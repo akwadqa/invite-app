@@ -32,7 +32,8 @@ class SelectPackageButton extends ConsumerWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: Text(
-        "${'select'.tr()} $title",
+        // "${'select'.tr()} $title",
+        'select'.tr(),
         style: AppTextStyle.rubikMedium18.copyWith(
           color: isSelected ? AppColors.white : AppColors.black,
         ),

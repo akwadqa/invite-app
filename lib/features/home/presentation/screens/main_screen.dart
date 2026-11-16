@@ -54,8 +54,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           context.push(AppRoutes.invitationsSecreen, extra: true);
         },
         child: SizedBox(
-          width: 70,
-          height: 70,
+          width: 60,
+          height: 60,
           child: Center(child: Assets.icons.addEventIc.svg()),
         ),
       ),

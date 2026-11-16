@@ -65,7 +65,7 @@ class TemplateItem extends ConsumerWidget {
                 left: 0,
                 right: 0,
                 child: Text(
-                  template.name ?? '',
+                  template.templateName ?? '',
                   textAlign: TextAlign.center,
                   style: AppTextStyle.rubikMedium14,
                 ),
@@ -113,11 +113,11 @@ class TemplateItem extends ConsumerWidget {
                         spacing: 10,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'عزيزتي هديل',
-                            style: AppTextStyle.rubikMedium14,
-                            textAlign: TextAlign.start,
-                          ),
+                          // Text(
+                          //   'عزيزتي هديل',
+                          //   style: AppTextStyle.rubikMedium14,
+                          //   textAlign: TextAlign.start,
+                          // ),
                           Text(
                             template.message ?? '',
                             style: AppTextStyle.rubikRegular12,
@@ -139,40 +139,40 @@ class TemplateItem extends ConsumerWidget {
                           // ),
 
                           //? Location :
-                          Row(
-                            spacing: 4,
-                            children: [
-                              Assets.icons.templateLocationIc.svg(),
-                              Text(
-                                'فندق الريتز كارلتون -قاعة المختصر',
-                                style: AppTextStyle.rubikRegular12,
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   spacing: 4,
+                          //   children: [
+                          //     Assets.icons.templateLocationIc.svg(),
+                          //     Text(
+                          //       'فندق الريتز كارلتون -قاعة المختصر',
+                          //       style: AppTextStyle.rubikRegular12,
+                          //     ),
+                          //   ],
+                          // ),
 
-                          //? Date :
-                          Row(
-                            spacing: 4,
-                            children: [
-                              Assets.icons.templateDateIc.svg(),
-                              Text(
-                                '25-10-2025',
-                                style: AppTextStyle.rubikRegular12,
-                              ),
-                            ],
-                          ),
+                          // //? Date :
+                          // Row(
+                          //   spacing: 4,
+                          //   children: [
+                          //     Assets.icons.templateDateIc.svg(),
+                          //     Text(
+                          //       '25-10-2025',
+                          //       style: AppTextStyle.rubikRegular12,
+                          //     ),
+                          //   ],
+                          // ),
 
-                          //? Time :
-                          Row(
-                            spacing: 4,
-                            children: [
-                              Assets.icons.templateTimeIc.svg(),
-                              Text(
-                                '70:30 مساءً',
-                                style: AppTextStyle.rubikRegular12,
-                              ),
-                            ],
-                          ),
+                          // //? Time :
+                          // Row(
+                          //   spacing: 4,
+                          //   children: [
+                          //     Assets.icons.templateTimeIc.svg(),
+                          //     Text(
+                          //       '70:30 مساءً',
+                          //       style: AppTextStyle.rubikRegular12,
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ).onlyPadding(start: 25),
 

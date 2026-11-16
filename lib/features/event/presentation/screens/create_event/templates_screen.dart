@@ -10,6 +10,7 @@ import 'package:invit/features/event/domain/model/template%20model/template_mode
 import 'package:invit/features/event/presentation/controller/create_event/create_event_controller.dart';
 import 'package:invit/features/event/presentation/widgets/templates_screen/template_bottom_sheet_confirm_message.dart';
 import 'package:invit/features/event/presentation/widgets/templates_screen/template_bottom_sheet_decline_message.dart';
+import 'package:invit/features/event/presentation/widgets/templates_screen/template_bottom_sheet_location_message.dart';
 import 'package:invit/features/event/presentation/widgets/templates_screen/template_item.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
@@ -150,18 +151,16 @@ class TemplateQrBottomSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final confirmMessage = template.buttons
-        ?.firstWhere((button) => button.buttonLabel?.toLowerCase() == 'confirm')
+        ?.firstWhere((button) => button.actionType?.toLowerCase() == 'confirm')
         .linkedTemplate;
 
     final declineMessage = template.buttons
-        ?.firstWhere((button) => button.buttonLabel?.toLowerCase() == 'decline')
+        ?.firstWhere((button) => button.actionType?.toLowerCase() == 'decline')
         .linkedTemplate;
 
-    final location = template.buttons
-        ?.firstWhere(
-          (button) => button.buttonLabel?.toLowerCase() == 'location',
-        )
-        .linkedTemplate;
+    // final location = template.buttons
+    //     ?.firstWhere((button) => button.actionType?.toLowerCase() == 'location')
+    //     .linkedTemplate;
 
     return Container(
       height: 600,
@@ -184,11 +183,11 @@ class TemplateQrBottomSheet extends ConsumerWidget {
 
             if (declineMessage != null)
               TemplateBottomSheetDecloneMessage(linkedTemplate: declineMessage),
+            TemplateBottomSheetLocationeMessage(),
             CustomButtonWidget(
               text: 'confirm'.tr(),
               onTap: () {
                 context.pushNamed(AppRoutes.createEventScreen);
-                // ref.read(createEventControllerProvider.notifier).createEvent();
               },
               isFiled: false,
               style: AppTextStyle.rubikMedium18.copyWith(

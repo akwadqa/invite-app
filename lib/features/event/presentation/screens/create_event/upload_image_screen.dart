@@ -10,6 +10,7 @@ import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event/presentation/controller/create_event/create_event_controller.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_footer.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_screen/create_event_steps_section.dart';
+import 'package:invit/features/home/presentation/controller/home_controller.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_alert.dart';
@@ -39,16 +40,22 @@ class _UploadImageScreenContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final file = ref.watch(createEventControllerProvider
-        .select((val) => val.value?.eventModel.image));
+    final file = ref.watch(
+      createEventControllerProvider.select(
+        (val) => val.value?.eventModel.image,
+      ),
+    );
 
     ref.listen(
       createEventControllerProvider.select((val) => val.value!.confirmEvent),
       (previous, next) {
         if (next is AsyncData) {
           context.pop();
-          context.goNamed(AppRoutes.successEventScreen,
-              extra: next!.value!.eventId);
+          ref.read(homeControllerProvider.notifier).getHomeData(page: 1);
+          context.goNamed(
+            AppRoutes.successEventScreen,
+            extra: next!.value!.eventId,
+          );
         }
         if (next is AsyncError) {
           // context.pop();
@@ -61,31 +68,36 @@ class _UploadImageScreenContent extends ConsumerWidget {
     );
 
     ref.listen(
-        createEventControllerProvider
-            .select((val) => val.value!.createEventResponse), (prev, next) {
-      if (next is AsyncLoading) {
-        AppAlert.showLoadingDialog(context);
-      }
-      if (next is AsyncError) {
-        context.pop();
-        Future.delayed(Duration(milliseconds: 100), () {
-          showErrorDialog(context, next!.error.toString());
-        });
-      }
-      if (next is AsyncData) {
-        final isConfirm =
-            ref.watch(createEventControllerProvider).value!.isConfirm;
-
-        if (isConfirm) {
-          ref
-              .read(createEventControllerProvider.notifier)
-              .confirmEvent(next!.value!);
-        } else {
-          context.pop();
-          context.goNamed(AppRoutes.successEventScreen, extra: next!.value!);
+      createEventControllerProvider.select(
+        (val) => val.value!.createEventResponse,
+      ),
+      (prev, next) {
+        if (next is AsyncLoading) {
+          AppAlert.showLoadingDialog(context);
         }
-      }
-    });
+        if (next is AsyncError) {
+          context.pop();
+          Future.delayed(Duration(milliseconds: 100), () {
+            showErrorDialog(context, next!.error.toString());
+          });
+        }
+        if (next is AsyncData) {
+          final isConfirm = ref
+              .watch(createEventControllerProvider)
+              .value!
+              .isConfirm;
+
+          if (isConfirm) {
+            ref
+                .read(createEventControllerProvider.notifier)
+                .confirmEvent(next!.value!);
+          } else {
+            context.pop();
+            context.goNamed(AppRoutes.successEventScreen, extra: next!.value!);
+          }
+        }
+      },
+    );
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 22, vertical: 10),
       child: Column(
@@ -93,20 +105,18 @@ class _UploadImageScreenContent extends ConsumerWidget {
         children: [
           CreateEventStepsSection(current: 3),
           Expanded(
-              child: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            // spacing: 16,
-            children: [
-              Text(
-                'image'.tr(),
-                style: AppTextStyle.rubikMedium16,
-              ),
-              16.verticalSpace,
-              UploadImageScreenUploadSection(),
-              16.verticalSpace,
-              if (file != null) UploadImageScreenImageSection(file),
-            ],
-          )),
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              // spacing: 16,
+              children: [
+                Text('image'.tr(), style: AppTextStyle.rubikMedium16),
+                16.verticalSpace,
+                UploadImageScreenUploadSection(),
+                16.verticalSpace,
+                if (file != null) UploadImageScreenImageSection(file),
+              ],
+            ),
+          ),
           CustomButtonWidget(
             text: 'send'.tr(),
             onTap: () {
@@ -130,14 +140,15 @@ class _UploadImageScreenContent extends ConsumerWidget {
                   .createEvent(false);
             },
             isFiled: false,
-            style:
-                AppTextStyle.rubikMedium18.copyWith(color: AppColors.primary),
+            style: AppTextStyle.rubikMedium18.copyWith(
+              color: AppColors.primary,
+            ),
             radius: 10,
             height: 48,
             backgroundColor: AppColors.white,
             width: double.infinity,
           ),
-          SizedBox()
+          SizedBox(),
         ],
       ),
     );
@@ -145,10 +156,7 @@ class _UploadImageScreenContent extends ConsumerWidget {
 }
 
 class UploadImageScreenImageSection extends StatelessWidget {
-  const UploadImageScreenImageSection(
-    this.file, {
-    super.key,
-  });
+  const UploadImageScreenImageSection(this.file, {super.key});
   final File file;
 
   @override
@@ -161,9 +169,7 @@ class UploadImageScreenImageSection extends StatelessWidget {
 }
 
 class UploadImageScreenUploadSection extends ConsumerWidget {
-  const UploadImageScreenUploadSection({
-    super.key,
-  });
+  const UploadImageScreenUploadSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -193,9 +199,10 @@ class UploadImageScreenUploadSection extends ConsumerWidget {
               Assets.icons.uploadImageIc.svg(),
               Text(
                 'upload_photo'.tr(),
-                style: AppTextStyle.bodysmallSemibold
-                    .copyWith(color: AppColors.grayHint),
-              )
+                style: AppTextStyle.bodysmallSemibold.copyWith(
+                  color: AppColors.grayHint,
+                ),
+              ),
             ],
           ),
         ),

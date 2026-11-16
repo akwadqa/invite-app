@@ -32,7 +32,7 @@ class TemplateBottomSheetConfirmMessage extends StatelessWidget {
               children: [
                 Assets.images.confitmTemplateQr.image().symmetricPadding(
                   horizontal: 16,
-                  vertical: 16,
+                  // vertical: 12,
                 ),
 
                 // Text(
@@ -46,7 +46,7 @@ class TemplateBottomSheetConfirmMessage extends StatelessWidget {
                   style: AppTextStyle.rubikMedium14,
                   // textAlign: TextAlign.center,
                 ).symmetricPadding(horizontal: 16),
-                14.verticalSpace,
+                12.verticalSpace,
                 // Text(
                 //   'الرجاء إظهار هذه التذكرة عند الوصول إلى القاعة!',
                 //   style: AppTextStyle.rubikRegular12.copyWith(
