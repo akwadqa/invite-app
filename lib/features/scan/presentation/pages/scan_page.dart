@@ -50,10 +50,8 @@ class _ScanPageState extends ConsumerState<ScanPage> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: PreferredSize(
-
         preferredSize: const Size(double.infinity, 65),
         child: CustomAppbar(title: context.tr('scan'), withBackButton: false),
-        
       ),
       body: controller?.when(
         data: (data) {

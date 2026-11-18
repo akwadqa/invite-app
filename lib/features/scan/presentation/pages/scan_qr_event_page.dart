@@ -86,42 +86,38 @@ class _ScanQrEventPageState extends ConsumerState<ScanQrEventPage> {
   @override
   Widget build(BuildContext context) {
     ref.listen(
-        scanControllerProvider.select((val) => val.value!.scanQrResponse),
-        (prev, next) {
-      if (next is AsyncLoading) {
-        AppAlert.showLoadingDialog(context);
-      }
+      scanControllerProvider.select((val) => val.value!.scanQrResponse),
+      (prev, next) {
+        if (next is AsyncLoading) {
+          AppAlert.showLoadingDialog(context);
+        }
 
-      if (next is AsyncData) {
-        context.pop();
+        if (next is AsyncData) {
+          context.pop();
 
-        AppToast.doneToast(
-          'successfullyCompleted'.tr(),
-        );
-        // BotToast.showText(
-        //   text: 'successfullyCompleted'.tr(),
-        //   contentColor: AppColors.green,
-        // );
-      }
-      if (next is AsyncError) {
-        context.pop();
-        AppToast.errorToast(
-          next!.error!.toString(),
-        );
-      }
-    });
+          AppToast.doneToast('successfullyCompleted'.tr());
+          // BotToast.showText(
+          //   text: 'successfullyCompleted'.tr(),
+          //   contentColor: AppColors.green,
+          // );
+        }
+        if (next is AsyncError) {
+          context.pop();
+          AppToast.errorToast(next!.error!.toString());
+        }
+      },
+    );
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size(double.infinity, 65),
-          child: CustomAppbar(title: context.tr('scanTheQrCode'))),
+        preferredSize: const Size(double.infinity, 65),
+        child: CustomAppbar(title: context.tr('scanTheQrCode')),
+      ),
       body: Column(
         children: [
           50.verticalSpace,
           Text(
             context.tr('placeTheQRCodeInsideTheFrameToScanIt'),
-            style: AppTextStyle.rubikRegular16.copyWith(
-              color: AppColors.black,
-            ),
+            style: AppTextStyle.rubikRegular16.copyWith(color: AppColors.black),
           ).symmetricPadding(horizontal: 32),
           45.verticalSpace,
           ClipRRect(

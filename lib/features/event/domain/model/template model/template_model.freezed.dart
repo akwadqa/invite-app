@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'template_model.dart';
@@ -9,6 +9,7 @@ part of 'template_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $TemplateModelCopyWith<TemplateModel> get copyWith => _$TemplateModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TemplateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.occasionType, occasionType) || other.occasionType == occasionType)&&(identical(other.headerType, headerType) || other.headerType == headerType)&&(identical(other.message, message) || other.message == message)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.buttons, buttons));
+  final _this = this as TemplateModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TemplateModel&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.templateName, _this.templateName) || other.templateName == _this.templateName)&&(identical(other.occasionType, _this.occasionType) || other.occasionType == _this.occasionType)&&(identical(other.headerType, _this.headerType) || other.headerType == _this.headerType)&&(identical(other.message, _this.message) || other.message == _this.message)&&(identical(other.image, _this.image) || other.image == _this.image)&&const DeepCollectionEquality().equals(other.buttons, _this.buttons));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,templateName,occasionType,headerType,message,image,const DeepCollectionEquality().hash(buttons));
+int get hashCode {
+  final _this = this as TemplateModel;
+  return Object.hash(runtimeType,_this.name,_this.templateName,_this.occasionType,_this.headerType,_this.message,_this.image,const DeepCollectionEquality().hash(_this.buttons));
+}
 
 @override
 String toString() {
-  return 'TemplateModel(name: $name, templateName: $templateName, occasionType: $occasionType, headerType: $headerType, message: $message, image: $image, buttons: $buttons)';
+  final _this = this as TemplateModel;
+  return 'TemplateModel(name: ${_this.name}, templateName: ${_this.templateName}, occasionType: ${_this.occasionType}, headerType: ${_this.headerType}, message: ${_this.message}, image: ${_this.image}, buttons: ${_this.buttons})';
 }
 
 
@@ -66,7 +72,7 @@ class _$TemplateModelCopyWithImpl<$Res>
 /// Create a copy of TemplateModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? templateName = freezed,Object? occasionType = freezed,Object? headerType = freezed,Object? message = freezed,Object? image = freezed,Object? buttons = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TemplateModel(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,templateName: freezed == templateName ? _self.templateName : templateName // ignore: cast_nullable_to_non_nullable
 as String?,occasionType: freezed == occasionType ? _self.occasionType : occasionType // ignore: cast_nullable_to_non_nullable
@@ -215,7 +221,7 @@ return $default(_that.name,_that.templateName,_that.occasionType,_that.headerTyp
 @JsonSerializable()
 
 class _TemplateModel implements TemplateModel {
-  const _TemplateModel({this.name, @JsonKey(name: 'template_name') this.templateName, @JsonKey(name: 'occasion_type') this.occasionType, @JsonKey(name: 'header_type') this.headerType, this.message, this.image, final  List<TemplateButton>? buttons}): _buttons = buttons;
+  const _TemplateModel({this.name, @JsonKey(name: 'template_name') this.templateName, @JsonKey(name: 'occasion_type') this.occasionType, @JsonKey(name: 'header_type') this.headerType, this.message, this.image,  List<TemplateButton>? buttons}): _buttons = buttons;
   factory _TemplateModel.fromJson(Map<String, dynamic> json) => _$TemplateModelFromJson(json);
 
 @override final  String? name;
@@ -247,16 +253,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TemplateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.occasionType, occasionType) || other.occasionType == occasionType)&&(identical(other.headerType, headerType) || other.headerType == headerType)&&(identical(other.message, message) || other.message == message)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other._buttons, _buttons));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TemplateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.occasionType, occasionType) || other.occasionType == occasionType)&&(identical(other.headerType, headerType) || other.headerType == headerType)&&(identical(other.message, message) || other.message == message)&&(identical(other.image, image) || other.image == image)&&const DeepCollectionEquality().equals(other.buttons, _buttons));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,templateName,occasionType,headerType,message,image,const DeepCollectionEquality().hash(_buttons));
+int get hashCode {
+    return Object.hash(runtimeType,name,templateName,occasionType,headerType,message,image,const DeepCollectionEquality().hash(_buttons));
+}
 
 @override
 String toString() {
-  return 'TemplateModel(name: $name, templateName: $templateName, occasionType: $occasionType, headerType: $headerType, message: $message, image: $image, buttons: $buttons)';
+    return 'TemplateModel(name: $name, templateName: $templateName, occasionType: $occasionType, headerType: $headerType, message: $message, image: $image, buttons: $buttons)';
 }
 
 
@@ -317,16 +325,21 @@ $TemplateButtonCopyWith<TemplateButton> get copyWith => _$TemplateButtonCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TemplateButton&&(identical(other.buttonType, buttonType) || other.buttonType == buttonType)&&(identical(other.buttonLabel, buttonLabel) || other.buttonLabel == buttonLabel)&&(identical(other.actionType, actionType) || other.actionType == actionType)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.websiteUrl, websiteUrl) || other.websiteUrl == websiteUrl)&&const DeepCollectionEquality().equals(other.flow, flow)&&(identical(other.linkedTemplate, linkedTemplate) || other.linkedTemplate == linkedTemplate));
+  final _this = this as TemplateButton;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TemplateButton&&(identical(other.buttonType, _this.buttonType) || other.buttonType == _this.buttonType)&&(identical(other.buttonLabel, _this.buttonLabel) || other.buttonLabel == _this.buttonLabel)&&(identical(other.actionType, _this.actionType) || other.actionType == _this.actionType)&&(identical(other.phoneNumber, _this.phoneNumber) || other.phoneNumber == _this.phoneNumber)&&(identical(other.websiteUrl, _this.websiteUrl) || other.websiteUrl == _this.websiteUrl)&&const DeepCollectionEquality().equals(other.flow, _this.flow)&&(identical(other.linkedTemplate, _this.linkedTemplate) || other.linkedTemplate == _this.linkedTemplate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,buttonType,buttonLabel,actionType,phoneNumber,websiteUrl,const DeepCollectionEquality().hash(flow),linkedTemplate);
+int get hashCode {
+  final _this = this as TemplateButton;
+  return Object.hash(runtimeType,_this.buttonType,_this.buttonLabel,_this.actionType,_this.phoneNumber,_this.websiteUrl,const DeepCollectionEquality().hash(_this.flow),_this.linkedTemplate);
+}
 
 @override
 String toString() {
-  return 'TemplateButton(buttonType: $buttonType, buttonLabel: $buttonLabel, actionType: $actionType, phoneNumber: $phoneNumber, websiteUrl: $websiteUrl, flow: $flow, linkedTemplate: $linkedTemplate)';
+  final _this = this as TemplateButton;
+  return 'TemplateButton(buttonType: ${_this.buttonType}, buttonLabel: ${_this.buttonLabel}, actionType: ${_this.actionType}, phoneNumber: ${_this.phoneNumber}, websiteUrl: ${_this.websiteUrl}, flow: ${_this.flow}, linkedTemplate: ${_this.linkedTemplate})';
 }
 
 
@@ -355,7 +368,7 @@ class _$TemplateButtonCopyWithImpl<$Res>
 /// Create a copy of TemplateButton
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? buttonType = freezed,Object? buttonLabel = freezed,Object? actionType = freezed,Object? phoneNumber = freezed,Object? websiteUrl = freezed,Object? flow = freezed,Object? linkedTemplate = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TemplateButton(
 buttonType: freezed == buttonType ? _self.buttonType : buttonType // ignore: cast_nullable_to_non_nullable
 as String?,buttonLabel: freezed == buttonLabel ? _self.buttonLabel : buttonLabel // ignore: cast_nullable_to_non_nullable
 as String?,actionType: freezed == actionType ? _self.actionType : actionType // ignore: cast_nullable_to_non_nullable
@@ -540,16 +553,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TemplateButton&&(identical(other.buttonType, buttonType) || other.buttonType == buttonType)&&(identical(other.buttonLabel, buttonLabel) || other.buttonLabel == buttonLabel)&&(identical(other.actionType, actionType) || other.actionType == actionType)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.websiteUrl, websiteUrl) || other.websiteUrl == websiteUrl)&&const DeepCollectionEquality().equals(other.flow, flow)&&(identical(other.linkedTemplate, linkedTemplate) || other.linkedTemplate == linkedTemplate));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TemplateButton&&(identical(other.buttonType, buttonType) || other.buttonType == buttonType)&&(identical(other.buttonLabel, buttonLabel) || other.buttonLabel == buttonLabel)&&(identical(other.actionType, actionType) || other.actionType == actionType)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.websiteUrl, websiteUrl) || other.websiteUrl == websiteUrl)&&const DeepCollectionEquality().equals(other.flow, flow)&&(identical(other.linkedTemplate, linkedTemplate) || other.linkedTemplate == linkedTemplate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,buttonType,buttonLabel,actionType,phoneNumber,websiteUrl,const DeepCollectionEquality().hash(flow),linkedTemplate);
+int get hashCode {
+    return Object.hash(runtimeType,buttonType,buttonLabel,actionType,phoneNumber,websiteUrl,const DeepCollectionEquality().hash(flow),linkedTemplate);
+}
 
 @override
 String toString() {
-  return 'TemplateButton(buttonType: $buttonType, buttonLabel: $buttonLabel, actionType: $actionType, phoneNumber: $phoneNumber, websiteUrl: $websiteUrl, flow: $flow, linkedTemplate: $linkedTemplate)';
+    return 'TemplateButton(buttonType: $buttonType, buttonLabel: $buttonLabel, actionType: $actionType, phoneNumber: $phoneNumber, websiteUrl: $websiteUrl, flow: $flow, linkedTemplate: $linkedTemplate)';
 }
 
 
@@ -622,16 +637,21 @@ $LinkedTemplateCopyWith<LinkedTemplate> get copyWith => _$LinkedTemplateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LinkedTemplate&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.headerType, headerType) || other.headerType == headerType)&&(identical(other.message, message) || other.message == message)&&(identical(other.image, image) || other.image == image));
+  final _this = this as LinkedTemplate;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LinkedTemplate&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.templateName, _this.templateName) || other.templateName == _this.templateName)&&(identical(other.headerType, _this.headerType) || other.headerType == _this.headerType)&&(identical(other.message, _this.message) || other.message == _this.message)&&(identical(other.image, _this.image) || other.image == _this.image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,templateName,headerType,message,image);
+int get hashCode {
+  final _this = this as LinkedTemplate;
+  return Object.hash(runtimeType,_this.name,_this.templateName,_this.headerType,_this.message,_this.image);
+}
 
 @override
 String toString() {
-  return 'LinkedTemplate(name: $name, templateName: $templateName, headerType: $headerType, message: $message, image: $image)';
+  final _this = this as LinkedTemplate;
+  return 'LinkedTemplate(name: ${_this.name}, templateName: ${_this.templateName}, headerType: ${_this.headerType}, message: ${_this.message}, image: ${_this.image})';
 }
 
 
@@ -660,7 +680,7 @@ class _$LinkedTemplateCopyWithImpl<$Res>
 /// Create a copy of LinkedTemplate
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? templateName = freezed,Object? headerType = freezed,Object? message = freezed,Object? image = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(LinkedTemplate(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,templateName: freezed == templateName ? _self.templateName : templateName // ignore: cast_nullable_to_non_nullable
 as String?,headerType: freezed == headerType ? _self.headerType : headerType // ignore: cast_nullable_to_non_nullable
@@ -829,16 +849,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LinkedTemplate&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.headerType, headerType) || other.headerType == headerType)&&(identical(other.message, message) || other.message == message)&&(identical(other.image, image) || other.image == image));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LinkedTemplate&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.headerType, headerType) || other.headerType == headerType)&&(identical(other.message, message) || other.message == message)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,templateName,headerType,message,image);
+int get hashCode {
+    return Object.hash(runtimeType,name,templateName,headerType,message,image);
+}
 
 @override
 String toString() {
-  return 'LinkedTemplate(name: $name, templateName: $templateName, headerType: $headerType, message: $message, image: $image)';
+    return 'LinkedTemplate(name: $name, templateName: $templateName, headerType: $headerType, message: $message, image: $image)';
 }
 
 

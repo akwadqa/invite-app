@@ -42,7 +42,7 @@ abstract class _$AppMessagesController
   FutureOr<List<AppMessagesModel>> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref =
         this.ref
             as $Ref<AsyncValue<List<AppMessagesModel>>, List<AppMessagesModel>>;
@@ -57,6 +57,6 @@ abstract class _$AppMessagesController
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

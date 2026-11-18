@@ -35,11 +35,11 @@
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>We need your location to show your current position on the map</string>
 		<key>NSContactsUsageDescription</key>
-		<string>This app needs access to your contacts to invite friends.</string>
+		<string>This app needs access to your contacts so you can pick guests to invite.</string>
 		<key>NSCameraUsageDescription</key>
 		<string>This app needs the camera to scan QR codes.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>Needed to pick images with QR codes.</string>
+		<string>This app needs access to your photos to choose the invitation image.</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>UISupportedInterfaceOrientations</key>
@@ -61,7 +61,5 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
-		<key>NSContactsUsageDescription</key>
-		<string>Reason we need access to the contact list</string>
 	</dict>
 </plist>

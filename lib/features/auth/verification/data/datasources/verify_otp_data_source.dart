@@ -10,12 +10,14 @@ class VerifyOtpRemoteDataSource {
   VerifyOtpRemoteDataSource(this._networkService);
 
   Future<ApiResponse<VerifyOtpResponseModel>> verifyOtp(
-      String otp, String phone) async {
+    String otp,
+    String phone,
+  ) async {
     try {
       final response = await _networkService.post(
         ApiEndPoints.verifyOtp,
         data: {
-          "mobile_no":phone,
+          "mobile_no": phone,
           // "mobile_no": '30255377',
           "otp": otp,
         },

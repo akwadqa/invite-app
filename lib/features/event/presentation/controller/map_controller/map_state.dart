@@ -5,7 +5,6 @@ import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.da
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-
 class MapState {
   final LatLng latLng;
   final AsyncValue<LatLng>? initialLatLng;
@@ -13,34 +12,40 @@ class MapState {
   final AsyncValue<SelectedPlace>? selectedPlace;
   final AsyncValue<List<Prediction>> predictions;
 
-  MapState(
-      {required this.latLng,
-      required this.initialLatLng,
-      required this.selectedPlace,
-      required this.predictions});
+  /// "Use my location" action; `AsyncData(null)` means idle.
+  final AsyncValue<LatLng?> currentLocation;
+
+  MapState({
+    required this.latLng,
+    required this.initialLatLng,
+    required this.selectedPlace,
+    required this.predictions,
+    this.currentLocation = const AsyncData(null),
+  });
 
   factory MapState.init() => MapState(
-        latLng: LatLng(25.2854473, 51.53103979999999),
-        initialLatLng: null,
-        predictions: AsyncData([]),
-        selectedPlace: null,
-      );
+    latLng: LatLng(25.2854473, 51.53103979999999),
+    initialLatLng: null,
+    predictions: AsyncData([]),
+    selectedPlace: null,
+  );
 
   MapState copyWith({
     LatLng? latLng,
     AsyncValue<LatLng>? initialLatLng,
     AsyncValue<SelectedPlace>? selectedPlace,
     AsyncValue<List<Prediction>>? predictions,
+    AsyncValue<LatLng?>? currentLocation,
   }) {
     return MapState(
       latLng: latLng ?? this.latLng,
       initialLatLng: initialLatLng ?? this.initialLatLng,
       selectedPlace: selectedPlace ?? this.selectedPlace,
       predictions: predictions ?? this.predictions,
+      currentLocation: currentLocation ?? this.currentLocation,
     );
   }
 }
-
 
 class SelectedPlace {
   final String placeId;

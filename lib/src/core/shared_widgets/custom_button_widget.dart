@@ -36,28 +36,29 @@ class CustomButtonWidget extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         elevation: 2,
-          padding: EdgeInsets.zero,
-          backgroundColor: backgroundColor ?? Colors.transparent,
-          foregroundColor: AppColors.black900,
-          fixedSize: Size(
-            width,
-            height,
-          ),
-          shape: RoundedRectangleBorder(
-              side: BorderSide(
-                  color: backgroundColor ?? Colors.transparent),
-              borderRadius: BorderRadius.circular(radius ?? 25))),
+        padding: EdgeInsets.zero,
+        backgroundColor: backgroundColor ?? Colors.transparent,
+        foregroundColor: AppColors.black900,
+        fixedSize: Size(width, height),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: backgroundColor ?? Colors.transparent),
+          borderRadius: BorderRadius.circular(radius ?? 25),
+        ),
+      ),
       onPressed: () {
         onTap();
       },
-      child: Text(context.tr(text),
-      textAlign: TextAlign.center,
-              style: style ??
-                  Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontSize: fontSize ?? 16,
-                      color: isFiled ? Colors.white :color?? Colors.black,
-                      fontWeight: FontWeight.w500))
-          .centered(),
+      child: Text(
+        context.tr(text),
+        textAlign: TextAlign.center,
+        style:
+            style ??
+            Theme.of(context).textTheme.displaySmall!.copyWith(
+              fontSize: fontSize ?? 16,
+              color: isFiled ? Colors.white : color ?? Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+      ).centered(),
     ).onlyPadding(top: topPading ?? 0);
   }
 }

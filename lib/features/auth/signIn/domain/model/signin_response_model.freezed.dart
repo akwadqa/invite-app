@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'signin_response_model.dart';
@@ -9,14 +9,13 @@ part of 'signin_response_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SigninResponseModel {
 
-// @JsonKey(name: 'mobile_number') String mobileNumber,
-// @JsonKey(name: 'remaining_attempts') required int remainingAttempts,
 @JsonKey(name: 'allow_login_after') int? get allowLoginAfter; LoginValidation get validation;
 /// Create a copy of SigninResponseModel
 /// with the given fields replaced by the non-null parameter values.
@@ -30,16 +29,21 @@ $SigninResponseModelCopyWith<SigninResponseModel> get copyWith => _$SigninRespon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SigninResponseModel&&(identical(other.allowLoginAfter, allowLoginAfter) || other.allowLoginAfter == allowLoginAfter)&&(identical(other.validation, validation) || other.validation == validation));
+  final _this = this as SigninResponseModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SigninResponseModel&&(identical(other.allowLoginAfter, _this.allowLoginAfter) || other.allowLoginAfter == _this.allowLoginAfter)&&(identical(other.validation, _this.validation) || other.validation == _this.validation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,allowLoginAfter,validation);
+int get hashCode {
+  final _this = this as SigninResponseModel;
+  return Object.hash(runtimeType,_this.allowLoginAfter,_this.validation);
+}
 
 @override
 String toString() {
-  return 'SigninResponseModel(allowLoginAfter: $allowLoginAfter, validation: $validation)';
+  final _this = this as SigninResponseModel;
+  return 'SigninResponseModel(allowLoginAfter: ${_this.allowLoginAfter}, validation: ${_this.validation})';
 }
 
 
@@ -68,7 +72,7 @@ class _$SigninResponseModelCopyWithImpl<$Res>
 /// Create a copy of SigninResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? allowLoginAfter = freezed,Object? validation = null,}) {
-  return _then(_self.copyWith(
+  return _then(SigninResponseModel(
 allowLoginAfter: freezed == allowLoginAfter ? _self.allowLoginAfter : allowLoginAfter // ignore: cast_nullable_to_non_nullable
 as int?,validation: null == validation ? _self.validation : validation // ignore: cast_nullable_to_non_nullable
 as LoginValidation,
@@ -224,8 +228,6 @@ class _SigninResponseModel implements SigninResponseModel {
   const _SigninResponseModel({@JsonKey(name: 'allow_login_after') this.allowLoginAfter, required this.validation});
   factory _SigninResponseModel.fromJson(Map<String, dynamic> json) => _$SigninResponseModelFromJson(json);
 
-// @JsonKey(name: 'mobile_number') String mobileNumber,
-// @JsonKey(name: 'remaining_attempts') required int remainingAttempts,
 @override@JsonKey(name: 'allow_login_after') final  int? allowLoginAfter;
 @override final  LoginValidation validation;
 
@@ -242,16 +244,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SigninResponseModel&&(identical(other.allowLoginAfter, allowLoginAfter) || other.allowLoginAfter == allowLoginAfter)&&(identical(other.validation, validation) || other.validation == validation));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SigninResponseModel&&(identical(other.allowLoginAfter, allowLoginAfter) || other.allowLoginAfter == allowLoginAfter)&&(identical(other.validation, validation) || other.validation == validation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,allowLoginAfter,validation);
+int get hashCode {
+    return Object.hash(runtimeType,allowLoginAfter,validation);
+}
 
 @override
 String toString() {
-  return 'SigninResponseModel(allowLoginAfter: $allowLoginAfter, validation: $validation)';
+    return 'SigninResponseModel(allowLoginAfter: $allowLoginAfter, validation: $validation)';
 }
 
 
@@ -316,16 +320,21 @@ $LoginValidationCopyWith<LoginValidation> get copyWith => _$LoginValidationCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginValidation&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.userExist, userExist) || other.userExist == userExist));
+  final _this = this as LoginValidation;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginValidation&&(identical(other.mobileNumber, _this.mobileNumber) || other.mobileNumber == _this.mobileNumber)&&(identical(other.userExist, _this.userExist) || other.userExist == _this.userExist));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,mobileNumber,userExist);
+int get hashCode {
+  final _this = this as LoginValidation;
+  return Object.hash(runtimeType,_this.mobileNumber,_this.userExist);
+}
 
 @override
 String toString() {
-  return 'LoginValidation(mobileNumber: $mobileNumber, userExist: $userExist)';
+  final _this = this as LoginValidation;
+  return 'LoginValidation(mobileNumber: ${_this.mobileNumber}, userExist: ${_this.userExist})';
 }
 
 
@@ -354,7 +363,7 @@ class _$LoginValidationCopyWithImpl<$Res>
 /// Create a copy of LoginValidation
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? mobileNumber = null,Object? userExist = null,}) {
-  return _then(_self.copyWith(
+  return _then(LoginValidation(
 mobileNumber: null == mobileNumber ? _self.mobileNumber : mobileNumber // ignore: cast_nullable_to_non_nullable
 as String,userExist: null == userExist ? _self.userExist : userExist // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -517,16 +526,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginValidation&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.userExist, userExist) || other.userExist == userExist));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginValidation&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.userExist, userExist) || other.userExist == userExist));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,mobileNumber,userExist);
+int get hashCode {
+    return Object.hash(runtimeType,mobileNumber,userExist);
+}
 
 @override
 String toString() {
-  return 'LoginValidation(mobileNumber: $mobileNumber, userExist: $userExist)';
+    return 'LoginValidation(mobileNumber: $mobileNumber, userExist: $userExist)';
 }
 
 

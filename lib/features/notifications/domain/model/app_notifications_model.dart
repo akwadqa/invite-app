@@ -1,8 +1,8 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_notifications_model.freezed.dart';
 part 'app_notifications_model.g.dart';
+
 @freezed
 abstract class AppNotificationsModel with _$AppNotificationsModel {
   const factory AppNotificationsModel({

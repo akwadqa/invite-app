@@ -16,10 +16,15 @@ class SettingsSectionTitle extends StatelessWidget {
       height: 50,
       width: double.infinity,
       color: AppColors.lightGray,
-      padding: EdgeInsets.symmetric(horizontal: 20,vertical:  12),
-      child: Text(title.tr(), style: textTheme.displayLarge!.copyWith(
-                color: AppColors.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 18),));
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      child: Text(
+        title.tr(),
+        style: textTheme.displayLarge!.copyWith(
+          color: AppColors.primary,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
+    );
   }
 }

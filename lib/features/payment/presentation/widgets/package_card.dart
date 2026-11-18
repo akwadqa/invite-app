@@ -33,7 +33,8 @@ class PackageCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
-                color: isSelected ? AppColors.primary : AppColors.lightGray),
+              color: isSelected ? AppColors.primary : AppColors.lightGray,
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(

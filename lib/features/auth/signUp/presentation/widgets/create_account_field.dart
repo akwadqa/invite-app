@@ -82,7 +82,8 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             keyboardType: widget.inputType,
             readOnly: widget.isReadOnly,
             controller: widget.controller,
-            validator: widget.validator ??
+            validator:
+                widget.validator ??
                 (val) => widget.isRequired
                     ? requiredVal(val, context)
                     : emailVal(val, context),
@@ -109,8 +110,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                     )
                   : null,
               hintText: widget.hint,
-              hintStyle: AppTextStyle.rubikRegular16
-                  .copyWith(color: AppColors.grayHint),
+              hintStyle: AppTextStyle.rubikRegular16.copyWith(
+                color: AppColors.grayHint,
+              ),
               // hintStyle: AppTextStyle.rubikRegular16.copyWith(
               //   color: AppColors.grayHint,
               // ),

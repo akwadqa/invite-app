@@ -7,61 +7,45 @@ class Dev {
   static void logValue(dynamic value) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("The value is : ******  $value  ******")
-          .magenta()
-          .red()
-          .bold()
-          .italic()
-          .initial,
+      Colorize(
+        "The value is : ******  $value  ******",
+      ).magenta().red().bold().italic().initial,
     );
   }
 
   static void logError(dynamic value) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("The Error is : ******  $value  ******")
-          .bgRed()
-          .black()
-          .bold()
-          .italic()
-          .initial,
+      Colorize(
+        "The Error is : ******  $value  ******",
+      ).bgRed().black().bold().italic().initial,
     );
   }
 
   static void logLine(dynamic value) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("******(  $value  )******")
-          .bgGreen()
-          .black()
-          .bold()
-          
-          .italic()
-          .initial,
+      Colorize(
+        "******(  $value  )******",
+      ).bgGreen().black().bold().italic().initial,
     );
   }
 
   static void logSuccess(dynamic value) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("--------   Success with : $value   --------")
-          .bgCyan()
-          .black()
-          .bold()
-          .italic()
-          .initial,
+      Colorize(
+        "--------   Success with : $value   --------",
+      ).bgCyan().black().bold().italic().initial,
     );
   }
 
   static void logFaild(dynamic value, dynamic reason) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("++++++++   Faild with : $value  ||| Reason: $reason ++++++++")
-          .bgRed()
-          .black()
-          .bold()
-          .italic()
-          .initial,
+      Colorize(
+        "++++++++   Faild with : $value  ||| Reason: $reason ++++++++",
+      ).bgRed().black().bold().italic().initial,
     );
   }
 
@@ -70,12 +54,9 @@ class Dev {
     logLine('List with name $listName and  size is ${items.length}');
     for (int i = 0; i < items.length; i++) {
       debugPrint(
-        Colorize("******  Item with index $i ===> ${items[i]}  ******")
-            .bgLightGray()
-            .black()
-            .bold()
-            .italic()
-            .initial,
+        Colorize(
+          "******  Item with index $i ===> ${items[i]}  ******",
+        ).bgLightGray().black().bold().italic().initial,
       );
     }
   }
@@ -83,11 +64,9 @@ class Dev {
   static void logLineWithTag({dynamic tag, dynamic message}) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("******  $tag: $message  ******")
-          .bgWhite()
-          .black()
-          .bold()
-          .initial,
+      Colorize(
+        "******  $tag: $message  ******",
+      ).bgWhite().black().bold().initial,
     );
   }
 
@@ -98,11 +77,9 @@ class Dev {
   }) {
     if (!_isLoggerEnable) return;
     debugPrint(
-      Colorize("******  $tag: $message >>>>> Error => $error  ******")
-          .bgLightRed()
-          .black()
-          .bold()
-          .initial,
+      Colorize(
+        "******  $tag: $message >>>>> Error => $error  ******",
+      ).bgLightRed().black().bold().initial,
     );
   }
 

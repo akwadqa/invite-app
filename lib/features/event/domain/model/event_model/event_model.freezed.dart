@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'event_model.dart';
@@ -9,14 +9,14 @@ part of 'event_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$EventModel {
 
-@JsonKey(name: 'event_id') String? get eventId;@JsonKey(name: 'date_time') String? get dateTime; String? get title; String? get type; String? get language; String? get role;@JsonKey(name: 'longitude') String? get mapLongitude;@JsonKey(name: 'latitude') String? get mapLatitude;@JsonKey(name: 'map_link') String? get mapLink;@JsonKey(name: 'location_name') String? get locationName;@JsonKey(name: 'show_qr') int? get showQr;@JsonKey(name: 'image_url') String? get imageUrl;@JsonKey(includeFromJson: false) File? get image;@JsonKey(name: 'invite_template') String? get inviteTemplate;@JsonKey(name: 'confirmed_template') String? get confirmedTemplate;@JsonKey(name: 'declined_template') String? get declinedTemplate;@JsonKey(name: 'workflow_state') String? get workflowState;@JsonKey(name: 'is_featured') int? get isFeatured; String? get status;// @JsonKey(name: 'guest_report') GuestReportModel? guestReport,
-@JsonKey(name: 'guest_list') List<GuestModel>? get guestList;@JsonKey(name: 'guest_report') GuestReportModel? get guestReport;
+@JsonKey(name: 'event_id') String? get eventId;@JsonKey(name: 'date_time') String? get dateTime; String? get title; String? get type; String? get language; String? get role;@JsonKey(name: 'longitude') String? get mapLongitude;@JsonKey(name: 'latitude') String? get mapLatitude;@JsonKey(name: 'map_link') String? get mapLink;@JsonKey(name: 'location_name') String? get locationName;@JsonKey(name: 'show_qr') int? get showQr;@JsonKey(name: 'image_url') String? get imageUrl;@JsonKey(includeFromJson: false) File? get image;@JsonKey(name: 'invite_template') String? get inviteTemplate;@JsonKey(name: 'confirmed_template') String? get confirmedTemplate;@JsonKey(name: 'declined_template') String? get declinedTemplate;@JsonKey(name: 'workflow_state') String? get workflowState;@JsonKey(name: 'is_featured') int? get isFeatured; String? get status;@JsonKey(name: 'guest_list') List<GuestModel>? get guestList;@JsonKey(name: 'guest_report') GuestReportModel? get guestReport;
 /// Create a copy of EventModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,21 @@ $EventModelCopyWith<EventModel> get copyWith => _$EventModelCopyWithImpl<EventMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EventModel&&(identical(other.eventId, eventId) || other.eventId == eventId)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.title, title) || other.title == title)&&(identical(other.type, type) || other.type == type)&&(identical(other.language, language) || other.language == language)&&(identical(other.role, role) || other.role == role)&&(identical(other.mapLongitude, mapLongitude) || other.mapLongitude == mapLongitude)&&(identical(other.mapLatitude, mapLatitude) || other.mapLatitude == mapLatitude)&&(identical(other.mapLink, mapLink) || other.mapLink == mapLink)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&(identical(other.showQr, showQr) || other.showQr == showQr)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.image, image) || other.image == image)&&(identical(other.inviteTemplate, inviteTemplate) || other.inviteTemplate == inviteTemplate)&&(identical(other.confirmedTemplate, confirmedTemplate) || other.confirmedTemplate == confirmedTemplate)&&(identical(other.declinedTemplate, declinedTemplate) || other.declinedTemplate == declinedTemplate)&&(identical(other.workflowState, workflowState) || other.workflowState == workflowState)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.guestList, guestList)&&(identical(other.guestReport, guestReport) || other.guestReport == guestReport));
+  final _this = this as EventModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EventModel&&(identical(other.eventId, _this.eventId) || other.eventId == _this.eventId)&&(identical(other.dateTime, _this.dateTime) || other.dateTime == _this.dateTime)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.language, _this.language) || other.language == _this.language)&&(identical(other.role, _this.role) || other.role == _this.role)&&(identical(other.mapLongitude, _this.mapLongitude) || other.mapLongitude == _this.mapLongitude)&&(identical(other.mapLatitude, _this.mapLatitude) || other.mapLatitude == _this.mapLatitude)&&(identical(other.mapLink, _this.mapLink) || other.mapLink == _this.mapLink)&&(identical(other.locationName, _this.locationName) || other.locationName == _this.locationName)&&(identical(other.showQr, _this.showQr) || other.showQr == _this.showQr)&&(identical(other.imageUrl, _this.imageUrl) || other.imageUrl == _this.imageUrl)&&(identical(other.image, _this.image) || other.image == _this.image)&&(identical(other.inviteTemplate, _this.inviteTemplate) || other.inviteTemplate == _this.inviteTemplate)&&(identical(other.confirmedTemplate, _this.confirmedTemplate) || other.confirmedTemplate == _this.confirmedTemplate)&&(identical(other.declinedTemplate, _this.declinedTemplate) || other.declinedTemplate == _this.declinedTemplate)&&(identical(other.workflowState, _this.workflowState) || other.workflowState == _this.workflowState)&&(identical(other.isFeatured, _this.isFeatured) || other.isFeatured == _this.isFeatured)&&(identical(other.status, _this.status) || other.status == _this.status)&&const DeepCollectionEquality().equals(other.guestList, _this.guestList)&&(identical(other.guestReport, _this.guestReport) || other.guestReport == _this.guestReport));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,eventId,dateTime,title,type,language,role,mapLongitude,mapLatitude,mapLink,locationName,showQr,imageUrl,image,inviteTemplate,confirmedTemplate,declinedTemplate,workflowState,isFeatured,status,const DeepCollectionEquality().hash(guestList),guestReport]);
+int get hashCode {
+  final _this = this as EventModel;
+  return Object.hashAll([runtimeType,_this.eventId,_this.dateTime,_this.title,_this.type,_this.language,_this.role,_this.mapLongitude,_this.mapLatitude,_this.mapLink,_this.locationName,_this.showQr,_this.imageUrl,_this.image,_this.inviteTemplate,_this.confirmedTemplate,_this.declinedTemplate,_this.workflowState,_this.isFeatured,_this.status,const DeepCollectionEquality().hash(_this.guestList),_this.guestReport]);
+}
 
 @override
 String toString() {
-  return 'EventModel(eventId: $eventId, dateTime: $dateTime, title: $title, type: $type, language: $language, role: $role, mapLongitude: $mapLongitude, mapLatitude: $mapLatitude, mapLink: $mapLink, locationName: $locationName, showQr: $showQr, imageUrl: $imageUrl, image: $image, inviteTemplate: $inviteTemplate, confirmedTemplate: $confirmedTemplate, declinedTemplate: $declinedTemplate, workflowState: $workflowState, isFeatured: $isFeatured, status: $status, guestList: $guestList, guestReport: $guestReport)';
+  final _this = this as EventModel;
+  return 'EventModel(eventId: ${_this.eventId}, dateTime: ${_this.dateTime}, title: ${_this.title}, type: ${_this.type}, language: ${_this.language}, role: ${_this.role}, mapLongitude: ${_this.mapLongitude}, mapLatitude: ${_this.mapLatitude}, mapLink: ${_this.mapLink}, locationName: ${_this.locationName}, showQr: ${_this.showQr}, imageUrl: ${_this.imageUrl}, image: ${_this.image}, inviteTemplate: ${_this.inviteTemplate}, confirmedTemplate: ${_this.confirmedTemplate}, declinedTemplate: ${_this.declinedTemplate}, workflowState: ${_this.workflowState}, isFeatured: ${_this.isFeatured}, status: ${_this.status}, guestList: ${_this.guestList}, guestReport: ${_this.guestReport})';
 }
 
 
@@ -67,7 +72,7 @@ class _$EventModelCopyWithImpl<$Res>
 /// Create a copy of EventModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? eventId = freezed,Object? dateTime = freezed,Object? title = freezed,Object? type = freezed,Object? language = freezed,Object? role = freezed,Object? mapLongitude = freezed,Object? mapLatitude = freezed,Object? mapLink = freezed,Object? locationName = freezed,Object? showQr = freezed,Object? imageUrl = freezed,Object? image = freezed,Object? inviteTemplate = freezed,Object? confirmedTemplate = freezed,Object? declinedTemplate = freezed,Object? workflowState = freezed,Object? isFeatured = freezed,Object? status = freezed,Object? guestList = freezed,Object? guestReport = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(EventModel(
 eventId: freezed == eventId ? _self.eventId : eventId // ignore: cast_nullable_to_non_nullable
 as String?,dateTime: freezed == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -242,7 +247,7 @@ return $default(_that.eventId,_that.dateTime,_that.title,_that.type,_that.langua
 @JsonSerializable()
 
 class _EventModel implements EventModel {
-  const _EventModel({@JsonKey(name: 'event_id') this.eventId, @JsonKey(name: 'date_time') this.dateTime, this.title, this.type, this.language, this.role, @JsonKey(name: 'longitude') this.mapLongitude, @JsonKey(name: 'latitude') this.mapLatitude, @JsonKey(name: 'map_link') this.mapLink, @JsonKey(name: 'location_name') this.locationName, @JsonKey(name: 'show_qr') this.showQr, @JsonKey(name: 'image_url') this.imageUrl, @JsonKey(includeFromJson: false) this.image, @JsonKey(name: 'invite_template') this.inviteTemplate, @JsonKey(name: 'confirmed_template') this.confirmedTemplate, @JsonKey(name: 'declined_template') this.declinedTemplate, @JsonKey(name: 'workflow_state') this.workflowState, @JsonKey(name: 'is_featured') this.isFeatured, this.status, @JsonKey(name: 'guest_list') final  List<GuestModel>? guestList, @JsonKey(name: 'guest_report') this.guestReport}): _guestList = guestList;
+  const _EventModel({@JsonKey(name: 'event_id') this.eventId, @JsonKey(name: 'date_time') this.dateTime, this.title, this.type, this.language, this.role, @JsonKey(name: 'longitude') this.mapLongitude, @JsonKey(name: 'latitude') this.mapLatitude, @JsonKey(name: 'map_link') this.mapLink, @JsonKey(name: 'location_name') this.locationName, @JsonKey(name: 'show_qr') this.showQr, @JsonKey(name: 'image_url') this.imageUrl, @JsonKey(includeFromJson: false) this.image, @JsonKey(name: 'invite_template') this.inviteTemplate, @JsonKey(name: 'confirmed_template') this.confirmedTemplate, @JsonKey(name: 'declined_template') this.declinedTemplate, @JsonKey(name: 'workflow_state') this.workflowState, @JsonKey(name: 'is_featured') this.isFeatured, this.status, @JsonKey(name: 'guest_list')  List<GuestModel>? guestList, @JsonKey(name: 'guest_report') this.guestReport}): _guestList = guestList;
   factory _EventModel.fromJson(Map<String, dynamic> json) => _$EventModelFromJson(json);
 
 @override@JsonKey(name: 'event_id') final  String? eventId;
@@ -264,9 +269,7 @@ class _EventModel implements EventModel {
 @override@JsonKey(name: 'workflow_state') final  String? workflowState;
 @override@JsonKey(name: 'is_featured') final  int? isFeatured;
 @override final  String? status;
-// @JsonKey(name: 'guest_report') GuestReportModel? guestReport,
  final  List<GuestModel>? _guestList;
-// @JsonKey(name: 'guest_report') GuestReportModel? guestReport,
 @override@JsonKey(name: 'guest_list') List<GuestModel>? get guestList {
   final value = _guestList;
   if (value == null) return null;
@@ -290,16 +293,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EventModel&&(identical(other.eventId, eventId) || other.eventId == eventId)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.title, title) || other.title == title)&&(identical(other.type, type) || other.type == type)&&(identical(other.language, language) || other.language == language)&&(identical(other.role, role) || other.role == role)&&(identical(other.mapLongitude, mapLongitude) || other.mapLongitude == mapLongitude)&&(identical(other.mapLatitude, mapLatitude) || other.mapLatitude == mapLatitude)&&(identical(other.mapLink, mapLink) || other.mapLink == mapLink)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&(identical(other.showQr, showQr) || other.showQr == showQr)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.image, image) || other.image == image)&&(identical(other.inviteTemplate, inviteTemplate) || other.inviteTemplate == inviteTemplate)&&(identical(other.confirmedTemplate, confirmedTemplate) || other.confirmedTemplate == confirmedTemplate)&&(identical(other.declinedTemplate, declinedTemplate) || other.declinedTemplate == declinedTemplate)&&(identical(other.workflowState, workflowState) || other.workflowState == workflowState)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._guestList, _guestList)&&(identical(other.guestReport, guestReport) || other.guestReport == guestReport));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EventModel&&(identical(other.eventId, eventId) || other.eventId == eventId)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.title, title) || other.title == title)&&(identical(other.type, type) || other.type == type)&&(identical(other.language, language) || other.language == language)&&(identical(other.role, role) || other.role == role)&&(identical(other.mapLongitude, mapLongitude) || other.mapLongitude == mapLongitude)&&(identical(other.mapLatitude, mapLatitude) || other.mapLatitude == mapLatitude)&&(identical(other.mapLink, mapLink) || other.mapLink == mapLink)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&(identical(other.showQr, showQr) || other.showQr == showQr)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.image, image) || other.image == image)&&(identical(other.inviteTemplate, inviteTemplate) || other.inviteTemplate == inviteTemplate)&&(identical(other.confirmedTemplate, confirmedTemplate) || other.confirmedTemplate == confirmedTemplate)&&(identical(other.declinedTemplate, declinedTemplate) || other.declinedTemplate == declinedTemplate)&&(identical(other.workflowState, workflowState) || other.workflowState == workflowState)&&(identical(other.isFeatured, isFeatured) || other.isFeatured == isFeatured)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.guestList, _guestList)&&(identical(other.guestReport, guestReport) || other.guestReport == guestReport));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,eventId,dateTime,title,type,language,role,mapLongitude,mapLatitude,mapLink,locationName,showQr,imageUrl,image,inviteTemplate,confirmedTemplate,declinedTemplate,workflowState,isFeatured,status,const DeepCollectionEquality().hash(_guestList),guestReport]);
+int get hashCode {
+    return Object.hashAll([runtimeType,eventId,dateTime,title,type,language,role,mapLongitude,mapLatitude,mapLink,locationName,showQr,imageUrl,image,inviteTemplate,confirmedTemplate,declinedTemplate,workflowState,isFeatured,status,const DeepCollectionEquality().hash(_guestList),guestReport]);
+}
 
 @override
 String toString() {
-  return 'EventModel(eventId: $eventId, dateTime: $dateTime, title: $title, type: $type, language: $language, role: $role, mapLongitude: $mapLongitude, mapLatitude: $mapLatitude, mapLink: $mapLink, locationName: $locationName, showQr: $showQr, imageUrl: $imageUrl, image: $image, inviteTemplate: $inviteTemplate, confirmedTemplate: $confirmedTemplate, declinedTemplate: $declinedTemplate, workflowState: $workflowState, isFeatured: $isFeatured, status: $status, guestList: $guestList, guestReport: $guestReport)';
+    return 'EventModel(eventId: $eventId, dateTime: $dateTime, title: $title, type: $type, language: $language, role: $role, mapLongitude: $mapLongitude, mapLatitude: $mapLatitude, mapLink: $mapLink, locationName: $locationName, showQr: $showQr, imageUrl: $imageUrl, image: $image, inviteTemplate: $inviteTemplate, confirmedTemplate: $confirmedTemplate, declinedTemplate: $declinedTemplate, workflowState: $workflowState, isFeatured: $isFeatured, status: $status, guestList: $guestList, guestReport: $guestReport)';
 }
 
 
@@ -386,16 +391,21 @@ $GuestModelCopyWith<GuestModel> get copyWith => _$GuestModelCopyWithImpl<GuestMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GuestModel&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.whatsappNumber, whatsappNumber) || other.whatsappNumber == whatsappNumber)&&(identical(other.partySize, partySize) || other.partySize == partySize)&&(identical(other.rsvpStatus, rsvpStatus) || other.rsvpStatus == rsvpStatus)&&(identical(other.replied, replied) || other.replied == replied));
+  final _this = this as GuestModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GuestModel&&(identical(other.inviteeId, _this.inviteeId) || other.inviteeId == _this.inviteeId)&&(identical(other.fullName, _this.fullName) || other.fullName == _this.fullName)&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.lastName, _this.lastName) || other.lastName == _this.lastName)&&(identical(other.whatsappNumber, _this.whatsappNumber) || other.whatsappNumber == _this.whatsappNumber)&&(identical(other.partySize, _this.partySize) || other.partySize == _this.partySize)&&(identical(other.rsvpStatus, _this.rsvpStatus) || other.rsvpStatus == _this.rsvpStatus)&&(identical(other.replied, _this.replied) || other.replied == _this.replied));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,inviteeId,fullName,firstName,lastName,whatsappNumber,partySize,rsvpStatus,replied);
+int get hashCode {
+  final _this = this as GuestModel;
+  return Object.hash(runtimeType,_this.inviteeId,_this.fullName,_this.firstName,_this.lastName,_this.whatsappNumber,_this.partySize,_this.rsvpStatus,_this.replied);
+}
 
 @override
 String toString() {
-  return 'GuestModel(inviteeId: $inviteeId, fullName: $fullName, firstName: $firstName, lastName: $lastName, whatsappNumber: $whatsappNumber, partySize: $partySize, rsvpStatus: $rsvpStatus, replied: $replied)';
+  final _this = this as GuestModel;
+  return 'GuestModel(inviteeId: ${_this.inviteeId}, fullName: ${_this.fullName}, firstName: ${_this.firstName}, lastName: ${_this.lastName}, whatsappNumber: ${_this.whatsappNumber}, partySize: ${_this.partySize}, rsvpStatus: ${_this.rsvpStatus}, replied: ${_this.replied})';
 }
 
 
@@ -424,7 +434,7 @@ class _$GuestModelCopyWithImpl<$Res>
 /// Create a copy of GuestModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? inviteeId = freezed,Object? fullName = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? whatsappNumber = freezed,Object? partySize = freezed,Object? rsvpStatus = freezed,Object? replied = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(GuestModel(
 inviteeId: freezed == inviteeId ? _self.inviteeId : inviteeId // ignore: cast_nullable_to_non_nullable
 as String?,fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,firstName: freezed == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
@@ -599,16 +609,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GuestModel&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.whatsappNumber, whatsappNumber) || other.whatsappNumber == whatsappNumber)&&(identical(other.partySize, partySize) || other.partySize == partySize)&&(identical(other.rsvpStatus, rsvpStatus) || other.rsvpStatus == rsvpStatus)&&(identical(other.replied, replied) || other.replied == replied));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GuestModel&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.whatsappNumber, whatsappNumber) || other.whatsappNumber == whatsappNumber)&&(identical(other.partySize, partySize) || other.partySize == partySize)&&(identical(other.rsvpStatus, rsvpStatus) || other.rsvpStatus == rsvpStatus)&&(identical(other.replied, replied) || other.replied == replied));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,inviteeId,fullName,firstName,lastName,whatsappNumber,partySize,rsvpStatus,replied);
+int get hashCode {
+    return Object.hash(runtimeType,inviteeId,fullName,firstName,lastName,whatsappNumber,partySize,rsvpStatus,replied);
+}
 
 @override
 String toString() {
-  return 'GuestModel(inviteeId: $inviteeId, fullName: $fullName, firstName: $firstName, lastName: $lastName, whatsappNumber: $whatsappNumber, partySize: $partySize, rsvpStatus: $rsvpStatus, replied: $replied)';
+    return 'GuestModel(inviteeId: $inviteeId, fullName: $fullName, firstName: $firstName, lastName: $lastName, whatsappNumber: $whatsappNumber, partySize: $partySize, rsvpStatus: $rsvpStatus, replied: $replied)';
 }
 
 

@@ -7,8 +7,6 @@ class PaymentState {
   factory PaymentState.initial() => PaymentState(paymentLink: null);
 
   PaymentState copyWith({AsyncValue<String>? paymentLink}) {
-    return PaymentState(
-      paymentLink: paymentLink ?? this.paymentLink,
-    );
+    return PaymentState(paymentLink: paymentLink ?? this.paymentLink);
   }
 }

@@ -19,29 +19,32 @@ class UpdateEventController extends _$UpdateEventController {
 
   Future<CreateEventResponse?> updateEvent() async {
     try {
-      state =
-          AsyncData(state.value!.copyWith(createEventResponse: AsyncLoading()));
+      state = AsyncData(
+        state.value!.copyWith(createEventResponse: AsyncLoading()),
+      );
       final repo = ref.read(eventRepositoryProvider);
       final response = await repo.updateEvent(state.value!.updatedEvent!);
 
       if (response.hasFailed) {
-        state = AsyncData(state.value!.copyWith(
+        state = AsyncData(
+          state.value!.copyWith(
             createEventResponse: AsyncError(
-          response.message ?? 'Something went wrong',
-          StackTrace.fromString(response.message ?? ''),
-        )));
+              response.message ?? 'Something went wrong',
+              StackTrace.fromString(response.message ?? ''),
+            ),
+          ),
+        );
         return null;
       }
 
       state = AsyncData(
-        state.value!.copyWith(
-          createEventResponse: AsyncData(response.data!),
-        ),
+        state.value!.copyWith(createEventResponse: AsyncData(response.data!)),
       );
       return response.data;
     } catch (e, st) {
       state = AsyncData(
-          state.value!.copyWith(createEventResponse: AsyncError(e, st)));
+        state.value!.copyWith(createEventResponse: AsyncError(e, st)),
+      );
       return null;
     }
   }
@@ -79,9 +82,14 @@ class UpdateEventController extends _$UpdateEventController {
   }
 
   void removeImage() {
-    state = AsyncData(state.value!.copyWith(
-        updatedEvent:
-            state.value!.updatedEvent!.copyWith(image: null, imageUrl: '')));
+    state = AsyncData(
+      state.value!.copyWith(
+        updatedEvent: state.value!.updatedEvent!.copyWith(
+          image: null,
+          imageUrl: '',
+        ),
+      ),
+    );
   }
 
   void updateDataForEvent(EventModel newData) {

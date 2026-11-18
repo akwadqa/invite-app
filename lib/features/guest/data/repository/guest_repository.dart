@@ -24,7 +24,9 @@ class GuestRepository {
   GuestRepository(this._remoteDataSource);
 
   Future<ApiResponse<AddGuestResponse>> addGuest(
-      String occasionId, List<GuestModel> guests) async {
+    String occasionId,
+    List<GuestModel> guests,
+  ) async {
     final response = await _remoteDataSource.addGuest(occasionId, guests);
 
     if (response.status == 200) {
@@ -35,7 +37,8 @@ class GuestRepository {
   }
 
   Future<ApiResponse<DeleteGuestsResponse>> deleteGuest(
-      List<String> invitees) async {
+    List<String> invitees,
+  ) async {
     final response = await _remoteDataSource.deleteGuest(invitees);
 
     if (response.status == 200) {
@@ -44,16 +47,20 @@ class GuestRepository {
 
     throw AppException(response.message);
   }
+
   Future<ApiResponse<UpdateGuestListResponse>> updateGuestList({
     required String occasionId,
     required List<GuestModel> guests,
   }) async {
-    final response = await _remoteDataSource.updateGuestList(occasionId: occasionId, guests: guests);
-  
+    final response = await _remoteDataSource.updateGuestList(
+      occasionId: occasionId,
+      guests: guests,
+    );
+
     if (response.status == 200) {
       return response;
     }
-  
+
     throw AppException(response.message);
   }
 }

@@ -1,8 +1,8 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_messages_model.freezed.dart';
 part 'app_messages_model.g.dart';
+
 @freezed
 abstract class AppMessagesModel with _$AppMessagesModel {
   const factory AppMessagesModel({

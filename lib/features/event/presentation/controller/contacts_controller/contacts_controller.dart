@@ -1,7 +1,6 @@
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event/presentation/controller/contacts_controller/contacts_state.dart';
-import 'package:invit/features/event/presentation/controller/create_event/create_event_controller.dart';
 import 'package:invit/features/event/presentation/controller/update_event/update_event_controller.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/guest/data/repository/guest_repository.dart';
@@ -27,9 +26,7 @@ class ContactsController extends _$ContactsController {
       if (list != null && list.isNotEmpty) {
         final selected = convertGuestModelsToSelectedContacts(list);
 
-        return ContactsState.init().copyWith(
-          selectedContacts: selected,
-        );
+        return ContactsState.init().copyWith(selectedContacts: selected);
       } else {
         return ContactsState.init();
       }
@@ -37,12 +34,13 @@ class ContactsController extends _$ContactsController {
     return ContactsState.init();
   }
 
-  Future<void> addNewContact(
-      {required String firstName,
-      required String lastName,
-      required String phoneNumber,
-      // required String code,
-      required String? occasionId}) async {
+  Future<void> addNewContact({
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    // required String code,
+    required String? occasionId,
+  }) async {
     try {
       final id = Uuid().v4();
 
@@ -61,18 +59,13 @@ class ContactsController extends _$ContactsController {
       ];
 
       state = AsyncData(
-        state.value!.copyWith(
-          selectedContacts: updatedSelected,
-        ),
+        state.value!.copyWith(selectedContacts: updatedSelected),
       );
-      if (occasionId == null) {
-        ref
-            .read(createEventControllerProvider.notifier)
-            .updateEvent(EventModel());
-      } else {
+      if (occasionId != null) {
         ref
             .read(
-                updateEventControllerProvider(ocassionId: occasionId).notifier)
+              updateEventControllerProvider(ocassionId: occasionId).notifier,
+            )
             .updateDataForEvent(EventModel());
       }
     } catch (e, st) {
@@ -91,11 +84,7 @@ class ContactsController extends _$ContactsController {
 
     state = AsyncData(currentState.copyWith(selectedContacts: updatedList));
 
-    if (occasionId == null) {
-      ref
-          .read(createEventControllerProvider.notifier)
-          .updateEvent(EventModel());
-    } else {
+    if (occasionId != null) {
       ref
           .read(updateEventControllerProvider(ocassionId: occasionId).notifier)
           .updateDataForEvent(EventModel());
@@ -112,11 +101,7 @@ class ContactsController extends _$ContactsController {
     }).toList();
 
     state = AsyncData(currentState.copyWith(selectedContacts: updatedList));
-    if (occasionId == null) {
-      ref
-          .read(createEventControllerProvider.notifier)
-          .updateEvent(EventModel());
-    } else {
+    if (occasionId != null) {
       ref
           .read(updateEventControllerProvider(ocassionId: occasionId).notifier)
           .updateDataForEvent(EventModel());
@@ -136,7 +121,7 @@ class ContactsController extends _$ContactsController {
   Future<void> getContacts(String? search) async {
     state = AsyncLoading();
 
-    final granted = await FlutterContacts.requestPermission();
+    final granted = await FlutterContacts.requestPermission(readonly: true);
     if (!granted) {
       state = AsyncError('The permission has denied', StackTrace.current);
       return;
@@ -150,14 +135,14 @@ class ContactsController extends _$ContactsController {
         contacts: search == null
             ? cleanContacts
             : cleanContacts
-                .where(
-                  (c) =>
-                      c.displayName.toLowerCase().contains(
-                            search.toLowerCase(),
-                          ) ||
-                      c.phones.any((p) => p.number.contains(search)),
-                )
-                .toList(),
+                  .where(
+                    (c) =>
+                        c.displayName.toLowerCase().contains(
+                          search.toLowerCase(),
+                        ) ||
+                        c.phones.any((p) => p.number.contains(search)),
+                  )
+                  .toList(),
       ),
     );
   }
@@ -169,8 +154,9 @@ class ContactsController extends _$ContactsController {
 
     final deviceContactIds = currentState.contacts.map((c) => c.id).toSet();
 
-    return currentState.selectedContacts
-        .any((selected) => deviceContactIds.contains(selected.contact.id));
+    return currentState.selectedContacts.any(
+      (selected) => deviceContactIds.contains(selected.contact.id),
+    );
   }
 
   void unselectAll() {
@@ -184,17 +170,19 @@ class ContactsController extends _$ContactsController {
     final contacts = currentState.contacts;
 
     selectedList = contacts.map((contact) {
-      final code = contact.phones.first.number.startsWith('+') ||
+      final code =
+          contact.phones.first.number.startsWith('+') ||
               contact.phones.first.number.replaceAll(' ', '').length > 11
           ? contact.phones.first.number.replaceAll(' ', '').substring(1, 4)
           : '974';
 
-      final number = contact.phones.first.number.startsWith('+') ||
+      final number =
+          contact.phones.first.number.startsWith('+') ||
               contact.phones.first.number.replaceAll(' ', '').length > 11
           ? contact.phones.first.number.replaceAll(' ', '').substring(4)
           : contact.phones.first.number.startsWith('0')
-              ? contact.phones.first.number.replaceAll(' ', '').substring(1)
-              : contact.phones.first.number;
+          ? contact.phones.first.number.replaceAll(' ', '').substring(1)
+          : contact.phones.first.number;
 
       final newContact = Contact(
         id: contact.id,
@@ -223,20 +211,23 @@ class ContactsController extends _$ContactsController {
     final exists = selectedList.any((c) => c.contact.id == contact.id);
 
     if (exists) {
-      selectedList =
-          selectedList.where((c) => c.contact.id != contact.id).toList();
+      selectedList = selectedList
+          .where((c) => c.contact.id != contact.id)
+          .toList();
     } else {
-      final code = contact.phones.first.number.startsWith('+') ||
+      final code =
+          contact.phones.first.number.startsWith('+') ||
               contact.phones.first.number.replaceAll(' ', '').length > 11
           ? contact.phones.first.number.replaceAll(' ', '').substring(1, 4)
           : '974';
 
-      final number = contact.phones.first.number.startsWith('+') ||
+      final number =
+          contact.phones.first.number.startsWith('+') ||
               contact.phones.first.number.replaceAll(' ', '').length > 11
           ? contact.phones.first.number.replaceAll(' ', '').substring(4)
           : contact.phones.first.number.startsWith('0')
-              ? contact.phones.first.number.replaceAll(' ', '').substring(1)
-              : contact.phones.first.number;
+          ? contact.phones.first.number.replaceAll(' ', '').substring(1)
+          : contact.phones.first.number;
 
       final newContact = Contact(
         id: contact.id,
@@ -258,11 +249,7 @@ class ContactsController extends _$ContactsController {
         ),
       ];
     }
-    if (occasionId == null) {
-      ref
-          .read(createEventControllerProvider.notifier)
-          .updateEvent(EventModel());
-    } else {
+    if (occasionId != null) {
       ref
           .read(updateEventControllerProvider(ocassionId: occasionId).notifier)
           .updateDataForEvent(EventModel());
@@ -276,13 +263,14 @@ class ContactsController extends _$ContactsController {
     return selectedContacts?.map((s) {
       final nameParts = (s.contact.displayName).split(' ');
       final firstName = nameParts.isNotEmpty ? nameParts.first : null;
-      final lastName =
-          nameParts.length > 1 ? nameParts.sublist(1).join(' ') : null;
+      final lastName = nameParts.length > 1
+          ? nameParts.sublist(1).join(' ')
+          : null;
 
       final number = (s.contact.phones.isNotEmpty)
           ? s.contact.phones.first.number.replaceAll(' ', '').length > 11
-              ? s.contact.phones.first.number.replaceAll(' ', '')
-              : '${s.code}${s.contact.phones.first.number.replaceAll(' ', '')}'
+                ? s.contact.phones.first.number.replaceAll(' ', '')
+                : '${s.code}${s.contact.phones.first.number.replaceAll(' ', '')}'
           : null;
 
       return GuestModel(

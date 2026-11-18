@@ -14,5 +14,4 @@ class ServicesUrls {
     mapApiKey = dotenv.get(DotenvKeys.mapApiKey);
     debugPrint('mnor $prodBaseUrl');
   }
-
 }

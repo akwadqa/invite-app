@@ -7,12 +7,12 @@ class ApiResponse<T> {
   ApiResponse(this.status, this.message, this.data, this.pagination);
 
   ApiResponse.success({this.message, this.data, this.pagination})
-      : status = 200;
+    : status = 200;
 
   ApiResponse.error({this.message, this.error})
-      : status = null,
-        data = null,
-        pagination = null;
+    : status = null,
+      data = null,
+      pagination = null;
 
   factory ApiResponse.fromJson(
     Map<String, dynamic> json,
@@ -61,11 +61,11 @@ class ApiResponse<T> {
   dynamic error;
 
   Map<String, dynamic> toJson() => {
-        'status_code': status,
-        'message': message,
-        'data': data,
-        'error': error,
-      };
+    'status_code': status,
+    'message': message,
+    'data': data,
+    'error': error,
+  };
 
   bool get hasSucceeded => status != null && status! <= 201;
   bool get hasFailed => error != null && error == 1;

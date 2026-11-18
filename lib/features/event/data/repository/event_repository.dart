@@ -24,8 +24,7 @@ class EventRepository {
 
   EventRepository(this._remoteDataSource);
 
-  Future<ApiResponse<String>> createEvent(
-      EventModel params) async {
+  Future<ApiResponse<String>> createEvent(EventModel params) async {
     final response = await _remoteDataSource.createEvent(params);
 
     // if (response.status! <= 201) {
@@ -35,9 +34,9 @@ class EventRepository {
     // throw AppException(message: response.message);
   }
 
- Future<ApiResponse<List<TemplateModel>>> getTemplates(
+  Future<ApiResponse<List<TemplateModel>>> getTemplates(
     String occasionType,
-  )async {
+  ) async {
     final response = await _remoteDataSource.getTemplates(occasionType);
 
     if (response.status == 200) {
@@ -46,7 +45,10 @@ class EventRepository {
 
     throw AppException(message: response.error);
   }
-  Future<ApiResponse<RetryBulkResponse>> resendFailedInvites(String occasionId) async {
+
+  Future<ApiResponse<RetryBulkResponse>> resendFailedInvites(
+    String occasionId,
+  ) async {
     final response = await _remoteDataSource.resendFailue(occasionId);
 
     if (response.status == 200) {
@@ -66,9 +68,7 @@ class EventRepository {
     throw AppException(message: response.error);
   }
 
-  Future<ApiResponse<CreateEventResponse>> updateEvent(
-    EventModel event,
-  ) async {
+  Future<ApiResponse<CreateEventResponse>> updateEvent(EventModel event) async {
     final response = await _remoteDataSource.updateEvent(event);
 
     if (response.status == 200) {

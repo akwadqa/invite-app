@@ -1,4 +1,3 @@
-
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event_details/data/datasources/event_details_datasource.dart';
 import 'package:invit/features/featured_events/data/datasources/featured_events_datasource.dart';
@@ -21,14 +20,13 @@ class EventDetailsRepository {
 
   EventDetailsRepository(this._remoteDataSource);
 
-  Future<ApiResponse<EventModel>> getEventDetails(
-       String occasionId) async {
+  Future<ApiResponse<EventModel>> getEventDetails(String occasionId) async {
     try {
-      final result = await _remoteDataSource.getEventDetails(occasionId:occasionId);
+      final result = await _remoteDataSource.getEventDetails(
+        occasionId: occasionId,
+      );
       if (result.hasFailed) {
-        throw AppException(
-          result.message ?? 'Failed to fetch getEventDetails',
-        );
+        throw AppException(result.message ?? 'Failed to fetch getEventDetails');
       }
       // if (result.status == 200) {
       return result;

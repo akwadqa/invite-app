@@ -7,7 +7,7 @@ import 'package:invit/features/guest/domain/model/update_guest_list_response/upd
 
 class ContactsState {
   final List<SelectedContact> selectedContacts;
-  
+
   final List<Contact> contacts;
   final AsyncValue<UpdateGuestListResponse>? updateGuestListRespone;
 
@@ -17,10 +17,8 @@ class ContactsState {
     this.updateGuestListRespone,
   });
 
-  factory ContactsState.init() => ContactsState(
-        selectedContacts: [],
-        contacts: [],
-      );
+  factory ContactsState.init() =>
+      ContactsState(selectedContacts: [], contacts: []);
 
   ContactsState copyWith({
     List<SelectedContact>? selectedContacts,
@@ -30,7 +28,8 @@ class ContactsState {
     return ContactsState(
       selectedContacts: selectedContacts ?? this.selectedContacts,
       contacts: contacts ?? this.contacts,
-      updateGuestListRespone: updateGuestListRespone ?? this.updateGuestListRespone,
+      updateGuestListRespone:
+          updateGuestListRespone ?? this.updateGuestListRespone,
     );
   }
 }

@@ -22,8 +22,10 @@ class PaymentRepository {
     String subscriptionType,
     String local,
   ) async {
-    final response =
-        await _remoteDataSource.getPaymentLink(subscriptionType, local);
+    final response = await _remoteDataSource.getPaymentLink(
+      subscriptionType,
+      local,
+    );
 
     if (response.status == 200) {
       return response;

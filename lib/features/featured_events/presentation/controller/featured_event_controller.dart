@@ -16,14 +16,19 @@ class FeaturedEventController extends _$FeaturedEventController {
     return await fetchAllEvents(page: 1, eventType: eventType);
   }
 
-  Future<AllEventsModel> fetchAllEvents(
-      {required int page, bool showLoading = true, String? eventType}) async {
+  Future<AllEventsModel> fetchAllEvents({
+    required int page,
+    bool showLoading = true,
+    String? eventType,
+  }) async {
     try {
       if (showLoading) state = const AsyncLoading();
 
       final repo = ref.read(featuredEventsRepositoryProvider);
-      final response =
-          await repo.getAllEvents(page: page, eventType: eventType);
+      final response = await repo.getAllEvents(
+        page: page,
+        eventType: eventType,
+      );
 
       // افترض أن الدالة ترجع كائن يحتوي على:
       // data: List<AllEventsModel>
@@ -37,7 +42,9 @@ class FeaturedEventController extends _$FeaturedEventController {
         _events.addAll(response.data!.events);
       }
       final responseModel = AllEventsModel(
-          events: _events, guestReport: response.data!.guestReport);
+        events: _events,
+        guestReport: response.data!.guestReport,
+      );
 
       state = AsyncData(responseModel);
       return responseModel;

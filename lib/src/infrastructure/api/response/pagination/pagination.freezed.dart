@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'pagination.dart';
@@ -9,6 +9,7 @@ part of 'pagination.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $PaginationCopyWith<Pagination> get copyWith => _$PaginationCopyWithImpl<Paginat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Pagination&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
+  final _this = this as Pagination;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Pagination&&(identical(other.totalItems, _this.totalItems) || other.totalItems == _this.totalItems)&&(identical(other.totalPages, _this.totalPages) || other.totalPages == _this.totalPages)&&(identical(other.currentPage, _this.currentPage) || other.currentPage == _this.currentPage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,totalItems,totalPages,currentPage);
+int get hashCode {
+  final _this = this as Pagination;
+  return Object.hash(runtimeType,_this.totalItems,_this.totalPages,_this.currentPage);
+}
 
 @override
 String toString() {
-  return 'Pagination(totalItems: $totalItems, totalPages: $totalPages, currentPage: $currentPage)';
+  final _this = this as Pagination;
+  return 'Pagination(totalItems: ${_this.totalItems}, totalPages: ${_this.totalPages}, currentPage: ${_this.currentPage})';
 }
 
 
@@ -66,7 +72,7 @@ class _$PaginationCopyWithImpl<$Res>
 /// Create a copy of Pagination
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? totalItems = null,Object? totalPages = null,Object? currentPage = null,}) {
-  return _then(_self.copyWith(
+  return _then(Pagination(
 totalItems: null == totalItems ? _self.totalItems : totalItems // ignore: cast_nullable_to_non_nullable
 as int,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
 as int,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
@@ -231,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Pagination&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Pagination&&(identical(other.totalItems, totalItems) || other.totalItems == totalItems)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,totalItems,totalPages,currentPage);
+int get hashCode {
+    return Object.hash(runtimeType,totalItems,totalPages,currentPage);
+}
 
 @override
 String toString() {
-  return 'Pagination(totalItems: $totalItems, totalPages: $totalPages, currentPage: $currentPage)';
+    return 'Pagination(totalItems: $totalItems, totalPages: $totalPages, currentPage: $currentPage)';
 }
 
 

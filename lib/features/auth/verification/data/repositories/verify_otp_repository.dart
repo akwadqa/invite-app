@@ -12,18 +12,21 @@ VerifyOtpRepository verifyOtpRepository(Ref ref) {
   final networkService = ref.watch(networkServiceProvider());
   return VerifyOtpRepository(VerifyOtpRemoteDataSource(networkService));
 }
+
 class VerifyOtpRepository {
   final VerifyOtpRemoteDataSource _remoteDataSource;
 
   VerifyOtpRepository(this._remoteDataSource);
-  Future<ApiResponse<VerifyOtpResponseModel>>  verifyOtp(String phone,String otp) async {
-    final response = await _remoteDataSource.verifyOtp(otp,phone);
-  
+  Future<ApiResponse<VerifyOtpResponseModel>> verifyOtp(
+    String phone,
+    String otp,
+  ) async {
+    final response = await _remoteDataSource.verifyOtp(otp, phone);
+
     if (response.status == 200) {
       return response;
     }
-  
+
     throw AppException(message: response.message);
   }
-
 }

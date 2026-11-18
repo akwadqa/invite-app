@@ -100,6 +100,117 @@ abstract class AppColors {
   static const Color softOrange = Color(0xFFFFEADA);
   static const Color softBlue = Color(0xFFE7F2FD);
   static const Color buttonBackground = Color(0xFFD1D1D1);
+
+  // Redesign palette, named by role.
+  /// Titles, primary buttons, strong text, focused borders, logo guests.
+  static const Color ink = Color(0xFF000000);
+
+  /// Descriptions and paragraphs.
+  static const Color inkBody = Color(0xFF4A5560);
+
+  /// Field labels and secondary text.
+  static const Color inkLabel = Color(0xFF5B6168);
+
+  /// Faint text and disabled button labels.
+  static const Color inkMuted = Color(0xFF7E878E);
+
+  /// Screen background behind the content.
+  static const Color pageBackground = Color(0xFFFBFBF8);
+
+  /// Hero header, splash background, icon circles.
+  static const Color mist = Color(0xFFDBE3E9);
+
+  /// Round secondary buttons and disabled badges.
+  static const Color mistSoft = Color(0xFFE8EDF1);
+
+  /// Input and chip backgrounds, empty code cells.
+  static const Color mistLight = Color(0xFFF2F5F7);
+
+  /// Input borders and disabled primary buttons.
+  static const Color mistBorder = Color(0xFFD5DDE3);
+
+  /// Button icon badge, logo host dot, avatar badge.
+  static const Color accent = Color(0xFF6AA6DA);
+
+  /// Logo core dot.
+  static const Color accentSecondary = Color(0xFFE1E5AC);
+  static const Color akwadInk = Color(0xFF270D33);
+
+  /// Inactive dots, drag handles and outlined button borders.
+  static const Color mistDark = Color(0xFFC3CED6);
+
+  /// Card outlines.
+  static const Color mistOutline = Color(0xFFDCE3E8);
+
+  /// Thin dividers inside cards.
+  static const Color mistDivider = Color(0xFFE6EBEF);
+
+  /// List chevrons.
+  static const Color inkChevron = Color(0xFF8E989F);
+
+  /// Declined replies.
+  static const Color inkFaint = Color(0xFF9AA3AB);
+
+  /// Light blue surfaces (info banners, "no reply" chips).
+  static const Color accentLight = Color(0xFFE1EDF8);
+  static const Color accentSurface = Color(0xFFE8F1FA);
+
+  /// Text on light blue surfaces.
+  static const Color accentInk = Color(0xFF2F6EA5);
+
+  /// Background card of the occasion carousel.
+  static const Color accentPale = Color(0xFFD3E4F3);
+
+  /// Success surfaces and text.
+  static const Color successLight = Color(0xFFE5F4EC);
+  static const Color success = Color(0xFF1F7A4C);
+  static const Color successDot = Color(0xFF1F9D5B);
+  static const Color successInk = Color(0xFF24503A);
+  static const Color successStrong = Color(0xFF1F6B45);
+  static const Color successText = Color(0xFF2A5A40);
+
+  /// Failed deliveries and destructive actions.
+  static const Color danger = Color(0xFFC2554B);
+  static const Color dangerInk = Color(0xFFB3261E);
+  static const Color dangerLight = Color(0xFFFDECEA);
+
+  /// "Declined" chips.
+  static const Color declinedSurface = Color(0xFFE8EBEE);
+  static const Color declinedInk = Color(0xFF4F575E);
+
+  /// Secondary text on dark buttons.
+  static const Color whiteMuted = Color(0xBFFFFFFF);
+
+  /// Image placeholders.
+  static const Color paper = Color(0xFFFFFDF8);
+  static const Color overlay = Color(0x66000000);
+
+  /// [pageBackground] fully transparent, for fades over lists.
+  static const Color transparentPage = Color(0x00FBFBF8);
+
+  /// Shadows: soft (cards, icon circles) and medium (floating buttons).
+  static const Color shadowFaint = Color(0x0F000000);
+  static const Color shadowSoft = Color(0x1A000000);
+  static const Color shadowMedium = Color(0x24000000);
+  static const Color shadowSheet = Color(0x1F000000);
+  static const Color shadowCard = Color(0x29000000);
+
+  /// Upload drop zone of the invitation image step.
+  static const Color dropzoneFill = Color(0xFFF5F8FA);
+  static const Color dropzoneBorder = Color(0xFFE1E5AC);
+
+  // WhatsApp preview.
+  static const Color whatsappChat = Color(0xFFEFEAE2);
+  static const Color whatsappText = Color(0xFF111B21);
+  static const Color whatsappMeta = Color(0xFF667781);
+  static const Color whatsappDate = Color(0xFF54656F);
+  static const Color whatsappLink = Color(0xFF027EB5);
+  static const Color whatsappShadow = Color(0x210B141A);
+  static const Color whatsappDoodle = Color(0xFFD9D0C3);
+  static const Color whatsappDivider = Color(0xFFE9EDEF);
+  static const Color whatsappOutgoing = Color(0xFFD9FDD3);
+  static const Color whatsappQuote = Color(0xFFD1F4CC);
+  static const Color whatsappQuoteAccent = Color(0xFF06CF9C);
 }
 
 class AvatarColors {

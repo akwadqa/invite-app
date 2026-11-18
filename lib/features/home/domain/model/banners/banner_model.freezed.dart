@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'banner_model.dart';
@@ -9,6 +9,7 @@ part of 'banner_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $BannerModelCopyWith<BannerModel> get copyWith => _$BannerModelCopyWithImpl<Bann
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannerModel&&(identical(other.bannerImage, bannerImage) || other.bannerImage == bannerImage)&&(identical(other.bannerTitle, bannerTitle) || other.bannerTitle == bannerTitle));
+  final _this = this as BannerModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannerModel&&(identical(other.bannerImage, _this.bannerImage) || other.bannerImage == _this.bannerImage)&&(identical(other.bannerTitle, _this.bannerTitle) || other.bannerTitle == _this.bannerTitle));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bannerImage,bannerTitle);
+int get hashCode {
+  final _this = this as BannerModel;
+  return Object.hash(runtimeType,_this.bannerImage,_this.bannerTitle);
+}
 
 @override
 String toString() {
-  return 'BannerModel(bannerImage: $bannerImage, bannerTitle: $bannerTitle)';
+  final _this = this as BannerModel;
+  return 'BannerModel(bannerImage: ${_this.bannerImage}, bannerTitle: ${_this.bannerTitle})';
 }
 
 
@@ -66,7 +72,7 @@ class _$BannerModelCopyWithImpl<$Res>
 /// Create a copy of BannerModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bannerImage = null,Object? bannerTitle = null,}) {
-  return _then(_self.copyWith(
+  return _then(BannerModel(
 bannerImage: null == bannerImage ? _self.bannerImage : bannerImage // ignore: cast_nullable_to_non_nullable
 as String,bannerTitle: null == bannerTitle ? _self.bannerTitle : bannerTitle // ignore: cast_nullable_to_non_nullable
 as String,
@@ -229,16 +235,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BannerModel&&(identical(other.bannerImage, bannerImage) || other.bannerImage == bannerImage)&&(identical(other.bannerTitle, bannerTitle) || other.bannerTitle == bannerTitle));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _BannerModel&&(identical(other.bannerImage, bannerImage) || other.bannerImage == bannerImage)&&(identical(other.bannerTitle, bannerTitle) || other.bannerTitle == bannerTitle));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bannerImage,bannerTitle);
+int get hashCode {
+    return Object.hash(runtimeType,bannerImage,bannerTitle);
+}
 
 @override
 String toString() {
-  return 'BannerModel(bannerImage: $bannerImage, bannerTitle: $bannerTitle)';
+    return 'BannerModel(bannerImage: $bannerImage, bannerTitle: $bannerTitle)';
 }
 
 

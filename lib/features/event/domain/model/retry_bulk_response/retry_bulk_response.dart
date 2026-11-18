@@ -11,7 +11,7 @@ abstract class RetryBulkResponse with _$RetryBulkResponse {
     @JsonKey(name: 'retried_count') required int retriedCount,
     @JsonKey(name: 'failed_count') required int failedCount,
     @JsonKey(name: 'failed_bulk_messages')
-        required List<String> failedBulkMessages,
+    required List<String> failedBulkMessages,
     required List<RetriedBulkMessage> retried,
   }) = _RetryBulkResponse;
 

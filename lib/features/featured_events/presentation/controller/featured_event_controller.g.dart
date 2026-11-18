@@ -87,7 +87,7 @@ abstract class _$FeaturedEventController
   FutureOr<AllEventsModel> build({String? eventType});
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<AllEventsModel>, AllEventsModel>;
     final element =
         ref.element
@@ -97,6 +97,6 @@ abstract class _$FeaturedEventController
               Object?,
               Object?
             >;
-    element.handleCreate(ref, () => build(eventType: _$args));
+    return element.handleCreate(ref, () => build(eventType: _$args));
   }
 }

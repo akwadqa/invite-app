@@ -1,7 +1,5 @@
 allprojects {
     repositories {
-        // google()
-        // mavenCentral()
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/public" }
         google()
@@ -17,33 +15,55 @@ buildscript {
         google()
         mavenCentral()
     }
-    dependencies {
+}
+
+// Keep in sync with the plugin versions in settings.gradle.
+def androidGradlePluginVersion = "9.3.1"
+def kotlinGradlePluginVersion = "2.4.20"
+
+// Some Flutter plugins pin older AGP/Kotlin versions in their own buildscript
+// blocks. Those classes are never used (the versions from settings.gradle are
+// loaded first), but Gradle would still download them just to resolve them,
+// so point those requests at the versions this project already uses.
+subprojects {
+    buildscript.configurations.configureEach {
+        resolutionStrategy.eachDependency { details ->
+            def requested = details.requested
+            if (requested.group == "com.android.tools.build" && requested.name == "gradle") {
+                details.useVersion(androidGradlePluginVersion)
+            } else if (requested.group == "org.jetbrains.kotlin" && requested.name == "kotlin-gradle-plugin") {
+                details.useVersion(kotlinGradlePluginVersion)
+            }
+        }
     }
 }
 
+// Kotlin 2 fails the build when a module's Kotlin JVM target differs from its
+// Java target. Some plugins (e.g. google_api_headers) leave Java on AGP's
+// default but pin Kotlin to 1.8, so align Kotlin to each module's Java target.
+subprojects { subproject ->
+    subproject.pluginManager.withPlugin("org.jetbrains.kotlin.android") {
+        subproject.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile).configureEach { task ->
+            // Read lazily: AGP finalizes the Java target only when tasks run.
+            task.compilerOptions.jvmTarget.set(subproject.provider {
+                org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(
+                    subproject.android.compileOptions.targetCompatibility.toString()
+                )
+            })
+        }
+    }
+}
 
-// allprojects {
-//     configurations.all {
-//         resolutionStrategy {
-//             force "androidx.activity:activity:1.9.3"
-//             force "androidx.activity:activity-ktx:2.2.20"
-//             force "androidx.core:core-ktx:1.16.0"
-//             force "androidx.core:core:1.16.0"
-//             force "com.google.android.libraries.places:places:4.3.1"
+def newBuildDir = rootProject.layout.buildDirectory.dir("../../build").get()
+rootProject.layout.buildDirectory.value(newBuildDir)
 
-//         }
-//     }
-// }
-
-
-rootProject.buildDir = "../build"
 subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.layout.buildDirectory.value(newBuildDir.dir(project.name))
 }
 subprojects {
     project.evaluationDependsOn(":app")
 }
 
 tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+    delete rootProject.layout.buildDirectory
 }

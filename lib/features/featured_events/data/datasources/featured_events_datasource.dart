@@ -11,17 +11,21 @@ class FeaturedEventsDatasource {
   FeaturedEventsDatasource(this._networkService);
 
   Future<ApiResponse<AllEventsModel>> getAllEvents(
-      int page, String? eventType) async {
+    int page,
+    String? eventType,
+  ) async {
     try {
       final response = await _networkService.get(
         ApiEndPoints.getUserEvents,
         queryParameters: {
           'page_no': page,
-          if (eventType != null) "event_type": eventType
+          if (eventType != null) "event_type": eventType,
         },
       );
-      return ApiResponse.fromJson(response.data,
-          (json) => AllEventsModel.fromJson(json as Map<String, dynamic>));
+      return ApiResponse.fromJson(
+        response.data,
+        (json) => AllEventsModel.fromJson(json as Map<String, dynamic>),
+      );
     } catch (e) {
       return ApiResponse.error(message: e.toString());
     }

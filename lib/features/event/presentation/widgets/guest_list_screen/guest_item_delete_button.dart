@@ -18,7 +18,7 @@ class GuestItemDeleteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _showDeleteDialog(context, contact,occasionId),
+      onTap: () => _showDeleteDialog(context, contact, occasionId),
       child: Container(
         alignment: Alignment.center,
         height: 36,
@@ -33,11 +33,14 @@ class GuestItemDeleteButton extends StatelessWidget {
   }
 
   Future<dynamic> _showDeleteDialog(
-      BuildContext context, Contact contact, String? occasionId) {
+    BuildContext context,
+    Contact contact,
+    String? occasionId,
+  ) {
     return showDialog(
-      
-        context: context,
-        fullscreenDialog: false,
-        builder: (context) => DeleteContactAlert(contact, occasionId));
+      context: context,
+      fullscreenDialog: false,
+      builder: (context) => DeleteContactAlert(contact, occasionId),
+    );
   }
 }

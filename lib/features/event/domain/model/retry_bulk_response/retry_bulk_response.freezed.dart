@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'retry_bulk_response.dart';
@@ -9,6 +9,7 @@ part of 'retry_bulk_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $RetryBulkResponseCopyWith<RetryBulkResponse> get copyWith => _$RetryBulkRespons
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RetryBulkResponse&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&(identical(other.totalBulkMessages, totalBulkMessages) || other.totalBulkMessages == totalBulkMessages)&&(identical(other.retriedCount, retriedCount) || other.retriedCount == retriedCount)&&(identical(other.failedCount, failedCount) || other.failedCount == failedCount)&&const DeepCollectionEquality().equals(other.failedBulkMessages, failedBulkMessages)&&const DeepCollectionEquality().equals(other.retried, retried));
+  final _this = this as RetryBulkResponse;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RetryBulkResponse&&(identical(other.occasionId, _this.occasionId) || other.occasionId == _this.occasionId)&&(identical(other.totalBulkMessages, _this.totalBulkMessages) || other.totalBulkMessages == _this.totalBulkMessages)&&(identical(other.retriedCount, _this.retriedCount) || other.retriedCount == _this.retriedCount)&&(identical(other.failedCount, _this.failedCount) || other.failedCount == _this.failedCount)&&const DeepCollectionEquality().equals(other.failedBulkMessages, _this.failedBulkMessages)&&const DeepCollectionEquality().equals(other.retried, _this.retried));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,occasionId,totalBulkMessages,retriedCount,failedCount,const DeepCollectionEquality().hash(failedBulkMessages),const DeepCollectionEquality().hash(retried));
+int get hashCode {
+  final _this = this as RetryBulkResponse;
+  return Object.hash(runtimeType,_this.occasionId,_this.totalBulkMessages,_this.retriedCount,_this.failedCount,const DeepCollectionEquality().hash(_this.failedBulkMessages),const DeepCollectionEquality().hash(_this.retried));
+}
 
 @override
 String toString() {
-  return 'RetryBulkResponse(occasionId: $occasionId, totalBulkMessages: $totalBulkMessages, retriedCount: $retriedCount, failedCount: $failedCount, failedBulkMessages: $failedBulkMessages, retried: $retried)';
+  final _this = this as RetryBulkResponse;
+  return 'RetryBulkResponse(occasionId: ${_this.occasionId}, totalBulkMessages: ${_this.totalBulkMessages}, retriedCount: ${_this.retriedCount}, failedCount: ${_this.failedCount}, failedBulkMessages: ${_this.failedBulkMessages}, retried: ${_this.retried})';
 }
 
 
@@ -66,7 +72,7 @@ class _$RetryBulkResponseCopyWithImpl<$Res>
 /// Create a copy of RetryBulkResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? occasionId = null,Object? totalBulkMessages = null,Object? retriedCount = null,Object? failedCount = null,Object? failedBulkMessages = null,Object? retried = null,}) {
-  return _then(_self.copyWith(
+  return _then(RetryBulkResponse(
 occasionId: null == occasionId ? _self.occasionId : occasionId // ignore: cast_nullable_to_non_nullable
 as String,totalBulkMessages: null == totalBulkMessages ? _self.totalBulkMessages : totalBulkMessages // ignore: cast_nullable_to_non_nullable
 as int,retriedCount: null == retriedCount ? _self.retriedCount : retriedCount // ignore: cast_nullable_to_non_nullable
@@ -214,7 +220,7 @@ return $default(_that.occasionId,_that.totalBulkMessages,_that.retriedCount,_tha
 @JsonSerializable()
 
 class _RetryBulkResponse implements RetryBulkResponse {
-  const _RetryBulkResponse({@JsonKey(name: 'occasion_id') required this.occasionId, @JsonKey(name: 'total_bulk_messages') required this.totalBulkMessages, @JsonKey(name: 'retried_count') required this.retriedCount, @JsonKey(name: 'failed_count') required this.failedCount, @JsonKey(name: 'failed_bulk_messages') required final  List<String> failedBulkMessages, required final  List<RetriedBulkMessage> retried}): _failedBulkMessages = failedBulkMessages,_retried = retried;
+  const _RetryBulkResponse({@JsonKey(name: 'occasion_id') required this.occasionId, @JsonKey(name: 'total_bulk_messages') required this.totalBulkMessages, @JsonKey(name: 'retried_count') required this.retriedCount, @JsonKey(name: 'failed_count') required this.failedCount, @JsonKey(name: 'failed_bulk_messages') required  List<String> failedBulkMessages, required  List<RetriedBulkMessage> retried}): _failedBulkMessages = failedBulkMessages,_retried = retried;
   factory _RetryBulkResponse.fromJson(Map<String, dynamic> json) => _$RetryBulkResponseFromJson(json);
 
 @override@JsonKey(name: 'occasion_id') final  String occasionId;
@@ -249,16 +255,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RetryBulkResponse&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&(identical(other.totalBulkMessages, totalBulkMessages) || other.totalBulkMessages == totalBulkMessages)&&(identical(other.retriedCount, retriedCount) || other.retriedCount == retriedCount)&&(identical(other.failedCount, failedCount) || other.failedCount == failedCount)&&const DeepCollectionEquality().equals(other._failedBulkMessages, _failedBulkMessages)&&const DeepCollectionEquality().equals(other._retried, _retried));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RetryBulkResponse&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&(identical(other.totalBulkMessages, totalBulkMessages) || other.totalBulkMessages == totalBulkMessages)&&(identical(other.retriedCount, retriedCount) || other.retriedCount == retriedCount)&&(identical(other.failedCount, failedCount) || other.failedCount == failedCount)&&const DeepCollectionEquality().equals(other.failedBulkMessages, _failedBulkMessages)&&const DeepCollectionEquality().equals(other.retried, _retried));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,occasionId,totalBulkMessages,retriedCount,failedCount,const DeepCollectionEquality().hash(_failedBulkMessages),const DeepCollectionEquality().hash(_retried));
+int get hashCode {
+    return Object.hash(runtimeType,occasionId,totalBulkMessages,retriedCount,failedCount,const DeepCollectionEquality().hash(_failedBulkMessages),const DeepCollectionEquality().hash(_retried));
+}
 
 @override
 String toString() {
-  return 'RetryBulkResponse(occasionId: $occasionId, totalBulkMessages: $totalBulkMessages, retriedCount: $retriedCount, failedCount: $failedCount, failedBulkMessages: $failedBulkMessages, retried: $retried)';
+    return 'RetryBulkResponse(occasionId: $occasionId, totalBulkMessages: $totalBulkMessages, retriedCount: $retriedCount, failedCount: $failedCount, failedBulkMessages: $failedBulkMessages, retried: $retried)';
 }
 
 
@@ -318,16 +326,21 @@ $RetriedBulkMessageCopyWith<RetriedBulkMessage> get copyWith => _$RetriedBulkMes
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RetriedBulkMessage&&(identical(other.bulkMessage, bulkMessage) || other.bulkMessage == bulkMessage)&&(identical(other.result, result) || other.result == result));
+  final _this = this as RetriedBulkMessage;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RetriedBulkMessage&&(identical(other.bulkMessage, _this.bulkMessage) || other.bulkMessage == _this.bulkMessage)&&(identical(other.result, _this.result) || other.result == _this.result));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bulkMessage,result);
+int get hashCode {
+  final _this = this as RetriedBulkMessage;
+  return Object.hash(runtimeType,_this.bulkMessage,_this.result);
+}
 
 @override
 String toString() {
-  return 'RetriedBulkMessage(bulkMessage: $bulkMessage, result: $result)';
+  final _this = this as RetriedBulkMessage;
+  return 'RetriedBulkMessage(bulkMessage: ${_this.bulkMessage}, result: ${_this.result})';
 }
 
 
@@ -356,7 +369,7 @@ class _$RetriedBulkMessageCopyWithImpl<$Res>
 /// Create a copy of RetriedBulkMessage
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bulkMessage = null,Object? result = null,}) {
-  return _then(_self.copyWith(
+  return _then(RetriedBulkMessage(
 bulkMessage: null == bulkMessage ? _self.bulkMessage : bulkMessage // ignore: cast_nullable_to_non_nullable
 as String,result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -519,16 +532,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RetriedBulkMessage&&(identical(other.bulkMessage, bulkMessage) || other.bulkMessage == bulkMessage)&&(identical(other.result, result) || other.result == result));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RetriedBulkMessage&&(identical(other.bulkMessage, bulkMessage) || other.bulkMessage == bulkMessage)&&(identical(other.result, result) || other.result == result));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bulkMessage,result);
+int get hashCode {
+    return Object.hash(runtimeType,bulkMessage,result);
+}
 
 @override
 String toString() {
-  return 'RetriedBulkMessage(bulkMessage: $bulkMessage, result: $result)';
+    return 'RetriedBulkMessage(bulkMessage: $bulkMessage, result: $result)';
 }
 
 

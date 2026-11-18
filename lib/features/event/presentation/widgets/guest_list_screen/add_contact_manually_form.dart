@@ -3,9 +3,7 @@ import 'package:invit/features/event/presentation/widgets/guest_list_screen/add_
 import 'package:invit/features/event/presentation/widgets/guest_list_screen/add_guest_manually_fields.dart';
 
 class AddContactManuallyForm extends StatefulWidget {
-  const AddContactManuallyForm({
-    super.key, this.occasionId,
-  });
+  const AddContactManuallyForm({super.key, this.occasionId});
   final String? occasionId;
 
   @override
@@ -36,17 +34,13 @@ class _AddContactManuallyFormState extends State<AddContactManuallyForm> {
     return Column(
       spacing: 17,
       children: [
-        AddGuestManuallyFields(
-          name: _name,
-          phone: _phone,
-          formKey: formKey,
-        ),
+        AddGuestManuallyFields(name: _name, phone: _phone, formKey: formKey),
         AddGuestManuallyButton(
           name: _name,
           phone: _phone,
           occasionId: widget.occasionId,
           formKey: formKey,
-        )
+        ),
       ],
     );
   }

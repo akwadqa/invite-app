@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'add_guest_response.dart';
@@ -9,6 +9,7 @@ part of 'add_guest_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $AddGuestResponseCopyWith<AddGuestResponse> get copyWith => _$AddGuestResponseCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddGuestResponse&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&const DeepCollectionEquality().equals(other.createdInvitees, createdInvitees)&&const DeepCollectionEquality().equals(other.duplicates, duplicates));
+  final _this = this as AddGuestResponse;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddGuestResponse&&(identical(other.occasionId, _this.occasionId) || other.occasionId == _this.occasionId)&&const DeepCollectionEquality().equals(other.createdInvitees, _this.createdInvitees)&&const DeepCollectionEquality().equals(other.duplicates, _this.duplicates));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,occasionId,const DeepCollectionEquality().hash(createdInvitees),const DeepCollectionEquality().hash(duplicates));
+int get hashCode {
+  final _this = this as AddGuestResponse;
+  return Object.hash(runtimeType,_this.occasionId,const DeepCollectionEquality().hash(_this.createdInvitees),const DeepCollectionEquality().hash(_this.duplicates));
+}
 
 @override
 String toString() {
-  return 'AddGuestResponse(occasionId: $occasionId, createdInvitees: $createdInvitees, duplicates: $duplicates)';
+  final _this = this as AddGuestResponse;
+  return 'AddGuestResponse(occasionId: ${_this.occasionId}, createdInvitees: ${_this.createdInvitees}, duplicates: ${_this.duplicates})';
 }
 
 
@@ -66,7 +72,7 @@ class _$AddGuestResponseCopyWithImpl<$Res>
 /// Create a copy of AddGuestResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? occasionId = null,Object? createdInvitees = null,Object? duplicates = null,}) {
-  return _then(_self.copyWith(
+  return _then(AddGuestResponse(
 occasionId: null == occasionId ? _self.occasionId : occasionId // ignore: cast_nullable_to_non_nullable
 as String,createdInvitees: null == createdInvitees ? _self.createdInvitees : createdInvitees // ignore: cast_nullable_to_non_nullable
 as List<CreatedInviteeModel>,duplicates: null == duplicates ? _self.duplicates : duplicates // ignore: cast_nullable_to_non_nullable
@@ -211,7 +217,7 @@ return $default(_that.occasionId,_that.createdInvitees,_that.duplicates);case _:
 @JsonSerializable()
 
 class _AddGuestResponse implements AddGuestResponse {
-  const _AddGuestResponse({@JsonKey(name: 'occasion_id') required this.occasionId, @JsonKey(name: 'created_invitees') required final  List<CreatedInviteeModel> createdInvitees, required final  List<CreatedInviteeModel> duplicates}): _createdInvitees = createdInvitees,_duplicates = duplicates;
+  const _AddGuestResponse({@JsonKey(name: 'occasion_id') required this.occasionId, @JsonKey(name: 'created_invitees') required  List<CreatedInviteeModel> createdInvitees, required  List<CreatedInviteeModel> duplicates}): _createdInvitees = createdInvitees,_duplicates = duplicates;
   factory _AddGuestResponse.fromJson(Map<String, dynamic> json) => _$AddGuestResponseFromJson(json);
 
 @override@JsonKey(name: 'occasion_id') final  String occasionId;
@@ -243,16 +249,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddGuestResponse&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&const DeepCollectionEquality().equals(other._createdInvitees, _createdInvitees)&&const DeepCollectionEquality().equals(other._duplicates, _duplicates));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddGuestResponse&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&const DeepCollectionEquality().equals(other.createdInvitees, _createdInvitees)&&const DeepCollectionEquality().equals(other.duplicates, _duplicates));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,occasionId,const DeepCollectionEquality().hash(_createdInvitees),const DeepCollectionEquality().hash(_duplicates));
+int get hashCode {
+    return Object.hash(runtimeType,occasionId,const DeepCollectionEquality().hash(_createdInvitees),const DeepCollectionEquality().hash(_duplicates));
+}
 
 @override
 String toString() {
-  return 'AddGuestResponse(occasionId: $occasionId, createdInvitees: $createdInvitees, duplicates: $duplicates)';
+    return 'AddGuestResponse(occasionId: $occasionId, createdInvitees: $createdInvitees, duplicates: $duplicates)';
 }
 
 
@@ -309,16 +317,21 @@ $CreatedInviteeModelCopyWith<CreatedInviteeModel> get copyWith => _$CreatedInvit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatedInviteeModel&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName));
+  final _this = this as CreatedInviteeModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatedInviteeModel&&(identical(other.inviteeId, _this.inviteeId) || other.inviteeId == _this.inviteeId)&&(identical(other.fullName, _this.fullName) || other.fullName == _this.fullName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,inviteeId,fullName);
+int get hashCode {
+  final _this = this as CreatedInviteeModel;
+  return Object.hash(runtimeType,_this.inviteeId,_this.fullName);
+}
 
 @override
 String toString() {
-  return 'CreatedInviteeModel(inviteeId: $inviteeId, fullName: $fullName)';
+  final _this = this as CreatedInviteeModel;
+  return 'CreatedInviteeModel(inviteeId: ${_this.inviteeId}, fullName: ${_this.fullName})';
 }
 
 
@@ -347,7 +360,7 @@ class _$CreatedInviteeModelCopyWithImpl<$Res>
 /// Create a copy of CreatedInviteeModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? inviteeId = null,Object? fullName = null,}) {
-  return _then(_self.copyWith(
+  return _then(CreatedInviteeModel(
 inviteeId: null == inviteeId ? _self.inviteeId : inviteeId // ignore: cast_nullable_to_non_nullable
 as String,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String,
@@ -510,16 +523,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatedInviteeModel&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatedInviteeModel&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,inviteeId,fullName);
+int get hashCode {
+    return Object.hash(runtimeType,inviteeId,fullName);
+}
 
 @override
 String toString() {
-  return 'CreatedInviteeModel(inviteeId: $inviteeId, fullName: $fullName)';
+    return 'CreatedInviteeModel(inviteeId: $inviteeId, fullName: $fullName)';
 }
 
 

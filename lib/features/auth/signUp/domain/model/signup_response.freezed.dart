@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'signup_response.dart';
@@ -9,15 +9,14 @@ part of 'signup_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SignupResponseModel {
 
-@JsonKey(name: 'user_id') String get userId; String get subscriber;// @JsonKey(name: 'first_name') required String firstName,
-// @JsonKey(name: 'last_name') required String lastName,
-@JsonKey(name: 'full_name') String get fullName; String get email;@JsonKey(name: 'mobile_no') String get mobileNo;
+@JsonKey(name: 'user_id') String get userId; String get subscriber;@JsonKey(name: 'full_name') String get fullName; String get email;@JsonKey(name: 'mobile_no') String get mobileNo;
 /// Create a copy of SignupResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,16 +29,21 @@ $SignupResponseModelCopyWith<SignupResponseModel> get copyWith => _$SignupRespon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupResponseModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.subscriber, subscriber) || other.subscriber == subscriber)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.mobileNo, mobileNo) || other.mobileNo == mobileNo));
+  final _this = this as SignupResponseModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupResponseModel&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.subscriber, _this.subscriber) || other.subscriber == _this.subscriber)&&(identical(other.fullName, _this.fullName) || other.fullName == _this.fullName)&&(identical(other.email, _this.email) || other.email == _this.email)&&(identical(other.mobileNo, _this.mobileNo) || other.mobileNo == _this.mobileNo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,subscriber,fullName,email,mobileNo);
+int get hashCode {
+  final _this = this as SignupResponseModel;
+  return Object.hash(runtimeType,_this.userId,_this.subscriber,_this.fullName,_this.email,_this.mobileNo);
+}
 
 @override
 String toString() {
-  return 'SignupResponseModel(userId: $userId, subscriber: $subscriber, fullName: $fullName, email: $email, mobileNo: $mobileNo)';
+  final _this = this as SignupResponseModel;
+  return 'SignupResponseModel(userId: ${_this.userId}, subscriber: ${_this.subscriber}, fullName: ${_this.fullName}, email: ${_this.email}, mobileNo: ${_this.mobileNo})';
 }
 
 
@@ -68,7 +72,7 @@ class _$SignupResponseModelCopyWithImpl<$Res>
 /// Create a copy of SignupResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? subscriber = null,Object? fullName = null,Object? email = null,Object? mobileNo = null,}) {
-  return _then(_self.copyWith(
+  return _then(SignupResponseModel(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,subscriber: null == subscriber ? _self.subscriber : subscriber // ignore: cast_nullable_to_non_nullable
 as String,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
@@ -220,8 +224,6 @@ class _SignupResponseModel extends SignupResponseModel {
 
 @override@JsonKey(name: 'user_id') final  String userId;
 @override final  String subscriber;
-// @JsonKey(name: 'first_name') required String firstName,
-// @JsonKey(name: 'last_name') required String lastName,
 @override@JsonKey(name: 'full_name') final  String fullName;
 @override final  String email;
 @override@JsonKey(name: 'mobile_no') final  String mobileNo;
@@ -239,16 +241,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupResponseModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.subscriber, subscriber) || other.subscriber == subscriber)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.mobileNo, mobileNo) || other.mobileNo == mobileNo));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupResponseModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.subscriber, subscriber) || other.subscriber == subscriber)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.mobileNo, mobileNo) || other.mobileNo == mobileNo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,subscriber,fullName,email,mobileNo);
+int get hashCode {
+    return Object.hash(runtimeType,userId,subscriber,fullName,email,mobileNo);
+}
 
 @override
 String toString() {
-  return 'SignupResponseModel(userId: $userId, subscriber: $subscriber, fullName: $fullName, email: $email, mobileNo: $mobileNo)';
+    return 'SignupResponseModel(userId: $userId, subscriber: $subscriber, fullName: $fullName, email: $email, mobileNo: $mobileNo)';
 }
 
 

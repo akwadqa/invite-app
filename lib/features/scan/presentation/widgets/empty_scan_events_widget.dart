@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:invit/gen/assets.gen.dart';
@@ -6,9 +5,7 @@ import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
 class EmptyScanEventsWidget extends StatelessWidget {
-  const EmptyScanEventsWidget({
-    super.key,
-  });
+  const EmptyScanEventsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +19,9 @@ class EmptyScanEventsWidget extends StatelessWidget {
             children: [
               TextSpan(
                 text: context.tr('ops'),
-                style: AppTextStyle.rubikSemiBold18
-                    .copyWith(color: AppColors.primary),
+                style: AppTextStyle.rubikSemiBold18.copyWith(
+                  color: AppColors.primary,
+                ),
               ),
               TextSpan(
                 text: context.tr('no_events_to_scan_yet'),

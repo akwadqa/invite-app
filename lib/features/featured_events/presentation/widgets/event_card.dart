@@ -24,16 +24,16 @@ class EventCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 6),
-        ],
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
       ),
       child: Column(
         children: [
           Stack(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
                 child: Image.asset(
                   imageUrl,
                   height: 180,
@@ -42,11 +42,7 @@ class EventCard extends StatelessWidget {
                 ),
               ),
 
-              Positioned(
-                top: 12,
-                left: 12,
-                child: EventDateBadge(date: date),
-              ),
+              Positioned(top: 12, left: 12, child: EventDateBadge(date: date)),
 
               // Positioned(
               //   top: 12,
@@ -72,7 +68,10 @@ class EventCard extends StatelessWidget {
                     ),
                     const Spacer(),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.pink.shade50,
                         borderRadius: BorderRadius.circular(20),

@@ -1,4 +1,3 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 
@@ -6,6 +5,7 @@ import 'guest_report_model.dart';
 
 part 'all_events_model.freezed.dart';
 part 'all_events_model.g.dart';
+
 @freezed
 abstract class AllEventsModel with _$AllEventsModel {
   const factory AllEventsModel({

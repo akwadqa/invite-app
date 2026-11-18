@@ -1,38 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:invit/features/auth/signUp/presentation/widgets/signUp_form.dart';
-import 'package:invit/features/auth/signUp/presentation/widgets/signUp_header.dart';
-import 'package:invit/features/auth/widgets/auth_build_content.dart';
-import 'package:invit/src/core/utils/extenssions/widget_extensions.dart';
-import '../widgets/signUp_footer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:invit/features/auth/presentation/controller/auth_flow_controller.dart';
+import 'package:invit/features/auth/presentation/utils/auth_action_listener.dart';
+import 'package:invit/features/auth/signUp/presentation/widgets/sign_up_form.dart';
+import 'package:invit/features/auth/signUp/presentation/widgets/sign_up_header.dart';
+import 'package:invit/features/auth/signUp/presentation/widgets/sign_up_continue_button.dart';
+import 'package:invit/features/auth/widgets/auth_layout.dart';
+import 'package:invit/src/application/router/app_routes.dart';
+import 'package:invit/src/core/shared_widgets/app_toast.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key, this.phoneNumber});
-  final String? phoneNumber;
+class SignupScreen extends ConsumerWidget {
+  const SignupScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: AuthScreen(child: _SignupContent(phoneNumber: phoneNumber)),
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(
+      authFlowControllerProvider.select((s) => s.value?.createAccount),
+      (prev, next) => handleAuthAction(
+        context,
+        prev,
+        next,
+        onSettled: (result) {
+          if (result.hasError) {
+            AppToast.errorToast(result.error.toString());
+          } else if (result.value != null) {
+            context.push(AppRoutes.verificationScreen);
+          }
+        },
+      ),
     );
-  }
-}
 
-class _SignupContent extends StatelessWidget {
-  const _SignupContent({this.phoneNumber});
-  final String? phoneNumber;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 20,
-        children: [
-          SignupHeader(),
-          SignUpForm(phoneNumber: phoneNumber),
-          SignUpFooter(),
-        ],
-      ).symmetricPadding(vertical: 25),
+    return const AuthLayout(
+      top: SignupHeader(),
+      content: SignUpForm(),
+      bottom: SignUpContinueButton(),
     );
   }
 }

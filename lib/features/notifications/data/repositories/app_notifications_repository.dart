@@ -1,4 +1,3 @@
-
 import 'package:invit/features/notifications/data/datasources/notifications_datasource.dart';
 import 'package:invit/features/notifications/domain/model/app_notifications_model.dart';
 import 'package:invit/src/infrastructure/api/response/api_response.dart';
@@ -18,10 +17,15 @@ class AppNotificationsRepository {
 
   AppNotificationsRepository(this._remoteDataSource);
 
-  Future<ApiResponse<List<AppNotificationsModel>>> getAllOrdersNotifications(
-      {required int page,String? quickOrderOfferId,}) async {
+  Future<ApiResponse<List<AppNotificationsModel>>> getAllOrdersNotifications({
+    required int page,
+    String? quickOrderOfferId,
+  }) async {
     try {
-      final result = await _remoteDataSource.getAllNotification(page,quickOrderOfferId);
+      final result = await _remoteDataSource.getAllNotification(
+        page,
+        quickOrderOfferId,
+      );
       if (result.hasFailed) {
         throw Exception(
           result.message ?? 'Failed to fetch OrdersOfferNotifications',

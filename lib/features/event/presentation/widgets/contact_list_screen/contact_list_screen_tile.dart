@@ -7,7 +7,6 @@ import 'package:invit/features/event/presentation/controller/contacts_controller
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
-
 class ContactListScreenTile extends StatelessWidget {
   const ContactListScreenTile({
     super.key,

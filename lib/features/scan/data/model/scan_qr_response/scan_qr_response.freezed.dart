@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'scan_qr_response.dart';
@@ -9,6 +9,7 @@ part of 'scan_qr_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $ScanQrResponseCopyWith<ScanQrResponse> get copyWith => _$ScanQrResponseCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanQrResponse&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&(identical(other.checkedIn, checkedIn) || other.checkedIn == checkedIn)&&(identical(other.maxAllowed, maxAllowed) || other.maxAllowed == maxAllowed)&&(identical(other.remainingCheckins, remainingCheckins) || other.remainingCheckins == remainingCheckins));
+  final _this = this as ScanQrResponse;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanQrResponse&&(identical(other.inviteeId, _this.inviteeId) || other.inviteeId == _this.inviteeId)&&(identical(other.fullName, _this.fullName) || other.fullName == _this.fullName)&&(identical(other.occasionId, _this.occasionId) || other.occasionId == _this.occasionId)&&(identical(other.checkedIn, _this.checkedIn) || other.checkedIn == _this.checkedIn)&&(identical(other.maxAllowed, _this.maxAllowed) || other.maxAllowed == _this.maxAllowed)&&(identical(other.remainingCheckins, _this.remainingCheckins) || other.remainingCheckins == _this.remainingCheckins));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,inviteeId,fullName,occasionId,checkedIn,maxAllowed,remainingCheckins);
+int get hashCode {
+  final _this = this as ScanQrResponse;
+  return Object.hash(runtimeType,_this.inviteeId,_this.fullName,_this.occasionId,_this.checkedIn,_this.maxAllowed,_this.remainingCheckins);
+}
 
 @override
 String toString() {
-  return 'ScanQrResponse(inviteeId: $inviteeId, fullName: $fullName, occasionId: $occasionId, checkedIn: $checkedIn, maxAllowed: $maxAllowed, remainingCheckins: $remainingCheckins)';
+  final _this = this as ScanQrResponse;
+  return 'ScanQrResponse(inviteeId: ${_this.inviteeId}, fullName: ${_this.fullName}, occasionId: ${_this.occasionId}, checkedIn: ${_this.checkedIn}, maxAllowed: ${_this.maxAllowed}, remainingCheckins: ${_this.remainingCheckins})';
 }
 
 
@@ -66,7 +72,7 @@ class _$ScanQrResponseCopyWithImpl<$Res>
 /// Create a copy of ScanQrResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? inviteeId = null,Object? fullName = null,Object? occasionId = null,Object? checkedIn = null,Object? maxAllowed = null,Object? remainingCheckins = null,}) {
-  return _then(_self.copyWith(
+  return _then(ScanQrResponse(
 inviteeId: null == inviteeId ? _self.inviteeId : inviteeId // ignore: cast_nullable_to_non_nullable
 as String,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String,occasionId: null == occasionId ? _self.occasionId : occasionId // ignore: cast_nullable_to_non_nullable
@@ -237,16 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScanQrResponse&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&(identical(other.checkedIn, checkedIn) || other.checkedIn == checkedIn)&&(identical(other.maxAllowed, maxAllowed) || other.maxAllowed == maxAllowed)&&(identical(other.remainingCheckins, remainingCheckins) || other.remainingCheckins == remainingCheckins));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScanQrResponse&&(identical(other.inviteeId, inviteeId) || other.inviteeId == inviteeId)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.occasionId, occasionId) || other.occasionId == occasionId)&&(identical(other.checkedIn, checkedIn) || other.checkedIn == checkedIn)&&(identical(other.maxAllowed, maxAllowed) || other.maxAllowed == maxAllowed)&&(identical(other.remainingCheckins, remainingCheckins) || other.remainingCheckins == remainingCheckins));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,inviteeId,fullName,occasionId,checkedIn,maxAllowed,remainingCheckins);
+int get hashCode {
+    return Object.hash(runtimeType,inviteeId,fullName,occasionId,checkedIn,maxAllowed,remainingCheckins);
+}
 
 @override
 String toString() {
-  return 'ScanQrResponse(inviteeId: $inviteeId, fullName: $fullName, occasionId: $occasionId, checkedIn: $checkedIn, maxAllowed: $maxAllowed, remainingCheckins: $remainingCheckins)';
+    return 'ScanQrResponse(inviteeId: $inviteeId, fullName: $fullName, occasionId: $occasionId, checkedIn: $checkedIn, maxAllowed: $maxAllowed, remainingCheckins: $remainingCheckins)';
 }
 
 

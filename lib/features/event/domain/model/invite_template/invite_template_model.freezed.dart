@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'invite_template_model.dart';
@@ -9,6 +9,7 @@ part of 'invite_template_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $InviteTemplateModelCopyWith<InviteTemplateModel> get copyWith => _$InviteTempla
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InviteTemplateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.appTemplateImage, appTemplateImage) || other.appTemplateImage == appTemplateImage));
+  final _this = this as InviteTemplateModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InviteTemplateModel&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.templateName, _this.templateName) || other.templateName == _this.templateName)&&(identical(other.appTemplateImage, _this.appTemplateImage) || other.appTemplateImage == _this.appTemplateImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,templateName,appTemplateImage);
+int get hashCode {
+  final _this = this as InviteTemplateModel;
+  return Object.hash(runtimeType,_this.name,_this.templateName,_this.appTemplateImage);
+}
 
 @override
 String toString() {
-  return 'InviteTemplateModel(name: $name, templateName: $templateName, appTemplateImage: $appTemplateImage)';
+  final _this = this as InviteTemplateModel;
+  return 'InviteTemplateModel(name: ${_this.name}, templateName: ${_this.templateName}, appTemplateImage: ${_this.appTemplateImage})';
 }
 
 
@@ -66,7 +72,7 @@ class _$InviteTemplateModelCopyWithImpl<$Res>
 /// Create a copy of InviteTemplateModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? templateName = null,Object? appTemplateImage = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(InviteTemplateModel(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,templateName: null == templateName ? _self.templateName : templateName // ignore: cast_nullable_to_non_nullable
 as String,appTemplateImage: freezed == appTemplateImage ? _self.appTemplateImage : appTemplateImage // ignore: cast_nullable_to_non_nullable
@@ -231,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InviteTemplateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.appTemplateImage, appTemplateImage) || other.appTemplateImage == appTemplateImage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _InviteTemplateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.templateName, templateName) || other.templateName == templateName)&&(identical(other.appTemplateImage, appTemplateImage) || other.appTemplateImage == appTemplateImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,templateName,appTemplateImage);
+int get hashCode {
+    return Object.hash(runtimeType,name,templateName,appTemplateImage);
+}
 
 @override
 String toString() {
-  return 'InviteTemplateModel(name: $name, templateName: $templateName, appTemplateImage: $appTemplateImage)';
+    return 'InviteTemplateModel(name: $name, templateName: $templateName, appTemplateImage: $appTemplateImage)';
 }
 
 

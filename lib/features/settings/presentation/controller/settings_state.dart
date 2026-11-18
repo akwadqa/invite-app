@@ -9,10 +9,8 @@ abstract class SettingsState with _$SettingsState {
     required bool notificationState,
 
     // Async actions
-    @Default(AsyncData(null))
-    AsyncValue<void> deleteAccountState,
+    @Default(AsyncData(null)) AsyncValue<void> deleteAccountState,
 
-    @Default(AsyncData(null))
-    AsyncValue<void> logoutState,
+    @Default(AsyncData(null)) AsyncValue<void> logoutState,
   }) = _SettingsState;
 }

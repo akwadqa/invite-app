@@ -7,10 +7,7 @@ import 'app_text_styles.dart';
 class SettingsProfileHeader extends StatelessWidget {
   final String name;
 
-  const SettingsProfileHeader({
-    super.key,
-    required this.name,
-  });
+  const SettingsProfileHeader({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +20,16 @@ class SettingsProfileHeader extends StatelessWidget {
           CircleAvatar(
             radius: 22,
             backgroundColor: AppColors.grayBorder,
-            child: Icon(
-              Icons.person,
-              size: 40,
-            ).bottomCenter(),
+            child: Icon(Icons.person, size: 40).bottomCenter(),
           ),
           16.horizontalSpace,
           Text(
             name,
             style: textTheme.headlineMedium!.copyWith(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w800,
-                fontSize: 20),
+              color: AppColors.primary,
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+            ),
           ),
           const Spacer(),
           const Icon(Icons.arrow_forward_ios_rounded),

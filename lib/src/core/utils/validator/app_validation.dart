@@ -16,6 +16,7 @@ String? Function(String?) mobileNumberValidation(BuildContext context) {
     ),
   ]);
 }
+
 FutureOr<String?> Function(PhoneNumber?) mobileNumberValidationIntl(
   BuildContext context,
 ) {
@@ -23,7 +24,7 @@ FutureOr<String?> Function(PhoneNumber?) mobileNumberValidationIntl(
     Dev.logLine(value);
     final number = value?.number ?? '';
 
-    if (number.isEmpty||value ==null) {
+    if (number.isEmpty || value == null) {
       return context.tr('required');
     }
 
@@ -37,13 +38,8 @@ FutureOr<String?> Function(PhoneNumber?) mobileNumberValidationIntl(
 
     return null;
   };
-
-  
 }
 
 String? Function(String?) nameValidation(BuildContext context) {
-  return qValidator([
-    IsRequired(context.tr('required')),
-  ]);
+  return qValidator([IsRequired(context.tr('required'))]);
 }
-

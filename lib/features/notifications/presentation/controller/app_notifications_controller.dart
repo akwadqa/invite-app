@@ -1,10 +1,8 @@
-
 import 'package:invit/features/notifications/data/repositories/app_notifications_repository.dart';
 import 'package:invit/features/notifications/domain/model/app_notifications_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_notifications_controller.g.dart';
-
 
 @riverpod
 class AppNotificationsController extends _$AppNotificationsController {
@@ -17,8 +15,10 @@ class AppNotificationsController extends _$AppNotificationsController {
     return await fetchOrdersOffersNotifications(page: 1);
   }
 
-  Future<List<AppNotificationsModel>> fetchOrdersOffersNotifications(
-      {required int page, bool showLoading = true}) async {
+  Future<List<AppNotificationsModel>> fetchOrdersOffersNotifications({
+    required int page,
+    bool showLoading = true,
+  }) async {
     try {
       if (showLoading) state = const AsyncLoading();
 
@@ -32,7 +32,7 @@ class AppNotificationsController extends _$AppNotificationsController {
       _totalPages = response.pagination!.totalPages;
 
       if (page == 1) {
-        _notifications =  List.from(response.data!);
+        _notifications = List.from(response.data!);
       } else {
         _notifications.addAll(response.data!);
       }
@@ -48,7 +48,10 @@ class AppNotificationsController extends _$AppNotificationsController {
   Future<bool> loadNextPage() async {
     if (_currentPage >= _totalPages) return false;
     final nextPage = _currentPage + 1;
-    final result = await fetchOrdersOffersNotifications(page: nextPage,showLoading: false);
+    final result = await fetchOrdersOffersNotifications(
+      page: nextPage,
+      showLoading: false,
+    );
     return result.isNotEmpty;
   }
 
@@ -59,7 +62,4 @@ class AppNotificationsController extends _$AppNotificationsController {
     await fetchOrdersOffersNotifications(page: 1);
     return true;
   }
-
-
-  
 }

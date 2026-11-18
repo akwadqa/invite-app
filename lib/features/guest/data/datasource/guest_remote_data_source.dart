@@ -16,10 +16,12 @@ class GuestRemoteDataSource {
   GuestRemoteDataSource(this._networkService);
 
   Future<ApiResponse<AddGuestResponse>> addGuest(
-      String occasionId, List<GuestModel> guests) async {
+    String occasionId,
+    List<GuestModel> guests,
+  ) async {
     final data = FormData.fromMap({
       'occasion_id': occasionId,
-      'guest_list': guests.map((e) => jsonEncode(e)).toList()
+      'guest_list': guests.map((e) => jsonEncode(e)).toList(),
     });
     try {
       final response = await _networkService.post(
@@ -42,13 +44,14 @@ class GuestRemoteDataSource {
   }
 
   Future<ApiResponse<DeleteGuestsResponse>> deleteGuest(
-      List<String> invitees) async {
+    List<String> invitees,
+  ) async {
     try {
-      final data = FormData.fromMap({
-        'invitees_list': jsonEncode(invitees),
-      });
-      final response =
-          await _networkService.post(ApiEndPoints.deleteGuest, data: data);
+      final data = FormData.fromMap({'invitees_list': jsonEncode(invitees)});
+      final response = await _networkService.post(
+        ApiEndPoints.deleteGuest,
+        data: data,
+      );
 
       if (response.data == null || response.statusCode != 200) {
         throw Exception('Request failed');
@@ -69,15 +72,15 @@ class GuestRemoteDataSource {
     required List<GuestModel> guests,
   }) async {
     try {
-      final data = FormData.fromMap(
-        {
-          'occasion_id': occasionId,
-          // 'guest_list': jsonEncode(guests.map((e) => e.toJson()).toList()),
-          'guest_list': jsonEncode(guests),
-        },
+      final data = FormData.fromMap({
+        'occasion_id': occasionId,
+        // 'guest_list': jsonEncode(guests.map((e) => e.toJson()).toList()),
+        'guest_list': jsonEncode(guests),
+      });
+      final response = await _networkService.post(
+        ApiEndPoints.updateGuestList,
+        data: data,
       );
-      final response =
-          await _networkService.post(ApiEndPoints.updateGuestList, data: data);
       return ApiResponse.fromJson(
         response.data,
         (json) =>

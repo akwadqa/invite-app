@@ -86,7 +86,7 @@ abstract class _$UpdateEventController
   FutureOr<UpdateEventState> build({required String ocassionId});
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref =
         this.ref as $Ref<AsyncValue<UpdateEventState>, UpdateEventState>;
     final element =
@@ -97,6 +97,6 @@ abstract class _$UpdateEventController
               Object?,
               Object?
             >;
-    element.handleCreate(ref, () => build(ocassionId: _$args));
+    return element.handleCreate(ref, () => build(ocassionId: _$args));
   }
 }

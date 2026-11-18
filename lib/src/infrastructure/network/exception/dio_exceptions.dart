@@ -49,6 +49,7 @@ class AppException implements Exception {
   @override
   String toString() => message ?? 'Something went wrong';
 }
+
 class WalletPaymentException implements Exception {
   final String message;
   final bool isInsufficient;
@@ -70,7 +71,7 @@ class ApiException extends DioException {
   final String? customMessage;
 
   ApiException(RequestOptions r, [this.customMessage])
-      : super(requestOptions: r, error: customMessage);
+    : super(requestOptions: r, error: customMessage);
 
   String get defaultMessage => 'requestError'.tr();
   @override

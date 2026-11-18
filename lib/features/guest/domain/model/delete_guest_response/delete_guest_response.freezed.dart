@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'delete_guest_response.dart';
@@ -9,6 +9,7 @@ part of 'delete_guest_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $DeleteGuestsResponseCopyWith<DeleteGuestsResponse> get copyWith => _$DeleteGues
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteGuestsResponse&&const DeepCollectionEquality().equals(other.deleted, deleted)&&const DeepCollectionEquality().equals(other.notFound, notFound));
+  final _this = this as DeleteGuestsResponse;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteGuestsResponse&&const DeepCollectionEquality().equals(other.deleted, _this.deleted)&&const DeepCollectionEquality().equals(other.notFound, _this.notFound));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(deleted),const DeepCollectionEquality().hash(notFound));
+int get hashCode {
+  final _this = this as DeleteGuestsResponse;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.deleted),const DeepCollectionEquality().hash(_this.notFound));
+}
 
 @override
 String toString() {
-  return 'DeleteGuestsResponse(deleted: $deleted, notFound: $notFound)';
+  final _this = this as DeleteGuestsResponse;
+  return 'DeleteGuestsResponse(deleted: ${_this.deleted}, notFound: ${_this.notFound})';
 }
 
 
@@ -66,7 +72,7 @@ class _$DeleteGuestsResponseCopyWithImpl<$Res>
 /// Create a copy of DeleteGuestsResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? deleted = null,Object? notFound = null,}) {
-  return _then(_self.copyWith(
+  return _then(DeleteGuestsResponse(
 deleted: null == deleted ? _self.deleted : deleted // ignore: cast_nullable_to_non_nullable
 as List<String>,notFound: null == notFound ? _self.notFound : notFound // ignore: cast_nullable_to_non_nullable
 as List<String>,
@@ -210,7 +216,7 @@ return $default(_that.deleted,_that.notFound);case _:
 @JsonSerializable()
 
 class _DeleteGuestsResponse implements DeleteGuestsResponse {
-  const _DeleteGuestsResponse({required final  List<String> deleted, @JsonKey(name: 'not_found') required final  List<String> notFound}): _deleted = deleted,_notFound = notFound;
+  const _DeleteGuestsResponse({required  List<String> deleted, @JsonKey(name: 'not_found') required  List<String> notFound}): _deleted = deleted,_notFound = notFound;
   factory _DeleteGuestsResponse.fromJson(Map<String, dynamic> json) => _$DeleteGuestsResponseFromJson(json);
 
  final  List<String> _deleted;
@@ -241,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteGuestsResponse&&const DeepCollectionEquality().equals(other._deleted, _deleted)&&const DeepCollectionEquality().equals(other._notFound, _notFound));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteGuestsResponse&&const DeepCollectionEquality().equals(other.deleted, _deleted)&&const DeepCollectionEquality().equals(other.notFound, _notFound));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_deleted),const DeepCollectionEquality().hash(_notFound));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_deleted),const DeepCollectionEquality().hash(_notFound));
+}
 
 @override
 String toString() {
-  return 'DeleteGuestsResponse(deleted: $deleted, notFound: $notFound)';
+    return 'DeleteGuestsResponse(deleted: $deleted, notFound: $notFound)';
 }
 
 

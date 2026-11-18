@@ -22,18 +22,19 @@ class CustomBackArrowWidget extends StatelessWidget {
         if (onTap != null) onTap?.call();
       },
       child: Container(
-          margin: EdgeInsetsDirectional.all(10),
-          padding: EdgeInsetsDirectional.all(4),
-          decoration: ShapeDecoration(
-            color: AppColors.cardWhite,
-            shape: CircleBorder(),
-            // borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-          child: Icon(
-            Icons.arrow_back,
-            color: AppColors.primary,
-            // size: 18,
-          )),
+        margin: EdgeInsetsDirectional.all(10),
+        padding: EdgeInsetsDirectional.all(4),
+        decoration: ShapeDecoration(
+          color: AppColors.cardWhite,
+          shape: CircleBorder(),
+          // borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+        child: Icon(
+          Icons.arrow_back,
+          color: AppColors.primary,
+          // size: 18,
+        ),
+      ),
     );
   }
 }

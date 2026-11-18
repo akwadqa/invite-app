@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_model.dart';
@@ -9,6 +9,7 @@ part of 'home_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $HomeModelCopyWith<HomeModel> get copyWith => _$HomeModelCopyWithImpl<HomeModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.remainingBalance, remainingBalance) || other.remainingBalance == remainingBalance)&&(identical(other.consumingBalance, consumingBalance) || other.consumingBalance == consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, bundles)&&const DeepCollectionEquality().equals(other.events, events)&&const DeepCollectionEquality().equals(other.featuredEvents, featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, occasionTypes));
+  final _this = this as HomeModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.remainingBalance, _this.remainingBalance) || other.remainingBalance == _this.remainingBalance)&&(identical(other.consumingBalance, _this.consumingBalance) || other.consumingBalance == _this.consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, _this.bundles)&&const DeepCollectionEquality().equals(other.events, _this.events)&&const DeepCollectionEquality().equals(other.featuredEvents, _this.featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, _this.occasionTypes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,remainingBalance,consumingBalance,const DeepCollectionEquality().hash(bundles),const DeepCollectionEquality().hash(events),const DeepCollectionEquality().hash(featuredEvents),const DeepCollectionEquality().hash(occasionTypes));
+int get hashCode {
+  final _this = this as HomeModel;
+  return Object.hash(runtimeType,_this.remainingBalance,_this.consumingBalance,const DeepCollectionEquality().hash(_this.bundles),const DeepCollectionEquality().hash(_this.events),const DeepCollectionEquality().hash(_this.featuredEvents),const DeepCollectionEquality().hash(_this.occasionTypes));
+}
 
 @override
 String toString() {
-  return 'HomeModel(remainingBalance: $remainingBalance, consumingBalance: $consumingBalance, bundles: $bundles, events: $events, featuredEvents: $featuredEvents, occasionTypes: $occasionTypes)';
+  final _this = this as HomeModel;
+  return 'HomeModel(remainingBalance: ${_this.remainingBalance}, consumingBalance: ${_this.consumingBalance}, bundles: ${_this.bundles}, events: ${_this.events}, featuredEvents: ${_this.featuredEvents}, occasionTypes: ${_this.occasionTypes})';
 }
 
 
@@ -66,7 +72,7 @@ class _$HomeModelCopyWithImpl<$Res>
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? remainingBalance = freezed,Object? consumingBalance = freezed,Object? bundles = null,Object? events = null,Object? featuredEvents = null,Object? occasionTypes = null,}) {
-  return _then(_self.copyWith(
+  return _then(HomeModel(
 remainingBalance: freezed == remainingBalance ? _self.remainingBalance : remainingBalance // ignore: cast_nullable_to_non_nullable
 as num?,consumingBalance: freezed == consumingBalance ? _self.consumingBalance : consumingBalance // ignore: cast_nullable_to_non_nullable
 as num?,bundles: null == bundles ? _self.bundles : bundles // ignore: cast_nullable_to_non_nullable
@@ -214,7 +220,7 @@ return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_tha
 @JsonSerializable()
 
 class _HomeModel implements HomeModel {
-   _HomeModel({@JsonKey(name: 'remaining_balance') this.remainingBalance, @JsonKey(name: 'consuming_balance') this.consumingBalance, required final  List<BundleModel> bundles, required final  List<EventModel> events, @JsonKey(name: 'featured_events') required final  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types') required final  List<OcationTypeModel> occasionTypes}): _bundles = bundles,_events = events,_featuredEvents = featuredEvents,_occasionTypes = occasionTypes;
+   _HomeModel({@JsonKey(name: 'remaining_balance') this.remainingBalance, @JsonKey(name: 'consuming_balance') this.consumingBalance, required  List<BundleModel> bundles, required  List<EventModel> events, @JsonKey(name: 'featured_events') required  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types') required  List<OcationTypeModel> occasionTypes}): _bundles = bundles,_events = events,_featuredEvents = featuredEvents,_occasionTypes = occasionTypes;
   factory _HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 
 @override@JsonKey(name: 'remaining_balance') final  num? remainingBalance;
@@ -261,16 +267,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.remainingBalance, remainingBalance) || other.remainingBalance == remainingBalance)&&(identical(other.consumingBalance, consumingBalance) || other.consumingBalance == consumingBalance)&&const DeepCollectionEquality().equals(other._bundles, _bundles)&&const DeepCollectionEquality().equals(other._events, _events)&&const DeepCollectionEquality().equals(other._featuredEvents, _featuredEvents)&&const DeepCollectionEquality().equals(other._occasionTypes, _occasionTypes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.remainingBalance, remainingBalance) || other.remainingBalance == remainingBalance)&&(identical(other.consumingBalance, consumingBalance) || other.consumingBalance == consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, _bundles)&&const DeepCollectionEquality().equals(other.events, _events)&&const DeepCollectionEquality().equals(other.featuredEvents, _featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, _occasionTypes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,remainingBalance,consumingBalance,const DeepCollectionEquality().hash(_bundles),const DeepCollectionEquality().hash(_events),const DeepCollectionEquality().hash(_featuredEvents),const DeepCollectionEquality().hash(_occasionTypes));
+int get hashCode {
+    return Object.hash(runtimeType,remainingBalance,consumingBalance,const DeepCollectionEquality().hash(_bundles),const DeepCollectionEquality().hash(_events),const DeepCollectionEquality().hash(_featuredEvents),const DeepCollectionEquality().hash(_occasionTypes));
+}
 
 @override
 String toString() {
-  return 'HomeModel(remainingBalance: $remainingBalance, consumingBalance: $consumingBalance, bundles: $bundles, events: $events, featuredEvents: $featuredEvents, occasionTypes: $occasionTypes)';
+    return 'HomeModel(remainingBalance: $remainingBalance, consumingBalance: $consumingBalance, bundles: $bundles, events: $events, featuredEvents: $featuredEvents, occasionTypes: $occasionTypes)';
 }
 
 
@@ -330,16 +338,21 @@ $BundleModelCopyWith<BundleModel> get copyWith => _$BundleModelCopyWithImpl<Bund
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BundleModel&&(identical(other.bundleName, bundleName) || other.bundleName == bundleName)&&(identical(other.price, price) || other.price == price)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.description, description) || other.description == description));
+  final _this = this as BundleModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BundleModel&&(identical(other.bundleName, _this.bundleName) || other.bundleName == _this.bundleName)&&(identical(other.price, _this.price) || other.price == _this.price)&&(identical(other.amount, _this.amount) || other.amount == _this.amount)&&(identical(other.description, _this.description) || other.description == _this.description));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bundleName,price,amount,description);
+int get hashCode {
+  final _this = this as BundleModel;
+  return Object.hash(runtimeType,_this.bundleName,_this.price,_this.amount,_this.description);
+}
 
 @override
 String toString() {
-  return 'BundleModel(bundleName: $bundleName, price: $price, amount: $amount, description: $description)';
+  final _this = this as BundleModel;
+  return 'BundleModel(bundleName: ${_this.bundleName}, price: ${_this.price}, amount: ${_this.amount}, description: ${_this.description})';
 }
 
 
@@ -368,7 +381,7 @@ class _$BundleModelCopyWithImpl<$Res>
 /// Create a copy of BundleModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bundleName = freezed,Object? price = freezed,Object? amount = freezed,Object? description = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(BundleModel(
 bundleName: freezed == bundleName ? _self.bundleName : bundleName // ignore: cast_nullable_to_non_nullable
 as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as num?,amount: freezed == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
@@ -535,16 +548,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BundleModel&&(identical(other.bundleName, bundleName) || other.bundleName == bundleName)&&(identical(other.price, price) || other.price == price)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.description, description) || other.description == description));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _BundleModel&&(identical(other.bundleName, bundleName) || other.bundleName == bundleName)&&(identical(other.price, price) || other.price == price)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.description, description) || other.description == description));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bundleName,price,amount,description);
+int get hashCode {
+    return Object.hash(runtimeType,bundleName,price,amount,description);
+}
 
 @override
 String toString() {
-  return 'BundleModel(bundleName: $bundleName, price: $price, amount: $amount, description: $description)';
+    return 'BundleModel(bundleName: $bundleName, price: $price, amount: $amount, description: $description)';
 }
 
 

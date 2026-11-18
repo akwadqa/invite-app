@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
-  const ErrorPage({
-    super.key, required this.details,
-  });
+  const ErrorPage({super.key, required this.details});
 
   final FlutterErrorDetails details;
   @override

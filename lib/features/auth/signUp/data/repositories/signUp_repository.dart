@@ -13,18 +13,18 @@ SignupRepository signupRepository(Ref ref) {
   final networkService = ref.watch(networkServiceProvider());
   return SignupRepository(SignupDataSource(networkService));
 }
+
 class SignupRepository {
   final SignupDataSource _remoteDataSource;
 
   SignupRepository(this._remoteDataSource);
   Future<ApiResponse<SignupResponseModel>> signUp(SignupParams params) async {
     final response = await _remoteDataSource.signUp(params);
-  
-    if (response.status == 200||response.status == 201) {
+
+    if (response.status == 200 || response.status == 201) {
       return response;
     }
-  
+
     throw AppException(message: response.message);
   }
-
 }

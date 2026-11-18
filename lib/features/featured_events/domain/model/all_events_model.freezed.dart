@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'all_events_model.dart';
@@ -9,6 +9,7 @@ part of 'all_events_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $AllEventsModelCopyWith<AllEventsModel> get copyWith => _$AllEventsModelCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AllEventsModel&&const DeepCollectionEquality().equals(other.events, events)&&(identical(other.guestReport, guestReport) || other.guestReport == guestReport));
+  final _this = this as AllEventsModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AllEventsModel&&const DeepCollectionEquality().equals(other.events, _this.events)&&(identical(other.guestReport, _this.guestReport) || other.guestReport == _this.guestReport));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(events),guestReport);
+int get hashCode {
+  final _this = this as AllEventsModel;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.events),_this.guestReport);
+}
 
 @override
 String toString() {
-  return 'AllEventsModel(events: $events, guestReport: $guestReport)';
+  final _this = this as AllEventsModel;
+  return 'AllEventsModel(events: ${_this.events}, guestReport: ${_this.guestReport})';
 }
 
 
@@ -66,7 +72,7 @@ class _$AllEventsModelCopyWithImpl<$Res>
 /// Create a copy of AllEventsModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? events = null,Object? guestReport = null,}) {
-  return _then(_self.copyWith(
+  return _then(AllEventsModel(
 events: null == events ? _self.events : events // ignore: cast_nullable_to_non_nullable
 as List<EventModel>,guestReport: null == guestReport ? _self.guestReport : guestReport // ignore: cast_nullable_to_non_nullable
 as GuestReportModel,
@@ -219,7 +225,7 @@ return $default(_that.events,_that.guestReport);case _:
 @JsonSerializable()
 
 class _AllEventsModel implements AllEventsModel {
-  const _AllEventsModel({required final  List<EventModel> events, @JsonKey(name: 'guest_report') required this.guestReport}): _events = events;
+  const _AllEventsModel({required  List<EventModel> events, @JsonKey(name: 'guest_report') required this.guestReport}): _events = events;
   factory _AllEventsModel.fromJson(Map<String, dynamic> json) => _$AllEventsModelFromJson(json);
 
  final  List<EventModel> _events;
@@ -244,16 +250,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AllEventsModel&&const DeepCollectionEquality().equals(other._events, _events)&&(identical(other.guestReport, guestReport) || other.guestReport == guestReport));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AllEventsModel&&const DeepCollectionEquality().equals(other.events, _events)&&(identical(other.guestReport, guestReport) || other.guestReport == guestReport));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_events),guestReport);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_events),guestReport);
+}
 
 @override
 String toString() {
-  return 'AllEventsModel(events: $events, guestReport: $guestReport)';
+    return 'AllEventsModel(events: $events, guestReport: $guestReport)';
 }
 
 

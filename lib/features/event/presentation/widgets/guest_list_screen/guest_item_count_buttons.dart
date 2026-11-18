@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invit/features/event/presentation/controller/contacts_controller/contacts_controller.dart';
 import 'package:invit/features/event/presentation/controller/contacts_controller/contacts_state.dart';
-import 'package:invit/features/event/presentation/controller/create_event/create_event_controller.dart';
-import 'package:invit/features/event/presentation/controller/create_event/create_event_state.dart';
-import 'package:invit/features/event/presentation/controller/update_event/update_event_controller.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
@@ -44,8 +41,9 @@ class GuestItemCountButtons extends ConsumerWidget {
           ),
           Text(
             contact.count.toString(),
-            style:
-                AppTextStyle.rubikRegular16.copyWith(color: AppColors.primary),
+            style: AppTextStyle.rubikRegular16.copyWith(
+              color: AppColors.primary,
+            ),
           ),
           GestureDetector(
             onTap: () {
@@ -58,7 +56,7 @@ class GuestItemCountButtons extends ConsumerWidget {
               color: AppColors.primary,
               size: 30,
             ),
-          )
+          ),
         ],
       ),
     );

@@ -30,26 +30,26 @@ abstract class EventModel with _$EventModel {
     String? status,
     // @JsonKey(name: 'guest_report') GuestReportModel? guestReport,
     @JsonKey(name: 'guest_list') List<GuestModel>? guestList,
-    
-    @JsonKey(name: 'guest_report')
-    GuestReportModel? guestReport,
+
+    @JsonKey(name: 'guest_report') GuestReportModel? guestReport,
     // @JsonKey(name: 'operators') List<HandlerModel>? operators,
     // @JsonKey(name: 'handlers') List<HandlerModel>? handlers,
   }) = _EventModel;
 
   factory EventModel.fromJson(Map<String, dynamic> json) =>
       _$EventModelFromJson(json);
-       factory EventModel.placeholder() =>  EventModel(
-        eventId: "occasionId",
-        title: "title",
-        type: "type",
-        dateTime: DateTime.now().toString(),
-        mapLink: "mapLink",
-        imageUrl: "/files/event_image_20251221172218_test.jpg",
-        workflowState: "workflowState",
-        isFeatured: 0,
-        status: "status",
-        role: "role");
+  factory EventModel.placeholder() => EventModel(
+    eventId: "occasionId",
+    title: "title",
+    type: "type",
+    dateTime: DateTime.now().toString(),
+    mapLink: "mapLink",
+    imageUrl: "/files/event_image_20251221172218_test.jpg",
+    workflowState: "workflowState",
+    isFeatured: 0,
+    status: "status",
+    role: "role",
+  );
 }
 
 @freezed

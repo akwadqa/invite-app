@@ -3,17 +3,13 @@ import 'package:invit/src/logger/error/error_response.dart';
 class ServerException implements Exception {
   final ErrorResponse errorMessageModel;
 
-  const ServerException({
-    required this.errorMessageModel,
-  });
+  const ServerException({required this.errorMessageModel});
 }
 
 class LocalDatabaseException implements Exception {
   final String message;
 
-  const LocalDatabaseException({
-    required this.message,
-  });
+  const LocalDatabaseException({required this.message});
 }
 
 class AppException implements Exception {
@@ -30,7 +26,7 @@ class AppException implements Exception {
 
 class FetchDataException extends AppException {
   FetchDataException(String message)
-      : super(message: 'Error During Communication: $message');
+    : super(message: 'Error During Communication: $message');
 }
 
 class BadRequestException extends AppException {
@@ -43,5 +39,5 @@ class UnauthorisedException extends AppException {
 
 class JsonObjectSerializeException extends AppException {
   JsonObjectSerializeException([message])
-      : super(message: 'Json is not matching with any of models : $message');
+    : super(message: 'Json is not matching with any of models : $message');
 }

@@ -3,338 +3,258 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
+import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
-import 'package:invit/features/guest/presentation/controller/guest_ui_controller.dart';
-import 'package:invit/features/guest/presentation/widgets/guests_screen_tab_bar.dart';
+import 'package:invit/features/guest/presentation/controller/guests_screen_controller.dart';
+import 'package:invit/features/guest/presentation/utils/guests_screen_args.dart';
+import 'package:invit/features/guest/presentation/widgets/guests_screen/guests_screen_filters.dart';
+import 'package:invit/features/guest/presentation/utils/guest_reply_status.dart';
+import 'package:invit/features/guest/presentation/widgets/guests_screen/guests_screen_guest_sheet.dart';
+import 'package:invit/features/guest/presentation/widgets/guests_screen/guests_screen_search_field.dart';
+import 'package:invit/features/guest/presentation/widgets/guests_screen/guests_screen_tile.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
+import 'package:invit/src/core/shared_widgets/app_empty_data_widget.dart';
 import 'package:invit/src/core/shared_widgets/app_error_widget.dart';
-import 'package:invit/src/core/shared_widgets/app_loader.dart';
-import 'package:invit/src/core/shared_widgets/custom_app_bar.dart';
-import 'package:invit/src/core/shared_widgets/custom_appbar.dart';
-import 'package:invit/src/core/utils/extenssions/int_extenssion.dart';
+import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
+import 'package:invit/src/core/shared_widgets/app_round_icon_button.dart';
+import 'package:invit/src/core/shared_widgets/app_screen_header.dart';
+import 'package:invit/src/core/utils/functions/coming_soon.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
-import 'package:invit/src/resourses/font_manager/app_text_style.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
+/// Status of an event whose invitations were sent, as sent by the backend.
+const String _confirmedStatus = 'Confirmed';
+
+/// An event's guests with search, reply filters and a details sheet.
 class GuestsScreen extends ConsumerStatefulWidget {
-  final String id;
-  const GuestsScreen({super.key, required this.id});
+  const GuestsScreen({super.key, required this.args});
+
+  final GuestsScreenArgs args;
 
   @override
   ConsumerState<GuestsScreen> createState() => _GuestsScreenState();
 }
 
 class _GuestsScreenState extends ConsumerState<GuestsScreen> {
+  static const EdgeInsets _searchPadding = EdgeInsets.fromLTRB(16, 6, 16, 12);
+  static const EdgeInsets _buttonPadding = EdgeInsets.fromLTRB(24, 0, 24, 36);
+  static const double _listTopGap = 16;
+
+  final TextEditingController _search = TextEditingController();
+
+  String get _occasionId => widget.args.occasionId;
+
   @override
   void initState() {
-    Future(() {
-      // ref.read(homeControllerProvider.notifier).getEventDetails(widget.id);
-    });
     super.initState();
+    final filter = widget.args.filter;
+    if (filter == null) return;
+    // Providers cannot change while the first frame is being built.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ref
+          .read(guestsScreenControllerProvider(_occasionId).notifier)
+          .selectFilter(filter);
+    });
   }
 
-  // void _openBottomSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //     isScrollControlled: true,
-  //     context: context,
-  //     builder: (context) => AddGuestManuallBotomSheet(),
-  //   );
-  // }
-
-  List<String?> rsvpStatusesFromIndex(int index) {
-    switch (index) {
-      case 0:
-        return [];
-      case 1:
-        return ['Confirmed'];
-      case 2:
-        return ['Declined'];
-      case 3:
-        return ['Pending', 'Not Sent', null];
-      case 4:
-        return ['Failed'];
-      default:
-        return [];
-    }
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final index = ref.watch(guestUiControllerProvider).value!.index;
-
-    // final controller = ref.watch(
-    //   homeControllerProvider.select(
-    //     (val) => val.value!.occasionModel ?? AsyncLoading(),
-    //   ),
-    // );0
-    final controller = ref.watch(
-      eventDetailsControllerProvider(ocassionId: widget.id),
+    final event = ref.watch(
+      eventDetailsControllerProvider(ocassionId: _occasionId),
     );
-    // ref.listen(
-    //   guestsControllerProvider.select((val) => val.value!.deleteGuestResponse),
-    //   (prev, next) {
-    //     if (next is AsyncLoading) {
-    //       AppAlert.showLoadingDialog(context);
-    //     }
+    final guests = event.value?.guestList ?? const <GuestModel>[];
+    final seats = guests.fold(0, (sum, guest) => sum + (guest.partySize ?? 0));
+    final canAddGuests =
+        event.hasValue && event.value?.status != _confirmedStatus;
 
-    //     if (next is AsyncData) {
-    //       context.pop();
-    //       context.pop();
-    //       ref.read(homeControllerProvider.notifier).getEventDetails(widget.id);
-    //       AppToast.doneToast("successfullyCompleted".tr());
-    //     }
-    //     if (next is AsyncError) {
-    //       context.pop();
-    //       AppToast.errorToast(next.error.toString());
-    //     }
-    //   },
-    // );
-
-    // final event = ref.watch(homeControllerProvider).value!.occasionModel?.value;
-    return Scaffold(
-      appBar: CustomDeafultAppbar(
-        title: context.tr('all_guests'),
-        actionButton: controller.whenOrNull(
-          data: (data) {
-            if (data.status == 'Confirmed') {
-              return 30.horizontalSpace;
-            }
-            // final event = EventModel(
-            //   occasionId: data.occasionId,
-            //   title: data.title,
-            //   date: data.date,
-            //   imageUrl: data.imageUrl,
-            //   guestList: data.guests,
-            // );
-            return GestureDetector(
-              onTap: () => context.push(
-                AppRoutes.updateGuestListScreen,
-                extra: data.eventId,
-              ),
-              child: Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.cardWhite,
-                ),
-                child: Icon(Icons.edit, color: AppColors.primary, size: 20),
-              ),
-            );
-          },
-        ),
+    final filter = ref.watch(
+      guestsScreenControllerProvider(_occasionId).select((s) => s.filter),
+    );
+    final counts = ref.watch(guestReplyCountsProvider(_occasionId));
+    final failed = counts[GuestReplyStatus.notDelivered] ?? 0;
+    final noReply = counts[GuestReplyStatus.noReply] ?? 0;
+    final actions = ref.read(
+      eventDetailsActionsControllerProvider(_occasionId).notifier,
+    );
+    // The bottom action of the "No reply" and "Not delivered" tabs.
+    final action = switch (filter) {
+      GuestReplyStatus.noReply when noReply > 0 => (
+        label: 'guests_remind'.tr(args: ['$noReply']),
+        subtitle: 'guests_uses_messages'.tr(args: ['$noReply']),
+        // TODO(backend): no endpoint to remind guests who have not replied.
+        onPressed: showComingSoon,
       ),
-      body: Column(
-        spacing: 16,
-        children: [
-          // HomePageSearchField(
-          //   hint: context.tr('search'),
-          // ).symmetricPadding(horizontal: 22.w, vertical: 23.h),
-          GuestsScreenTabBar(),
+      GuestReplyStatus.notDelivered when failed > 0 => (
+        label: 'guests_fix_resend'.tr(),
+        subtitle: 'guests_fix_resend_subtitle'.tr(args: ['$failed', '$failed']),
+        // TODO(backend): no endpoint to fix a guest's number before resending;
+        // this only resends the failed invitations for now.
+        onPressed: actions.resendFailed,
+      ),
+      _ => null,
+    };
 
-          controller.when(
-            data: (data) {
-              return Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(0.1, 0),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: FadeTransition(opacity: animation, child: child),
-                    );
-                  },
-                  child: KeyedSubtree(
-                    key: ValueKey(index),
-                    child: _buildBody(data, index),
+    return Scaffold(
+      backgroundColor: AppColors.pageBackground,
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              AppScreenHeader(
+                title: 'guests_title'.tr(),
+                subtitle: event.hasValue
+                    ? 'guests_summary'.tr(args: ['${guests.length}', '$seats'])
+                    : null,
+                trailing: canAddGuests
+                    ? AppRoundIconButton(
+                        icon: Assets.icons.plusIc,
+                        backgroundColor: AppColors.ink,
+                        iconColor: AppColors.white,
+                        onTap: () => context.push(
+                          AppRoutes.updateGuestListScreen,
+                          extra: _occasionId,
+                        ),
+                      )
+                    : null,
+              ),
+              Padding(
+                padding: _searchPadding,
+                child: GuestsScreenSearchField(
+                  controller: _search,
+                  onChanged: ref
+                      .read(
+                        guestsScreenControllerProvider(_occasionId).notifier,
+                      )
+                      .search,
+                ),
+              ),
+              GuestsScreenFilters(occasionId: _occasionId),
+              const SizedBox(height: _listTopGap),
+              Expanded(
+                child: event.when(
+                  data: (_) => _GuestsScreenList(
+                    occasionId: _occasionId,
+                    hasFloatingButton: action != null,
+                  ),
+                  error: (error, _) => AppErrorWidget(
+                    errorMsg: error.toString(),
+                    onTap: () => ref
+                        .read(
+                          eventDetailsControllerProvider(
+                            ocassionId: _occasionId,
+                          ).notifier,
+                        )
+                        .retry(),
+                  ),
+                  loading: () => const _GuestsScreenSkeleton(),
+                ),
+              ),
+            ],
+          ),
+          // The event details screen below listens to this action and shows
+          // its loading dialog and result.
+          if (action != null)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: _buttonPadding,
+                  child: AppPrimaryButton(
+                    label: action.label,
+                    subtitle: action.subtitle,
+                    icon: Assets.icons.sendIc,
+                    onPressed: action.onPressed,
                   ),
                 ),
-              );
-            },
-            error: (e, st) => AppErrorWidget(
-              onTap: () {
-                // ref
-                //     .read(homeControllerProvider.notifier)
-                //     .getEventDetails(widget.id);
-              },
+              ),
             ),
-            loading: () => AppLoader(),
-          ),
-          SizedBox(),
         ],
       ),
     );
   }
-
-  Widget _buildBody(EventModel event, int index) {
-    final statuses = rsvpStatusesFromIndex(index);
-
-    final filteredGuests = statuses.isEmpty
-        ? event.guestList
-        : event.guestList
-              ?.where((g) => statuses.contains(g.rsvpStatus))
-              .toList();
-
-    return filteredGuests?.isNotEmpty ?? false
-        ? Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 22),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.black.withValues(alpha: .25),
-                    blurRadius: 4,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListView.separated(
-                shrinkWrap: true,
-                separatorBuilder: (context, index) =>
-                    Divider(color: AppColors.lightGray02.withValues(alpha: .4)),
-                itemBuilder: (context, index) => GuestsScreenGuestItem(
-                  index: index,
-                  guest: filteredGuests?[index],
-                  isConfirmed: event.status == 'Confirmed',
-                ),
-                itemCount: filteredGuests?.length ?? 0,
-              ),
-            ),
-          )
-        : Center(child: Text('empty_guests'.tr()));
-    // : Center(child: Assets.icons.emptyIc.svg());
-  }
 }
 
-class GuestsScreenGuestItem extends ConsumerWidget {
-  const GuestsScreenGuestItem({
-    super.key,
-    required this.index,
-    required this.guest,
-    required this.isConfirmed,
+class _GuestsScreenList extends ConsumerWidget {
+  const _GuestsScreenList({
+    required this.occasionId,
+    required this.hasFloatingButton,
   });
 
-  final int index;
-  final bool isConfirmed;
-  final GuestModel? guest;
+  final String occasionId;
+
+  /// Leaves room under the last guest for the floating resend button:
+  /// button height (64) + its bottom gap (36) + breathing room.
+  final bool hasFloatingButton;
+
+  static const double _bottomPadding = 20;
+  static const double _bottomPaddingWithButton = 64 + 36 + 24;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabIndex = ref.watch(guestUiControllerProvider).value!.index;
-
-    return ListTile(
-      // onTap: !isConfirmed
-      //     ? () {
-      //         showModalBottomSheet(
-      //           context: context,
-      //           isScrollControlled: true,
-      //           builder: (context) =>
-      //               UpdateGuestNameBottomSheet(guestModel: guest!),
-      //         );
-      //       }
-      //     : null,
-      // leading: !isConfirmed
-      //     ? GestureDetector(
-      //         onTap: () {
-      //           AppAlert.showGlobalDialog(
-      //             context: context,
-      //             title: context.tr('deleteGuest'),
-      //             onSubmit: () {
-      //               ref.read(guestsControllerProvider.notifier).deleteGuest(
-      //                 guests: [guest!],
-      //                 occasionId: ref
-      //                     .read(homeControllerProvider)
-      //                     .value!
-      //                     .occasionModel!
-      //                     .value!
-      //                     .occasionId!,
-      //               );
-      //             },
-      //             text: Text.rich(
-      //               textAlign: TextAlign.center,
-      //               TextSpan(
-      //                 children: [
-      //                   TextSpan(
-      //                     text: context.tr('sureRemoveContact1'),
-      //                     style: AppTextStyle.rubikRegular14.copyWith(
-      //                       color: AppColors.primary,
-      //                     ),
-      //                   ),
-      //                   TextSpan(
-      //                     text: guest?.fullName,
-      //                     style: AppTextStyle.rubikMedium14.copyWith(
-      //                       color: AppColors.primary,
-      //                     ),
-      //                   ),
-      //                   TextSpan(
-      //                     text: context.tr('sureRemoveContact2'),
-      //                     style: AppTextStyle.rubikRegular14.copyWith(
-      //                       color: AppColors.primary,
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //             ),
-      //           );
-      //         },
-      //         child: Assets.icons.xGuestIc.svg(),
-      //       )
-      //     : null,
-      leading: Container(
-        width: 26,
-        height: 26,
-        padding: EdgeInsets.symmetric(horizontal: 4),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          // color: AppColors.guestName,
-          color: AvatarColors.getColorForName(guest?.fullName ?? 'NA'),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.black.withValues(alpha: .25),
-              blurRadius: 4,
+    final guests = ref.watch(filteredGuestsProvider(occasionId));
+    return RefreshIndicator(
+      color: AppColors.ink,
+      onRefresh: ref
+          .read(eventDetailsControllerProvider(ocassionId: occasionId).notifier)
+          .refresh,
+      child: guests.isEmpty
+          ? ListView(children: [AppEmptyDataWidget(text: 'guests_empty')])
+          : ListView.builder(
+              padding: EdgeInsets.fromLTRB(
+                16,
+                0,
+                16,
+                hasFloatingButton ? _bottomPaddingWithButton : _bottomPadding,
+              ),
+              itemCount: guests.length,
+              itemBuilder: (context, index) {
+                final guest = guests[index];
+                return GuestsScreenTile(
+                  guest: guest,
+                  onTap: () => GuestsScreenGuestSheet.show(
+                    context,
+                    guest: guest,
+                    occasionId: occasionId,
+                  ),
+                );
+              },
             ),
-          ],
-        ),
-        child: FittedBox(
-          child: Text(
-            guest?.fullName?.substring(0, 2).toUpperCase() ?? 'NA',
-            style: AppTextStyle.rubikRegular12.copyWith(color: AppColors.white),
-          ),
-        ),
-      ),
-      title: Text(
-        guest?.fullName ?? 'name',
-        style: AppTextStyle.rubikRegular16.copyWith(color: AppColors.black),
-      ),
-      trailing: Container(
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color: guest!.rsvpStatus == 'Confirmed'
-              ? AppColors.confirmGuest
-              : guest!.rsvpStatus == 'Pending' ||
-                    guest!.rsvpStatus == 'Not Sent' ||
-                    guest!.rsvpStatus == null
-              ? AppColors.waitingGuest
-              : AppColors.noticeRed,
-          borderRadius: BorderRadius.circular(32),
-        ),
-        child: guest!.rsvpStatus == 'Confirmed'
-            ? Assets.icons.confirmGuestIc.svg()
-            : guest!.rsvpStatus == 'Pending' ||
-                  guest!.rsvpStatus == 'Not Sent' ||
-                  guest!.rsvpStatus == null
-            ? Assets.icons.waitingGuestIc.svg()
-            : Assets.icons.failedGuestIc.svg(),
-        // child: Text(
-        //   guest!.rsvpStatus ?? 'Not Sent',
-        //   style: AppTextStyle.rubikRegular14.copyWith(
-        //     color: AppColors.white,
-        //   ),
-        // ),
+    );
+  }
+}
+
+class _GuestsScreenSkeleton extends StatelessWidget {
+  const _GuestsScreenSkeleton();
+
+  static const int _rows = 6;
+  static const GuestModel _placeholder = GuestModel(
+    fullName: 'Guest full name',
+    whatsappNumber: '97400000000',
+    partySize: 2,
+    rsvpStatus: 'Confirmed',
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: _rows,
+        itemBuilder: (_, _) =>
+            GuestsScreenTile(guest: _placeholder, onTap: () {}),
       ),
     );
   }

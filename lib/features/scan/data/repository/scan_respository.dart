@@ -8,7 +8,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../model/scan_qr_response/scan_qr_response.dart';
 
-
 part 'scan_respository.g.dart';
 
 @riverpod

@@ -38,21 +38,26 @@ class ScanController extends _$ScanController {
       );
 
       if (response.hasFailed) {
-        state = AsyncData(state.value!.copyWith(
+        state = AsyncData(
+          state.value!.copyWith(
             scanQrResponse: AsyncError(
-          response.message ?? '',
-          StackTrace.fromString(response.message ?? ''),
-        )));
+              response.message ?? '',
+              StackTrace.fromString(response.message ?? ''),
+            ),
+          ),
+        );
 
         return null;
       }
 
       state = AsyncData(
-          state.value!.copyWith(scanQrResponse: AsyncData(response.data!)));
+        state.value!.copyWith(scanQrResponse: AsyncData(response.data!)),
+      );
       return response.data;
     } catch (e, st) {
-      state =
-          AsyncData(state.value!.copyWith(scanQrResponse: AsyncError(e, st)));
+      state = AsyncData(
+        state.value!.copyWith(scanQrResponse: AsyncError(e, st)),
+      );
       return null;
     }
   }

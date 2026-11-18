@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:invit/features/payment/presentation/widgets/small_info_card.dart';
 import 'package:invit/gen/assets.gen.dart';

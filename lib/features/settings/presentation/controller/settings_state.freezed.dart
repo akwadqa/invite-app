@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'settings_state.dart';
@@ -9,13 +9,13 @@ part of 'settings_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SettingsState {
 
- bool get notificationState;// Async actions
- AsyncValue<void> get deleteAccountState; AsyncValue<void> get logoutState;
+ bool get notificationState; AsyncValue<void> get deleteAccountState; AsyncValue<void> get logoutState;
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,21 @@ $SettingsStateCopyWith<SettingsState> get copyWith => _$SettingsStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.notificationState, notificationState) || other.notificationState == notificationState)&&(identical(other.deleteAccountState, deleteAccountState) || other.deleteAccountState == deleteAccountState)&&(identical(other.logoutState, logoutState) || other.logoutState == logoutState));
+  final _this = this as SettingsState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.notificationState, _this.notificationState) || other.notificationState == _this.notificationState)&&(identical(other.deleteAccountState, _this.deleteAccountState) || other.deleteAccountState == _this.deleteAccountState)&&(identical(other.logoutState, _this.logoutState) || other.logoutState == _this.logoutState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,notificationState,deleteAccountState,logoutState);
+int get hashCode {
+  final _this = this as SettingsState;
+  return Object.hash(runtimeType,_this.notificationState,_this.deleteAccountState,_this.logoutState);
+}
 
 @override
 String toString() {
-  return 'SettingsState(notificationState: $notificationState, deleteAccountState: $deleteAccountState, logoutState: $logoutState)';
+  final _this = this as SettingsState;
+  return 'SettingsState(notificationState: ${_this.notificationState}, deleteAccountState: ${_this.deleteAccountState}, logoutState: ${_this.logoutState})';
 }
 
 
@@ -64,7 +69,7 @@ class _$SettingsStateCopyWithImpl<$Res>
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? notificationState = null,Object? deleteAccountState = null,Object? logoutState = null,}) {
-  return _then(_self.copyWith(
+  return _then(SettingsState(
 notificationState: null == notificationState ? _self.notificationState : notificationState // ignore: cast_nullable_to_non_nullable
 as bool,deleteAccountState: null == deleteAccountState ? _self.deleteAccountState : deleteAccountState // ignore: cast_nullable_to_non_nullable
 as AsyncValue<void>,logoutState: null == logoutState ? _self.logoutState : logoutState // ignore: cast_nullable_to_non_nullable
@@ -213,7 +218,6 @@ class _SettingsState implements SettingsState {
   
 
 @override final  bool notificationState;
-// Async actions
 @override@JsonKey() final  AsyncValue<void> deleteAccountState;
 @override@JsonKey() final  AsyncValue<void> logoutState;
 
@@ -227,16 +231,18 @@ _$SettingsStateCopyWith<_SettingsState> get copyWith => __$SettingsStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.notificationState, notificationState) || other.notificationState == notificationState)&&(identical(other.deleteAccountState, deleteAccountState) || other.deleteAccountState == deleteAccountState)&&(identical(other.logoutState, logoutState) || other.logoutState == logoutState));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.notificationState, notificationState) || other.notificationState == notificationState)&&(identical(other.deleteAccountState, deleteAccountState) || other.deleteAccountState == deleteAccountState)&&(identical(other.logoutState, logoutState) || other.logoutState == logoutState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,notificationState,deleteAccountState,logoutState);
+int get hashCode {
+    return Object.hash(runtimeType,notificationState,deleteAccountState,logoutState);
+}
 
 @override
 String toString() {
-  return 'SettingsState(notificationState: $notificationState, deleteAccountState: $deleteAccountState, logoutState: $logoutState)';
+    return 'SettingsState(notificationState: $notificationState, deleteAccountState: $deleteAccountState, logoutState: $logoutState)';
 }
 
 

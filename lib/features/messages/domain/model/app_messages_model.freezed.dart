@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_messages_model.dart';
@@ -9,13 +9,13 @@ part of 'app_messages_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AppMessagesModel {
 
-// @JsonKey(name: 'for_user') required String forUser,
 @JsonKey(name: 'content') String get emailContent; String get subject;@JsonKey(name: "creation") DateTime get creation;
 /// Create a copy of AppMessagesModel
 /// with the given fields replaced by the non-null parameter values.
@@ -29,16 +29,21 @@ $AppMessagesModelCopyWith<AppMessagesModel> get copyWith => _$AppMessagesModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppMessagesModel&&(identical(other.emailContent, emailContent) || other.emailContent == emailContent)&&(identical(other.subject, subject) || other.subject == subject)&&(identical(other.creation, creation) || other.creation == creation));
+  final _this = this as AppMessagesModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppMessagesModel&&(identical(other.emailContent, _this.emailContent) || other.emailContent == _this.emailContent)&&(identical(other.subject, _this.subject) || other.subject == _this.subject)&&(identical(other.creation, _this.creation) || other.creation == _this.creation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,emailContent,subject,creation);
+int get hashCode {
+  final _this = this as AppMessagesModel;
+  return Object.hash(runtimeType,_this.emailContent,_this.subject,_this.creation);
+}
 
 @override
 String toString() {
-  return 'AppMessagesModel(emailContent: $emailContent, subject: $subject, creation: $creation)';
+  final _this = this as AppMessagesModel;
+  return 'AppMessagesModel(emailContent: ${_this.emailContent}, subject: ${_this.subject}, creation: ${_this.creation})';
 }
 
 
@@ -67,7 +72,7 @@ class _$AppMessagesModelCopyWithImpl<$Res>
 /// Create a copy of AppMessagesModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? emailContent = null,Object? subject = null,Object? creation = null,}) {
-  return _then(_self.copyWith(
+  return _then(AppMessagesModel(
 emailContent: null == emailContent ? _self.emailContent : emailContent // ignore: cast_nullable_to_non_nullable
 as String,subject: null == subject ? _self.subject : subject // ignore: cast_nullable_to_non_nullable
 as String,creation: null == creation ? _self.creation : creation // ignore: cast_nullable_to_non_nullable
@@ -215,7 +220,6 @@ class _AppMessagesModel implements AppMessagesModel {
   const _AppMessagesModel({@JsonKey(name: 'content') required this.emailContent, required this.subject, @JsonKey(name: "creation") required this.creation});
   factory _AppMessagesModel.fromJson(Map<String, dynamic> json) => _$AppMessagesModelFromJson(json);
 
-// @JsonKey(name: 'for_user') required String forUser,
 @override@JsonKey(name: 'content') final  String emailContent;
 @override final  String subject;
 @override@JsonKey(name: "creation") final  DateTime creation;
@@ -233,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppMessagesModel&&(identical(other.emailContent, emailContent) || other.emailContent == emailContent)&&(identical(other.subject, subject) || other.subject == subject)&&(identical(other.creation, creation) || other.creation == creation));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppMessagesModel&&(identical(other.emailContent, emailContent) || other.emailContent == emailContent)&&(identical(other.subject, subject) || other.subject == subject)&&(identical(other.creation, creation) || other.creation == creation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,emailContent,subject,creation);
+int get hashCode {
+    return Object.hash(runtimeType,emailContent,subject,creation);
+}
 
 @override
 String toString() {
-  return 'AppMessagesModel(emailContent: $emailContent, subject: $subject, creation: $creation)';
+    return 'AppMessagesModel(emailContent: $emailContent, subject: $subject, creation: $creation)';
 }
 
 

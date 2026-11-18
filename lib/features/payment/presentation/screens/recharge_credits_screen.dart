@@ -8,7 +8,6 @@ import 'package:invit/features/payment/presentation/widgets/info_cards_row.dart'
 import 'package:invit/features/payment/presentation/widgets/main_balance_card.dart';
 import 'package:invit/features/payment/presentation/widgets/package_list.dart';
 import 'package:invit/src/application/router/app_routes.dart';
-import 'package:invit/src/core/shared_widgets/app_dialogs.dart';
 import 'package:invit/src/core/shared_widgets/app_loader.dart';
 import 'package:invit/src/core/shared_widgets/custom_app_bar.dart';
 import 'package:invit/src/core/utils/extenssions/int_extenssion.dart';
@@ -16,6 +15,7 @@ import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
 import '../../../../gen/assets.gen.dart';
+import 'package:invit/src/core/shared_widgets/app_toast.dart';
 
 class RechargeCreditsScreen extends StatelessWidget {
   const RechargeCreditsScreen({super.key});
@@ -36,28 +36,28 @@ class _RechargeCreditsScreenContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(
-        paymentControllerProvider.select((val) => val.value!.paymentLink),
-        (previous, next) {
-      if (next is AsyncLoading) {
-        // Show loading indicator
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) => AppLoader(),
-        );
-      }
+      paymentControllerProvider.select((val) => val.value!.paymentLink),
+      (previous, next) {
+        if (next is AsyncLoading) {
+          // Show loading indicator
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AppLoader(),
+          );
+        }
 
-      if (next is AsyncData) {
-        context.pop();
-        context.push(AppRoutes.webPaymentScreen, extra: next!.value);
-      }
+        if (next is AsyncData) {
+          context.pop();
+          context.push(AppRoutes.webPaymentScreen, extra: next!.value);
+        }
 
-      if (next is AsyncError) {
-        context.pop();
-        showErrorDialog(
-            context, 'Failed to get payment link. Please try again.');
-      }
-    });
+        if (next is AsyncError) {
+          context.pop();
+          AppToast.errorToast('Failed to get payment link. Please try again.');
+        }
+      },
+    );
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -72,14 +72,8 @@ class _RechargeCreditsScreenContent extends ConsumerWidget {
             spacing: 10,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'payment'.tr(),
-                style: AppTextStyle.rubikSemiBold18,
-              ),
-              Text(
-                "chose_package".tr(),
-                style: AppTextStyle.rubikRegular14,
-              ),
+              Text('payment'.tr(), style: AppTextStyle.rubikSemiBold18),
+              Text("chose_package".tr(), style: AppTextStyle.rubikRegular14),
             ],
           ),
           const PackageList(),

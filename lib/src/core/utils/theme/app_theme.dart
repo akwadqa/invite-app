@@ -27,8 +27,9 @@ abstract class AppTheme {
 
   static ThemeData lightTheme() {
     return ThemeData(
-      colorScheme:
-          ColorScheme.fromSwatch(primarySwatch: AppColors.primarySwatch),
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: AppColors.primarySwatch,
+      ),
       // fontFamily: FontFamily.tajawal,
       textTheme: GoogleFonts.rubikTextTheme(textTheme),
 

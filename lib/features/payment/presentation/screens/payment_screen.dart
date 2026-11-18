@@ -5,13 +5,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:invit/features/home/presentation/controller/home_controller.dart';
 import 'package:invit/src/application/router/app_routes.dart';
-import 'package:invit/src/core/shared_widgets/app_dialogs.dart';
 import 'package:invit/src/core/shared_widgets/app_loader.dart';
 import 'package:invit/src/core/shared_widgets/custom_app_bar.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:invit/src/core/shared_widgets/app_toast.dart';
 
 class PaymentScreen extends ConsumerStatefulWidget {
   const PaymentScreen({super.key, required this.paymentUrl});
@@ -67,7 +66,6 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
       final parsed = json.decode(unquoted);
 
       if (parsed['message'] == 'Txn Success') {
-        ref.read(bottomNavIndexProvider.notifier).state = 0;
         context.go(AppRoutes.mainScreen);
         // AppToast.doneToast('successfullyCompleted'.tr());
       } else {
@@ -75,7 +73,7 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
 
         context.pop();
         // AppToast.errorToast('Payment failed');
-        showErrorDialog(context, 'Payment failed');
+        AppToast.errorToast('Payment failed');
       }
     } catch (e) {
       debugPrint("❌ Failed to decode or handle result: $e");

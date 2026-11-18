@@ -47,10 +47,7 @@ class HomePageSearchField extends StatelessWidget {
           prefixIconConstraints: BoxConstraints(
             minWidth: 40, // Minimum width for touch targets, adjust if needed
           ),
-          prefixIcon: Icon(
-            Icons.search,
-            color: AppColors.grayHint,
-          ),
+          prefixIcon: Icon(Icons.search, color: AppColors.grayHint),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),
           ),

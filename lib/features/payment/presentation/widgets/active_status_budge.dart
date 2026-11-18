@@ -12,19 +12,22 @@ class ActiveStatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-          color: const Color(0xFFF0FDF4),
-          borderRadius: BorderRadius.circular(32)),
+        color: const Color(0xFFF0FDF4),
+        borderRadius: BorderRadius.circular(32),
+      ),
       child: Row(
         spacing: 4,
         mainAxisSize: MainAxisSize.min,
         children: [
           Assets.icons.activeIc.svg(),
-          Text("active".tr(),
-              style: AppTextStyle.rubikMedium14
-                  .copyWith(color: AppColors.confirmGuest)),
+          Text(
+            "active".tr(),
+            style: AppTextStyle.rubikMedium14.copyWith(
+              color: AppColors.confirmGuest,
+            ),
+          ),
         ],
       ),
     );
   }
 }
-

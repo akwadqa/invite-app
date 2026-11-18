@@ -8,15 +8,18 @@ class EventDetailsDatasource {
 
   EventDetailsDatasource(this._networkService);
 
-  Future<ApiResponse<EventModel>> getEventDetails({required String occasionId}) async {
+  Future<ApiResponse<EventModel>> getEventDetails({
+    required String occasionId,
+  }) async {
     try {
       final response = await _networkService.get(
         ApiEndPoints.getEventDetails,
-        queryParameters: {"occasion_id": occasionId
-        },
+        queryParameters: {"occasion_id": occasionId},
       );
-      return ApiResponse.fromJson(response.data,
-          (json) => EventModel.fromJson(json as Map<String, dynamic>));
+      return ApiResponse.fromJson(
+        response.data,
+        (json) => EventModel.fromJson(json as Map<String, dynamic>),
+      );
     } catch (e) {
       return ApiResponse.error(message: e.toString());
     }

@@ -13,27 +13,25 @@ class EventsHeader extends StatelessWidget {
         Stack(
           alignment: AlignmentGeometry.bottomCenter,
           children: [
-            Assets.images.backgroundEventIm.image(width: double.infinity,fit: BoxFit.fitWidth).onlyPadding(bottom: 70),
+            Assets.images.backgroundEventIm
+                .image(width: double.infinity, fit: BoxFit.fitWidth)
+                .onlyPadding(bottom: 70),
             PositionedDirectional(
-                top: 40, start: 16, child: CustomBackArrowWidget()),
+              top: 40,
+              start: 16,
+              child: CustomBackArrowWidget(),
+            ),
             Positioned(
               bottom: 0,
               child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.flutter_dash_outlined,
-                    size: 100,
-                  )),
+                padding: const EdgeInsets.all(12),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
+                ),
+                child: Icon(Icons.flutter_dash_outlined, size: 100),
+              ),
             ),
           ],
         ),

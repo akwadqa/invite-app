@@ -7,10 +7,7 @@ class FallbackScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text(
-          'Not Found Screen',
-          style: TextStyle(fontSize: 26),
-        ),
+        child: Text('Not Found Screen', style: TextStyle(fontSize: 26)),
       ),
     );
   }

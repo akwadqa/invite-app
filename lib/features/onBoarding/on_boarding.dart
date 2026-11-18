@@ -5,11 +5,7 @@ class OnBoarding extends ConsumerWidget {
   const OnBoarding({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    return Container(
-      color: Colors.amber,
-      width: 222,
-      height: 111,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(color: Colors.amber, width: 222, height: 111);
   }
 }

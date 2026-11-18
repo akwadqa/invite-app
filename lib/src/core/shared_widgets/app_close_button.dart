@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import '../../resourses/color_manager/app_colors.dart';
 
 class AppCloseButton extends StatelessWidget {
-  const AppCloseButton(
-      {super.key,
-      this.icon,
-      this.width,
-      this.height,
-      this.backgroundColor = Colors.white,
-      this.iconColor = AppColors.primary});
+  const AppCloseButton({
+    super.key,
+    this.icon,
+    this.width,
+    this.height,
+    this.backgroundColor = Colors.white,
+    this.iconColor = AppColors.primary,
+  });
   final Widget? icon;
   final double? width;
   final double? height;

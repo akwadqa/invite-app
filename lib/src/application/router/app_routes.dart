@@ -7,23 +7,30 @@ abstract class AppRoutes {
   static const String verificationScreen = '/verification';
   static const String splashScreen = '/splash';
   static const String homeScreen = '/home';
-  static const String createEventScreen = '/create_event';
-  static const String guestListScreen = '/guest_list';
   static const String contactListScreen = '/contact_list';
-  static const String uploadImageScreen = '/upload_image';
   static const String selectLocationScreen = '/select_location';
-  static const String successEventScreen = '/success_event';
   static const String guestsScreen = '/guest_screen';
-  static const String templatesScreen = '/templates_screen';
   static const String mainScreen = '/main';
   static const String notificationScreen = '/notification';
-  static const String invitationsSecreen = '/invitationsSecreen';
-  static const String allEventsSecreen = '/allEventsSecreen';
   static const String eventDetails = '/event_details';
   static const String paymentScreen = '/payment_screen';
   static const String updateEventScreen = '/update_event';
   static const String updateGuestListScreen = '/update_guest_list';
   static const String webPaymentScreen = '/web_payment';
+  static const String settingsScreen = '/settings';
+
+  //? Create event flow (6 steps)
+  static const String createEventTypeScreen = '/create_event_type';
+  static const String createEventPreviewScreen = '/create_event_preview';
+  static const String createEventDetailsScreen = '/create_event_details';
+  static const String createEventGuestsScreen = '/create_event_guests';
+  static const String createEventQuickAddScreen = '/create_event_quick_add';
+  static const String createEventContactsScreen = '/create_event_contacts';
+  static const String createEventImportReviewScreen =
+      '/create_event_import_review';
+  static const String createEventImageScreen = '/create_event_image';
+  static const String createEventCropScreen = '/create_event_crop';
+  static const String createEventReviewScreen = '/create_event_review';
 
   // static String qrScreen = '/qr-page';
 

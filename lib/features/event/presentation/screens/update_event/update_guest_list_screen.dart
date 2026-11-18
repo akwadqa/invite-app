@@ -10,12 +10,12 @@ import 'package:invit/features/event_details/presentation/controller/event_detai
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_alert.dart';
-import 'package:invit/src/core/shared_widgets/app_dialogs.dart';
 import 'package:invit/src/core/shared_widgets/custom_app_bar.dart';
 import 'package:invit/src/core/shared_widgets/custom_button_widget.dart';
 import 'package:invit/src/core/utils/extenssions/int_extenssion.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
+import 'package:invit/src/core/shared_widgets/app_toast.dart';
 
 class UpdateGuestListScreen extends StatelessWidget {
   const UpdateGuestListScreen({super.key, required this.occasionId});
@@ -28,9 +28,10 @@ class UpdateGuestListScreen extends StatelessWidget {
       appBar: CustomDeafultAppbar(
         title: 'guest_list'.tr(),
         actionButton: GestureDetector(
-            onTap: () => context.pushNamed(AppRoutes.contactListScreen,
-                extra: occasionId),
-            child: Assets.icons.contactsIc.svg()),
+          onTap: () =>
+              context.pushNamed(AppRoutes.contactListScreen, extra: occasionId),
+          child: Assets.icons.contactsIc.svg(),
+        ),
       ),
       body: _UpdateGuestListScreenContent(occasionId),
     );
@@ -51,26 +52,35 @@ class __UpdateGuestListScreenContentState
   @override
   Widget build(BuildContext context) {
     ref.listen(
-        contactsControllerProvider(widget.occasionId)
-            .select((val) => val.value!.updateGuestListRespone),
-        (previous, next) {
-      if (next is AsyncLoading) {
-        AppAlert.showLoadingDialog(context);
-      }
+      contactsControllerProvider(
+        widget.occasionId,
+      ).select((val) => val.value!.updateGuestListRespone),
+      (previous, next) {
+        if (next is AsyncLoading) {
+          AppAlert.showLoadingDialog(context);
+        }
 
-      if (next is AsyncData) {
-        context.pop();
-        ref.invalidate(
-            eventDetailsControllerProvider(ocassionId: widget.occasionId));
-        context.goNamed(AppRoutes.eventDetails, extra: next!.value!.occasionId);
-      }
-      if (next is AsyncError) {
-        context.pop();
-        showErrorDialog(context, next!.error.toString());
-      }
-    });
-    final contacts = ref.watch(contactsControllerProvider(widget.occasionId)
-        .select((val) => val.value!.selectedContacts));
+        if (next is AsyncData) {
+          context.pop();
+          ref.invalidate(
+            eventDetailsControllerProvider(ocassionId: widget.occasionId),
+          );
+          context.goNamed(
+            AppRoutes.eventDetails,
+            extra: next!.value!.occasionId,
+          );
+        }
+        if (next is AsyncError) {
+          context.pop();
+          AppToast.errorToast(next!.error.toString());
+        }
+      },
+    );
+    final contacts = ref.watch(
+      contactsControllerProvider(
+        widget.occasionId,
+      ).select((val) => val.value!.selectedContacts),
+    );
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 22),
       child: Column(
@@ -78,8 +88,10 @@ class __UpdateGuestListScreenContentState
           Expanded(
             child: Container(
               width: double.infinity,
-              padding:
-                  EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 15),
+              padding: EdgeInsetsDirectional.symmetric(
+                horizontal: 10,
+                vertical: 15,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.cardWhite,
                 borderRadius: BorderRadius.circular(8),
@@ -130,7 +142,7 @@ class __UpdateGuestListScreenContentState
             backgroundColor: AppColors.primary,
             width: double.infinity,
           ),
-          10.verticalSpace
+          10.verticalSpace,
         ],
       ),
     );

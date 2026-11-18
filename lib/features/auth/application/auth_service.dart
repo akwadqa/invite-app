@@ -19,7 +19,7 @@ class UserData extends _$UserData {
     if (token != null && userId != null) {
       return (
         sharedPrefs.getString(Keys.token)!,
-        sharedPrefs.getInt(Keys.userId)!
+        sharedPrefs.getInt(Keys.userId)!,
       );
     }
     return null;

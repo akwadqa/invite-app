@@ -18,9 +18,10 @@ class ScanState {
   });
 
   factory ScanState.init() => ScanState(
-      scanQrResponse: null,
-      userScanEventResponse: AsyncLoading(),
-      scannedCode: null);
+    scanQrResponse: null,
+    userScanEventResponse: AsyncLoading(),
+    scannedCode: null,
+  );
 
   ScanState copyWith({
     AsyncValue<ScanQrResponse>? scanQrResponse,
@@ -30,7 +31,8 @@ class ScanState {
     return ScanState(
       scanQrResponse: scanQrResponse ?? this.scanQrResponse,
       scannedCode: scannedCode ?? this.scannedCode,
-      userScanEventResponse: userScanEventResponse ?? this.userScanEventResponse,
+      userScanEventResponse:
+          userScanEventResponse ?? this.userScanEventResponse,
     );
   }
 }

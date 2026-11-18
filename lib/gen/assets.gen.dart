@@ -28,18 +28,61 @@ class $AssetsIconsGen {
   SvgGenImage get addEventIc =>
       const SvgGenImage('assets/icons/add_event_ic.svg');
 
-  /// File path: assets/icons/app_icon.jpg
-  AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.jpg');
+  /// File path: assets/icons/akwad_logo.svg
+  SvgGenImage get akwadLogo => const SvgGenImage('assets/icons/akwad_logo.svg');
+
+  /// File path: assets/icons/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
+
+  /// File path: assets/icons/arrow_right_ic.svg
+  SvgGenImage get arrowRightIc =>
+      const SvgGenImage('assets/icons/arrow_right_ic.svg');
+
+  /// File path: assets/icons/auth_brand_mark.svg
+  SvgGenImage get authBrandMark =>
+      const SvgGenImage('assets/icons/auth_brand_mark.svg');
 
   /// File path: assets/icons/available_cards_ic.svg
   SvgGenImage get availableCardsIc =>
       const SvgGenImage('assets/icons/available_cards_ic.svg');
 
+  /// File path: assets/icons/bell_ic.svg
+  SvgGenImage get bellIc => const SvgGenImage('assets/icons/bell_ic.svg');
+
+  /// File path: assets/icons/calendar_ic.svg
+  SvgGenImage get calendarIc =>
+      const SvgGenImage('assets/icons/calendar_ic.svg');
+
   /// File path: assets/icons/card_ic.svg
   SvgGenImage get cardIc => const SvgGenImage('assets/icons/card_ic.svg');
 
+  /// File path: assets/icons/chat_bubble_ic.svg
+  SvgGenImage get chatBubbleIc =>
+      const SvgGenImage('assets/icons/chat_bubble_ic.svg');
+
   /// File path: assets/icons/chat_ic.svg
   SvgGenImage get chatIc => const SvgGenImage('assets/icons/chat_ic.svg');
+
+  /// File path: assets/icons/check_ic.svg
+  SvgGenImage get checkIc => const SvgGenImage('assets/icons/check_ic.svg');
+
+  /// File path: assets/icons/chevron_down_ic.svg
+  SvgGenImage get chevronDownIc =>
+      const SvgGenImage('assets/icons/chevron_down_ic.svg');
+
+  /// File path: assets/icons/chevron_left_ic.svg
+  SvgGenImage get chevronLeftIc =>
+      const SvgGenImage('assets/icons/chevron_left_ic.svg');
+
+  /// File path: assets/icons/chevron_right_ic.svg
+  SvgGenImage get chevronRightIc =>
+      const SvgGenImage('assets/icons/chevron_right_ic.svg');
+
+  /// File path: assets/icons/clock_ic.svg
+  SvgGenImage get clockIc => const SvgGenImage('assets/icons/clock_ic.svg');
+
+  /// File path: assets/icons/close_ic.svg
+  SvgGenImage get closeIc => const SvgGenImage('assets/icons/close_ic.svg');
 
   /// File path: assets/icons/confirm_guest_ic.svg
   SvgGenImage get confirmGuestIc =>
@@ -52,6 +95,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/contacts_ic.svg
   SvgGenImage get contactsIc =>
       const SvgGenImage('assets/icons/contacts_ic.svg');
+
+  /// File path: assets/icons/crop_ic.svg
+  SvgGenImage get cropIc => const SvgGenImage('assets/icons/crop_ic.svg');
 
   /// File path: assets/icons/date_ic.svg
   SvgGenImage get dateIc => const SvgGenImage('assets/icons/date_ic.svg');
@@ -98,12 +144,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google_ic.svg
   SvgGenImage get googleIc => const SvgGenImage('assets/icons/google_ic.svg');
 
+  /// File path: assets/icons/grad_cap_ic.svg
+  SvgGenImage get gradCapIc =>
+      const SvgGenImage('assets/icons/grad_cap_ic.svg');
+
   /// File path: assets/icons/home_ic.svg
   SvgGenImage get homeIc => const SvgGenImage('assets/icons/home_ic.svg');
+
+  /// File path: assets/icons/home_rings_bg.svg
+  SvgGenImage get homeRingsBg =>
+      const SvgGenImage('assets/icons/home_rings_bg.svg');
 
   /// File path: assets/icons/icon_corner.svg
   SvgGenImage get iconCorner =>
       const SvgGenImage('assets/icons/icon_corner.svg');
+
+  /// File path: assets/icons/image_ic.svg
+  SvgGenImage get imageIc => const SvgGenImage('assets/icons/image_ic.svg');
 
   /// File path: assets/icons/lang_ic.svg
   SvgGenImage get langIc => const SvgGenImage('assets/icons/lang_ic.svg');
@@ -119,9 +176,32 @@ class $AssetsIconsGen {
   SvgGenImage get logoutWithCornerIc =>
       const SvgGenImage('assets/icons/logout_with_corner_ic.svg');
 
+  /// File path: assets/icons/map_marker_ic.svg
+  SvgGenImage get mapMarkerIc =>
+      const SvgGenImage('assets/icons/map_marker_ic.svg');
+
+  /// File path: assets/icons/map_pin_ic.svg
+  SvgGenImage get mapPinIc => const SvgGenImage('assets/icons/map_pin_ic.svg');
+
+  /// File path: assets/icons/map_preview_bg.svg
+  SvgGenImage get mapPreviewBg =>
+      const SvgGenImage('assets/icons/map_preview_bg.svg');
+
   /// File path: assets/icons/messages_ic.svg
   SvgGenImage get messagesIc =>
       const SvgGenImage('assets/icons/messages_ic.svg');
+
+  /// File path: assets/icons/more_horizontal_ic.svg
+  SvgGenImage get moreHorizontalIc =>
+      const SvgGenImage('assets/icons/more_horizontal_ic.svg');
+
+  /// File path: assets/icons/more_vertical_ic.svg
+  SvgGenImage get moreVerticalIc =>
+      const SvgGenImage('assets/icons/more_vertical_ic.svg');
+
+  /// File path: assets/icons/my_location_ic.svg
+  SvgGenImage get myLocationIc =>
+      const SvgGenImage('assets/icons/my_location_ic.svg');
 
   /// File path: assets/icons/notification_ic.svg
   SvgGenImage get notificationIc =>
@@ -131,9 +211,15 @@ class $AssetsIconsGen {
   SvgGenImage get passwordIc =>
       const SvgGenImage('assets/icons/password_ic.svg');
 
+  /// File path: assets/icons/pencil_ic.svg
+  SvgGenImage get pencilIc => const SvgGenImage('assets/icons/pencil_ic.svg');
+
   /// File path: assets/icons/phone_number_ic.svg
   SvgGenImage get phoneNumberIc =>
       const SvgGenImage('assets/icons/phone_number_ic.svg');
+
+  /// File path: assets/icons/plus_ic.svg
+  SvgGenImage get plusIc => const SvgGenImage('assets/icons/plus_ic.svg');
 
   /// File path: assets/icons/privacy_ic.svg
   SvgGenImage get privacyIc => const SvgGenImage('assets/icons/privacy_ic.svg');
@@ -146,6 +232,22 @@ class $AssetsIconsGen {
   AssetGenImage get qatarFlag =>
       const AssetGenImage('assets/icons/qatar_flag.png');
 
+  /// File path: assets/icons/qr_ic.svg
+  SvgGenImage get qrIc => const SvgGenImage('assets/icons/qr_ic.svg');
+
+  /// File path: assets/icons/replace_ic.svg
+  SvgGenImage get replaceIc => const SvgGenImage('assets/icons/replace_ic.svg');
+
+  /// File path: assets/icons/reply_ic.svg
+  SvgGenImage get replyIc => const SvgGenImage('assets/icons/reply_ic.svg');
+
+  /// File path: assets/icons/rings_backdrop.svg
+  SvgGenImage get ringsBackdrop =>
+      const SvgGenImage('assets/icons/rings_backdrop.svg');
+
+  /// File path: assets/icons/rings_ic.svg
+  SvgGenImage get ringsIc => const SvgGenImage('assets/icons/rings_ic.svg');
+
   /// File path: assets/icons/save_event_ic.svg
   SvgGenImage get saveEventIc =>
       const SvgGenImage('assets/icons/save_event_ic.svg');
@@ -153,9 +255,19 @@ class $AssetsIconsGen {
   /// File path: assets/icons/scan_ic.svg
   SvgGenImage get scanIc => const SvgGenImage('assets/icons/scan_ic.svg');
 
+  /// File path: assets/icons/search_ic.svg
+  SvgGenImage get searchIc => const SvgGenImage('assets/icons/search_ic.svg');
+
+  /// File path: assets/icons/send_ic.svg
+  SvgGenImage get sendIc => const SvgGenImage('assets/icons/send_ic.svg');
+
   /// File path: assets/icons/settings_ic.svg
   SvgGenImage get settingsIc =>
       const SvgGenImage('assets/icons/settings_ic.svg');
+
+  /// File path: assets/icons/sheet_file_ic.svg
+  SvgGenImage get sheetFileIc =>
+      const SvgGenImage('assets/icons/sheet_file_ic.svg');
 
   /// File path: assets/icons/template_confirm_arrow_ic.svg
   SvgGenImage get templateConfirmArrowIc =>
@@ -176,26 +288,78 @@ class $AssetsIconsGen {
   /// File path: assets/icons/title_ic.svg
   SvgGenImage get titleIc => const SvgGenImage('assets/icons/title_ic.svg');
 
+  /// File path: assets/icons/trophy_ic.svg
+  SvgGenImage get trophyIc => const SvgGenImage('assets/icons/trophy_ic.svg');
+
+  /// File path: assets/icons/upload_ic.svg
+  SvgGenImage get uploadIc => const SvgGenImage('assets/icons/upload_ic.svg');
+
   /// File path: assets/icons/upload_image_ic.svg
   SvgGenImage get uploadImageIc =>
       const SvgGenImage('assets/icons/upload_image_ic.svg');
 
+  /// File path: assets/icons/user_ic.svg
+  SvgGenImage get userIc => const SvgGenImage('assets/icons/user_ic.svg');
+
+  /// File path: assets/icons/users_ic.svg
+  SvgGenImage get usersIc => const SvgGenImage('assets/icons/users_ic.svg');
+
+  /// File path: assets/icons/wa_avatar_mark.svg
+  SvgGenImage get waAvatarMark =>
+      const SvgGenImage('assets/icons/wa_avatar_mark.svg');
+
+  /// File path: assets/icons/wa_back_ic.svg
+  SvgGenImage get waBackIc => const SvgGenImage('assets/icons/wa_back_ic.svg');
+
+  /// File path: assets/icons/wa_phone_ic.svg
+  SvgGenImage get waPhoneIc =>
+      const SvgGenImage('assets/icons/wa_phone_ic.svg');
+
+  /// File path: assets/icons/wa_ticks_ic.svg
+  SvgGenImage get waTicksIc =>
+      const SvgGenImage('assets/icons/wa_ticks_ic.svg');
+
+  /// File path: assets/icons/wa_verified_ic.svg
+  SvgGenImage get waVerifiedIc =>
+      const SvgGenImage('assets/icons/wa_verified_ic.svg');
+
+  /// File path: assets/icons/wa_video_ic.svg
+  SvgGenImage get waVideoIc =>
+      const SvgGenImage('assets/icons/wa_video_ic.svg');
+
   /// File path: assets/icons/waiting_guest_ic.svg
   SvgGenImage get waitingGuestIc =>
       const SvgGenImage('assets/icons/waiting_guest_ic.svg');
+
+  /// File path: assets/icons/whatsapp_chat_ic.svg
+  SvgGenImage get whatsappChatIc =>
+      const SvgGenImage('assets/icons/whatsapp_chat_ic.svg');
 
   /// List of all assets
   List<dynamic> get values => [
     activeIc,
     addContactIc,
     addEventIc,
+    akwadLogo,
     appIcon,
+    arrowRightIc,
+    authBrandMark,
     availableCardsIc,
+    bellIc,
+    calendarIc,
     cardIc,
+    chatBubbleIc,
     chatIc,
+    checkIc,
+    chevronDownIc,
+    chevronLeftIc,
+    chevronRightIc,
+    clockIc,
+    closeIc,
     confirmGuestIc,
     consumedIs,
     contactsIc,
+    cropIc,
     dateIc,
     deleteContactAlertIc,
     deleteContactIc,
@@ -208,29 +372,59 @@ class $AssetsIconsGen {
     failedGuestIc,
     fullNameIc,
     googleIc,
+    gradCapIc,
     homeIc,
+    homeRingsBg,
     iconCorner,
+    imageIc,
     langIc,
     locationIc,
     logoutIc,
     logoutWithCornerIc,
+    mapMarkerIc,
+    mapPinIc,
+    mapPreviewBg,
     messagesIc,
+    moreHorizontalIc,
+    moreVerticalIc,
+    myLocationIc,
     notificationIc,
     passwordIc,
+    pencilIc,
     phoneNumberIc,
+    plusIc,
     privacyIc,
     qatarCountry,
     qatarFlag,
+    qrIc,
+    replaceIc,
+    replyIc,
+    ringsBackdrop,
+    ringsIc,
     saveEventIc,
     scanIc,
+    searchIc,
+    sendIc,
     settingsIc,
+    sheetFileIc,
     templateConfirmArrowIc,
     templateDateIc,
     templateLocationIc,
     templateTimeIc,
     titleIc,
+    trophyIc,
+    uploadIc,
     uploadImageIc,
+    userIc,
+    usersIc,
+    waAvatarMark,
+    waBackIc,
+    waPhoneIc,
+    waTicksIc,
+    waVerifiedIc,
+    waVideoIc,
     waitingGuestIc,
+    whatsappChatIc,
   ];
 }
 
@@ -370,23 +564,6 @@ class $AssetsLottieGen {
   List<String> get values => [openerLoading, processingCircle];
 }
 
-class $AssetsSplashGen {
-  const $AssetsSplashGen();
-
-  /// File path: assets/splash/call-center.json
-  String get callCenter => 'assets/splash/call-center.json';
-
-  /// File path: assets/splash/splash.json
-  String get splashJson => 'assets/splash/splash.json';
-
-  /// File path: assets/splash/splash.png
-  AssetGenImage get splashPng =>
-      const AssetGenImage('assets/splash/splash.png');
-
-  /// List of all assets
-  List<dynamic> get values => [callCenter, splashJson, splashPng];
-}
-
 class $AssetsTranslationsGen {
   const $AssetsTranslationsGen();
 
@@ -400,14 +577,11 @@ class $AssetsTranslationsGen {
   List<String> get values => [ar, en];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const String aEnv = '.env';
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
-  static const $AssetsSplashGen splash = $AssetsSplashGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 
   /// List of all assets

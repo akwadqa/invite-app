@@ -19,7 +19,9 @@ class RemoteInterceptor extends Interceptor {
 
   @override
   Future<void> onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     // final token = ref.read(userDataProvider);
     final token = await ref.read(localStorageServiceProvider).getToken();
     final language = ref.read(currentLanguageProvider);
@@ -64,18 +66,17 @@ class RemoteInterceptor extends Interceptor {
 
     // ✅ تحقق من إذا كان Unauthorized
 
-    final isUnauthorized = (statusCode == 401 &&
+    final isUnauthorized =
+        (statusCode == 401 &&
             (responseData['message']?.toString().toLowerCase().contains(
-                      "otp",
-                    )) ==
-                false) ||
-        (responseData['exc_type']?.toString().contains(
-                  'PermissionError',
+                  "otp",
                 )) ==
+                false) ||
+        (responseData['exc_type']?.toString().contains('PermissionError')) ==
             true ||
         (responseData['exc_type']?.toString().contains(
-                  'AuthenticationError',
-                )) ==
+              'AuthenticationError',
+            )) ==
             true;
 
     if (isUnauthorized) {
@@ -98,30 +99,46 @@ class RemoteInterceptor extends Interceptor {
         switch (statusCode) {
           case 400:
             throw BadRequestException(
-                request, responseData['message'] ?? "Bad Request");
+              request,
+              responseData['message'] ?? "Bad Request",
+            );
           case 401:
             throw UnauthorizedException(
-                request, responseData['message'] ?? "Unauthorized");
+              request,
+              responseData['message'] ?? "Unauthorized",
+            );
           case 403:
             throw AccessForbiddenException(
-                request, responseData['message'] ?? "Forbidden");
+              request,
+              responseData['message'] ?? "Forbidden",
+            );
           case 404:
             throw NotFoundException(
-                request, responseData['message'] ?? "Not Found");
+              request,
+              responseData['message'] ?? "Not Found",
+            );
           case 409:
             throw ConflictException(
-                request, responseData['message'] ?? "Conflict");
+              request,
+              responseData['message'] ?? "Conflict",
+            );
           //TODO:
           case 422:
             // throw UnprocessableEntityException(request, "Unprocessable Entity");
             throw UnprocessableEntityException(
-                request, responseData['message'] ?? "Unprocessable Entity");
+              request,
+              responseData['message'] ?? "Unprocessable Entity",
+            );
           case 500:
             throw InternalServerErrorException(
-                request, responseData['message'] ?? "Server Error");
+              request,
+              responseData['message'] ?? "Server Error",
+            );
           default:
             throw BadResponseException(
-                request, responseData['message'] ?? "Bad Response");
+              request,
+              responseData['message'] ?? "Bad Response",
+            );
         }
       case DioExceptionType.cancel:
         break;
@@ -152,7 +169,8 @@ class RemoteInterceptor extends Interceptor {
     if (data is Map && data['message'] != null) {
       message = data['message'].toString();
     } else {
-      message = _getDefaultMessageForStatusCode(statusCode) ??
+      message =
+          _getDefaultMessageForStatusCode(statusCode) ??
           err.message ??
           'Unexpected error occurred';
     }

@@ -8,7 +8,7 @@ abstract class SigninResponseModel with _$SigninResponseModel {
   const factory SigninResponseModel({
     // @JsonKey(name: 'mobile_number') String mobileNumber,
     // @JsonKey(name: 'remaining_attempts') required int remainingAttempts,
-    @JsonKey(name: 'allow_login_after')  int? allowLoginAfter,
+    @JsonKey(name: 'allow_login_after') int? allowLoginAfter,
     required LoginValidation validation,
   }) = _SigninResponseModel;
 

@@ -16,9 +16,7 @@ class EventDateBadge extends StatelessWidget {
       child: Text(
         date,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

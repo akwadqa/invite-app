@@ -8,12 +8,15 @@ part of 'event_details_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// One event with its guest list and reply report.
 
 @ProviderFor(EventDetailsController)
 final eventDetailsControllerProvider = EventDetailsControllerFamily._();
 
+/// One event with its guest list and reply report.
 final class EventDetailsControllerProvider
     extends $AsyncNotifierProvider<EventDetailsController, EventModel> {
+  /// One event with its guest list and reply report.
   EventDetailsControllerProvider._({
     required EventDetailsControllerFamily super.from,
     required String super.argument,
@@ -52,7 +55,9 @@ final class EventDetailsControllerProvider
 }
 
 String _$eventDetailsControllerHash() =>
-    r'7c59bc043f441fca69d1583dd107a579f446b7c0';
+    r'79886257c89fdea2f192c3aab89cd881aa12ce12';
+
+/// One event with its guest list and reply report.
 
 final class EventDetailsControllerFamily extends $Family
     with
@@ -72,12 +77,16 @@ final class EventDetailsControllerFamily extends $Family
         isAutoDispose: true,
       );
 
+  /// One event with its guest list and reply report.
+
   EventDetailsControllerProvider call({required String ocassionId}) =>
       EventDetailsControllerProvider._(argument: ocassionId, from: this);
 
   @override
   String toString() => r'eventDetailsControllerProvider';
 }
+
+/// One event with its guest list and reply report.
 
 abstract class _$EventDetailsController extends $AsyncNotifier<EventModel> {
   late final _$args = ref.$arg as String;
@@ -86,7 +95,7 @@ abstract class _$EventDetailsController extends $AsyncNotifier<EventModel> {
   FutureOr<EventModel> build({required String ocassionId});
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<EventModel>, EventModel>;
     final element =
         ref.element
@@ -96,6 +105,6 @@ abstract class _$EventDetailsController extends $AsyncNotifier<EventModel> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, () => build(ocassionId: _$args));
+    return element.handleCreate(ref, () => build(ocassionId: _$args));
   }
 }

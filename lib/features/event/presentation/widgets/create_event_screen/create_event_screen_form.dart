@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,10 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:invit/features/auth/signUp/presentation/widgets/create_account_field.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/event/presentation/controller/create_event/create_event_controller.dart';
 import 'package:invit/features/event/presentation/controller/map_controller/map_controller.dart';
 import 'package:invit/features/event/presentation/controller/update_event/update_event_controller.dart';
-import 'package:invit/features/event/presentation/screens/create_event/upload_image_screen.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/image_picker.dart';
@@ -20,23 +17,23 @@ import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 class CreateEventScreenForm extends ConsumerWidget {
   const CreateEventScreenForm({
     super.key,
-    this.occasionId,
+    required this.occasionId,
     required this.formKey,
     required this.title,
     this.isUpdate = false,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController title;
-  final String? occasionId;
+  final String occasionId;
   final bool isUpdate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final date = occasionId == null
-        ? ref.watch(createEventControllerProvider
-            .select((val) => val.value!.eventModel.dateTime))
-        : ref.watch(updateEventControllerProvider(ocassionId: occasionId!)
-            .select((val) => val.value!.updatedEvent!.dateTime));
+    final date = ref.watch(
+      updateEventControllerProvider(
+        ocassionId: occasionId,
+      ).select((val) => val.value?.updatedEvent?.dateTime),
+    );
 
     final deviceLocale = Localizations.localeOf(context).toString();
 
@@ -50,24 +47,11 @@ class CreateEventScreenForm extends ConsumerWidget {
         ? DateFormat.jm(deviceLocale).format(DateTime.parse(date))
         : '';
 
-    final locationName = ref.watch(mapControllerProvider(occasionId)
-        .select((val) => val.value?.selectedPlace?.value?.locationName));
-
-    //TODO : Delete this:
-
-    // final locationName = occasionId == null
-    //     ? ref.watch(createEventControllerProvider
-    //         .select((val) => val.value!.selectedPlace?.value?.locationName))
-    //     : ref.watch(updateEventControllerProvider(ocassionId: occasionId!)
-    //         .select((val) => val.value!.selectedPlace?.value?.locationName));
-
-    //TODO : Delete this:
-
-    // final locationName = occasionId == null
-    //     ? ref.watch(createEventControllerProvider
-    //         .select((val) => val.value!.selectedPlace?.value?.locationName))
-    //     : ref.watch(updateEventControllerProvider(ocassionId: occasionId!)
-    //         .select((val) => val.value!.selectedPlace?.value?.locationName));
+    final locationName = ref.watch(
+      mapControllerProvider(
+        occasionId,
+      ).select((val) => val.value?.selectedPlace?.value?.locationName),
+    );
 
     return SingleChildScrollView(
       child: Container(
@@ -79,7 +63,9 @@ class CreateEventScreenForm extends ConsumerWidget {
           border: Border.all(color: AppColors.dividerColor),
           boxShadow: [
             BoxShadow(
-                color: AppColors.black.withValues(alpha: .25), blurRadius: 4),
+              color: AppColors.black.withValues(alpha: .25),
+              blurRadius: 4,
+            ),
           ],
         ),
         child: Form(
@@ -89,102 +75,95 @@ class CreateEventScreenForm extends ConsumerWidget {
             spacing: 16,
             children: [
               AppTextFormField(
-                  controller: title,
-                  icon: Assets.icons.titleIc,
-                  hint: 'event_title'.tr(),
-                  label: 'title'.tr(),
-                  isRequired: true),
+                controller: title,
+                icon: Assets.icons.titleIc,
+                hint: 'event_title'.tr(),
+                label: 'title'.tr(),
+                isRequired: true,
+              ),
               AppTextFormField(
-                  isReadOnly: true,
-                  controller: TextEditingController(text: dataFormatter),
-                  icon: Assets.icons.eventDateIc,
-                  onTap: () async {
-                    final date = await showDatePicker(
-                      builder: (context, child) => Theme(
-                        data: Theme.of(context).copyWith(
-                          datePickerTheme: DatePickerThemeData(
-                            dayBackgroundColor:
-                                MaterialStateProperty.resolveWith((states) {
+                isReadOnly: true,
+                controller: TextEditingController(text: dataFormatter),
+                icon: Assets.icons.eventDateIc,
+                onTap: () async {
+                  final date = await showDatePicker(
+                    builder: (context, child) => Theme(
+                      data: Theme.of(context).copyWith(
+                        datePickerTheme: DatePickerThemeData(
+                          dayBackgroundColor: MaterialStateProperty.resolveWith(
+                            (states) {
                               if (states.contains(MaterialState.selected)) {
                                 return AppColors.primary;
                               }
                               return null;
-                            }),
+                            },
+                          ),
+                        ),
+                      ),
+                      child: child!,
+                    ),
+                    context: context,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                  );
+                  if (date != null) {
+                    ref
+                        .read(
+                          updateEventControllerProvider(
+                            ocassionId: occasionId,
+                          ).notifier,
+                        )
+                        .updateEventDate(date);
+                  }
+                },
+                hint: 'event_date'.tr(),
+                label: 'date'.tr(),
+                isRequired: true,
+              ),
+              AppTextFormField(
+                isReadOnly: true,
+                controller: TextEditingController(text: formattedTime),
+                onTap: () async {
+                  final initialTime = TimeOfDay.now();
+
+                  final time = await showTimePicker(
+                    context: context,
+                    initialTime: initialTime,
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          timePickerTheme: TimePickerThemeData(
+                            hourMinuteShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            hourMinuteColor: AppColors.primary.withOpacity(0.1),
+                            hourMinuteTextColor: AppColors.primary,
+                            dialHandColor: AppColors.primary,
+                            dialBackgroundColor: AppColors.primary.withOpacity(
+                              0.08,
+                            ),
+                            entryModeIconColor: AppColors.primary,
                           ),
                         ),
                         child: child!,
-                      ),
-                      context: context,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                    );
-                    if (date != null) {
-                      if (occasionId == null) {
-                        ref
-                            .read(createEventControllerProvider.notifier)
-                            .updateEventDate(date);
-                      } else {
-                        ref
-                            .read(updateEventControllerProvider(
-                                    ocassionId: occasionId!)
-                                .notifier)
-                            .updateEventDate(date);
-                      }
-                    }
-                  },
-                  hint: 'event_date'.tr(),
-                  label: 'date'.tr(),
-                  isRequired: true),
-              AppTextFormField(
-                  isReadOnly: true,
-                  controller: TextEditingController(text: formattedTime),
-                  onTap: () async {
-                    final dateTime = DateTime.now();
-                    final initialTime = dateTime != null
-                        ? TimeOfDay.fromDateTime(dateTime!)
-                        : TimeOfDay.now();
-
-                    final time = await showTimePicker(
-                      context: context,
-                      initialTime: initialTime,
-                      builder: (context, child) {
-                        return Theme(
-                          data: Theme.of(context).copyWith(
-                            timePickerTheme: TimePickerThemeData(
-                              hourMinuteShape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              hourMinuteColor:
-                                  AppColors.primary.withOpacity(0.1),
-                              hourMinuteTextColor: AppColors.primary,
-                              dialHandColor: AppColors.primary,
-                              dialBackgroundColor:
-                                  AppColors.primary.withOpacity(0.08),
-                              entryModeIconColor: AppColors.primary,
-                            ),
-                          ),
-                          child: child!,
-                        );
-                      },
-                    );
-                    if (time != null) {
-                      if (occasionId == null) {
-                        ref
-                            .read(createEventControllerProvider.notifier)
-                            .updateEventTime(time);
-                      } else {
-                        ref
-                            .read(updateEventControllerProvider(
-                                    ocassionId: occasionId!)
-                                .notifier)
-                            .updateEventTime(time);
-                      }
-                    }
-                  },
-                  icon: Assets.icons.eventTimeIc,
-                  hint: 'event_time'.tr(),
-                  label: 'time'.tr(),
-                  isRequired: true),
+                      );
+                    },
+                  );
+                  if (time != null) {
+                    ref
+                        .read(
+                          updateEventControllerProvider(
+                            ocassionId: occasionId,
+                          ).notifier,
+                        )
+                        .updateEventTime(time);
+                  }
+                },
+                icon: Assets.icons.eventTimeIc,
+                hint: 'event_time'.tr(),
+                label: 'time'.tr(),
+                isRequired: true,
+              ),
               Text('location'.tr(), style: AppTextStyle.rubikMedium16),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -193,11 +172,14 @@ class CreateEventScreenForm extends ConsumerWidget {
                   height: 203,
                   child: GoogleMap(
                     onTap: (_) => context.pushNamed(
-                        AppRoutes.selectLocationScreen,
-                        extra: occasionId),
+                      AppRoutes.selectLocationScreen,
+                      extra: occasionId,
+                    ),
                     scrollGesturesEnabled: false,
                     initialCameraPosition: CameraPosition(
-                        target: LatLng(25.285, 51.531), zoom: 14),
+                      target: LatLng(25.285, 51.531),
+                      zoom: 14,
+                    ),
                   ),
                 ),
               ),
@@ -216,7 +198,7 @@ class CreateEventScreenForm extends ConsumerWidget {
                     ),
                   ],
                 ),
-              if (isUpdate) _buildImageSection(ref)
+              if (isUpdate) _buildImageSection(ref),
             ],
           ),
         ),
@@ -226,71 +208,73 @@ class CreateEventScreenForm extends ConsumerWidget {
 
   Widget _buildImageSection(WidgetRef ref) {
     final imageUrl = ref.watch(
-        updateEventControllerProvider(ocassionId: occasionId!)
-            .select((val) => val.value?.updatedEvent?.imageUrl));
+      updateEventControllerProvider(
+        ocassionId: occasionId,
+      ).select((val) => val.value?.updatedEvent?.imageUrl),
+    );
 
     final imageFile = ref.watch(
-        updateEventControllerProvider(ocassionId: occasionId!)
-            .select((val) => val.value?.updatedEvent?.image));
+      updateEventControllerProvider(
+        ocassionId: occasionId,
+      ).select((val) => val.value?.updatedEvent?.image),
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 16,
       children: [
-        Text(
-          'image'.tr(),
-          style: AppTextStyle.rubikMedium16,
-        ),
+        Text('image'.tr(), style: AppTextStyle.rubikMedium16),
         SizedBox(
           width: double.infinity,
           height:
               (imageFile != null || (imageUrl != null && imageUrl.isNotEmpty))
-                  ? null
-                  : 80,
+              ? null
+              : 80,
           child: imageFile != null
-              ? Image.file(
-                  imageFile,
+              ? Image.file(imageFile, fit: BoxFit.cover)
+              : (imageUrl != null && imageUrl.isNotEmpty)
+              ? Image.network(
+                  ServicesUrls.imageUrl + imageUrl,
                   fit: BoxFit.cover,
                 )
-              : (imageUrl != null && imageUrl.isNotEmpty)
-                  ? Image.network(
-                      ServicesUrls.imageUrl + imageUrl,
-                      fit: BoxFit.cover,
-                    )
-                  : GestureDetector(
-                      onTap: () async {
-                        final newImage = await pickImage();
-                        if (newImage != null) {
-                          ref
-                              .read(updateEventControllerProvider(
-                                      ocassionId: occasionId!)
-                                  .notifier)
-                              .updateDataForEvent(EventModel(image: newImage));
-                        }
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: AppColors.primary),
-                          ),
-                          child: Center(
-                            child: Assets.icons.uploadImageIc.svg(),
-                          )),
+              : GestureDetector(
+                  onTap: () async {
+                    final newImage = await pickImage();
+                    if (newImage != null) {
+                      ref
+                          .read(
+                            updateEventControllerProvider(
+                              ocassionId: occasionId,
+                            ).notifier,
+                          )
+                          .updateDataForEvent(EventModel(image: newImage));
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.primary),
                     ),
+                    child: Center(child: Assets.icons.uploadImageIc.svg()),
+                  ),
+                ),
         ),
         if (imageFile != null || (imageUrl != null && imageUrl.isNotEmpty))
           GestureDetector(
             onTap: () {
               ref
-                  .read(updateEventControllerProvider(ocassionId: occasionId!)
-                      .notifier)
+                  .read(
+                    updateEventControllerProvider(
+                      ocassionId: occasionId,
+                    ).notifier,
+                  )
                   .removeImage();
             },
             child: Text(
               'remove_image'.tr(),
               style: AppTextStyle.rubikMedium14.copyWith(color: AppColors.red),
             ),
-          )
+          ),
       ],
     );
   }

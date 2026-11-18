@@ -1,4 +1,3 @@
-
 import 'package:invit/features/messages/domain/model/app_messages_model.dart';
 import 'package:invit/features/notifications/domain/model/app_notifications_model.dart';
 import 'package:invit/src/infrastructure/api/endpoint/api_endpoints.dart';
@@ -12,24 +11,24 @@ class MessagesDatasource {
 
   Future<ApiResponse<List<AppMessagesModel>>> getAllmessages(
     int page,
-    String? search
+    String? search,
   ) async {
     try {
       final response = await _networkService.get(
         ApiEndPoints.appNotification,
         queryParameters: {
           'page': page,
-        "for_user": "test@email.com",
+          "for_user": "test@email.com",
 
-       if(search!=null) "search": search
-
+          if (search != null) "search": search,
         },
       );
       return ApiResponse.fromJson(
         response.data,
         (json) => (json as List)
-            .map((item) =>
-                AppMessagesModel.fromJson(item as Map<String, dynamic>))
+            .map(
+              (item) => AppMessagesModel.fromJson(item as Map<String, dynamic>),
+            )
             .toList(),
       );
     } catch (e) {

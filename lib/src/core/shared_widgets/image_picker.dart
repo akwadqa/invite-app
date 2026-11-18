@@ -1,19 +1,13 @@
 import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 
+/// Picks an image from the gallery exactly as it is: no resizing and no
+/// compression, so the invitation keeps its original quality.
 Future<File?> pickImage() async {
-  File? file;
-
   final pickedImage = await ImagePicker().pickImage(
     source: ImageSource.gallery,
-    maxWidth: 500,
-    imageQuality: 70,
   );
-
-  if (pickedImage == null) {
-    return null;
-  } else {
-    file = File(pickedImage.path);
-    return file;
-  }
+  if (pickedImage == null) return null;
+  return File(pickedImage.path);
 }

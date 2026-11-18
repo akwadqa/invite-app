@@ -26,7 +26,9 @@ class SmallInfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-              color: AppColors.black.withValues(alpha: .04), blurRadius: 6)
+            color: AppColors.black.withValues(alpha: .04),
+            blurRadius: 6,
+          ),
         ],
       ),
       child: Column(
@@ -36,14 +38,19 @@ class SmallInfoCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: bgColor, borderRadius: BorderRadius.circular(4)),
+              color: bgColor,
+              borderRadius: BorderRadius.circular(4),
+            ),
             child: icon.svg(),
           ),
           FittedBox(
-            child: Text(title,
-                maxLines: 1,
-                style: AppTextStyle.rubikRegular16
-                    .copyWith(color: AppColors.textGrey)),
+            child: Text(
+              title,
+              maxLines: 1,
+              style: AppTextStyle.rubikRegular16.copyWith(
+                color: AppColors.textGrey,
+              ),
+            ),
           ),
           Text(value, style: AppTextStyle.rubikMedium16),
         ],

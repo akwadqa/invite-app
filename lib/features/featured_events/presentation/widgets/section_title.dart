@@ -6,11 +6,7 @@ class SectionTitle extends StatelessWidget {
   final String title;
   final String count;
 
-  const SectionTitle({
-    super.key,
-    required this.title,
-    required this.count,
-  });
+  const SectionTitle({super.key, required this.title, required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +17,12 @@ class SectionTitle extends StatelessWidget {
         children: [
           Text(
             title,
-            style:AppTextStyle.rubikSemiBold18.copyWith(color: AppColors.primary)
+            style: AppTextStyle.rubikSemiBold18.copyWith(
+              color: AppColors.primary,
+            ),
           ),
           Text(
-           count,
+            count,
             style: AppTextStyle.rubikMedium14.copyWith(color: AppColors.gray),
           ),
         ],
@@ -32,6 +30,7 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
+
 class CompanyTitle extends StatelessWidget {
   const CompanyTitle({super.key});
 
@@ -52,10 +51,7 @@ class CompanyTitle extends StatelessWidget {
           ),
           Text(
             "Akwad Programming",
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
+            style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
         ],
       ),

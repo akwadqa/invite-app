@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_information.dart';
@@ -9,6 +9,7 @@ part of 'user_information.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $UserInformationCopyWith<UserInformation> get copyWith => _$UserInformationCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserInformation&&(identical(other.token, token) || other.token == token)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.userId, userId) || other.userId == userId));
+  final _this = this as UserInformation;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserInformation&&(identical(other.token, _this.token) || other.token == _this.token)&&(identical(other.fullName, _this.fullName) || other.fullName == _this.fullName)&&(identical(other.mobileNumber, _this.mobileNumber) || other.mobileNumber == _this.mobileNumber)&&(identical(other.userId, _this.userId) || other.userId == _this.userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,token,fullName,mobileNumber,userId);
+int get hashCode {
+  final _this = this as UserInformation;
+  return Object.hash(runtimeType,_this.token,_this.fullName,_this.mobileNumber,_this.userId);
+}
 
 @override
 String toString() {
-  return 'UserInformation(token: $token, fullName: $fullName, mobileNumber: $mobileNumber, userId: $userId)';
+  final _this = this as UserInformation;
+  return 'UserInformation(token: ${_this.token}, fullName: ${_this.fullName}, mobileNumber: ${_this.mobileNumber}, userId: ${_this.userId})';
 }
 
 
@@ -66,7 +72,7 @@ class _$UserInformationCopyWithImpl<$Res>
 /// Create a copy of UserInformation
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? token = null,Object? fullName = null,Object? mobileNumber = null,Object? userId = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(UserInformation(
 token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String,mobileNumber: null == mobileNumber ? _self.mobileNumber : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -233,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserInformation&&(identical(other.token, token) || other.token == token)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.userId, userId) || other.userId == userId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserInformation&&(identical(other.token, token) || other.token == token)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,token,fullName,mobileNumber,userId);
+int get hashCode {
+    return Object.hash(runtimeType,token,fullName,mobileNumber,userId);
+}
 
 @override
 String toString() {
-  return 'UserInformation(token: $token, fullName: $fullName, mobileNumber: $mobileNumber, userId: $userId)';
+    return 'UserInformation(token: $token, fullName: $fullName, mobileNumber: $mobileNumber, userId: $userId)';
 }
 
 

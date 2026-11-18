@@ -17,14 +17,10 @@ class AppEmptyDataWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 20,
         children: [
-          SvgPicture.asset(Assets.images.emptyData.keyName,height: 200,),
+          SvgPicture.asset(Assets.images.emptyData.keyName, height: 200),
           20.verticalSpace,
-          Text(
-            context.tr(text),
-            style: AppTextStyle.rubikMedium20,
-          ),
+          Text(context.tr(text), style: AppTextStyle.rubikMedium20),
           80.verticalSpace,
-
         ],
       ),
     );

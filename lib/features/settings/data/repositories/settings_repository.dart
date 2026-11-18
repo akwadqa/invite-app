@@ -13,6 +13,7 @@ SettingsRepository settingsRepository(Ref ref) {
   final networkService = ref.watch(networkServiceProvider());
   return SettingsRepository(SettingsDatasource(networkService));
 }
+
 class SettingsRepository {
   final SettingsDatasource _remoteDataSource;
 
@@ -20,29 +21,30 @@ class SettingsRepository {
   Future<HomeModel> getSettingsData({required int page}) async {
     try {
       final result = await _remoteDataSource.getSettingsData(page: page);
-  
+
       if (result.hasFailed) {
-        throw AppException( message: result.message ?? 'Failed to fetch data');
+        throw AppException(message: result.message ?? 'Failed to fetch data');
       }
-  
+
       return result.data!;
     } catch (e) {
       throw AppException(message: 'Failed to fetch HomeModel: $e');
     }
   }
-    Future<ApiResponse<bool>> deleteAccount(String email) async {
+
+  Future<ApiResponse<bool>> deleteAccount(String email) async {
     final response = await _remoteDataSource.deleteAccount(email);
     if (response.status == 200) {
       return response;
     }
-    throw AppException(message:  response.message);
+    throw AppException(message: response.message);
   }
-    Future<bool> logout() async {
+
+  Future<bool> logout() async {
     final response = await _remoteDataSource.logout();
     if (response.status == 200) {
       return response.data ?? false;
     }
-    throw AppException(message:  response.message);
+    throw AppException(message: response.message);
   }
-
 }

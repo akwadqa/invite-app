@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
@@ -17,11 +16,13 @@ class BestValueBadge extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(10)),
-          child: Text("best_value".tr(),
-              style:
-                  AppTextStyle.rubikMedium12.copyWith(color: AppColors.white)),
+            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            "best_value".tr(),
+            style: AppTextStyle.rubikMedium12.copyWith(color: AppColors.white),
+          ),
         ),
       ),
     );

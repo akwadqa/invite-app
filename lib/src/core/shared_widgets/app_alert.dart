@@ -92,11 +92,12 @@ class AppAlert {
         return PopScope(
           canPop: false,
           child: Container(
-              // padding: EdgeInsets.all(30),
-              // width: 50,
-              // height: 50,
-              // color: AppColors.white,
-              child: AppLoader()),
+            // padding: EdgeInsets.all(30),
+            // width: 50,
+            // height: 50,
+            // color: AppColors.white,
+            child: AppLoader(),
+          ),
         );
       },
     );

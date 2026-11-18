@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'guest_report_model.dart';
@@ -9,6 +9,7 @@ part of 'guest_report_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $GuestReportModelCopyWith<GuestReportModel> get copyWith => _$GuestReportModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GuestReportModel&&(identical(other.totalInvitees, totalInvitees) || other.totalInvitees == totalInvitees)&&(identical(other.notSent, notSent) || other.notSent == notSent)&&(identical(other.pending, pending) || other.pending == pending)&&(identical(other.confirmed, confirmed) || other.confirmed == confirmed)&&(identical(other.declined, declined) || other.declined == declined)&&(identical(other.failed, failed) || other.failed == failed)&&(identical(other.scannedCount, scannedCount) || other.scannedCount == scannedCount));
+  final _this = this as GuestReportModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GuestReportModel&&(identical(other.totalInvitees, _this.totalInvitees) || other.totalInvitees == _this.totalInvitees)&&(identical(other.notSent, _this.notSent) || other.notSent == _this.notSent)&&(identical(other.pending, _this.pending) || other.pending == _this.pending)&&(identical(other.confirmed, _this.confirmed) || other.confirmed == _this.confirmed)&&(identical(other.declined, _this.declined) || other.declined == _this.declined)&&(identical(other.failed, _this.failed) || other.failed == _this.failed)&&(identical(other.scannedCount, _this.scannedCount) || other.scannedCount == _this.scannedCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,totalInvitees,notSent,pending,confirmed,declined,failed,scannedCount);
+int get hashCode {
+  final _this = this as GuestReportModel;
+  return Object.hash(runtimeType,_this.totalInvitees,_this.notSent,_this.pending,_this.confirmed,_this.declined,_this.failed,_this.scannedCount);
+}
 
 @override
 String toString() {
-  return 'GuestReportModel(totalInvitees: $totalInvitees, notSent: $notSent, pending: $pending, confirmed: $confirmed, declined: $declined, failed: $failed, scannedCount: $scannedCount)';
+  final _this = this as GuestReportModel;
+  return 'GuestReportModel(totalInvitees: ${_this.totalInvitees}, notSent: ${_this.notSent}, pending: ${_this.pending}, confirmed: ${_this.confirmed}, declined: ${_this.declined}, failed: ${_this.failed}, scannedCount: ${_this.scannedCount})';
 }
 
 
@@ -66,7 +72,7 @@ class _$GuestReportModelCopyWithImpl<$Res>
 /// Create a copy of GuestReportModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? totalInvitees = null,Object? notSent = null,Object? pending = null,Object? confirmed = null,Object? declined = null,Object? failed = null,Object? scannedCount = null,}) {
-  return _then(_self.copyWith(
+  return _then(GuestReportModel(
 totalInvitees: null == totalInvitees ? _self.totalInvitees : totalInvitees // ignore: cast_nullable_to_non_nullable
 as int,notSent: null == notSent ? _self.notSent : notSent // ignore: cast_nullable_to_non_nullable
 as int,pending: null == pending ? _self.pending : pending // ignore: cast_nullable_to_non_nullable
@@ -239,16 +245,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GuestReportModel&&(identical(other.totalInvitees, totalInvitees) || other.totalInvitees == totalInvitees)&&(identical(other.notSent, notSent) || other.notSent == notSent)&&(identical(other.pending, pending) || other.pending == pending)&&(identical(other.confirmed, confirmed) || other.confirmed == confirmed)&&(identical(other.declined, declined) || other.declined == declined)&&(identical(other.failed, failed) || other.failed == failed)&&(identical(other.scannedCount, scannedCount) || other.scannedCount == scannedCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GuestReportModel&&(identical(other.totalInvitees, totalInvitees) || other.totalInvitees == totalInvitees)&&(identical(other.notSent, notSent) || other.notSent == notSent)&&(identical(other.pending, pending) || other.pending == pending)&&(identical(other.confirmed, confirmed) || other.confirmed == confirmed)&&(identical(other.declined, declined) || other.declined == declined)&&(identical(other.failed, failed) || other.failed == failed)&&(identical(other.scannedCount, scannedCount) || other.scannedCount == scannedCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,totalInvitees,notSent,pending,confirmed,declined,failed,scannedCount);
+int get hashCode {
+    return Object.hash(runtimeType,totalInvitees,notSent,pending,confirmed,declined,failed,scannedCount);
+}
 
 @override
 String toString() {
-  return 'GuestReportModel(totalInvitees: $totalInvitees, notSent: $notSent, pending: $pending, confirmed: $confirmed, declined: $declined, failed: $failed, scannedCount: $scannedCount)';
+    return 'GuestReportModel(totalInvitees: $totalInvitees, notSent: $notSent, pending: $pending, confirmed: $confirmed, declined: $declined, failed: $failed, scannedCount: $scannedCount)';
 }
 
 

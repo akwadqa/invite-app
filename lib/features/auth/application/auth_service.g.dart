@@ -88,7 +88,7 @@ abstract class _$UserData extends $Notifier<(String, int)?> {
   (String, int)? build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<(String, int)?, (String, int)?>;
     final element =
         ref.element
@@ -98,7 +98,7 @@ abstract class _$UserData extends $Notifier<(String, int)?> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
 

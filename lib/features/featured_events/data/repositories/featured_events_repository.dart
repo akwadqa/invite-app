@@ -1,4 +1,3 @@
-
 import 'package:invit/features/featured_events/data/datasources/featured_events_datasource.dart';
 import 'package:invit/features/featured_events/domain/model/all_events_model.dart';
 import 'package:invit/features/messages/domain/model/app_messages_model.dart';
@@ -20,14 +19,14 @@ class FeaturedEventsRepository {
 
   FeaturedEventsRepository(this._remoteDataSource);
 
-  Future<ApiResponse<AllEventsModel>> getAllEvents(
-      {required int page,String? eventType,}) async {
+  Future<ApiResponse<AllEventsModel>> getAllEvents({
+    required int page,
+    String? eventType,
+  }) async {
     try {
-      final result = await _remoteDataSource.getAllEvents(page,eventType);
+      final result = await _remoteDataSource.getAllEvents(page, eventType);
       if (result.hasFailed) {
-        throw AppException(
-          result.message ?? 'Failed to fetch getAllEvents',
-        );
+        throw AppException(result.message ?? 'Failed to fetch getAllEvents');
       }
       // if (result.status == 200) {
       return result;

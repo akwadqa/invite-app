@@ -49,8 +49,7 @@ class ScanRemoteDateSource {
       return ApiResponse.fromJson(
         response.data,
         (json) => (json as List)
-            .map((item) =>
-                EventModel.fromJson(item as Map<String, dynamic>))
+            .map((item) => EventModel.fromJson(item as Map<String, dynamic>))
             .toList(),
       );
     } catch (e) {

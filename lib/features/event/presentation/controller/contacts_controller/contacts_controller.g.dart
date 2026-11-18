@@ -51,7 +51,7 @@ final class ContactsControllerProvider
 }
 
 String _$contactsControllerHash() =>
-    r'c5b510fa514a328fa8ed9aeafc525490ce017a4e';
+    r'7f72d69b6e8dc4c4de9a7447a263375feca55435';
 
 final class ContactsControllerFamily extends $Family
     with
@@ -85,7 +85,7 @@ abstract class _$ContactsController extends $AsyncNotifier<ContactsState> {
   FutureOr<ContactsState> build(String? occasionId);
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<ContactsState>, ContactsState>;
     final element =
         ref.element
@@ -95,6 +95,6 @@ abstract class _$ContactsController extends $AsyncNotifier<ContactsState> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, () => build(_$args));
+    return element.handleCreate(ref, () => build(_$args));
   }
 }

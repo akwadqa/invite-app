@@ -43,8 +43,9 @@ class _AddGuestManuallyFieldsState extends State<AddGuestManuallyFields> {
     final number = _nationalController.text.startsWith('0')
         ? _nationalController.text.substring(1)
         : _nationalController.text;
-    final code =
-        countryCode.startsWith('+') ? countryCode.substring(1) : countryCode;
+    final code = countryCode.startsWith('+')
+        ? countryCode.substring(1)
+        : countryCode;
     final full = '$code$number';
     widget.phone.value = TextEditingValue(
       text: full,
@@ -58,14 +59,15 @@ class _AddGuestManuallyFieldsState extends State<AddGuestManuallyFields> {
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.black.withValues(alpha: .25),
-              blurRadius: 4,
-            )
-          ]),
+        borderRadius: BorderRadius.circular(4),
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: .25),
+            blurRadius: 4,
+          ),
+        ],
+      ),
       child: Form(
         key: widget.formKey,
         child: Column(
@@ -81,8 +83,9 @@ class _AddGuestManuallyFieldsState extends State<AddGuestManuallyFields> {
                   child: Assets.icons.fullNameIc.svg(width: 16),
                 ),
                 hintText: 'full_name'.tr(),
-                hintStyle: AppTextStyle.rubikRegular14
-                    .copyWith(color: AppColors.grayHint),
+                hintStyle: AppTextStyle.rubikRegular14.copyWith(
+                  color: AppColors.grayHint,
+                ),
                 isDense: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 14),
                 filled: true,
@@ -95,10 +98,7 @@ class _AddGuestManuallyFieldsState extends State<AddGuestManuallyFields> {
                 focusedErrorBorder: InputBorder.none,
               ),
             ),
-            Divider(
-              color: AppColors.grayHint,
-              height: 0,
-            ),
+            Divider(color: AppColors.grayHint, height: 0),
             Directionality(
               textDirection: ui.TextDirection.ltr,
               child: IntlPhoneField(
@@ -139,8 +139,9 @@ class _AddGuestManuallyFieldsState extends State<AddGuestManuallyFields> {
                   fillColor: AppColors.white,
                   // hintText: 'phone_number'.tr(),
                   hintText: '000-000-00',
-                  hintStyle: AppTextStyle.rubikRegular14
-                      .copyWith(color: AppColors.grayHint),
+                  hintStyle: AppTextStyle.rubikRegular14.copyWith(
+                    color: AppColors.grayHint,
+                  ),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(vertical: 14),
                   errorStyle: TextStyle(height: 0, fontSize: 0),
@@ -152,7 +153,7 @@ class _AddGuestManuallyFieldsState extends State<AddGuestManuallyFields> {
                   focusedErrorBorder: InputBorder.none,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:invit/features/auth/signIn/presentation/widgets/sign_in_form.dart';
 import 'package:invit/features/settings/presentation/controller/settings_controller.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_loader.dart';
+import 'package:invit/src/core/shared_widgets/app_loading_indicator.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/shared_widgets/custom_button_widget.dart';
 import 'package:invit/src/core/utils/extenssions/int_extenssion.dart';
@@ -20,22 +19,34 @@ import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 class AppDialogs {
   AppDialogs._();
 
-  static Future<void> loading(
-    BuildContext context, {
-    bool dismissible = false,
-  }) {
-    return showDialog<void>(
+  static const String _loadingRouteName = 'app_loading_dialog';
+  static const double _loadingBarrierOpacity = 0.35;
+  static const Duration _loadingTransition = Duration(milliseconds: 150);
+
+  /// Full-screen loading overlay: blocks taps and the back button until
+  /// [closeLoading] is called.
+  static void loading(BuildContext context) {
+    showGeneralDialog<void>(
       context: context,
-      barrierDismissible: dismissible,
       useRootNavigator: true,
-      builder: (_) => const Center(child: _LoadingIndicator()),
+      barrierDismissible: false,
+      barrierColor: AppColors.ink.withValues(alpha: _loadingBarrierOpacity),
+      transitionDuration: _loadingTransition,
+      routeSettings: const RouteSettings(name: _loadingRouteName),
+      pageBuilder: (_, _, _) => const PopScope(
+        canPop: false,
+        child: Center(child: AppLoadingIndicator()),
+      ),
     );
   }
 
-  static void close(BuildContext context) {
-    if (Navigator.of(context, rootNavigator: true).canPop()) {
-      Navigator.of(context, rootNavigator: true).pop();
-    }
+  /// Closes the overlay opened by [loading]. Does nothing if it is not the
+  /// top route, so it never pops a screen or another dialog by mistake.
+  static void closeLoading(BuildContext context) {
+    Navigator.of(
+      context,
+      rootNavigator: true,
+    ).popUntil((route) => route.settings.name != _loadingRouteName);
   }
 
   static Future<void> success(
@@ -103,28 +114,6 @@ class AppDialogs {
       ),
     );
     return result ?? false;
-  }
-}
-
-class _LoadingIndicator extends StatelessWidget {
-  const _LoadingIndicator();
-
-  @override
-  Widget build(BuildContext context) {
-    final bg = Theme.of(context).dialogTheme.backgroundColor;
-    return Material(
-      color: Colors.black38,
-      child: Center(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: bg,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: SizedBox(width: 48, height: 48, child: AppLoader()),
-        ),
-      ),
-    );
   }
 }
 

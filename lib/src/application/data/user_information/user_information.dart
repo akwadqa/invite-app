@@ -15,7 +15,7 @@ abstract class UserInformation with _$UserInformation {
     @HiveField(0) required String token,
     @HiveField(1) @JsonKey(name: "full_name") required String fullName,
     @HiveField(2) @JsonKey(name: "mobile_no") required String mobileNumber,
-    @HiveField(3) @JsonKey(name: "user_id")  String? userId,
+    @HiveField(3) @JsonKey(name: "user_id") String? userId,
   }) = _UserInformation;
 
   /// **Default Empty Object (If Needed)**

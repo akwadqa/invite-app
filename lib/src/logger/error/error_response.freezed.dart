@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'error_response.dart';
@@ -9,6 +9,7 @@ part of 'error_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $ErrorResponseCopyWith<ErrorResponse> get copyWith => _$ErrorResponseCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorResponse&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.status, status)&&const DeepCollectionEquality().equals(other.data, data));
+  final _this = this as ErrorResponse;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorResponse&&(identical(other.message, _this.message) || other.message == _this.message)&&const DeepCollectionEquality().equals(other.status, _this.status)&&const DeepCollectionEquality().equals(other.data, _this.data));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,const DeepCollectionEquality().hash(status),const DeepCollectionEquality().hash(data));
+int get hashCode {
+  final _this = this as ErrorResponse;
+  return Object.hash(runtimeType,_this.message,const DeepCollectionEquality().hash(_this.status),const DeepCollectionEquality().hash(_this.data));
+}
 
 @override
 String toString() {
-  return 'ErrorResponse(message: $message, status: $status, data: $data)';
+  final _this = this as ErrorResponse;
+  return 'ErrorResponse(message: ${_this.message}, status: ${_this.status}, data: ${_this.data})';
 }
 
 
@@ -66,7 +72,7 @@ class _$ErrorResponseCopyWithImpl<$Res>
 /// Create a copy of ErrorResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? status = freezed,Object? data = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ErrorResponse(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as dynamic,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
@@ -231,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ErrorResponse&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.status, status)&&const DeepCollectionEquality().equals(other.data, data));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ErrorResponse&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.status, status)&&const DeepCollectionEquality().equals(other.data, data));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,const DeepCollectionEquality().hash(status),const DeepCollectionEquality().hash(data));
+int get hashCode {
+    return Object.hash(runtimeType,message,const DeepCollectionEquality().hash(status),const DeepCollectionEquality().hash(data));
+}
 
 @override
 String toString() {
-  return 'ErrorResponse(message: $message, status: $status, data: $data)';
+    return 'ErrorResponse(message: $message, status: $status, data: $data)';
 }
 
 

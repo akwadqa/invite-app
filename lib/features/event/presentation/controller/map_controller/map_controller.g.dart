@@ -50,7 +50,7 @@ final class MapControllerProvider
   }
 }
 
-String _$mapControllerHash() => r'06939c1fa1423e92294d5c0059b8cc1792dcb03b';
+String _$mapControllerHash() => r'35b215335eef2ac8be21af0f4b22df87c908b808';
 
 final class MapControllerFamily extends $Family
     with
@@ -84,7 +84,7 @@ abstract class _$MapController extends $AsyncNotifier<MapState> {
   FutureOr<MapState> build(String? occasionId);
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<MapState>, MapState>;
     final element =
         ref.element
@@ -94,6 +94,6 @@ abstract class _$MapController extends $AsyncNotifier<MapState> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, () => build(_$args));
+    return element.handleCreate(ref, () => build(_$args));
   }
 }
