@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
+import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/guest/presentation/controller/guests_screen_controller.dart';
 import 'package:invit/features/guest/presentation/utils/guests_screen_args.dart';
+import 'package:invit/features/home/presentation/utils/home_event_format.dart';
 import 'package:invit/features/guest/presentation/widgets/guests_screen/guests_screen_filters.dart';
 import 'package:invit/features/guest/presentation/utils/guest_reply_status.dart';
 import 'package:invit/features/guest/presentation/widgets/guests_screen/guests_screen_guest_sheet.dart';
@@ -19,7 +20,6 @@ import 'package:invit/src/core/shared_widgets/app_error_widget.dart';
 import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
 import 'package:invit/src/core/shared_widgets/app_round_icon_button.dart';
 import 'package:invit/src/core/shared_widgets/app_screen_header.dart';
-import 'package:invit/src/core/utils/functions/coming_soon.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -59,6 +59,16 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
     });
   }
 
+  void _openReminder(ReminderAudience audience) {
+    context.push(
+      AppRoutes.sendReminderScreen,
+      extra: SendReminderScreenArgs(
+        occasionId: _occasionId,
+        audience: audience,
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _search.dispose();
@@ -72,8 +82,11 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
     );
     final guests = event.value?.guestList ?? const <GuestModel>[];
     final seats = guests.fold(0, (sum, guest) => sum + (guest.partySize ?? 0));
+    // Once the event is over its guests can no longer be opened, changed or
+    // reminded.
+    final isPast = event.value != null && HomeEventFormat.isPast(event.value!);
     final canAddGuests =
-        event.hasValue && event.value?.status != _confirmedStatus;
+        event.hasValue && !isPast && event.value?.status != _confirmedStatus;
 
     final filter = ref.watch(
       guestsScreenControllerProvider(_occasionId).select((s) => s.filter),
@@ -81,26 +94,27 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
     final counts = ref.watch(guestReplyCountsProvider(_occasionId));
     final failed = counts[GuestReplyStatus.notDelivered] ?? 0;
     final noReply = counts[GuestReplyStatus.noReply] ?? 0;
-    final actions = ref.read(
-      eventDetailsActionsControllerProvider(_occasionId).notifier,
-    );
     // The bottom action of the "No reply" and "Not delivered" tabs.
-    final action = switch (filter) {
-      GuestReplyStatus.noReply when noReply > 0 => (
-        label: 'guests_remind'.tr(args: ['$noReply']),
-        subtitle: 'guests_uses_messages'.tr(args: ['$noReply']),
-        // TODO(backend): no endpoint to remind guests who have not replied.
-        onPressed: showComingSoon,
-      ),
-      GuestReplyStatus.notDelivered when failed > 0 => (
-        label: 'guests_fix_resend'.tr(),
-        subtitle: 'guests_fix_resend_subtitle'.tr(args: ['$failed', '$failed']),
-        // TODO(backend): no endpoint to fix a guest's number before resending;
-        // this only resends the failed invitations for now.
-        onPressed: actions.resendFailed,
-      ),
-      _ => null,
-    };
+    final action = isPast
+        ? null
+        : switch (filter) {
+            GuestReplyStatus.noReply when noReply > 0 => (
+              label: 'guests_remind'.tr(args: ['$noReply']),
+              subtitle: 'guests_uses_messages'.tr(args: ['$noReply']),
+              onPressed: () => _openReminder(ReminderAudience.noReply),
+            ),
+            GuestReplyStatus.notDelivered when failed > 0 => (
+              label: 'guests_fix_resend'.tr(),
+              subtitle: 'guests_fix_resend_subtitle'.tr(
+                args: ['$failed', '$failed'],
+              ),
+              // TODO(backend): no endpoint to fix a guest's number before
+              // resending; the reminder screen only resends the failed
+              // invitations for now.
+              onPressed: () => _openReminder(ReminderAudience.notDelivered),
+            ),
+            _ => null,
+          };
 
     return Scaffold(
       backgroundColor: AppColors.pageBackground,
@@ -144,6 +158,7 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
                   data: (_) => _GuestsScreenList(
                     occasionId: _occasionId,
                     hasFloatingButton: action != null,
+                    isPast: isPast,
                   ),
                   error: (error, _) => AppErrorWidget(
                     errorMsg: error.toString(),
@@ -160,8 +175,6 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
               ),
             ],
           ),
-          // The event details screen below listens to this action and shows
-          // its loading dialog and result.
           if (action != null)
             Positioned(
               left: 0,
@@ -190,9 +203,13 @@ class _GuestsScreenList extends ConsumerWidget {
   const _GuestsScreenList({
     required this.occasionId,
     required this.hasFloatingButton,
+    required this.isPast,
   });
 
   final String occasionId;
+
+  /// Guests of a past event are only listed, not opened.
+  final bool isPast;
 
   /// Leaves room under the last guest for the floating resend button:
   /// button height (64) + its bottom gap (36) + breathing room.
@@ -223,11 +240,13 @@ class _GuestsScreenList extends ConsumerWidget {
                 final guest = guests[index];
                 return GuestsScreenTile(
                   guest: guest,
-                  onTap: () => GuestsScreenGuestSheet.show(
-                    context,
-                    guest: guest,
-                    occasionId: occasionId,
-                  ),
+                  onTap: isPast
+                      ? null
+                      : () => GuestsScreenGuestSheet.show(
+                          context,
+                          guest: guest,
+                          occasionId: occasionId,
+                        ),
                 );
               },
             ),

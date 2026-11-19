@@ -10,13 +10,13 @@ class EventDetailsScreenTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
-    required this.onTap,
+    this.onTap,
   });
 
   final SvgGenImage icon;
   final String title;
   final String? subtitle;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   static const double _radius = 18;
   static const double _borderWidth = 1.5;

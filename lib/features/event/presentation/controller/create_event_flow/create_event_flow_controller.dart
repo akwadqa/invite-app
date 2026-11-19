@@ -175,6 +175,27 @@ class CreateEventFlowController extends _$CreateEventFlowController {
     );
   }
 
+  /// Starts the guest list with the guests of a past event (invite again).
+  /// Guests without a usable name or number are skipped.
+  void addGuestsFromPastEvent(List<GuestModel> guests) {
+    final drafts = <EventGuestDraft>[];
+    for (final guest in guests) {
+      final name = guest.fullName?.trim() ?? '';
+      final phone = GuestPhoneNumber.fromContact(guest.whatsappNumber ?? '');
+      if (name.isEmpty || phone == null) continue;
+      drafts.add(
+        EventGuestDraft(
+          id: _uuid.v4(),
+          name: name,
+          phone: phone,
+          seats: guest.partySize ?? CreateEventFlowConstants.defaultSeats,
+        ),
+      );
+    }
+    addGuestsFromContacts(drafts);
+    state = state.copyWith(recentlyAddedGuestIds: []);
+  }
+
   void removeGuest(String id) {
     state = state.copyWith(
       guests: state.guests.where((guest) => guest.id != id).toList(),

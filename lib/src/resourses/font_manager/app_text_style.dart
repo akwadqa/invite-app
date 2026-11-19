@@ -268,6 +268,38 @@ class AppTextStyle {
     fontWeight: FontWeight.w700,
     fontSize: 15,
   );
+  static TextStyle outfitMedium36 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w500,
+    fontSize: 36,
+  );
+  static TextStyle outfitSemiBold56 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 56,
+  );
+  static TextStyle outfitSemiBold64 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 64,
+  );
+  static TextStyle outfitSemiBold18 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+  );
+  static TextStyle outfitSemiBold22 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 22,
+  );
+  static TextStyle outfitSemiBold13_5 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 13.5,
+  );
+  static TextStyle outfitMedium18 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+  );
+  static TextStyle outfitSemiBold20 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+  );
   static TextStyle outfitMedium34 = GoogleFonts.outfit(
     fontWeight: FontWeight.w500,
     fontSize: 34,

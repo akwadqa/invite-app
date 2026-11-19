@@ -10,10 +10,14 @@ abstract class AppRoutes {
   static const String contactListScreen = '/contact_list';
   static const String selectLocationScreen = '/select_location';
   static const String guestsScreen = '/guest_screen';
+  static const String sendReminderScreen = '/send_reminder';
   static const String mainScreen = '/main';
   static const String notificationScreen = '/notification';
   static const String eventDetails = '/event_details';
   static const String paymentScreen = '/payment_screen';
+  static const String rechargeScreen = '/recharge_screen';
+  static const String paymentStepsScreen = '/payment_steps_screen';
+  static const String checkoutRedirectScreen = '/checkout_redirect_screen';
   static const String updateEventScreen = '/update_event';
   static const String updateGuestListScreen = '/update_guest_list';
   static const String webPaymentScreen = '/web_payment';

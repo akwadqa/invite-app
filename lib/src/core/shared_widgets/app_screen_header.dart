@@ -13,6 +13,8 @@ class AppScreenHeader extends StatelessWidget {
     super.key,
     required this.title,
     this.subtitle,
+    this.subtitleEnd,
+    this.subtitleEndColor,
     this.subtitleMaxLines = 1,
     this.trailing,
     this.onBack,
@@ -20,6 +22,10 @@ class AppScreenHeader extends StatelessWidget {
 
   final String title;
   final String? subtitle;
+
+  /// Text after the subtitle, in [subtitleEndColor] (e.g. "Ended").
+  final String? subtitleEnd;
+  final Color? subtitleEndColor;
 
   /// `null` lets the subtitle wrap so it is always shown in full.
   final int? subtitleMaxLines;
@@ -68,8 +74,17 @@ class AppScreenHeader extends StatelessWidget {
                     ),
                   ),
                   if (subtitle != null)
-                    Text(
-                      subtitle!,
+                    Text.rich(
+                      TextSpan(
+                        text: subtitle,
+                        children: [
+                          if (subtitleEnd != null)
+                            TextSpan(
+                              text: subtitleEnd,
+                              style: TextStyle(color: subtitleEndColor),
+                            ),
+                        ],
+                      ),
                       maxLines: subtitleMaxLines,
                       overflow: subtitleMaxLines == null
                           ? null

@@ -32,8 +32,12 @@ class CreateEventReviewScreen extends ConsumerWidget {
     notifier.setEditingFromReview(false);
   }
 
-  Future<void> _topUp(BuildContext context, WidgetRef ref) async {
-    await context.push(AppRoutes.paymentScreen);
+  Future<void> _topUp(
+    BuildContext context,
+    WidgetRef ref,
+    int messagesNeeded,
+  ) async {
+    await context.push(AppRoutes.rechargeScreen, extra: messagesNeeded);
     if (!context.mounted) return;
     ref.read(homeControllerProvider.notifier).refresh();
   }
@@ -120,8 +124,9 @@ class CreateEventReviewScreen extends ConsumerWidget {
                 ? 'create_review_send'.tr()
                 : 'create_review_top_up_send'.tr(),
             icon: Assets.icons.sendIc,
-            onPressed: () =>
-                canSend ? notifier.submit(send: true) : _topUp(context, ref),
+            onPressed: () => canSend
+                ? notifier.submit(send: true)
+                : _topUp(context, ref, messagesNeeded),
           ),
         ],
       ),

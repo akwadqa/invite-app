@@ -197,6 +197,7 @@ abstract class AppColors {
 
   /// Upload drop zone of the invitation image step.
   static const Color dropzoneFill = Color(0xFFF5F8FA);
+  static const Color optionSelectedSurface = Color(0xFFF5F8FA);
   static const Color dropzoneBorder = Color(0xFFE1E5AC);
 
   // WhatsApp preview.

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event/presentation/controller/create_event_flow/create_event_flow_controller.dart';
 import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_type_screen/create_event_type_screen_card.dart';
@@ -22,7 +23,10 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 /// Step 1: "What are we celebrating?" — pick the occasion type.
 class CreateEventTypeScreen extends ConsumerStatefulWidget {
-  const CreateEventTypeScreen({super.key});
+  const CreateEventTypeScreen({super.key, this.invitedAgain = const []});
+
+  /// Guests of a past event to invite again; they start the guest list.
+  final List<GuestModel> invitedAgain;
 
   @override
   ConsumerState<CreateEventTypeScreen> createState() =>
@@ -56,6 +60,11 @@ class _CreateEventTypeScreenState extends ConsumerState<CreateEventTypeScreen> {
     final types = ref.read(homeControllerProvider).value?.occasionTypes;
     final index = types?.indexWhere((type) => type.title == picked) ?? -1;
     _currentIndex = index < 0 ? 0 : index;
+    if (widget.invitedAgain.isNotEmpty) {
+      ref
+          .read(createEventFlowControllerProvider.notifier)
+          .addGuestsFromPastEvent(widget.invitedAgain);
+    }
   }
 
   @override

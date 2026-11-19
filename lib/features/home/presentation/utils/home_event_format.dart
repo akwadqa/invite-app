@@ -19,6 +19,19 @@ abstract class HomeEventFormat {
     ].join(' · ');
   }
 
+  /// `true` once the event's day is before today (an event of today is not
+  /// past yet).
+  static bool isPast(EventModel event) {
+    final date = dateOf(event);
+    if (date == null) return false;
+    final now = DateTime.now();
+    return DateTime(
+      date.year,
+      date.month,
+      date.day,
+    ).isBefore(DateTime(now.year, now.month, now.day));
+  }
+
   /// "Sat, 14 Mar 2026".
   static String? fullDate(BuildContext context, EventModel event) {
     final date = dateOf(event);

@@ -10,10 +10,12 @@ import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
 /// One invited guest: initials, name, number · seats and reply.
 class GuestsScreenTile extends StatelessWidget {
-  const GuestsScreenTile({super.key, required this.guest, required this.onTap});
+  const GuestsScreenTile({super.key, required this.guest, this.onTap});
 
   final GuestModel guest;
-  final VoidCallback onTap;
+
+  /// `null` shows the guest without opening anything (past events).
+  final VoidCallback? onTap;
 
   static const double _avatarSize = 40;
   static const double _lineHeight = 1.25;

@@ -38,6 +38,10 @@ class $AssetsIconsGen {
   SvgGenImage get arrowRightIc =>
       const SvgGenImage('assets/icons/arrow_right_ic.svg');
 
+  /// File path: assets/icons/arrow_up_right_ic.svg
+  SvgGenImage get arrowUpRightIc =>
+      const SvgGenImage('assets/icons/arrow_up_right_ic.svg');
+
   /// File path: assets/icons/auth_brand_mark.svg
   SvgGenImage get authBrandMark =>
       const SvgGenImage('assets/icons/auth_brand_mark.svg');
@@ -133,6 +137,10 @@ class $AssetsIconsGen {
   SvgGenImage get expiringIc =>
       const SvgGenImage('assets/icons/expiring_ic.svg');
 
+  /// File path: assets/icons/external_link_ic.svg
+  SvgGenImage get externalLinkIc =>
+      const SvgGenImage('assets/icons/external_link_ic.svg');
+
   /// File path: assets/icons/failed_guest_ic.svg
   SvgGenImage get failedGuestIc =>
       const SvgGenImage('assets/icons/failed_guest_ic.svg');
@@ -162,12 +170,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/image_ic.svg
   SvgGenImage get imageIc => const SvgGenImage('assets/icons/image_ic.svg');
 
+  /// File path: assets/icons/info_ic.svg
+  SvgGenImage get infoIc => const SvgGenImage('assets/icons/info_ic.svg');
+
   /// File path: assets/icons/lang_ic.svg
   SvgGenImage get langIc => const SvgGenImage('assets/icons/lang_ic.svg');
 
   /// File path: assets/icons/location_ic.svg
   SvgGenImage get locationIc =>
       const SvgGenImage('assets/icons/location_ic.svg');
+
+  /// File path: assets/icons/lock_ic.svg
+  SvgGenImage get lockIc => const SvgGenImage('assets/icons/lock_ic.svg');
 
   /// File path: assets/icons/logout_ic.svg
   SvgGenImage get logoutIc => const SvgGenImage('assets/icons/logout_ic.svg');
@@ -343,6 +357,7 @@ class $AssetsIconsGen {
     akwadLogo,
     appIcon,
     arrowRightIc,
+    arrowUpRightIc,
     authBrandMark,
     availableCardsIc,
     bellIc,
@@ -369,6 +384,7 @@ class $AssetsIconsGen {
     eventDateIc,
     eventTimeIc,
     expiringIc,
+    externalLinkIc,
     failedGuestIc,
     fullNameIc,
     googleIc,
@@ -377,8 +393,10 @@ class $AssetsIconsGen {
     homeRingsBg,
     iconCorner,
     imageIc,
+    infoIc,
     langIc,
     locationIc,
+    lockIc,
     logoutIc,
     logoutWithCornerIc,
     mapMarkerIc,

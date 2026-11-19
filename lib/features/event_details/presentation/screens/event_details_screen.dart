@@ -6,8 +6,10 @@ import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
+import 'package:invit/features/event_details/presentation/widgets/event_details_screen/event_details_screen_past_body.dart';
 import 'package:invit/features/event_details/presentation/widgets/event_details_screen/event_details_screen_replies_card.dart';
 import 'package:invit/features/event_details/presentation/widgets/event_details_screen/event_details_screen_tiles.dart';
+import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
 import 'package:invit/features/guest/presentation/utils/guest_reply_status.dart';
 import 'package:invit/features/guest/presentation/utils/guests_screen_args.dart';
 import 'package:invit/features/home/presentation/controller/home_controller.dart';
@@ -19,7 +21,6 @@ import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
 import 'package:invit/src/core/shared_widgets/app_screen_header.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/utils/functions/async_action_listener.dart';
-import 'package:invit/src/core/utils/functions/coming_soon.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -61,17 +62,6 @@ class EventDetailsScreen extends ConsumerWidget {
             : AppToast.doneToast('details_sent_done'.tr()),
       ),
     );
-    ref.listen(
-      provider.select((state) => state.resendFailed),
-      (previous, next) => handleAsyncAction(
-        context,
-        previous,
-        next,
-        onSettled: (result) => result.hasError
-            ? AppToast.errorToast(result.error.toString())
-            : AppToast.doneToast('details_resend_done'.tr()),
-      ),
-    );
   }
 
   @override
@@ -82,6 +72,7 @@ class EventDetailsScreen extends ConsumerWidget {
     );
     final data = event.value;
     final isDraft = data?.status == _draftStatus;
+    final isPast = data != null && HomeEventFormat.isPast(data);
 
     return PopScope(
       canPop: context.canPop(),
@@ -98,11 +89,17 @@ class EventDetailsScreen extends ConsumerWidget {
                   title: data?.title ?? '',
                   subtitle: data == null
                       ? null
+                      : isPast
+                      ? HomeEventFormat.fullDate(context, data)
                       : HomeEventFormat.whenAndWhere(context, data),
+                  subtitleEnd: isPast ? ' · ${'details_ended'.tr()}' : null,
+                  subtitleEndColor: AppColors.danger,
                   subtitleMaxLines: null,
                   onBack: () => _back(context),
                   trailing: data == null
                       ? null
+                      : isPast
+                      ? const _EventDetailsScreenPastChip()
                       : _EventDetailsScreenMoreButton(
                           event: data,
                           canEdit: isDraft,
@@ -110,10 +107,16 @@ class EventDetailsScreen extends ConsumerWidget {
                 ),
                 Expanded(
                   child: event.when(
-                    data: (data) => _EventDetailsScreenBody(
-                      event: data,
-                      occasionId: ocassionId,
-                    ),
+                    data: (data) => isPast
+                        ? EventDetailsScreenPastBody(
+                            event: data,
+                            occasionId: ocassionId,
+                            bottomPadding: contentBottomPadding,
+                          )
+                        : _EventDetailsScreenBody(
+                            event: data,
+                            occasionId: ocassionId,
+                          ),
                     error: (error, _) => AppErrorWidget(
                       errorMsg: error.toString(),
                       onTap: () => ref
@@ -129,7 +132,28 @@ class EventDetailsScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            if (data != null && !isDraft)
+            if (data != null && isPast)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: SafeArea(
+                  top: false,
+                  child: Padding(
+                    padding: _buttonPadding,
+                    child: AppPrimaryButton(
+                      label: 'details_invite_again'.tr(),
+                      icon: Assets.icons.plusIc,
+                      mirrorIconInRtl: false,
+                      onPressed: () => context.push(
+                        AppRoutes.createEventTypeScreen,
+                        extra: data.guestList ?? const <GuestModel>[],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            else if (data != null && !isDraft)
               Positioned(
                 left: 0,
                 right: 0,
@@ -176,6 +200,13 @@ class _EventDetailsScreenBody extends ConsumerWidget {
     context.push(
       AppRoutes.guestsScreen,
       extra: GuestsScreenArgs(occasionId: occasionId, filter: filter),
+    );
+  }
+
+  void _openReminder(BuildContext context, ReminderAudience audience) {
+    context.push(
+      AppRoutes.sendReminderScreen,
+      extra: SendReminderScreenArgs(occasionId: occasionId, audience: audience),
     );
   }
 
@@ -247,7 +278,8 @@ class _EventDetailsScreenBody extends ConsumerWidget {
                 ),
                 message: 'details_not_delivered_suffix'.tr(),
                 actionLabel: 'details_resend'.tr(),
-                onAction: actions.resendFailed,
+                onAction: () =>
+                    _openReminder(context, ReminderAudience.notDelivered),
               ),
             ],
             if (noReply > 0) ...[
@@ -256,9 +288,8 @@ class _EventDetailsScreenBody extends ConsumerWidget {
                 highlight: 'details_remind_highlight'.tr(args: ['$noReply']),
                 message: 'details_remind_suffix'.tr(),
                 actionLabel: 'details_remind'.tr(),
-                // TODO(backend): no endpoint to remind guests who have not
-                // replied yet. Wire it here when it exists.
-                onAction: showComingSoon,
+                onAction: () =>
+                    _openReminder(context, ReminderAudience.noReply),
               ),
             ],
           ],
@@ -317,6 +348,31 @@ class _EventDetailsScreenSkeleton extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// "Past" chip shown instead of the options once the event is over.
+class _EventDetailsScreenPastChip extends StatelessWidget {
+  const _EventDetailsScreenPastChip();
+
+  static const double _height = 32;
+  static const EdgeInsets _padding = EdgeInsets.symmetric(horizontal: 12);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: _height,
+      padding: _padding,
+      alignment: Alignment.center,
+      decoration: const ShapeDecoration(
+        color: AppColors.mistSoft,
+        shape: StadiumBorder(),
+      ),
+      child: Text(
+        'details_past'.tr(),
+        style: AppTextStyle.outfitMedium13.copyWith(color: AppColors.inkLabel),
       ),
     );
   }

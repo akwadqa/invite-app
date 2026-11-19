@@ -37,7 +37,8 @@ class EventDetailsScreenRepliesCard extends StatelessWidget {
 
   /// The smallest bar still fits its percentage, so bars grow from this
   /// height up to the full track for the largest count.
-  static const double _minFill = 62 / EventDetailsScreenReplyBar.trackHeight;
+  static const double _minFill =
+      62 / EventDetailsScreenReplyBar.defaultTrackHeight;
 
   static const List<BoxShadow> _shadow = [
     BoxShadow(

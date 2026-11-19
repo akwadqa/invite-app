@@ -9,6 +9,7 @@ import 'package:invit/features/home/presentation/controller/home_controller.dart
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_event_row.dart';
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_header.dart';
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_upcoming_card.dart';
+import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_welcome.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_error_widget.dart';
@@ -38,9 +39,14 @@ class HomeScreen extends ConsumerWidget {
         (home) => (
           isLoading: home.isLoading && !home.hasValue,
           error: home.hasValue ? null : home.error,
+          hasLoaded: home.hasValue,
         ),
       ),
     );
+    final hasEvents = !ref.watch(
+      homeEventSectionsProvider.select((sections) => sections.isEmpty),
+    );
+    if (status.hasLoaded && !hasEvents) return const HomeScreenWelcome();
 
     return Scaffold(
       backgroundColor: AppColors.pageBackground,
@@ -106,7 +112,6 @@ class _HomeScreenEvents extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final sections = ref.watch(homeEventSectionsProvider);
     final notifier = ref.read(homeControllerProvider.notifier);
-    if (sections.isEmpty) return const _HomeScreenEmpty();
 
     final upcoming = sections.upcoming;
     void open(EventModel event) {
@@ -184,64 +189,6 @@ class _HomeScreenSectionTitle extends StatelessWidget {
           color: AppColors.inkLabel,
           letterSpacing: _letterSpacing,
         ),
-      ),
-    );
-  }
-}
-
-class _HomeScreenEmpty extends ConsumerWidget {
-  const _HomeScreenEmpty();
-
-  static const double _iconCircleSize = 88;
-  static const double _iconSize = 40;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return RefreshIndicator(
-      color: AppColors.ink,
-      onRefresh: ref.read(homeControllerProvider.notifier).refresh,
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          32,
-          80,
-          32,
-          HomeScreen.listBottomPadding,
-        ),
-        children: [
-          Center(
-            child: Container(
-              width: _iconCircleSize,
-              height: _iconCircleSize,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                color: AppColors.mist,
-                shape: BoxShape.circle,
-              ),
-              child: Assets.icons.ringsIc.svg(
-                width: _iconSize,
-                height: _iconSize,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.accentInk,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            'home_empty_title'.tr(),
-            textAlign: TextAlign.center,
-            style: AppTextStyle.outfitMedium20.copyWith(color: AppColors.ink),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'home_empty_subtitle'.tr(),
-            textAlign: TextAlign.center,
-            style: AppTextStyle.outfitRegular14.copyWith(
-              color: AppColors.inkLabel,
-            ),
-          ),
-        ],
       ),
     );
   }

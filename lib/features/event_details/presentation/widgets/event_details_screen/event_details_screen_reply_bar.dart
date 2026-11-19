@@ -13,7 +13,11 @@ class EventDetailsScreenReplyBar extends StatefulWidget {
     required this.count,
     required this.percent,
     required this.fill,
-    required this.onTap,
+    this.onTap,
+    this.trackHeight = defaultTrackHeight,
+    this.radius = defaultRadius,
+    this.percentBottom = defaultPercentBottom,
+    this.labelGap = defaultLabelGap,
     this.delay = Duration.zero,
     this.animate = true,
   });
@@ -24,7 +28,13 @@ class EventDetailsScreenReplyBar extends StatefulWidget {
 
   /// Bar height as a share of the track (0 → 1).
   final double fill;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+
+  /// Measurements of the column; the defaults are the event details design.
+  final double trackHeight;
+  final double radius;
+  final double percentBottom;
+  final double labelGap;
 
   /// Stagger between the columns.
   final Duration delay;
@@ -32,10 +42,10 @@ class EventDetailsScreenReplyBar extends StatefulWidget {
   /// `false` shows the bar at full height (skeleton).
   final bool animate;
 
-  static const double trackHeight = 212;
-  static const double _radius = 40;
-  static const double _percentBottom = 20;
-  static const double _labelGap = 10;
+  static const double defaultTrackHeight = 212;
+  static const double defaultRadius = 40;
+  static const double defaultPercentBottom = 20;
+  static const double defaultLabelGap = 10;
   static const double _lineHeight = 1.2;
 
   /// One line of the 14px label.
@@ -90,8 +100,7 @@ class _EventDetailsScreenReplyBarState extends State<EventDetailsScreenReplyBar>
   @override
   Widget build(BuildContext context) {
     final (barColor, textColor) = _colors;
-    final barHeight =
-        EventDetailsScreenReplyBar.trackHeight * widget.fill.clamp(0.0, 1.0);
+    final barHeight = widget.trackHeight * widget.fill.clamp(0.0, 1.0);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -99,11 +108,9 @@ class _EventDetailsScreenReplyBarState extends State<EventDetailsScreenReplyBar>
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(
-              EventDetailsScreenReplyBar._radius,
-            ),
+            borderRadius: BorderRadius.circular(widget.radius),
             child: Container(
-              height: EventDetailsScreenReplyBar.trackHeight,
+              height: widget.trackHeight,
               width: double.infinity,
               color: AppColors.mistSoft,
               alignment: Alignment.bottomCenter,
@@ -115,9 +122,7 @@ class _EventDetailsScreenReplyBarState extends State<EventDetailsScreenReplyBar>
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     color: barColor,
-                    borderRadius: BorderRadius.circular(
-                      EventDetailsScreenReplyBar._radius,
-                    ),
+                    borderRadius: BorderRadius.circular(widget.radius),
                   ),
                   child: child,
                 ),
@@ -128,9 +133,7 @@ class _EventDetailsScreenReplyBarState extends State<EventDetailsScreenReplyBar>
                   minHeight: barHeight,
                   maxHeight: barHeight,
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: EventDetailsScreenReplyBar._percentBottom,
-                    ),
+                    padding: EdgeInsets.only(bottom: widget.percentBottom),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Text(
@@ -145,7 +148,7 @@ class _EventDetailsScreenReplyBarState extends State<EventDetailsScreenReplyBar>
               ),
             ),
           ),
-          const SizedBox(height: EventDetailsScreenReplyBar._labelGap),
+          SizedBox(height: widget.labelGap),
           // "Not delivered" is wider than the column; it overflows centered
           // instead of being cut, as in the design.
           SizedBox(
