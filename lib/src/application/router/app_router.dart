@@ -9,6 +9,8 @@ import 'package:invit/features/event/presentation/screens/update_event/update_gu
 import 'package:invit/features/event_details/presentation/screens/event_details_screen.dart';
 import 'package:invit/features/event_details/presentation/screens/send_reminder_screen.dart';
 import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
+import 'package:invit/features/guest/presentation/screens/edit_guest_screen.dart';
+import 'package:invit/features/guest/presentation/utils/edit_guest_screen_args.dart';
 import 'package:invit/features/guest/presentation/screens/guests_screen.dart';
 import 'package:invit/features/guest/presentation/utils/guests_screen_args.dart';
 import 'package:invit/features/event/presentation/screens/create_event/contact_list_screen.dart';
@@ -24,15 +26,19 @@ import 'package:invit/features/event/presentation/screens/create_event_flow/crea
 import 'package:invit/features/event/presentation/screens/create_event_flow/create_event_review_screen.dart';
 import 'package:invit/features/event/presentation/screens/create_event_flow/create_event_type_screen.dart';
 import 'package:invit/features/home/presentation/screens/home_screen.dart';
-import 'package:invit/features/settings/presentation/screens/settings_screen.dart';
+import 'package:invit/features/settings/presentation/screens/profile_screen.dart';
 import 'package:invit/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:invit/features/onBoarding/on_boarding.dart';
 import 'package:invit/features/auth/signIn/presentation/screens/sign_in_screen.dart';
 import 'package:invit/features/splash/presentation/screens/splash_screen.dart';
 import 'package:invit/features/payment/presentation/screens/balance_screen.dart';
 import 'package:invit/features/payment/presentation/screens/payment_screen.dart';
-import 'package:invit/features/scan/presentation/pages/scan_qr_event_page.dart';
-import 'package:invit/features/payment/domain/model/recharge_plan.dart';
+import 'package:invit/features/scan/presentation/screens/find_guest_screen.dart';
+import 'package:invit/features/scan/presentation/screens/scan_screen.dart';
+import 'package:invit/features/payment/presentation/utils/payment_order.dart';
+import 'package:invit/features/payment/presentation/utils/recharge_request.dart';
+import 'package:invit/features/payment/presentation/screens/payment_failed_screen.dart';
+import 'package:invit/features/payment/presentation/screens/payment_success_screen.dart';
 import 'package:invit/features/payment/presentation/utils/payment_web_args.dart';
 import 'package:invit/features/payment/presentation/screens/choose_plan_screen.dart';
 import 'package:invit/features/payment/presentation/screens/checkout_redirect_screen.dart';
@@ -270,6 +276,12 @@ class AppRouter {
           },
         ),
         _createEventRouteFrom(
+          AppRoutes.editGuestScreen,
+          (state) => state.extra is EditGuestScreenArgs
+              ? EditGuestScreen(args: state.extra as EditGuestScreenArgs)
+              : const SizedBox.shrink(),
+        ),
+        _createEventRouteFrom(
           AppRoutes.sendReminderScreen,
           (state) => SendReminderScreen(
             args: SendReminderScreenArgs.from(state.extra),
@@ -306,7 +318,19 @@ class AppRouter {
           name: AppRoutes.scanQr,
           pageBuilder: (context, state) => CustomTransitionPage(
             key: state.pageKey,
-            child: ScanQrEventPage(state.extra as String),
+            child: ScanScreen.from(state.extra),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.findGuestScreen,
+          name: AppRoutes.findGuestScreen,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            key: state.pageKey,
+            child: FindGuestScreen.from(state.extra),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
                   return FadeTransition(opacity: animation, child: child);
@@ -361,7 +385,11 @@ class AppRouter {
           parentNavigatorKey: rootKey,
           pageBuilder: (BuildContext context, GoRouterState state) {
             return CustomTransitionPage(
-              child: ChoosePlanScreen(needed: state.extra as int? ?? 0),
+              child: ChoosePlanScreen(
+                request: state.extra is RechargeRequest
+                    ? state.extra as RechargeRequest
+                    : const RechargeRequest(),
+              ),
               key: state.pageKey,
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
@@ -375,10 +403,10 @@ class AppRouter {
           name: AppRoutes.paymentStepsScreen,
           parentNavigatorKey: rootKey,
           pageBuilder: (BuildContext context, GoRouterState state) {
-            final plan = state.extra;
+            final order = state.extra;
             return CustomTransitionPage(
-              child: plan is RechargePlan
-                  ? PaymentStepsScreen(plan: plan)
+              child: order is PaymentOrder
+                  ? PaymentStepsScreen(order: order)
                   : const SizedBox.shrink(),
               key: state.pageKey,
               transitionsBuilder:
@@ -393,10 +421,46 @@ class AppRouter {
           name: AppRoutes.checkoutRedirectScreen,
           parentNavigatorKey: rootKey,
           pageBuilder: (BuildContext context, GoRouterState state) {
-            final plan = state.extra;
+            final order = state.extra;
             return CustomTransitionPage(
-              child: plan is RechargePlan
-                  ? CheckoutRedirectScreen(plan: plan)
+              child: order is PaymentOrder
+                  ? CheckoutRedirectScreen(order: order)
+                  : const SizedBox.shrink(),
+              key: state.pageKey,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRoutes.paymentSuccessScreen,
+          name: AppRoutes.paymentSuccessScreen,
+          parentNavigatorKey: rootKey,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final order = state.extra;
+            return CustomTransitionPage(
+              child: order is PaymentOrder
+                  ? PaymentSuccessScreen(order: order)
+                  : const SizedBox.shrink(),
+              key: state.pageKey,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRoutes.paymentFailedScreen,
+          name: AppRoutes.paymentFailedScreen,
+          parentNavigatorKey: rootKey,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            final order = state.extra;
+            return CustomTransitionPage(
+              child: order is PaymentOrder
+                  ? PaymentFailedScreen(order: order)
                   : const SizedBox.shrink(),
               key: state.pageKey,
               transitionsBuilder:
@@ -489,7 +553,7 @@ class AppRouter {
           pageBuilder: (BuildContext context, GoRouterState state) {
             return CustomTransitionPage(
               key: state.pageKey,
-              child: const SettingsScreen(),
+              child: const ProfileScreen(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                     return FadeTransition(opacity: animation, child: child);

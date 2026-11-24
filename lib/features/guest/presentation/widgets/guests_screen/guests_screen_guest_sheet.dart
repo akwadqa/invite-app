@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event/presentation/utils/guest_phone_number.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
+import 'package:invit/features/guest/presentation/utils/edit_guest_screen_args.dart';
 import 'package:invit/features/guest/presentation/utils/guest_reply_status.dart';
 import 'package:invit/gen/assets.gen.dart';
+import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_dialogs.dart';
 import 'package:invit/src/core/shared_widgets/app_initials_avatar.dart';
 import 'package:invit/src/core/shared_widgets/app_round_icon_button.dart';
@@ -54,6 +57,16 @@ class GuestsScreenGuestSheet extends ConsumerWidget {
       elevation: 0,
       builder: (_) =>
           GuestsScreenGuestSheet(guest: guest, occasionId: occasionId),
+    );
+  }
+
+  /// Closes the sheet and opens the edit screen for this guest.
+  void _edit(BuildContext context) {
+    final router = GoRouter.of(context);
+    Navigator.of(context).pop();
+    router.push(
+      AppRoutes.editGuestScreen,
+      extra: EditGuestScreenArgs(occasionId: occasionId, guest: guest),
     );
   }
 
@@ -195,7 +208,7 @@ class GuestsScreenGuestSheet extends ConsumerWidget {
               ),
             ],
           ),
-          const _GuestsScreenGuestSheetActions(),
+          _GuestsScreenGuestSheetActions(onEdit: () => _edit(context)),
           if (guest.inviteeId != null)
             _GuestsScreenGuestSheetRemoveButton(
               onTap: () => _confirmRemove(context, ref),
@@ -258,7 +271,9 @@ class _GuestsScreenGuestSheetInfo extends StatelessWidget {
 
 /// "Edit" and "Resend invitation" buttons (widths 10 : 16).
 class _GuestsScreenGuestSheetActions extends StatelessWidget {
-  const _GuestsScreenGuestSheetActions();
+  const _GuestsScreenGuestSheetActions({required this.onEdit});
+
+  final VoidCallback onEdit;
 
   static const double _height = 52;
   static const double _borderWidth = 1.5;
@@ -286,8 +301,7 @@ class _GuestsScreenGuestSheetActions extends StatelessWidget {
               ),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
-                // TODO(backend): no endpoint to edit a single guest.
-                onTap: showComingSoon,
+                onTap: onEdit,
                 child: Center(
                   child: Text(
                     'guests_edit'.tr(),

@@ -173,6 +173,10 @@ abstract class AppColors {
   static const Color danger = Color(0xFFC2554B);
   static const Color dangerInk = Color(0xFFB3261E);
   static const Color dangerLight = Color(0xFFFDECEA);
+  static const Color dangerDeep = Color(0xFF5A2420);
+
+  /// Hero background of the payment-failed screen.
+  static const Color dangerMist = Color(0xFFF7ECEF);
 
   /// "Declined" chips.
   static const Color declinedSurface = Color(0xFFE8EBEE);
@@ -184,6 +188,10 @@ abstract class AppColors {
   /// Image placeholders.
   static const Color paper = Color(0xFFFFFDF8);
   static const Color overlay = Color(0x66000000);
+  static const Color barrier = Color(0x73000000);
+
+  /// Guest dots still waiting (dashed) on the daily limit sheet.
+  static const Color inkWaiting = Color(0xFF8E989F);
 
   /// [pageBackground] fully transparent, for fades over lists.
   static const Color transparentPage = Color(0x00FBFBF8);
@@ -199,6 +207,11 @@ abstract class AppColors {
   static const Color dropzoneFill = Color(0xFFF5F8FA);
   static const Color optionSelectedSurface = Color(0xFFF5F8FA);
   static const Color dropzoneBorder = Color(0xFFE1E5AC);
+
+  /// Camera backdrop of the check-in scanner, shown until the preview starts.
+  static const Color scannerGlow = Color(0xFF8C6A55);
+  static const Color scannerMid = Color(0xFF5A4250);
+  static const Color scannerDeep = Color(0xFF3A2A3C);
 
   // WhatsApp preview.
   static const Color whatsappChat = Color(0xFFEFEAE2);

@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/scan/data/data_source/scan_remote_date_source.dart';
-import 'package:invit/features/scan/data/model/user_scan_event_response/user_scan_event_response.dart';
 import 'package:invit/src/infrastructure/api/response/api_response.dart';
 import 'package:invit/src/infrastructure/network/services/dio_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -32,19 +30,6 @@ class ScanRespository {
         checkinBy: checkinBy,
         inviteeId: inviteeId,
       );
-      return respone;
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<ApiResponse<List<EventModel>>> getUserScanEvent({
-    required int page,
-  }) async {
-    try {
-      final respone = await remoteDateSource.getUserScanEvent(page: page);
       return respone;
     } on DioException {
       rethrow;

@@ -221,6 +221,10 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 11,
   );
+  static TextStyle outfitSemiBold24 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+  );
   static TextStyle outfitSemiBold15 = GoogleFonts.outfit(
     fontWeight: FontWeight.w600,
     fontSize: 15,
@@ -316,6 +320,10 @@ class AppTextStyle {
   );
   static TextStyle outfitMedium21 = GoogleFonts.outfit(
     fontWeight: FontWeight.w500,
+    fontSize: 21,
+  );
+  static TextStyle outfitSemiBold21 = GoogleFonts.outfit(
+    fontWeight: FontWeight.w600,
     fontSize: 21,
   );
   static TextStyle outfitMedium19 = GoogleFonts.outfit(

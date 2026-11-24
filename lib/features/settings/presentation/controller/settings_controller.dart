@@ -1,115 +1,92 @@
-import 'dart:ffi';
+import 'dart:async';
 
-import 'package:invit/features/home/domain/model/home/home_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:invit/features/home/presentation/controller/home_controller.dart';
 import 'package:invit/features/settings/data/repositories/settings_repository.dart';
 import 'package:invit/features/settings/presentation/controller/settings_state.dart';
 import 'package:invit/src/infrastructure/storage/local_storage_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'settings_controller.g.dart';
 
+/// The profile screen: user card, balance and the logout / delete actions.
 @riverpod
 class SettingsController extends _$SettingsController {
+  SettingsState get _current => state.requireValue;
+  void _emit(SettingsState newState) => state = AsyncData(newState);
+
   @override
-  FutureOr<SettingsState> build() async {
-    return const SettingsState(notificationState: true);
-  }
-  // Future<HomeModel> getSettingsData() async {
-  //   state = const AsyncLoading();
-
-  //   final result = await AsyncValue.guard(() async {
-  //     final repo = ref.read(settingsRepositoryProvider);
-  //     return await repo.getSettingsData(page: 1);
-  //   });
-  //   // (error) => AsyncError(error, StackTrace.current);
-
-  //   // state = result;
-
-  //   return result.value!;
-  // }
-
-  void onNotificationChange(bool value) {
-    final current = state.value;
-    if (current == null) return;
-
-    state = AsyncData(current.copyWith(notificationState: value));
+  FutureOr<SettingsState> build() {
+    ref.listen(
+      homeControllerProvider.select((home) => home.value?.remainingBalance),
+      (_, balance) {
+        if (!state.hasValue) return;
+        _emit(_current.copyWith(balance: balance?.toInt()));
+      },
+    );
+    final userInfo = ref.read(localStorageServiceProvider).userInfo;
+    return SettingsState(
+      fullName: userInfo.fullName,
+      phone: userInfo.mobileNumber,
+      balance: ref
+          .read(homeControllerProvider)
+          .value
+          ?.remainingBalance
+          ?.toInt(),
+    );
   }
 
-  // 🔴 Delete Account
-  // Future<void> deleteAccount() async {
-  //   final current = state.value;
-  //   if (current == null) return;
-  //   final storage = ref.read(localStorageServiceProvider);
-
-  //   state = AsyncData(
-  //     current.copyWith(deleteAccountState: const AsyncLoading()),
-  //   );
-  //   final mobileNumber=storage.userInfo.mobileNumber;
-
-  //   final result = await AsyncValue.guard(() async {
-  //     final repo = ref.read(settingsRepositoryProvider);
-  //     await repo.deleteAccount(mobileNumber);
-  //   });
-  //   await storage.logout();
-
-  //   state = AsyncData(
-  //     current.copyWith(deleteAccountState: AsyncData(result)),
-  //   );
-  // }
-
-  Future<dynamic> deleteAccount() async {
+  /// Logs out on the server, then clears the local session. If the server
+  /// call fails the user stays signed in and the error is emitted.
+  Future<bool> logout() async {
+    if (!state.hasValue || _current.logoutState.isLoading) return false;
+    final storage = ref.read(localStorageServiceProvider);
+    final repository = ref.read(settingsRepositoryProvider);
+    _emit(_current.copyWith(logoutState: const AsyncLoading()));
     try {
-      final storage = ref.read(localStorageServiceProvider);
-
-      state = AsyncData(
-        state.value!.copyWith(deleteAccountState: AsyncLoading()),
-      );
-      final mobileNumber = storage.userInfo.userId;
-
-      final repo = ref.read(settingsRepositoryProvider);
-      final response = await repo.deleteAccount(mobileNumber ?? '');
-
-      if (response.hasFailed) {
-        state = AsyncData(
-          state.value!.copyWith(
-            deleteAccountState: AsyncError(
-              response.message ?? '',
-              StackTrace.fromString(response.message ?? ''),
-            ),
-          ),
-        );
-        return null;
-      }
-
-      state = AsyncData(
-        state.value!.copyWith(deleteAccountState: AsyncData(response.data!)),
-      );
-      storage.logout();
-      return response.data;
+      await repository.logout();
+      if (!ref.mounted) return false;
+      await storage.logout();
+      if (!ref.mounted) return false;
+      _emit(_current.copyWith(logoutState: const AsyncData(null)));
+      return true;
     } catch (e, st) {
-      state = AsyncData(
-        state.value!.copyWith(deleteAccountState: AsyncError(e, st)),
-      );
-      return null;
+      if (!ref.mounted) return false;
+      _emit(_current.copyWith(logoutState: AsyncError(e, st)));
+      return false;
     }
   }
 
-  // 🔵 Logout
-  Future<void> logout() async {
-    final current = state.value;
-    if (current == null) return;
+  /// Deletes the account (same payload as before: the saved `user_id`), then
+  /// clears the local session.
+  Future<bool> deleteAccount() async {
+    if (!state.hasValue || _current.deleteAccountState.isLoading) return false;
     final storage = ref.read(localStorageServiceProvider);
-    state = AsyncData(current.copyWith(logoutState: const AsyncLoading()));
-
-    final result = await AsyncValue.guard(() async {
-      final repo = ref.read(settingsRepositoryProvider);
-
-      //  final result =
-      await repo.logout();
-    });
-    await Future.delayed(Duration(seconds: 2));
-
-    await storage.logout();
-
-    state = AsyncData(current.copyWith(logoutState: AsyncData(result)));
+    final repository = ref.read(settingsRepositoryProvider);
+    final userId = storage.userInfo.userId ?? '';
+    _emit(_current.copyWith(deleteAccountState: const AsyncLoading()));
+    try {
+      final response = await repository.deleteAccount(userId);
+      if (!ref.mounted) return false;
+      if (response.hasFailed) {
+        _emit(
+          _current.copyWith(
+            deleteAccountState: AsyncError(
+              response.message ?? '',
+              StackTrace.current,
+            ),
+          ),
+        );
+        return false;
+      }
+      await storage.logout();
+      if (!ref.mounted) return false;
+      _emit(_current.copyWith(deleteAccountState: const AsyncData(null)));
+      return true;
+    } catch (e, st) {
+      if (!ref.mounted) return false;
+      _emit(_current.copyWith(deleteAccountState: AsyncError(e, st)));
+      return false;
+    }
   }
 }

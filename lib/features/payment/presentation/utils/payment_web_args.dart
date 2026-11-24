@@ -1,10 +1,10 @@
-import 'package:invit/features/payment/domain/model/recharge_plan.dart';
+import 'package:invit/features/payment/presentation/utils/payment_order.dart';
 
-/// What the checkout web view needs: where to go, and the plan being paid
+/// What the checkout web view needs: where to go, and the order being paid
 /// (for the "opening checkout" page it shows while loading).
 class PaymentWebArgs {
-  const PaymentWebArgs({required this.url, required this.plan});
+  const PaymentWebArgs({required this.url, required this.order});
 
   final String url;
-  final RechargePlan plan;
+  final PaymentOrder order;
 }

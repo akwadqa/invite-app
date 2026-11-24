@@ -15,7 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SettingsState {
 
- bool get notificationState; AsyncValue<void> get deleteAccountState; AsyncValue<void> get logoutState;
+/// Profile card data (from the saved user session).
+ String get fullName; String get phone;/// Messages left (shared with the home feed); `null` while unknown.
+ int? get balance; AsyncValue<void> get logoutState; AsyncValue<void> get deleteAccountState;
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +29,20 @@ $SettingsStateCopyWith<SettingsState> get copyWith => _$SettingsStateCopyWithImp
 @override
 bool operator ==(Object other) {
   final _this = this as SettingsState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.notificationState, _this.notificationState) || other.notificationState == _this.notificationState)&&(identical(other.deleteAccountState, _this.deleteAccountState) || other.deleteAccountState == _this.deleteAccountState)&&(identical(other.logoutState, _this.logoutState) || other.logoutState == _this.logoutState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.fullName, _this.fullName) || other.fullName == _this.fullName)&&(identical(other.phone, _this.phone) || other.phone == _this.phone)&&(identical(other.balance, _this.balance) || other.balance == _this.balance)&&(identical(other.logoutState, _this.logoutState) || other.logoutState == _this.logoutState)&&(identical(other.deleteAccountState, _this.deleteAccountState) || other.deleteAccountState == _this.deleteAccountState));
 }
 
 
 @override
 int get hashCode {
   final _this = this as SettingsState;
-  return Object.hash(runtimeType,_this.notificationState,_this.deleteAccountState,_this.logoutState);
+  return Object.hash(runtimeType,_this.fullName,_this.phone,_this.balance,_this.logoutState,_this.deleteAccountState);
 }
 
 @override
 String toString() {
   final _this = this as SettingsState;
-  return 'SettingsState(notificationState: ${_this.notificationState}, deleteAccountState: ${_this.deleteAccountState}, logoutState: ${_this.logoutState})';
+  return 'SettingsState(fullName: ${_this.fullName}, phone: ${_this.phone}, balance: ${_this.balance}, logoutState: ${_this.logoutState}, deleteAccountState: ${_this.deleteAccountState})';
 }
 
 
@@ -51,7 +53,7 @@ abstract mixin class $SettingsStateCopyWith<$Res>  {
   factory $SettingsStateCopyWith(SettingsState value, $Res Function(SettingsState) _then) = _$SettingsStateCopyWithImpl;
 @useResult
 $Res call({
- bool notificationState, AsyncValue<void> deleteAccountState, AsyncValue<void> logoutState
+ String fullName, String phone, int? balance, AsyncValue<void> logoutState, AsyncValue<void> deleteAccountState
 });
 
 
@@ -68,11 +70,13 @@ class _$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? notificationState = null,Object? deleteAccountState = null,Object? logoutState = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? phone = null,Object? balance = freezed,Object? logoutState = null,Object? deleteAccountState = null,}) {
   return _then(SettingsState(
-notificationState: null == notificationState ? _self.notificationState : notificationState // ignore: cast_nullable_to_non_nullable
-as bool,deleteAccountState: null == deleteAccountState ? _self.deleteAccountState : deleteAccountState // ignore: cast_nullable_to_non_nullable
-as AsyncValue<void>,logoutState: null == logoutState ? _self.logoutState : logoutState // ignore: cast_nullable_to_non_nullable
+fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,balance: freezed == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
+as int?,logoutState: null == logoutState ? _self.logoutState : logoutState // ignore: cast_nullable_to_non_nullable
+as AsyncValue<void>,deleteAccountState: null == deleteAccountState ? _self.deleteAccountState : deleteAccountState // ignore: cast_nullable_to_non_nullable
 as AsyncValue<void>,
   ));
 }
@@ -158,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool notificationState,  AsyncValue<void> deleteAccountState,  AsyncValue<void> logoutState)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String phone,  int? balance,  AsyncValue<void> logoutState,  AsyncValue<void> deleteAccountState)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
-return $default(_that.notificationState,_that.deleteAccountState,_that.logoutState);case _:
+return $default(_that.fullName,_that.phone,_that.balance,_that.logoutState,_that.deleteAccountState);case _:
   return orElse();
 
 }
@@ -179,10 +183,10 @@ return $default(_that.notificationState,_that.deleteAccountState,_that.logoutSta
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool notificationState,  AsyncValue<void> deleteAccountState,  AsyncValue<void> logoutState)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String phone,  int? balance,  AsyncValue<void> logoutState,  AsyncValue<void> deleteAccountState)  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState():
-return $default(_that.notificationState,_that.deleteAccountState,_that.logoutState);case _:
+return $default(_that.fullName,_that.phone,_that.balance,_that.logoutState,_that.deleteAccountState);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +203,10 @@ return $default(_that.notificationState,_that.deleteAccountState,_that.logoutSta
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool notificationState,  AsyncValue<void> deleteAccountState,  AsyncValue<void> logoutState)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String phone,  int? balance,  AsyncValue<void> logoutState,  AsyncValue<void> deleteAccountState)?  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
-return $default(_that.notificationState,_that.deleteAccountState,_that.logoutState);case _:
+return $default(_that.fullName,_that.phone,_that.balance,_that.logoutState,_that.deleteAccountState);case _:
   return null;
 
 }
@@ -214,12 +218,16 @@ return $default(_that.notificationState,_that.deleteAccountState,_that.logoutSta
 
 
 class _SettingsState implements SettingsState {
-  const _SettingsState({required this.notificationState, this.deleteAccountState = const AsyncData(null), this.logoutState = const AsyncData(null)});
+  const _SettingsState({this.fullName = '', this.phone = '', this.balance, this.logoutState = const AsyncData(null), this.deleteAccountState = const AsyncData(null)});
   
 
-@override final  bool notificationState;
-@override@JsonKey() final  AsyncValue<void> deleteAccountState;
+/// Profile card data (from the saved user session).
+@override@JsonKey() final  String fullName;
+@override@JsonKey() final  String phone;
+/// Messages left (shared with the home feed); `null` while unknown.
+@override final  int? balance;
 @override@JsonKey() final  AsyncValue<void> logoutState;
+@override@JsonKey() final  AsyncValue<void> deleteAccountState;
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
@@ -231,18 +239,18 @@ _$SettingsStateCopyWith<_SettingsState> get copyWith => __$SettingsStateCopyWith
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.notificationState, notificationState) || other.notificationState == notificationState)&&(identical(other.deleteAccountState, deleteAccountState) || other.deleteAccountState == deleteAccountState)&&(identical(other.logoutState, logoutState) || other.logoutState == logoutState));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.logoutState, logoutState) || other.logoutState == logoutState)&&(identical(other.deleteAccountState, deleteAccountState) || other.deleteAccountState == deleteAccountState));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,notificationState,deleteAccountState,logoutState);
+    return Object.hash(runtimeType,fullName,phone,balance,logoutState,deleteAccountState);
 }
 
 @override
 String toString() {
-    return 'SettingsState(notificationState: $notificationState, deleteAccountState: $deleteAccountState, logoutState: $logoutState)';
+    return 'SettingsState(fullName: $fullName, phone: $phone, balance: $balance, logoutState: $logoutState, deleteAccountState: $deleteAccountState)';
 }
 
 
@@ -253,7 +261,7 @@ abstract mixin class _$SettingsStateCopyWith<$Res> implements $SettingsStateCopy
   factory _$SettingsStateCopyWith(_SettingsState value, $Res Function(_SettingsState) _then) = __$SettingsStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool notificationState, AsyncValue<void> deleteAccountState, AsyncValue<void> logoutState
+ String fullName, String phone, int? balance, AsyncValue<void> logoutState, AsyncValue<void> deleteAccountState
 });
 
 
@@ -270,11 +278,13 @@ class __$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? notificationState = null,Object? deleteAccountState = null,Object? logoutState = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? phone = null,Object? balance = freezed,Object? logoutState = null,Object? deleteAccountState = null,}) {
   return _then(_SettingsState(
-notificationState: null == notificationState ? _self.notificationState : notificationState // ignore: cast_nullable_to_non_nullable
-as bool,deleteAccountState: null == deleteAccountState ? _self.deleteAccountState : deleteAccountState // ignore: cast_nullable_to_non_nullable
-as AsyncValue<void>,logoutState: null == logoutState ? _self.logoutState : logoutState // ignore: cast_nullable_to_non_nullable
+fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,balance: freezed == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
+as int?,logoutState: null == logoutState ? _self.logoutState : logoutState // ignore: cast_nullable_to_non_nullable
+as AsyncValue<void>,deleteAccountState: null == deleteAccountState ? _self.deleteAccountState : deleteAccountState // ignore: cast_nullable_to_non_nullable
 as AsyncValue<void>,
   ));
 }

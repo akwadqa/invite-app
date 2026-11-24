@@ -402,6 +402,8 @@ class CreateEventFlowController extends _$CreateEventFlowController {
     } catch (error, stackTrace) {
       if (!ref.mounted) return null;
       state = state.copyWith(submit: AsyncError(error, stackTrace));
+      // The event was created even though sending failed: show it as a draft.
+      if (state.createdEventId != null) homeController.refresh();
       return null;
     }
   }

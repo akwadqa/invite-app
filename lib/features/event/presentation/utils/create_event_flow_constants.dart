@@ -13,7 +13,16 @@ abstract class CreateEventFlowConstants {
 
   /// Seat choices in the quick add form; the last one means "or more".
   static const List<int> seatOptions = [1, 2, 3, 4, 5];
+
+  /// Choosing the last option ("5+") asks for the number: from that option
+  /// up to [maxCustomSeats] (3 digits).
+  static const int minCustomSeats = 5;
+  static const int maxCustomSeats = 999;
+  static const int customSeatsDigits = 3;
   static const int defaultSeats = 1;
+
+  /// Messages WhatsApp lets the account send in a day (shown to the user).
+  static const int whatsAppDailyLimit = 1000;
 
   /// One WhatsApp message is consumed per guest.
   static const int messagesPerGuest = 1;

@@ -9,7 +9,6 @@ import 'package:invit/features/payment/presentation/utils/recharge_format.dart';
 import 'package:invit/features/payment/presentation/widgets/checkout_redirect_screen/checkout_redirect_screen_view.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_screen_header.dart';
-import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -56,8 +55,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         'document.body.innerText',
       );
       if (!mounted) return;
-      // TODO(design): the payment result is still read from the page text;
-      // send the user to the success / failed screens once they exist.
+      // The payment result is read from the page text.
       if (Platform.isAndroid && (bodyText as String).contains('message')) {
         _handleResult(bodyText);
       }
@@ -72,10 +70,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
       final parsed = json.decode(unquoted);
 
       if (parsed['message'] == 'Txn Success') {
-        context.go(AppRoutes.mainScreen);
+        context.pushReplacement(
+          AppRoutes.paymentSuccessScreen,
+          extra: widget.args.order,
+        );
       } else {
-        context.pop();
-        AppToast.errorToast('Payment failed');
+        context.pushReplacement(
+          AppRoutes.paymentFailedScreen,
+          extra: widget.args.order,
+        );
       }
     } catch (e) {
       debugPrint('Failed to handle the payment result: $e');
@@ -102,7 +105,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             Positioned.fill(
               child: CheckoutRedirectScreenView(
                 amount:
-                    '${RechargeFormat.thousands(widget.args.plan.price)} ${'qar'.tr()}',
+                    '${RechargeFormat.thousands(widget.args.order.plan.price)} ${'qar'.tr()}',
                 onBack: _back,
                 onRetry: _reload,
               ),

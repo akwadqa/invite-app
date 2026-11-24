@@ -4,16 +4,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invit/features/event/presentation/controller/create_event_flow/create_event_flow_controller.dart';
 import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
+import 'package:invit/features/event/presentation/utils/whatsapp_limit_error.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_flow/create_event_flow_layout.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_review_screen/create_event_review_screen_balance.dart';
+import 'package:invit/features/event/presentation/widgets/create_event_review_screen/create_event_review_screen_limit_sheet.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_review_screen/create_event_review_screen_sections.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_review_screen/create_event_review_screen_summary.dart';
 import 'package:invit/features/home/presentation/controller/home_controller.dart';
+import 'package:invit/features/payment/presentation/utils/recharge_request.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/utils/functions/async_action_listener.dart';
+import 'package:invit/src/core/utils/functions/coming_soon.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
@@ -32,12 +36,29 @@ class CreateEventReviewScreen extends ConsumerWidget {
     notifier.setEditingFromReview(false);
   }
 
+  /// The invitations could not go out: the event is saved, so the user picks
+  /// when to send them and lands on the event.
+  Future<void> _handleLimit(BuildContext context, WidgetRef ref) async {
+    final choice = await CreateEventReviewScreenLimitSheet.show(context);
+    if (!context.mounted) return;
+    if (choice == CreateEventReviewScreenLimitChoice.sendTomorrow) {
+      // TODO(backend): no endpoint schedules the invitations for the next
+      // day. Call it here when it exists.
+      showComingSoon();
+    }
+    final eventId = ref.read(createEventFlowControllerProvider).createdEventId;
+    if (eventId != null) context.go(AppRoutes.eventDetails, extra: eventId);
+  }
+
   Future<void> _topUp(
     BuildContext context,
     WidgetRef ref,
     int messagesNeeded,
   ) async {
-    await context.push(AppRoutes.rechargeScreen, extra: messagesNeeded);
+    await context.push(
+      AppRoutes.rechargeScreen,
+      extra: RechargeRequest(needed: messagesNeeded),
+    );
     if (!context.mounted) return;
     ref.read(homeControllerProvider.notifier).refresh();
   }
@@ -52,6 +73,10 @@ class CreateEventReviewScreen extends ConsumerWidget {
         next,
         onSettled: (result) {
           if (result.hasError) {
+            if (WhatsAppLimitError.matches(result.error)) {
+              _handleLimit(context, ref);
+              return;
+            }
             AppToast.errorToast(result.error.toString());
             return;
           }

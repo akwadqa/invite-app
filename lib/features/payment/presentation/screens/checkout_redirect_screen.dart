@@ -2,21 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:invit/features/payment/domain/model/recharge_plan.dart';
+import 'package:invit/features/payment/presentation/utils/payment_order.dart';
 import 'package:invit/features/payment/presentation/controller/checkout_controller.dart';
 import 'package:invit/features/payment/presentation/utils/payment_web_args.dart';
 import 'package:invit/features/payment/presentation/utils/recharge_format.dart';
 import 'package:invit/features/payment/presentation/widgets/checkout_redirect_screen/checkout_redirect_screen_view.dart';
 import 'package:invit/src/application/router/app_routes.dart';
-import 'package:invit/src/core/shared_widgets/app_toast.dart';
 
 /// Shown for a few seconds while the secure checkout address is requested,
 /// then opens the checkout web view (which keeps this same page on top until
 /// the checkout has loaded).
 class CheckoutRedirectScreen extends ConsumerStatefulWidget {
-  const CheckoutRedirectScreen({super.key, required this.plan});
+  const CheckoutRedirectScreen({super.key, required this.order});
 
-  final RechargePlan plan;
+  final PaymentOrder order;
 
   @override
   ConsumerState<CheckoutRedirectScreen> createState() =>
@@ -33,7 +32,9 @@ class _CheckoutRedirectScreenState
 
   void _open() {
     if (!mounted) return;
-    ref.read(checkoutControllerProvider.notifier).openCheckout(widget.plan.id);
+    ref
+        .read(checkoutControllerProvider.notifier)
+        .openCheckout(widget.order.plan.id);
   }
 
   void _back() {
@@ -47,9 +48,10 @@ class _CheckoutRedirectScreenState
       (previous, next) {
         if (previous == null || !previous.isLoading || next == null) return;
         if (next.hasError) {
-          // TODO(design): go to the payment-failed screen once it exists.
-          AppToast.errorToast('checkout_redirect_error'.tr());
-          _back();
+          context.pushReplacement(
+            AppRoutes.paymentFailedScreen,
+            extra: widget.order,
+          );
           return;
         }
         final url = next.value;
@@ -58,7 +60,7 @@ class _CheckoutRedirectScreenState
         // going back from it returns to the order summary.
         context.pushReplacement(
           AppRoutes.webPaymentScreen,
-          extra: PaymentWebArgs(url: url, plan: widget.plan),
+          extra: PaymentWebArgs(url: url, order: widget.order),
         );
       },
     );
@@ -71,7 +73,8 @@ class _CheckoutRedirectScreenState
 
     return Scaffold(
       body: CheckoutRedirectScreenView(
-        amount: '${RechargeFormat.thousands(widget.plan.price)} ${'qar'.tr()}',
+        amount:
+            '${RechargeFormat.thousands(widget.order.plan.price)} ${'qar'.tr()}',
         onBack: _back,
         onRetry: isLoading ? null : _open,
       ),

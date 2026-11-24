@@ -1,123 +1,74 @@
-import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/scan/data/model/scan_qr_response/scan_qr_response.dart';
-import 'package:invit/features/scan/data/model/user_scan_event_response/user_scan_event_response.dart';
+import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/scan/data/repository/scan_respository.dart';
 import 'package:invit/features/scan/presentation/controller/scan_state.dart';
+import 'package:invit/src/logger/failure/exceptions/app_exception.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'scan_controller.g.dart';
 
+/// Checks guests in at the door of one event by scanning their QR codes.
 @riverpod
 class ScanController extends _$ScanController {
+  /// Camera frames repeat the same code many times a second; the same code is
+  /// ignored again for this long after it was handled.
+  static const Duration _sameCodeCooldown = Duration(seconds: 3);
+
+  String? _lastCode;
+  DateTime? _lastCodeAt;
+
   @override
-  FutureOr<ScanState> build() {
-    return ScanState.init();
+  ScanState build(String occasionId) => const ScanState();
+
+  /// Called for every detected QR code. Returns without doing anything while
+  /// another check-in is running, while its result is still on screen or when
+  /// the code was just handled.
+  Future<void> onCodeDetected(String code) async {
+    final trimmed = code.trim();
+    if (trimmed.isEmpty) return;
+    if (state.checkIn.isLoading || state.checkIn.value != null) return;
+    final now = DateTime.now();
+    final lastAt = _lastCodeAt;
+    if (trimmed == _lastCode &&
+        lastAt != null &&
+        now.difference(lastAt) < _sameCodeCooldown) {
+      return;
+    }
+    _lastCode = trimmed;
+    _lastCodeAt = now;
+    await _checkIn(trimmed);
   }
 
-  int _currentPage = 1;
-  int _totalPages = 1;
-  List<EventModel> _eventsList = [];
+  /// Closes the last result so the next code can be scanned.
+  void scanNext() => state = state.copyWith(checkIn: const AsyncData(null));
 
-  Future<bool> setScannedCode(String qr) async {
-    state = AsyncData(state.value!.copyWith(scannedCode: qr));
-
-    return true;
-  }
-
-  Future<ScanQrResponse?> scanQr({
-    required String qrCode,
-    required String inviteeId,
-  }) async {
+  Future<void> _checkIn(String qrCode) async {
+    final repository = ref.read(scanRepositoryProvider);
+    state = state.copyWith(checkIn: const AsyncLoading());
     try {
-      state = AsyncData(state.value!.copyWith(scanQrResponse: AsyncLoading()));
-      final repo = ref.read(scanRepositoryProvider);
-      final response = await repo.scanQr(
+      // The endpoint's `occasion_id` parameter is the repository's
+      // `inviteeId` argument.
+      final response = await repository.scanQr(
         qrCode: qrCode,
         checkinBy: '',
-        inviteeId: inviteeId,
+        inviteeId: occasionId,
       );
-
-      if (response.hasFailed) {
-        state = AsyncData(
-          state.value!.copyWith(
-            scanQrResponse: AsyncError(
-              response.message ?? '',
-              StackTrace.fromString(response.message ?? ''),
-            ),
-          ),
-        );
-
-        return null;
+      if (!ref.mounted) return;
+      final data = response.data;
+      if (response.hasFailed || data == null) {
+        throw AppException(message: response.message);
       }
-
-      state = AsyncData(
-        state.value!.copyWith(scanQrResponse: AsyncData(response.data!)),
-      );
-      return response.data;
-    } catch (e, st) {
-      state = AsyncData(
-        state.value!.copyWith(scanQrResponse: AsyncError(e, st)),
-      );
-      return null;
+      state = state.copyWith(checkIn: AsyncData(data));
+      _reloadEvent();
+    } catch (error, stackTrace) {
+      if (!ref.mounted) return;
+      state = state.copyWith(checkIn: AsyncError(error, stackTrace));
     }
   }
 
-  Future<List<EventModel>?> getUserScanEvent({
-    required int page,
-    bool showLoading = true,
-  }) async {
-    try {
-      if (showLoading) {
-        state = AsyncData(
-          state.value!.copyWith(userScanEventResponse: AsyncLoading()),
-        );
-      }
-      final repo = ref.read(scanRepositoryProvider);
-      final response = await repo.getUserScanEvent(page: page);
-      _currentPage = response.pagination?.currentPage ?? _currentPage;
-      _totalPages = response.pagination?.totalPages ?? _totalPages;
-
-      if (page == 1) {
-        _eventsList = List.from(response.data!);
-      } else {
-        _eventsList = [..._eventsList, ...List.from(response.data!)];
-      }
-
-      if (response.hasFailed) {
-        state = AsyncData(
-          state.value!.copyWith(
-            userScanEventResponse: AsyncError(
-              response.message ?? '',
-              StackTrace.fromString(response.message ?? ''),
-            ),
-          ),
-        );
-        return null;
-      }
-      // final eventResponse = UserScanEventResponse(events: _eventsList);
-
-      state = AsyncData(
-        state.value!.copyWith(userScanEventResponse: AsyncData(_eventsList)),
-      );
-      return response.data;
-    } catch (e, st) {
-      state = AsyncError(e, st);
-      return null;
-    }
-  }
-
-  Future<bool> onLoadMoreEvents() async {
-    if (_currentPage >= _totalPages) return false;
-    final nextPage = _currentPage + 1;
-    final result = await getUserScanEvent(showLoading: false, page: nextPage);
-    return result?.isNotEmpty ?? false;
-  }
-
-  Future<bool> refreshEvents() async {
-    _eventsList.clear();
-    _currentPage = 1;
-    _totalPages = 1;
-    await getUserScanEvent(page: 1, showLoading: true);
-    return true;
+  /// Refreshes the "arrived" counter shown on this screen and the details.
+  void _reloadEvent() {
+    ref
+        .read(eventDetailsControllerProvider(ocassionId: occasionId).notifier)
+        .refresh();
   }
 }

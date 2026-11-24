@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invit/features/payment/presentation/controller/recharge_controller.dart';
 import 'package:invit/features/payment/presentation/controller/recharge_state.dart';
+import 'package:invit/features/payment/presentation/utils/payment_order.dart';
+import 'package:invit/features/payment/presentation/utils/recharge_request.dart';
 import 'package:invit/features/payment/presentation/widgets/recharge_screen/recharge_screen_need_banner.dart';
 import 'package:invit/features/payment/presentation/widgets/recharge_screen/recharge_screen_plans.dart';
 import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
@@ -17,9 +19,11 @@ import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 class ChoosePlanScreen extends ConsumerWidget {
   /// [needed] is the messages the user's action requires (`0` when opened
   /// from the balance, which hides the need banner and the plan tags).
-  const ChoosePlanScreen({super.key, this.needed = 0});
+  const ChoosePlanScreen({super.key, this.request = const RechargeRequest()});
 
-  final int needed;
+  final RechargeRequest request;
+
+  int get needed => request.needed;
 
   static const EdgeInsets _contentPadding = EdgeInsets.fromLTRB(20, 12, 20, 24);
   static const EdgeInsets _buttonPadding = EdgeInsets.fromLTRB(24, 0, 24, 36);
@@ -82,8 +86,13 @@ class ChoosePlanScreen extends ConsumerWidget {
                     ? 'recharge_choose'.tr()
                     : 'recharge_continue_with'.tr(args: [selected.name]),
                 isEnabled: selected != null,
-                onPressed: () =>
-                    context.push(AppRoutes.paymentStepsScreen, extra: selected),
+                onPressed: () {
+                  if (selected == null) return;
+                  context.push(
+                    AppRoutes.paymentStepsScreen,
+                    extra: PaymentOrder(plan: selected, request: request),
+                  );
+                },
               ),
             ),
           ),

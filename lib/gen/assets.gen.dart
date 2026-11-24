@@ -53,6 +53,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/bell_ic.svg
   SvgGenImage get bellIc => const SvgGenImage('assets/icons/bell_ic.svg');
 
+  /// File path: assets/icons/bubble_alert_ic.svg
+  SvgGenImage get bubbleAlertIc =>
+      const SvgGenImage('assets/icons/bubble_alert_ic.svg');
+
   /// File path: assets/icons/calendar_ic.svg
   SvgGenImage get calendarIc =>
       const SvgGenImage('assets/icons/calendar_ic.svg');
@@ -255,6 +259,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/reply_ic.svg
   SvgGenImage get replyIc => const SvgGenImage('assets/icons/reply_ic.svg');
 
+  /// File path: assets/icons/retry_ic.svg
+  SvgGenImage get retryIc => const SvgGenImage('assets/icons/retry_ic.svg');
+
   /// File path: assets/icons/rings_backdrop.svg
   SvgGenImage get ringsBackdrop =>
       const SvgGenImage('assets/icons/rings_backdrop.svg');
@@ -361,6 +368,7 @@ class $AssetsIconsGen {
     authBrandMark,
     availableCardsIc,
     bellIc,
+    bubbleAlertIc,
     calendarIc,
     cardIc,
     chatBubbleIc,
@@ -417,6 +425,7 @@ class $AssetsIconsGen {
     qrIc,
     replaceIc,
     replyIc,
+    retryIc,
     ringsBackdrop,
     ringsIc,
     saveEventIc,

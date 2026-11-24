@@ -19,10 +19,50 @@ class App extends ConsumerStatefulWidget {
 class _AppState extends ConsumerState<App> {
   final TransitionBuilder _botToastBuilder = BotToastInit();
 
+  bool _isLanguageSynced = false;
+  Locale? _lastLocale;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // هذا الكود يتنفذ قبل أن تبدأ أي شاشة بطلب بيانات من الـ API
+    if (!_isLanguageSynced) {
+      // نقرأ اللغة المحفوظة في easy_localization مباشرة بشكل متزامن
+      final currentLang = context.locale.languageCode;
+
+      // نحدث حالة الـ Riverpod فوراً (نستخدم microtask لتجنب أخطاء بناء الواجهة)
+      Future.microtask(() {
+        ref.read(currentLanguageProvider.notifier).syncLanguage(currentLang);
+      });
+
+      _isLanguageSynced = true;
+    }
+
+    // `'key'.tr()` without a context does not depend on the locale, so
+    // screens that are not rebuilt would keep the old strings: rebuild all.
+    final locale = context.locale;
+    if (_lastLocale != null && _lastLocale != locale) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _rebuildAll(context as Element);
+      });
+    }
+    _lastLocale = locale;
+  }
+
+  void _rebuildAll(Element root) {
+    void rebuild(Element element) {
+      element.markNeedsBuild();
+      element.visitChildren(rebuild);
+    }
+
+    root.visitChildren(rebuild);
+  }
+
   @override
   void initState() {
     Future(() {
-      ref.read(currentLanguageProvider.notifier).getLanguage(context);
+      // ref.read(currentLanguageProvider.notifier).getLanguage(context);
     });
     super.initState();
   }

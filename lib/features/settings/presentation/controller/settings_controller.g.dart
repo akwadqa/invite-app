@@ -8,12 +8,15 @@ part of 'settings_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The profile screen: user card, balance and the logout / delete actions.
 
 @ProviderFor(SettingsController)
 final settingsControllerProvider = SettingsControllerProvider._();
 
+/// The profile screen: user card, balance and the logout / delete actions.
 final class SettingsControllerProvider
     extends $AsyncNotifierProvider<SettingsController, SettingsState> {
+  /// The profile screen: user card, balance and the logout / delete actions.
   SettingsControllerProvider._()
     : super(
         from: null,
@@ -34,7 +37,9 @@ final class SettingsControllerProvider
 }
 
 String _$settingsControllerHash() =>
-    r'1e82dc35fdd0e2967c6cc5bc11efd6b65ea465b8';
+    r'377610f527993ade94e96564abe882e21a7d9bda';
+
+/// The profile screen: user card, balance and the logout / delete actions.
 
 abstract class _$SettingsController extends $AsyncNotifier<SettingsState> {
   FutureOr<SettingsState> build();

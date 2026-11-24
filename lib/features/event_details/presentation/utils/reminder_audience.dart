@@ -11,6 +11,7 @@ enum ReminderAudience {
     titleKey: 'reminder_msg_no_reply_title',
     bodyKey: 'reminder_msg_no_reply_body',
     buttonKeys: ['reminder_btn_confirm', 'reminder_btn_decline'],
+    lowBalanceKey: 'low_balance_no_reply',
   ),
   confirmed(
     labelKey: 'reminder_aud_confirmed',
@@ -19,6 +20,7 @@ enum ReminderAudience {
     titleKey: 'reminder_msg_confirmed_title',
     bodyKey: 'reminder_msg_confirmed_body',
     buttonKeys: ['reminder_btn_location'],
+    lowBalanceKey: 'low_balance_confirmed',
   ),
   notDelivered(
     labelKey: 'reminder_aud_failed',
@@ -27,6 +29,7 @@ enum ReminderAudience {
     titleKey: 'reminder_msg_failed_title',
     bodyKey: 'reminder_msg_failed_body',
     buttonKeys: ['reminder_btn_confirm', 'reminder_btn_decline'],
+    lowBalanceKey: 'low_balance_failed',
   );
 
   const ReminderAudience({
@@ -36,6 +39,7 @@ enum ReminderAudience {
     required this.titleKey,
     required this.bodyKey,
     required this.buttonKeys,
+    required this.lowBalanceKey,
   });
 
   final String labelKey;
@@ -46,6 +50,9 @@ enum ReminderAudience {
   final String titleKey;
   final String bodyKey;
   final List<String> buttonKeys;
+
+  /// "Reminding the {} guests … needs {} messages. You have {}."
+  final String lowBalanceKey;
 
   /// How many guests of [report] belong to this audience.
   int countIn(GuestReportModel report) => switch (this) {

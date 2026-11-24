@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,20 +9,21 @@ part 'current_language.g.dart';
 class CurrentLanguage extends _$CurrentLanguage {
   @override
   String build() {
-    return 'en';
+    final deviceLang = ui.PlatformDispatcher.instance.locale.languageCode;
+    return deviceLang;
   }
 
-  void getLanguage(BuildContext context) {
-    String? languageCode = context.savedLocale?.languageCode;
-    if (languageCode != null) {
-      state = languageCode;
-    } else {
-      state = 'en';
+  void syncLanguage(String langCode) {
+    if (state != langCode) {
+      state = langCode;
     }
   }
 
-  void changeLanguage(BuildContext context, String languageCode) {
-    EasyLocalization.of(context)!.setLocale(Locale(languageCode));
+  /// Loads the new translations first, then publishes the language, so
+  /// nothing rebuilds against the old strings.
+  Future<void> changeLanguage(BuildContext context, String languageCode) async {
+    await context.setLocale(Locale(languageCode));
+    if (!ref.mounted) return;
     state = languageCode;
   }
 }

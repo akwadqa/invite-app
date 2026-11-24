@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invit/features/auth/presentation/utils/auth_flow_constants.dart';
 import 'package:invit/features/auth/presentation/utils/qatar_phone_input_formatter.dart';
 import 'package:invit/features/event/presentation/controller/create_event_flow/create_event_flow_controller.dart';
 import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
+import 'package:invit/features/event/presentation/utils/seats_choice.dart';
 import 'package:invit/features/event/presentation/widgets/create_event_flow/create_event_flow_field.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/core/shared_widgets/app_round_icon_button.dart';
@@ -35,7 +37,12 @@ class _CreateEventQuickAddScreenFormState
   final FocusNode _nameFocus = FocusNode();
   final FocusNode _phoneFocus = FocusNode();
   final QatarPhoneInputFormatter _phoneFormatter = QatarPhoneInputFormatter();
+  final TextEditingController _customSeats = TextEditingController();
+  final FocusNode _customSeatsFocus = FocusNode();
   int _seats = CreateEventFlowConstants.defaultSeats;
+
+  /// The last option ("5+") is selected: the number is typed in a field.
+  bool _isCustomSeats = false;
 
   @override
   void dispose() {
@@ -43,16 +50,40 @@ class _CreateEventQuickAddScreenFormState
     _phone.dispose();
     _nameFocus.dispose();
     _phoneFocus.dispose();
+    _customSeats.dispose();
+    _customSeatsFocus.dispose();
     super.dispose();
   }
 
+  void _selectSeats(int seats) {
+    final isCustom = SeatsChoice.isMoreOption(seats);
+    setState(() {
+      _isCustomSeats = isCustom;
+      _seats = seats;
+    });
+    if (isCustom) _customSeatsFocus.requestFocus();
+  }
+
+  /// Seats of the guest, or `null` when the typed number is not valid.
+  int? get _chosenSeats =>
+      _isCustomSeats ? SeatsChoice.parseCustom(_customSeats.text) : _seats;
+
   void _add() {
+    final seats = _chosenSeats;
+    if (seats == null) {
+      AppToast.errorToast(
+        'quick_add_seats_invalid'.tr(
+          args: ['${CreateEventFlowConstants.minCustomSeats}'],
+        ),
+      );
+      return;
+    }
     final result = ref
         .read(createEventFlowControllerProvider.notifier)
         .addGuest(
           name: _name.text,
           nationalNumber: QatarPhoneInputFormatter.digitsOf(_phone.text),
-          seats: _seats,
+          seats: seats,
         );
     final error = result.messageKey;
     if (error != null) {
@@ -63,7 +94,11 @@ class _CreateEventQuickAddScreenFormState
     }
     _name.clear();
     _phone.clear();
-    setState(() => _seats = CreateEventFlowConstants.defaultSeats);
+    _customSeats.clear();
+    setState(() {
+      _seats = CreateEventFlowConstants.defaultSeats;
+      _isCustomSeats = false;
+    });
     dismissKeyboard();
   }
 
@@ -119,7 +154,7 @@ class _CreateEventQuickAddScreenFormState
               Expanded(
                 child: _CreateEventQuickAddScreenSeats(
                   selected: _seats,
-                  onSelected: (seats) => setState(() => _seats = seats),
+                  onSelected: _selectSeats,
                 ),
               ),
               AppRoundIconButton(
@@ -132,6 +167,25 @@ class _CreateEventQuickAddScreenFormState
               ),
             ],
           ),
+          if (_isCustomSeats)
+            CreateEventFlowTextField(
+              controller: _customSeats,
+              focusNode: _customSeatsFocus,
+              hint: 'quick_add_custom_seats_hint'.tr(
+                args: ['${CreateEventFlowConstants.minCustomSeats}'],
+              ),
+              fillColor: AppColors.white,
+              borderColor: AppColors.transparentPage,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(
+                  CreateEventFlowConstants.customSeatsDigits,
+                ),
+              ],
+              textInputAction: TextInputAction.done,
+              onSubmitted: (_) => _add(),
+            ),
         ],
       ),
     );
