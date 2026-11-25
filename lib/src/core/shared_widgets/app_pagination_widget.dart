@@ -62,38 +62,44 @@ class _AppPaginationWidgetState extends State<AppPaginationWidget> {
               return false;
             }
           : null,
-      child: SmartRefresher(
-        enablePullDown: widget.enablePullDown,
-        enablePullUp: true,
-        footer: CustomFooter(
-          builder: (BuildContext context, LoadStatus? mode) {
-            return SizedBox(
-              height: 55.0,
-              child: Center(
-                child: mode == LoadStatus.loading
-                    ? const FadeCircleLoadingIndicator()
-                    : const SizedBox.shrink(),
-              ),
-            );
-          },
+      // Without this, the package blocks dragging once a refresh completes
+      // and only re-enables it when the header settles at exactly offset 0,
+      // which may never happen, leaving the list unscrollable.
+      child: RefreshConfiguration(
+        enableScrollWhenRefreshCompleted: true,
+        child: SmartRefresher(
+          enablePullDown: widget.enablePullDown,
+          enablePullUp: true,
+          footer: CustomFooter(
+            builder: (BuildContext context, LoadStatus? mode) {
+              return SizedBox(
+                height: 55.0,
+                child: Center(
+                  child: mode == LoadStatus.loading
+                      ? const FadeCircleLoadingIndicator()
+                      : const SizedBox.shrink(),
+                ),
+              );
+            },
+          ),
+          header: CustomHeader(
+            builder: (context, mode) {
+              return SizedBox(
+                height: 55.0,
+                child: Center(
+                  child: mode == RefreshStatus.refreshing
+                      ? const CircularProgressIndicator.adaptive()
+                      : const SizedBox.shrink(),
+                ),
+              );
+            },
+          ),
+          controller: _refreshController,
+          onLoading: widget.enableLoadingOnScrollStart ? null : _onLoading,
+          onRefresh: widget.enablePullDown ? _onRefresh : null,
+          primary: false,
+          child: widget.child,
         ),
-        header: CustomHeader(
-          builder: (context, mode) {
-            return SizedBox(
-              height: 55.0,
-              child: Center(
-                child: mode == RefreshStatus.refreshing
-                    ? const CircularProgressIndicator.adaptive()
-                    : const SizedBox.shrink(),
-              ),
-            );
-          },
-        ),
-        controller: _refreshController,
-        onLoading: widget.enableLoadingOnScrollStart ? null : _onLoading,
-        onRefresh: widget.enablePullDown ? _onRefresh : null,
-        primary: false,
-        child: widget.child,
       ),
     );
   }
