@@ -289,7 +289,7 @@ class _AppLowBalanceSheetBarPainter extends CustomPainter {
           Rect.fromLTWH(0, 0, split, size.height),
           const Radius.circular(_radius),
         ),
-        Paint()..color = AppColors.ink,
+        Paint()..color = AppColors.primary,
       );
     }
   }

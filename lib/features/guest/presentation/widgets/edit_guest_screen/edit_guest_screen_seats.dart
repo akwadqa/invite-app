@@ -136,10 +136,10 @@ class _EditGuestScreenSeatChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: isSelected ? AppColors.ink : AppColors.white,
+      color: isSelected ? AppColors.primary : AppColors.white,
       shape: StadiumBorder(
         side: BorderSide(
-          color: isSelected ? AppColors.ink : AppColors.mistBorder,
+          color: isSelected ? AppColors.primary : AppColors.mistBorder,
           width: _borderWidth,
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
+import 'package:invit/features/event_details/domain/model/guest_stats_model.dart';
 import 'package:invit/features/home/presentation/utils/home_event_format.dart';
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_event_icon.dart';
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_replies_bar.dart';
@@ -76,7 +76,7 @@ class HomeScreenUpcomingCard extends StatelessWidget {
                     height: _badgeHeight,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: const ShapeDecoration(
-                      color: AppColors.ink,
+                      color: AppColors.primary,
                       shape: StadiumBorder(),
                     ),
                     child: Row(
@@ -136,7 +136,7 @@ class HomeScreenUpcomingCard extends StatelessWidget {
                 end: _repliesInset,
                 bottom: _repliesInset,
                 child: HomeScreenRepliesBar(
-                  report: event.guestReport ?? const GuestReportModel(),
+                  stats: event.guestStats ?? const GuestStatsModel(),
                 ),
               ),
             ],

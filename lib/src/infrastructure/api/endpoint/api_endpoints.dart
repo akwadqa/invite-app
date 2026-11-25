@@ -28,6 +28,9 @@ class ApiEndPoints {
   static const String logoutApi = 'invite.api.auth.logout';
   static String getPaymentLink = 'sadad.api.api.get_payment_url';
 
+  //? --- Balance ---
+  static const String getBalance = 'invite.api.balance.get_message_balance';
+
   //? --- EventsCollection ---
   static const String getUserEvents = 'invite.api.api.get_user_events';
   static const String getEventDetails = 'invite.api.api.event_details';

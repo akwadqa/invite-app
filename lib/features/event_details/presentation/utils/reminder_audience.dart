@@ -16,7 +16,7 @@ enum ReminderAudience {
   confirmed(
     labelKey: 'reminder_aud_confirmed',
     hintKey: 'reminder_aud_confirmed_hint',
-    dot: AppColors.ink,
+    dot: AppColors.primary,
     titleKey: 'reminder_msg_confirmed_title',
     bodyKey: 'reminder_msg_confirmed_body',
     buttonKeys: ['reminder_btn_location'],

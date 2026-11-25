@@ -8,18 +8,18 @@ part of 'balance_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// The balance screen: messages left (shared with the home feed), the
-/// "not enough" warning and the usage / purchase history.
+/// The balance screen: messages left, the "not enough" warning and the
+/// paginated usage / purchase history, all from the message balance endpoint.
 
 @ProviderFor(BalanceController)
 final balanceControllerProvider = BalanceControllerProvider._();
 
-/// The balance screen: messages left (shared with the home feed), the
-/// "not enough" warning and the usage / purchase history.
+/// The balance screen: messages left, the "not enough" warning and the
+/// paginated usage / purchase history, all from the message balance endpoint.
 final class BalanceControllerProvider
     extends $AsyncNotifierProvider<BalanceController, BalanceState> {
-  /// The balance screen: messages left (shared with the home feed), the
-  /// "not enough" warning and the usage / purchase history.
+  /// The balance screen: messages left, the "not enough" warning and the
+  /// paginated usage / purchase history, all from the message balance endpoint.
   BalanceControllerProvider._()
     : super(
         from: null,
@@ -39,10 +39,10 @@ final class BalanceControllerProvider
   BalanceController create() => BalanceController();
 }
 
-String _$balanceControllerHash() => r'a60d72e843ffaf3dddc98cf22f875a900ea3f445';
+String _$balanceControllerHash() => r'fd479d09c9d4b9482036e2ad455806d32f3e1b5a';
 
-/// The balance screen: messages left (shared with the home feed), the
-/// "not enough" warning and the usage / purchase history.
+/// The balance screen: messages left, the "not enough" warning and the
+/// paginated usage / purchase history, all from the message balance endpoint.
 
 abstract class _$BalanceController extends $AsyncNotifier<BalanceState> {
   FutureOr<BalanceState> build();

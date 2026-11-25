@@ -55,7 +55,7 @@ class RechargeScreenPlanCard extends StatelessWidget {
                   : AppColors.white,
               borderRadius: BorderRadius.circular(22),
               border: Border.all(
-                color: isSelected ? AppColors.ink : AppColors.mistBorder,
+                color: isSelected ? AppColors.primary : AppColors.mistBorder,
                 width: isSelected ? 2 : 1.5,
               ),
             ),
@@ -138,9 +138,9 @@ class _RechargeScreenRadio extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isSelected ? AppColors.ink : AppColors.white,
+        color: isSelected ? AppColors.primary : AppColors.white,
         border: Border.all(
-          color: isSelected ? AppColors.ink : AppColors.mistDark,
+          color: isSelected ? AppColors.primary : AppColors.mistDark,
           width: 2,
         ),
       ),

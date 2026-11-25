@@ -72,7 +72,7 @@ class _CreateEventGuestsScreenActionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: isPrimary ? AppColors.ink : AppColors.mist,
+      color: isPrimary ? AppColors.primary : AppColors.mist,
       borderRadius: BorderRadius.circular(_radius),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -90,7 +90,7 @@ class _CreateEventGuestsScreenActionCard extends StatelessWidget {
                   height: _badgeSize,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: isPrimary ? AppColors.accent : AppColors.white,
+                    color: isPrimary ? AppColors.mist : AppColors.white,
                     shape: BoxShape.circle,
                   ),
                   child: icon.svg(

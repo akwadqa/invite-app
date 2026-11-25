@@ -17,7 +17,7 @@ mixin _$BalanceState {
 
 /// `null` while the balance is unknown.
  int? get balance;/// Guests the user still has to remind, for the "not enough" warning.
- int get guestsToRemind; AsyncValue<List<BalanceEntry>> get history;
+ int get guestsToRemind; AsyncValue<List<BalanceHistoryModel>> get history;
 /// Create a copy of BalanceState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -53,7 +53,7 @@ abstract mixin class $BalanceStateCopyWith<$Res>  {
   factory $BalanceStateCopyWith(BalanceState value, $Res Function(BalanceState) _then) = _$BalanceStateCopyWithImpl;
 @useResult
 $Res call({
- int? balance, int guestsToRemind, AsyncValue<List<BalanceEntry>> history
+ int? balance, int guestsToRemind, AsyncValue<List<BalanceHistoryModel>> history
 });
 
 
@@ -75,7 +75,7 @@ class _$BalanceStateCopyWithImpl<$Res>
 balance: freezed == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
 as int?,guestsToRemind: null == guestsToRemind ? _self.guestsToRemind : guestsToRemind // ignore: cast_nullable_to_non_nullable
 as int,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
-as AsyncValue<List<BalanceEntry>>,
+as AsyncValue<List<BalanceHistoryModel>>,
   ));
 }
 
@@ -160,7 +160,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? balance,  int guestsToRemind,  AsyncValue<List<BalanceEntry>> history)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? balance,  int guestsToRemind,  AsyncValue<List<BalanceHistoryModel>> history)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BalanceState() when $default != null:
 return $default(_that.balance,_that.guestsToRemind,_that.history);case _:
@@ -181,7 +181,7 @@ return $default(_that.balance,_that.guestsToRemind,_that.history);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? balance,  int guestsToRemind,  AsyncValue<List<BalanceEntry>> history)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? balance,  int guestsToRemind,  AsyncValue<List<BalanceHistoryModel>> history)  $default,) {final _that = this;
 switch (_that) {
 case _BalanceState():
 return $default(_that.balance,_that.guestsToRemind,_that.history);case _:
@@ -201,7 +201,7 @@ return $default(_that.balance,_that.guestsToRemind,_that.history);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? balance,  int guestsToRemind,  AsyncValue<List<BalanceEntry>> history)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? balance,  int guestsToRemind,  AsyncValue<List<BalanceHistoryModel>> history)?  $default,) {final _that = this;
 switch (_that) {
 case _BalanceState() when $default != null:
 return $default(_that.balance,_that.guestsToRemind,_that.history);case _:
@@ -223,7 +223,7 @@ class _BalanceState implements BalanceState {
 @override final  int? balance;
 /// Guests the user still has to remind, for the "not enough" warning.
 @override@JsonKey() final  int guestsToRemind;
-@override@JsonKey() final  AsyncValue<List<BalanceEntry>> history;
+@override@JsonKey() final  AsyncValue<List<BalanceHistoryModel>> history;
 
 /// Create a copy of BalanceState
 /// with the given fields replaced by the non-null parameter values.
@@ -257,7 +257,7 @@ abstract mixin class _$BalanceStateCopyWith<$Res> implements $BalanceStateCopyWi
   factory _$BalanceStateCopyWith(_BalanceState value, $Res Function(_BalanceState) _then) = __$BalanceStateCopyWithImpl;
 @override @useResult
 $Res call({
- int? balance, int guestsToRemind, AsyncValue<List<BalanceEntry>> history
+ int? balance, int guestsToRemind, AsyncValue<List<BalanceHistoryModel>> history
 });
 
 
@@ -279,7 +279,7 @@ class __$BalanceStateCopyWithImpl<$Res>
 balance: freezed == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
 as int?,guestsToRemind: null == guestsToRemind ? _self.guestsToRemind : guestsToRemind // ignore: cast_nullable_to_non_nullable
 as int,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
-as AsyncValue<List<BalanceEntry>>,
+as AsyncValue<List<BalanceHistoryModel>>,
   ));
 }
 

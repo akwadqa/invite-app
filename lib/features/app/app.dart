@@ -86,7 +86,7 @@ class _AppState extends ConsumerState<App> {
             ColoredBox(color: AppColors.mist, child: child),
           ),
           theme: ref.watch(appThemeProvider),
-          onGenerateTitle: (context) => context.tr('appTitle'),
+          onGenerateTitle: (context) => 'Invite',
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,

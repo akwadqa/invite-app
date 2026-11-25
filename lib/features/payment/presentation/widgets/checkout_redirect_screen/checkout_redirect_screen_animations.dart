@@ -233,7 +233,7 @@ class _GatherPainter extends CustomPainter {
         ..strokeWidth = 2.4
         ..strokeCap = StrokeCap.round
         ..strokeJoin = StrokeJoin.round
-        ..color = AppColors.ink,
+        ..color = AppColors.primary,
     );
     canvas.restore();
     canvas.restore();

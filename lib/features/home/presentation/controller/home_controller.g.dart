@@ -62,14 +62,8 @@ abstract class _$HomeController extends $AsyncNotifier<HomeModel> {
   }
 }
 
-/// Home events split by date: upcoming (soonest first) and past (latest
-/// first). Events without a valid date are listed as upcoming, last.
-
 @ProviderFor(homeEventSections)
 final homeEventSectionsProvider = HomeEventSectionsProvider._();
-
-/// Home events split by date: upcoming (soonest first) and past (latest
-/// first). Events without a valid date are listed as upcoming, last.
 
 final class HomeEventSectionsProvider
     extends
@@ -79,8 +73,6 @@ final class HomeEventSectionsProvider
           HomeEventSections
         >
     with $Provider<HomeEventSections> {
-  /// Home events split by date: upcoming (soonest first) and past (latest
-  /// first). Events without a valid date are listed as upcoming, last.
   HomeEventSectionsProvider._()
     : super(
         from: null,
@@ -115,4 +107,4 @@ final class HomeEventSectionsProvider
   }
 }
 
-String _$homeEventSectionsHash() => r'a6d5f8d36f46e8057b3bc63fcdd1ac819cb37a2e';
+String _$homeEventSectionsHash() => r'6d1505e3d62c124b17074515bcd161c9f643dcc3';

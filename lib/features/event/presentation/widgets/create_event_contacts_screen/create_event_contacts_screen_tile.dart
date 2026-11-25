@@ -62,9 +62,9 @@ class CreateEventContactsScreenTile extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: isSelected ? AppColors.ink : AppColors.white,
+                color: isSelected ? AppColors.primary : AppColors.white,
                 border: Border.all(
-                  color: isSelected ? AppColors.ink : AppColors.mistDark,
+                  color: isSelected ? AppColors.primary : AppColors.mistDark,
                 ),
               ),
               child: isSelected

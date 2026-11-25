@@ -161,7 +161,7 @@ class _CreateEventQuickAddScreenFormState
                 icon: Assets.icons.plusIc,
                 size: _addButtonSize,
                 iconSize: _addIconSize,
-                backgroundColor: AppColors.ink,
+                backgroundColor: AppColors.primary,
                 iconColor: AppColors.white,
                 onTap: _add,
               ),
@@ -234,7 +234,7 @@ class _CreateEventQuickAddScreenSeats extends StatelessWidget {
       children: [
         for (final seats in options)
           Material(
-            color: seats == selected ? AppColors.ink : AppColors.white,
+            color: seats == selected ? AppColors.primary : AppColors.white,
             shape: const CircleBorder(),
             clipBehavior: Clip.antiAlias,
             child: InkWell(

@@ -36,7 +36,7 @@ class AuthPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: isEnabled ? AppColors.ink : AppColors.mistBorder,
+      color: isEnabled ? AppColors.primary : AppColors.mistBorder,
       shape: const StadiumBorder(),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -65,14 +65,14 @@ class AuthPrimaryButton extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isEnabled ? AppColors.accent : AppColors.mistSoft,
+                    color: isEnabled ? AppColors.mist : AppColors.mistSoft,
                   ),
                   child: icon.svg(
                     width: _iconSize,
                     height: _iconSize,
                     matchTextDirection: mirrorIconInRtl,
                     colorFilter: const ColorFilter.mode(
-                      AppColors.ink,
+                      AppColors.primary,
                       BlendMode.srcIn,
                     ),
                   ),

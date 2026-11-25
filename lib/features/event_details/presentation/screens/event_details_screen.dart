@@ -96,14 +96,14 @@ class EventDetailsScreen extends ConsumerWidget {
                   subtitleEndColor: AppColors.danger,
                   subtitleMaxLines: null,
                   onBack: () => _back(context),
-                  trailing: data == null
-                      ? null
-                      : isPast
-                      ? const _EventDetailsScreenPastChip()
-                      : _EventDetailsScreenMoreButton(
-                          event: data,
-                          canEdit: isDraft,
-                        ),
+                  // trailing: data == null
+                  //     ? null
+                  //     : isPast
+                  //     ? const _EventDetailsScreenPastChip()
+                  //     : _EventDetailsScreenMoreButton(
+                  //         event: data,
+                  //         canEdit: isDraft,
+                  //       ),
                 ),
                 Expanded(
                   child: event.when(
@@ -223,7 +223,7 @@ class _EventDetailsScreenBody extends ConsumerWidget {
     );
 
     return RefreshIndicator(
-      color: AppColors.ink,
+      color: AppColors.primary,
       onRefresh: ref
           .read(eventDetailsControllerProvider(ocassionId: occasionId).notifier)
           .refresh,

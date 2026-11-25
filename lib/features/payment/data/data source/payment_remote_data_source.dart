@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:invit/features/payment/domain/model/balance/balance_model.dart';
 import 'package:invit/src/infrastructure/api/endpoint/api_endpoints.dart';
 import 'package:invit/src/infrastructure/api/response/api_response.dart';
 import 'package:invit/src/infrastructure/network/services/network_service.dart';
@@ -24,6 +25,27 @@ class PaymentRemoteDataSource {
       );
     } catch (e) {
       return ApiResponse.error(message: e.toString());
+    }
+  }
+
+  Future<ApiResponse<BalanceModel>> getBalance({required int page}) async {
+    try {
+      final response = await _networkService.get(
+        ApiEndPoints.getBalance,
+        data: {'page_no': page, 'limit': 10},
+      );
+
+      if (response.data == null || response.statusCode != 200) {
+        throw Exception('Failed to load data');
+      }
+
+      return ApiResponse.fromJson(
+        response.data as Map<String, dynamic>,
+        (json) => BalanceModel.fromJson(json as Map<String, dynamic>),
+      );
+    } catch (e) {
+      Dev.logLine('Error in getBalance: $e');
+      rethrow;
     }
   }
 }

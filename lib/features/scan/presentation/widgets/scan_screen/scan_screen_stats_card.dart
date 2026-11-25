@@ -72,7 +72,7 @@ class ScanScreenStatsCard extends StatelessWidget {
                 heightFactor: 1,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: AppColors.ink,
+                    color: AppColors.primary,
                     borderRadius: BorderRadius.circular(_barHeight / 2),
                   ),
                 ),

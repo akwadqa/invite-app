@@ -90,7 +90,7 @@ class _VerificationScreenPinState extends ConsumerState<VerificationScreenPin> {
                 submittedPinTheme: _theme(
                   width: cellWidth,
                   fill: AppColors.white,
-                  border: AppColors.ink,
+                  border: AppColors.primary,
                 ),
                 errorPinTheme: _theme(
                   width: cellWidth,
@@ -102,7 +102,7 @@ class _VerificationScreenPinState extends ConsumerState<VerificationScreenPin> {
                 cursor: Container(
                   width: _cursorWidth,
                   height: _cursorHeight,
-                  color: AppColors.ink,
+                  color: AppColors.primary,
                 ),
                 onChanged: ref
                     .read(authFlowControllerProvider.notifier)

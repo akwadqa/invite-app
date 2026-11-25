@@ -85,8 +85,11 @@ class HomeController extends _$HomeController {
   }
 }
 
-/// Home events split by date: upcoming (soonest first) and past (latest
-/// first). Events without a valid date are listed as upcoming, last.
+/// Home events split by the server's `is_upcoming` flag (by date when it is
+/// missing): upcoming (soonest first, undated last) and past (latest first). Past events
+/// without a valid date are listed last.
+final DateTime _noDate = DateTime.fromMillisecondsSinceEpoch(0);
+
 @riverpod
 HomeEventSections homeEventSections(Ref ref) {
   final events = ref.watch(
@@ -99,8 +102,10 @@ HomeEventSections homeEventSections(Ref ref) {
   final past = <({EventModel event, DateTime date})>[];
   for (final event in events) {
     final date = DateTime.tryParse(event.dateTime ?? '');
-    if (date != null && date.isBefore(now)) {
-      past.add((event: event, date: date));
+    final isUpcoming =
+        event.isUpcoming ?? !(date != null && date.isBefore(now));
+    if (!isUpcoming) {
+      past.add((event: event, date: date ?? _noDate));
     } else {
       upcoming.add((event: event, date: date));
     }

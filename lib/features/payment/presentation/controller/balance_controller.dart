@@ -2,30 +2,32 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invit/features/home/presentation/controller/home_controller.dart';
-import 'package:invit/features/payment/domain/model/balance_entry.dart';
+import 'package:invit/features/payment/data/repository/payment_repository.dart';
+import 'package:invit/features/payment/domain/model/balance/balance_model.dart';
 import 'package:invit/features/payment/presentation/controller/balance_state.dart';
+import 'package:invit/src/infrastructure/api/response/pagination/pagination.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'balance_controller.g.dart';
 
-/// The balance screen: messages left (shared with the home feed), the
-/// "not enough" warning and the usage / purchase history.
+/// The balance screen: messages left, the "not enough" warning and the
+/// paginated usage / purchase history, all from the message balance endpoint.
 @riverpod
 class BalanceController extends _$BalanceController {
-  int _latestRefreshRequest = 0;
-  int _latestHistoryRequest = 0;
+  static const int _firstPage = 1;
+
+  int _currentPage = _firstPage;
+  int _totalPages = _firstPage;
+  int _latestRequest = 0;
 
   BalanceState get _current => state.requireValue;
   void _emit(BalanceState newState) => state = AsyncData(newState);
 
   @override
   FutureOr<BalanceState> build() {
-    ref.listen(
-      homeControllerProvider.select((home) => home.value?.remainingBalance),
-      (_, balance) => _emit(_current.copyWith(balance: balance?.toInt())),
-    );
-    unawaited(_loadHistory());
+    unawaited(_loadFirstPage());
     return BalanceState(
+      // Shown until the balance endpoint answers.
       balance: ref
           .read(homeControllerProvider)
           .value
@@ -37,73 +39,62 @@ class BalanceController extends _$BalanceController {
     );
   }
 
-  /// Pull to refresh: reloads the balance (home feed) and the history.
-  Future<bool> refresh() async {
-    final requestId = ++_latestRefreshRequest;
-    bool isOutdated() => !ref.mounted || requestId != _latestRefreshRequest;
-    final homeController = ref.read(homeControllerProvider.notifier);
-    final refreshed = await homeController.refresh();
-    if (isOutdated()) return false;
-    await _loadHistory();
-    return refreshed && !isOutdated();
-  }
+  /// Pull to refresh: reloads the balance and the first page of the history.
+  Future<bool> refresh() => _loadFirstPage();
 
   /// Reloads the history after an error.
   Future<void> retry() async {
     if (!state.hasValue) return;
     _emit(_current.copyWith(history: const AsyncLoading()));
-    await _loadHistory();
+    await _loadFirstPage();
   }
 
-  Future<void> _loadHistory() async {
-    final requestId = ++_latestHistoryRequest;
-    bool isOutdated() => !ref.mounted || requestId != _latestHistoryRequest;
+  /// Returns whether more pages remain, for the pagination footer.
+  Future<bool> loadNextPage() async {
+    if (!state.hasValue || _currentPage >= _totalPages) return false;
+    final page = _currentPage + 1;
+    final requestId = ++_latestRequest;
+    bool isOutdated() => !ref.mounted || requestId != _latestRequest;
+    final repository = ref.read(paymentRepositoryProvider);
     try {
-      final entries = await _fetchHistory();
-      if (isOutdated() || !state.hasValue) return;
-      _emit(_current.copyWith(history: AsyncData(entries)));
-    } catch (error, stackTrace) {
-      if (isOutdated() || !state.hasValue) return;
-      _emit(_current.copyWith(history: AsyncError(error, stackTrace)));
+      final response = await repository.getBalance(page: page);
+      if (isOutdated() || !state.hasValue) return false;
+      _emit(_merge(response.data, response.pagination, page));
+      return _currentPage < _totalPages;
+    } catch (_) {
+      return false;
     }
   }
 
-  // TODO(backend): there is no endpoint for the balance history (messages
-  // spent per event, plans bought and their price). Replace this stand-in with a
-  // repository call when it exists.
-  Future<List<BalanceEntry>> _fetchHistory() async {
-    await Future<void>.value();
-    return [
-      BalanceEntry(
-        kind: BalanceEntryKind.invitations,
-        label: "Fatima & Hamad's Wedding",
-        date: DateTime(2026, 11, 3),
-        amount: 254,
+  Future<bool> _loadFirstPage() async {
+    final requestId = ++_latestRequest;
+    bool isOutdated() => !ref.mounted || requestId != _latestRequest;
+    final repository = ref.read(paymentRepositoryProvider);
+    try {
+      final response = await repository.getBalance(page: _firstPage);
+      if (isOutdated() || !state.hasValue) return false;
+      _emit(_merge(response.data, response.pagination, _firstPage));
+      return true;
+    } catch (error, stackTrace) {
+      if (isOutdated() || !state.hasValue) return false;
+      // Keep the lines already on screen when a refresh fails.
+      if (!_current.history.hasValue) {
+        _emit(_current.copyWith(history: AsyncError(error, stackTrace)));
+      }
+      return false;
+    }
+  }
+
+  BalanceState _merge(BalanceModel? data, Pagination? pagination, int page) {
+    _currentPage = pagination?.currentPage ?? page;
+    _totalPages = pagination?.totalPages ?? page;
+    final pageEntries = data?.history ?? const <BalanceHistoryModel>[];
+    final previous = _current.history.value ?? const <BalanceHistoryModel>[];
+    return _current.copyWith(
+      balance: data?.messagesLeft?.toInt() ?? _current.balance,
+      history: AsyncData(
+        page == _firstPage ? pageEntries : [...previous, ...pageEntries],
       ),
-      BalanceEntry(
-        kind: BalanceEntryKind.purchase,
-        label: 'Celebration plan',
-        date: DateTime(2026, 11, 3),
-        amount: 300,
-      ),
-      BalanceEntry(
-        kind: BalanceEntryKind.reminders,
-        label: 'Al-Kuwari Family Ghabga',
-        date: DateTime(2026, 3, 12),
-        amount: 14,
-      ),
-      BalanceEntry(
-        kind: BalanceEntryKind.invitations,
-        label: 'Al-Kuwari Family Ghabga',
-        date: DateTime(2026, 3, 10),
-        amount: 86,
-      ),
-      BalanceEntry(
-        kind: BalanceEntryKind.purchase,
-        label: 'Essential plan',
-        date: DateTime(2026, 3, 10),
-        amount: 100,
-      ),
-    ];
+    );
   }
 }

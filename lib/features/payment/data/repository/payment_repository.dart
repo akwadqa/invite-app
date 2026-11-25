@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invit/features/payment/data/data%20source/payment_remote_data_source.dart';
+import 'package:invit/features/payment/domain/model/balance/balance_model.dart';
 import 'package:invit/src/infrastructure/api/response/api_response.dart';
 import 'package:invit/src/infrastructure/network/exception/dio_exceptions.dart';
 import 'package:invit/src/infrastructure/network/services/dio_client.dart';
+import 'package:invit/src/logger/failure/exceptions/app_exception.dart' as logger;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'payment_repository.g.dart';
@@ -32,5 +34,21 @@ class PaymentRepository {
     }
 
     throw AppException(response.message);
+  }
+
+  Future<ApiResponse<BalanceModel>> getBalance({required int page}) async {
+    try {
+      final result = await _remoteDataSource.getBalance(page: page);
+
+      if (result.hasFailed) {
+        throw logger.AppException(
+          message: result.message ?? 'Failed to fetch data',
+        );
+      }
+
+      return result;
+    } catch (e) {
+      throw logger.AppException(message: e.toString());
+    }
   }
 }

@@ -46,7 +46,7 @@ class _SignUpNameFieldState extends ConsumerState<SignUpNameField> {
       autofocus: true,
       textCapitalization: TextCapitalization.words,
       textInputAction: TextInputAction.done,
-      cursorColor: AppColors.ink,
+      cursorColor: AppColors.primary,
       style: AppTextStyle.outfitRegular18.copyWith(color: AppColors.ink),
       decoration: InputDecoration(
         filled: true,
@@ -54,7 +54,7 @@ class _SignUpNameFieldState extends ConsumerState<SignUpNameField> {
         isDense: true,
         contentPadding: _contentPadding,
         enabledBorder: _border(AppColors.mistBorder),
-        focusedBorder: _border(AppColors.ink),
+        focusedBorder: _border(AppColors.primary),
       ),
       onChanged: ref.read(authFlowControllerProvider.notifier).updateFullName,
       onSubmitted: (_) =>

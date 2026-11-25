@@ -190,7 +190,7 @@ class _ScanScreenArrivalSheetStepper extends StatelessWidget {
             semantics: 'scan_fewer'.tr(),
             size: _buttonSize,
             background: AppColors.white,
-            foreground: AppColors.ink,
+            foreground: AppColors.primary,
             borderWidth: _borderWidth,
           ),
           SizedBox(
@@ -207,7 +207,7 @@ class _ScanScreenArrivalSheetStepper extends StatelessWidget {
             label: '+',
             semantics: 'scan_more'.tr(),
             size: _buttonSize,
-            background: AppColors.ink,
+            background: AppColors.primary,
             foreground: AppColors.white,
           ),
         ],

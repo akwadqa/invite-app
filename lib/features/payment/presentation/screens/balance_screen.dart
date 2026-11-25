@@ -51,7 +51,8 @@ class BalanceScreen extends ConsumerWidget {
             child: AppPaginationWidget(
               enablePullDown: true,
               onRefresh: ref.read(balanceControllerProvider.notifier).refresh,
-              onLoading: (_) async => false,
+              onLoading: (_) =>
+                  ref.read(balanceControllerProvider.notifier).loadNextPage(),
               child: ListView(
                 padding: _listPadding,
                 children: [

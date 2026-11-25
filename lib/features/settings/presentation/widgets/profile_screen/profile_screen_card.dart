@@ -46,7 +46,7 @@ class ProfileScreenCard extends StatelessWidget {
             height: _avatarSize,
             alignment: Alignment.center,
             decoration: const BoxDecoration(
-              color: AppColors.ink,
+              color: AppColors.primary,
               shape: BoxShape.circle,
             ),
             child: Text(

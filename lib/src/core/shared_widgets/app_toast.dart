@@ -41,7 +41,7 @@ class AppToast {
     toastification.show(
       autoCloseDuration: const Duration(seconds: 3),
       alignment: Alignment.bottomCenter,
-      primaryColor: AppColors.ink,
+      primaryColor: AppColors.primary,
       showProgressBar: false,
       style: ToastificationStyle.flat,
       type: ToastificationType.info,

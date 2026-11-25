@@ -63,7 +63,7 @@ class _SignInPhoneFieldState extends ConsumerState<SignInPhoneField> {
           borderRadius: BorderRadius.circular(_radius),
           border: Border.all(
             width: _borderWidth,
-            color: _focusNode.hasFocus ? AppColors.ink : AppColors.mistBorder,
+            color: _focusNode.hasFocus ? AppColors.primary : AppColors.mistBorder,
           ),
         ),
         child: Row(
@@ -75,7 +75,7 @@ class _SignInPhoneFieldState extends ConsumerState<SignInPhoneField> {
                 focusNode: _focusNode,
                 keyboardType: TextInputType.phone,
                 inputFormatters: [_formatter],
-                cursorColor: AppColors.ink,
+                cursorColor: AppColors.primary,
                 style: AppTextStyle.outfitRegular18.copyWith(
                   color: AppColors.ink,
                   letterSpacing: _numberLetterSpacing,

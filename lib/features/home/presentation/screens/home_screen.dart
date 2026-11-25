@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
+import 'package:invit/features/event_details/domain/model/guest_stats_model.dart';
 import 'package:invit/features/home/presentation/controller/home_controller.dart';
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_event_row.dart';
 import 'package:invit/features/home/presentation/widgets/home_screen/home_screen_header.dart';
@@ -207,7 +207,7 @@ class _HomeScreenSkeleton extends StatelessWidget {
     title: 'Event title placeholder',
     dateTime: '2030-01-01 20:00:00',
     locationName: 'Venue name',
-    guestReport: GuestReportModel(confirmed: 10, pending: 5, declined: 2),
+    guestStats: GuestStatsModel(confirmed: 10, noReply: 5, declined: 2),
   );
 
   @override

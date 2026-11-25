@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:invit/features/payment/domain/model/balance_entry.dart';
+import 'package:invit/features/payment/domain/model/balance/balance_model.dart';
 import 'package:invit/features/payment/presentation/controller/balance_controller.dart';
 import 'package:invit/features/payment/presentation/widgets/balance_screen/balance_screen_history_row.dart';
 import 'package:invit/src/core/shared_widgets/app_error_widget.dart';
@@ -13,11 +13,11 @@ import 'package:skeletonizer/skeletonizer.dart';
 class BalanceScreenHistory extends ConsumerWidget {
   const BalanceScreenHistory({super.key});
 
-  static final BalanceEntry _placeholder = BalanceEntry(
-    kind: BalanceEntryKind.invitations,
-    label: 'Event title placeholder',
-    date: DateTime(2030),
-    amount: 100,
+  static const BalanceHistoryModel _placeholder = BalanceHistoryModel(
+    title: 'Invitations sent',
+    subtitle: 'Event title placeholder',
+    date: '2030-01-01 00:00:00',
+    amount: -100,
   );
 
   @override
@@ -41,7 +41,7 @@ class BalanceScreenHistory extends ConsumerWidget {
         onTap: () => ref.read(balanceControllerProvider.notifier).retry(),
       );
     }
-    final entries = history.value ?? const <BalanceEntry>[];
+    final entries = history.value ?? const <BalanceHistoryModel>[];
     if (entries.isEmpty) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 24),

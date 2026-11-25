@@ -139,7 +139,7 @@ class _CreateEventFlowTextFieldState extends State<CreateEventFlowTextField> {
         inputFormatters: widget.inputFormatters,
         textInputAction: widget.textInputAction,
         textCapitalization: widget.textCapitalization,
-        cursorColor: AppColors.ink,
+        cursorColor: AppColors.primary,
         style: AppTextStyle.outfitRegular16.copyWith(color: AppColors.ink),
         decoration: InputDecoration(
           hintText: widget.hint,
@@ -152,7 +152,7 @@ class _CreateEventFlowTextFieldState extends State<CreateEventFlowTextField> {
           prefixIcon: widget.prefix,
           border: border(widget.borderColor),
           enabledBorder: border(widget.borderColor),
-          focusedBorder: border(AppColors.ink),
+          focusedBorder: border(AppColors.primary),
         ),
       ),
     );

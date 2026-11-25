@@ -29,7 +29,7 @@ class FindGuestScreenSearchField extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(_radius),
-        border: Border.all(color: AppColors.ink, width: _borderWidth),
+        border: Border.all(color: AppColors.primary, width: _borderWidth),
       ),
       child: Row(
         spacing: 10,
@@ -45,7 +45,7 @@ class FindGuestScreenSearchField extends StatelessWidget {
               onChanged: onChanged,
               autofocus: true,
               textInputAction: TextInputAction.search,
-              cursorColor: AppColors.ink,
+              cursorColor: AppColors.primary,
               style: AppTextStyle.outfitRegular16.copyWith(
                 color: AppColors.ink,
                 height: null,

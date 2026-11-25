@@ -420,6 +420,7 @@ class CreateEventFlowController extends _$CreateEventFlowController {
       mapLatitude: location?.latitude,
       mapLongitude: location?.longitude,
       mapLink: location?.mapLink,
+      hostedBy: state.hostedBy,
       inviteTemplate: state.templateName,
       image: state.image,
       guestList: state.guests.map(_toGuestModel).toList(),

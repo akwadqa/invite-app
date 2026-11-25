@@ -140,7 +140,7 @@ class CreateEventTypeScreenDots extends StatelessWidget {
           width: isActive ? _activeWidth : _dotSize,
           height: _dotSize,
           decoration: BoxDecoration(
-            color: isActive ? AppColors.ink : AppColors.mistDark,
+            color: isActive ? AppColors.primary : AppColors.mistDark,
             borderRadius: BorderRadius.circular(_dotSize / 2),
           ),
         );

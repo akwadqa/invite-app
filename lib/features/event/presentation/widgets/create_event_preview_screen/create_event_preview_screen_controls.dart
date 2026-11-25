@@ -121,10 +121,10 @@ class _CreateEventPreviewScreenTabs extends ConsumerWidget {
         for (final tab in TemplatePreviewTab.values)
           Expanded(
             child: Material(
-              color: tab == selected ? AppColors.ink : AppColors.white,
+              color: tab == selected ? AppColors.primary : AppColors.white,
               shape: StadiumBorder(
                 side: BorderSide(
-                  color: tab == selected ? AppColors.ink : AppColors.mistDark,
+                  color: tab == selected ? AppColors.primary : AppColors.mistDark,
                   width: _borderWidth,
                 ),
               ),

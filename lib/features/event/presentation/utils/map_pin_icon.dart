@@ -25,7 +25,7 @@ abstract class MapPinIcon {
       );
     final paint = Paint()..isAntiAlias = true;
 
-    paint.color = AppColors.ink;
+    paint.color = AppColors.primary;
     canvas.drawPath(
       Path()
         ..moveTo(12, 29)

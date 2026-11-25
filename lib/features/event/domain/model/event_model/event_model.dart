@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
+import 'package:invit/features/event_details/domain/model/guest_stats_model.dart';
 
 part 'event_model.g.dart';
 part 'event_model.freezed.dart';
@@ -12,6 +13,7 @@ abstract class EventModel with _$EventModel {
     @JsonKey(name: 'event_id') String? eventId,
     @JsonKey(name: 'date_time') String? dateTime,
     String? title,
+    @JsonKey(name: 'hosted_by') String? hostedBy,
     String? type,
     String? language,
     String? role,
@@ -32,6 +34,11 @@ abstract class EventModel with _$EventModel {
     @JsonKey(name: 'guest_list') List<GuestModel>? guestList,
 
     @JsonKey(name: 'guest_report') GuestReportModel? guestReport,
+    @JsonKey(name: 'checkin_stats') GuestReportModel? checkinStats,
+    @JsonKey(name: 'guest_stats') GuestStatsModel? guestStats,
+    @JsonKey(name: 'reminder_template') String? reminderTemplate,
+    @JsonKey(name: 'is_upcoming') bool? isUpcoming,
+    @JsonKey(name: 'checkin_status') String? checkinStatus,
     // @JsonKey(name: 'operators') List<HandlerModel>? operators,
     // @JsonKey(name: 'handlers') List<HandlerModel>? handlers,
   }) = _EventModel;

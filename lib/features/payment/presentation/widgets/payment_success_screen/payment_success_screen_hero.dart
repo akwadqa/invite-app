@@ -96,7 +96,7 @@ class _GatheredPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.scale(size.width / 100, size.height / 100);
 
-    final dark = Paint()..color = AppColors.ink;
+    final dark = Paint()..color = AppColors.primary;
     for (final guest in _guests) {
       canvas.drawCircle(guest, 7.5, dark);
     }
@@ -116,7 +116,7 @@ class _GatheredPainter extends CustomPainter {
         ..relativeLineTo(4.5, 4.5)
         ..lineTo(57, 45.5),
       Paint()
-        ..color = AppColors.ink
+        ..color = AppColors.primary
         ..style = PaintingStyle.stroke
         ..strokeWidth = 3
         ..strokeCap = StrokeCap.round

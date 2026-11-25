@@ -3,20 +3,38 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static const Color primary = Color(0xFF3B41C5);
-  static const Color secondPrimary = Color(0xFFA981BB);
-  static const Color primaryOpacity = Color(0xFFA0A3E3);
-  static const Color background = Color(0xFFF6F8FA);
-  static const Color fieldBackground = Color(0xFFEFF0F6);
-  static const Color dividerColor = Color(0xFFEDF1F3);
+  static const Color primary = Color(0xFF5E1A22);
+  static const Color secondPrimary = Color(0xFF4E5133);
+  static const Color primaryOpacity = Color(0xFFD9C2C5);
+  static const Color background = Color(0xFFE4D8C7);
+  static const Color fieldBackground = Color(0xFFF6F2EC);
+  static const Color dividerColor = Color(0xFFEEE8DF);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color cardWhite = Color(0xFFF5F5F5);
-  static const Color redOpacity = Color(0xFFFFF6E5);
-  static const Color orangeOpacity = Color(0xFFFFF6E5);
-  static const Color greenOpacity = Color(0xFFE9F7EF);
-  static const Color shadow = Color(0x3F3B41C5);
-  static const Color dark = Color(0xFF201C11);
+  static const Color cardWhite = Color(0xFFF6F2EC);
+  static const Color redOpacity = Color(0xFFFAEDEB);
+  static const Color orangeOpacity = Color(0xFFF4EEE6);
+  static const Color greenOpacity = Color(0xFFEAF2EC);
+  static const Color shadow = Color(0x3F5E1A22);
+  static const Color dark = Color(0xFF2A1A17);
   static const Color cyan = Color(0xFF5AA8CC);
+  static const Color deepPurple = Color(0xFF270D33);
+  static const Color muted = Color(0xFF8A7B70);
+  static const Color host = Color(0xFF4E5133);
+  static const Color core = Color(0xFFF6F1E9);
+  static const Color ring = Color(0xFFFFFFFF);
+  static const Color akwadCyan1 = Color(0xFF3CC3D9);
+  static const Color akwadCyan2 = Color(0xFF3BBBD7);
+  static const Color akwadCyan3 = Color(0xFF38B2D6);
+  static const Color akwadCyan4 = Color(0xFF36ACD5);
+  static const Color akwadBlue = Color(0xFF2D95D2);
+  static const List<Color> akwadGradient = [
+    akwadCyan1,
+    akwadCyan2,
+    akwadCyan3,
+    akwadCyan4,
+    akwadBlue,
+  ];
+  static const List<double> akwadGradientStops = [0.42, 0.47, 0.54, 0.59, 0.71];
 
   // Invitation Colors – Wedding
   static const Color weddingBg = Color(0xFFFFDCDC);
@@ -49,28 +67,28 @@ abstract class AppColors {
   static const Color otherIcon = Color(0x33F293B7);
 
   static const MaterialColor primarySwatch = MaterialColor(
-    0xFFFD4057, // Base color
+    0xFF5E1A22, // Base color
     <int, Color>{
-      50: Color(0xFFFFEBEE),
-      100: Color(0xFFFFCDD2),
-      200: Color(0xFFEF9A9A),
-      300: Color(0xFFE57373),
-      400: Color(0xFFEF5350),
-      500: Color(0xFFFD4057),
-      600: Color(0xFFE53935),
-      700: Color(0xFFD32F2F),
-      800: Color(0xFFC62828),
-      900: Color(0xFFB71C1C),
+      50: Color(0xFFF3E8E9),
+      100: Color(0xFFE0C6C9),
+      200: Color(0xFFC9A0A5),
+      300: Color(0xFFAE7077),
+      400: Color(0xFF8A424B),
+      500: Color(0xFF5E1A22),
+      600: Color(0xFF541820),
+      700: Color(0xFF46141B),
+      800: Color(0xFF380F16),
+      900: Color(0xFF2A0A10),
     },
   );
   static const Color gray = Color(0xFFAAAAAA);
 
   static const Color rose = Color(0xFFF8D5CC);
-  static const Color darkRed = Color(0xFFBC0000);
-  static const Color textDart = Color(0xFF050E13);
-  static const Color red = Color(0xFFBD2C06);
+  static const Color darkRed = Color(0xFF5E1A22);
+  static const Color textDart = Color(0xFF2A1A17);
+  static const Color red = Color(0xFFA8352C);
 
-  static const Color bodyColor = Color(0xFF576B74);
+  static const Color bodyColor = Color(0xFF6F625B);
   static const Color borderGrey = Color(0xFF979797);
   static const Color black = Color(0xFF000000);
   static const Color black900 = Color(0xFF484848);
@@ -88,99 +106,99 @@ abstract class AppColors {
   static const Color black800 = Color(0xFF444444);
   static const Color stoneGray = Color(0xFF949494);
   static const Color offWhite = Color(0xFFF6F6F6);
-  static const Color newRed = Color(0xFFD75966);
-  static const Color lightPeach = Color(0xFFFFF5F1);
+  static const Color newRed = Color(0xFFB4473D);
+  static const Color lightPeach = Color(0xFFF6F2EC);
   static const Color dimGray = Color(0xFF555555);
   static const Color grayishCharcoal = Color(0xFF595959);
-  static const Color confirmGuest = Color(0xFF289C6D);
-  static const Color waitingGuest = Color(0xFFBC8C1C);
-  static const Color noticeRed = Color(0xFF9F2102);
-  static const Color guestName = Color(0xFF937373);
+  static const Color confirmGuest = Color(0xFF2E6B4F);
+  static const Color waitingGuest = Color(0xFF4E5133);
+  static const Color noticeRed = Color(0xFFA8352C);
+  static const Color guestName = Color(0xFF6F625B);
   static const Color textGrey = Color(0xFF686868);
-  static const Color softOrange = Color(0xFFFFEADA);
-  static const Color softBlue = Color(0xFFE7F2FD);
-  static const Color buttonBackground = Color(0xFFD1D1D1);
+  static const Color softOrange = Color(0xFFF4EEE6);
+  static const Color softBlue = Color(0xFFEEEFE6);
+  static const Color buttonBackground = Color(0xFFD8CEC0);
 
   // Redesign palette, named by role.
   /// Titles, primary buttons, strong text, focused borders, logo guests.
-  static const Color ink = Color(0xFF000000);
+  static const Color ink = Color(0xFF2A1A17);
 
   /// Descriptions and paragraphs.
-  static const Color inkBody = Color(0xFF4A5560);
+  static const Color inkBody = Color(0xFF5A4A43);
 
   /// Field labels and secondary text.
-  static const Color inkLabel = Color(0xFF5B6168);
+  static const Color inkLabel = Color(0xFF6F625B);
 
   /// Faint text and disabled button labels.
-  static const Color inkMuted = Color(0xFF7E878E);
+  static const Color inkMuted = Color(0xFF8A7B70);
 
   /// Screen background behind the content.
-  static const Color pageBackground = Color(0xFFFBFBF8);
+  static const Color pageBackground = Color(0xFFFFFFFF);
 
   /// Hero header, splash background, icon circles.
-  static const Color mist = Color(0xFFDBE3E9);
+  static const Color mist = Color(0xFFF4EEE6);
 
   /// Round secondary buttons and disabled badges.
-  static const Color mistSoft = Color(0xFFE8EDF1);
+  static const Color mistSoft = Color(0xFFF0EAE2);
 
   /// Input and chip backgrounds, empty code cells.
-  static const Color mistLight = Color(0xFFF2F5F7);
+  static const Color mistLight = Color(0xFFF6F2EC);
 
   /// Input borders and disabled primary buttons.
-  static const Color mistBorder = Color(0xFFD5DDE3);
+  static const Color mistBorder = Color(0xFFE6DED2);
 
   /// Button icon badge, logo host dot, avatar badge.
-  static const Color accent = Color(0xFF6AA6DA);
+  static const Color accent = Color(0xFF4E5133);
 
   /// Logo core dot.
-  static const Color accentSecondary = Color(0xFFE1E5AC);
+  static const Color accentSecondary = Color(0xFFB9B48A);
   static const Color akwadInk = Color(0xFF270D33);
 
   /// Inactive dots, drag handles and outlined button borders.
-  static const Color mistDark = Color(0xFFC3CED6);
+  static const Color mistDark = Color(0xFFD8CEC0);
 
   /// Card outlines.
-  static const Color mistOutline = Color(0xFFDCE3E8);
+  static const Color mistOutline = Color(0xFFEAE3D8);
 
   /// Thin dividers inside cards.
-  static const Color mistDivider = Color(0xFFE6EBEF);
+  static const Color mistDivider = Color(0xFFEEE8DF);
 
   /// List chevrons.
-  static const Color inkChevron = Color(0xFF8E989F);
+  static const Color inkChevron = Color(0xFF9A8B80);
 
   /// Declined replies.
-  static const Color inkFaint = Color(0xFF9AA3AB);
+  static const Color inkFaint = Color(0xFFA69A8E);
 
   /// Light blue surfaces (info banners, "no reply" chips).
-  static const Color accentLight = Color(0xFFE1EDF8);
-  static const Color accentSurface = Color(0xFFE8F1FA);
+  static const Color accentLight = Color(0xFFEEEFE6);
+  static const Color accentSurface = Color(0xFFF3F2EA);
 
   /// Text on light blue surfaces.
-  static const Color accentInk = Color(0xFF2F6EA5);
+  static const Color accentInk = Color(0xFF4E5133);
 
   /// Background card of the occasion carousel.
-  static const Color accentPale = Color(0xFFD3E4F3);
+  static const Color accentPale = Color(0xFFF4EEE6);
 
   /// Success surfaces and text.
-  static const Color successLight = Color(0xFFE5F4EC);
-  static const Color success = Color(0xFF1F7A4C);
-  static const Color successDot = Color(0xFF1F9D5B);
-  static const Color successInk = Color(0xFF24503A);
-  static const Color successStrong = Color(0xFF1F6B45);
-  static const Color successText = Color(0xFF2A5A40);
+  static const Color successLight = Color(0xFFEAF2EC);
+  static const Color success = Color(0xFF2E6B4F);
+  static const Color successDot = Color(0xFF2E7D56);
+  static const Color successInk = Color(0xFF2E5B45);
+  static const Color successStrong = Color(0xFF2E6B4F);
+  static const Color successText = Color(0xFF2E5B45);
 
   /// Failed deliveries and destructive actions.
-  static const Color danger = Color(0xFFC2554B);
-  static const Color dangerInk = Color(0xFFB3261E);
-  static const Color dangerLight = Color(0xFFFDECEA);
+  static const Color danger = Color(0xFFB4473D);
+  static const Color dangerInk = Color(0xFFA8352C);
+  static const Color dangerLight = Color(0xFFFAEDEB);
   static const Color dangerDeep = Color(0xFF5A2420);
 
   /// Hero background of the payment-failed screen.
-  static const Color dangerMist = Color(0xFFF7ECEF);
+  static const Color dangerMist = Color(0xFFF8EFED);
 
   /// "Declined" chips.
-  static const Color declinedSurface = Color(0xFFE8EBEE);
-  static const Color declinedInk = Color(0xFF4F575E);
+  static const Color declinedSurface = Color(0xFFF2EDE6);
+  static const Color declinedInk = Color(0xFF5E5249);
 
   /// Secondary text on dark buttons.
   static const Color whiteMuted = Color(0xBFFFFFFF);
@@ -191,10 +209,10 @@ abstract class AppColors {
   static const Color barrier = Color(0x73000000);
 
   /// Guest dots still waiting (dashed) on the daily limit sheet.
-  static const Color inkWaiting = Color(0xFF8E989F);
+  static const Color inkWaiting = Color(0xFF9A8B80);
 
   /// [pageBackground] fully transparent, for fades over lists.
-  static const Color transparentPage = Color(0x00FBFBF8);
+  static const Color transparentPage = Color(0x00FFFFFF);
 
   /// Shadows: soft (cards, icon circles) and medium (floating buttons).
   static const Color shadowFaint = Color(0x0F000000);
@@ -204,9 +222,9 @@ abstract class AppColors {
   static const Color shadowCard = Color(0x29000000);
 
   /// Upload drop zone of the invitation image step.
-  static const Color dropzoneFill = Color(0xFFF5F8FA);
-  static const Color optionSelectedSurface = Color(0xFFF5F8FA);
-  static const Color dropzoneBorder = Color(0xFFE1E5AC);
+  static const Color dropzoneFill = Color(0xFFF6F2EC);
+  static const Color optionSelectedSurface = Color(0xFFF6F2EC);
+  static const Color dropzoneBorder = Color(0xFFB9B48A);
 
   /// Camera backdrop of the check-in scanner, shown until the preview starts.
   static const Color scannerGlow = Color(0xFF8C6A55);

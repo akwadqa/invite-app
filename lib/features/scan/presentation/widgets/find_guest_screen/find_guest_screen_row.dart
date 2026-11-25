@@ -88,7 +88,7 @@ class FindGuestScreenRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               alignment: Alignment.center,
               decoration: const ShapeDecoration(
-                color: AppColors.ink,
+                color: AppColors.primary,
                 shape: StadiumBorder(),
               ),
               child: Text(

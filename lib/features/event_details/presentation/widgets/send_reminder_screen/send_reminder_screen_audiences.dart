@@ -103,7 +103,7 @@ class _SendReminderScreenOption extends StatelessWidget {
           color: isSelected ? AppColors.optionSelectedSurface : AppColors.white,
           borderRadius: BorderRadius.circular(_radius),
           border: Border.all(
-            color: isSelected ? AppColors.ink : AppColors.mistBorder,
+            color: isSelected ? AppColors.primary : AppColors.mistBorder,
             width: isSelected ? _selectedBorder : _border,
           ),
         ),

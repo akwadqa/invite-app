@@ -66,7 +66,7 @@ class _PaymentStepsScreenStep extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: isActive ? AppColors.ink : AppColors.mist,
+                color: isActive ? AppColors.primary : AppColors.mist,
                 shape: BoxShape.circle,
               ),
               child: SizedBox.square(

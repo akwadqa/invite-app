@@ -77,7 +77,7 @@ class BalanceScreenHero extends StatelessWidget {
                 bottom: 16,
                 height: 52,
                 child: Material(
-                  color: AppColors.ink,
+                  color: AppColors.primary,
                   shape: const StadiumBorder(),
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(

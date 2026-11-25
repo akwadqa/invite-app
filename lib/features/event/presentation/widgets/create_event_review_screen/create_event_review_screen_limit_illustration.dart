@@ -45,7 +45,7 @@ class CreateEventReviewScreenLimitIllustration extends StatelessWidget {
               height: _badgeSize,
               alignment: Alignment.center,
               decoration: const BoxDecoration(
-                color: AppColors.ink,
+                color: AppColors.primary,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(color: AppColors.white, spreadRadius: _badgeRing),
@@ -99,7 +99,7 @@ class _CreateEventReviewScreenLimitDotsPainter extends CustomPainter {
     canvas.scale(size.width / _grid, size.height / _grid);
     canvas.drawCircle(_center, _discRadius, Paint()..color = AppColors.mist);
 
-    final filled = Paint()..color = AppColors.ink;
+    final filled = Paint()..color = AppColors.primary;
     for (final center in _filled) {
       canvas.drawCircle(center, _filledRadius, filled);
     }

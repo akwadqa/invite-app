@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
+import 'package:invit/features/event_details/domain/model/guest_stats_model.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
 /// White box with the confirmed / no reply / declined bar and counts.
 class HomeScreenRepliesBar extends StatelessWidget {
-  const HomeScreenRepliesBar({super.key, required this.report});
+  const HomeScreenRepliesBar({super.key, required this.stats});
 
-  final GuestReportModel report;
+  final GuestStatsModel stats;
 
   static const double _radius = 20;
   static const double _barHeight = 8;
@@ -19,7 +19,7 @@ class HomeScreenRepliesBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final noReply = report.pending + report.notSent;
+    final hasGuests = stats.confirmed + stats.noReply + stats.declined > 0;
     return Container(
       padding: _padding,
       decoration: BoxDecoration(
@@ -35,20 +35,23 @@ class HomeScreenRepliesBar extends StatelessWidget {
               height: _barHeight,
               child: Row(
                 spacing: _segmentGap,
-                children: [
-                  _segment(report.confirmed, AppColors.ink),
-                  _segment(noReply, AppColors.accent),
-                  _segment(report.declined, AppColors.inkFaint),
-                ],
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: hasGuests
+                    ? [
+                        _segment(stats.confirmed, AppColors.primary),
+                        _segment(stats.noReply, AppColors.accent),
+                        _segment(stats.declined, AppColors.inkFaint),
+                      ]
+                    : const [_EmptySegment()],
               ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _count(report.confirmed, 'home_confirmed_count'),
-              _count(noReply, 'home_no_reply_count'),
-              _count(report.declined, 'home_declined_count'),
+              _count(stats.confirmed, 'home_confirmed_count'),
+              _count(stats.noReply, 'home_no_reply_count'),
+              _count(stats.declined, 'home_declined_count'),
             ],
           ),
         ],
@@ -76,4 +79,13 @@ class HomeScreenRepliesBar extends StatelessWidget {
     ),
     style: AppTextStyle.outfitRegular13.copyWith(color: AppColors.inkBody),
   );
+}
+
+/// The whole bar in one gray when the event has no guests yet.
+class _EmptySegment extends StatelessWidget {
+  const _EmptySegment();
+
+  @override
+  Widget build(BuildContext context) =>
+      const Expanded(child: ColoredBox(color: AppColors.mistDark));
 }

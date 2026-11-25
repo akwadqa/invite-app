@@ -10,6 +10,7 @@ _EventModel _$EventModelFromJson(Map<String, dynamic> json) => _EventModel(
   eventId: json['event_id'] as String?,
   dateTime: json['date_time'] as String?,
   title: json['title'] as String?,
+  hostedBy: json['hosted_by'] as String?,
   type: json['type'] as String?,
   language: json['language'] as String?,
   role: json['role'] as String?,
@@ -31,6 +32,17 @@ _EventModel _$EventModelFromJson(Map<String, dynamic> json) => _EventModel(
   guestReport: json['guest_report'] == null
       ? null
       : GuestReportModel.fromJson(json['guest_report'] as Map<String, dynamic>),
+  checkinStats: json['checkin_stats'] == null
+      ? null
+      : GuestReportModel.fromJson(
+          json['checkin_stats'] as Map<String, dynamic>,
+        ),
+  guestStats: json['guest_stats'] == null
+      ? null
+      : GuestStatsModel.fromJson(json['guest_stats'] as Map<String, dynamic>),
+  reminderTemplate: json['reminder_template'] as String?,
+  isUpcoming: json['is_upcoming'] as bool?,
+  checkinStatus: json['checkin_status'] as String?,
 );
 
 Map<String, dynamic> _$EventModelToJson(_EventModel instance) =>
@@ -38,6 +50,7 @@ Map<String, dynamic> _$EventModelToJson(_EventModel instance) =>
       'event_id': instance.eventId,
       'date_time': instance.dateTime,
       'title': instance.title,
+      'hosted_by': instance.hostedBy,
       'type': instance.type,
       'language': instance.language,
       'role': instance.role,
@@ -55,6 +68,11 @@ Map<String, dynamic> _$EventModelToJson(_EventModel instance) =>
       'status': instance.status,
       'guest_list': instance.guestList,
       'guest_report': instance.guestReport,
+      'checkin_stats': instance.checkinStats,
+      'guest_stats': instance.guestStats,
+      'reminder_template': instance.reminderTemplate,
+      'is_upcoming': instance.isUpcoming,
+      'checkin_status': instance.checkinStatus,
     };
 
 _GuestModel _$GuestModelFromJson(Map<String, dynamic> json) => _GuestModel(

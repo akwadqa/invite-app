@@ -316,7 +316,7 @@ class _GuestsScreenGuestSheetActions extends StatelessWidget {
           Expanded(
             flex: _resendFlex,
             child: Material(
-              color: AppColors.ink,
+              color: AppColors.primary,
               shape: const StadiumBorder(),
               clipBehavior: Clip.antiAlias,
               child: InkWell(

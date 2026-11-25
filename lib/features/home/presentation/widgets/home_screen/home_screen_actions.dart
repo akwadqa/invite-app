@@ -73,7 +73,7 @@ class HomeScreenActions extends ConsumerWidget {
           ),
         if (name.trim().isNotEmpty)
           Material(
-            color: AppColors.ink,
+            color: AppColors.primary,
             shape: const CircleBorder(),
             clipBehavior: Clip.antiAlias,
             child: InkWell(
@@ -81,7 +81,7 @@ class HomeScreenActions extends ConsumerWidget {
               child: AppInitialsAvatar(
                 name: name,
                 size: _avatarSize,
-                backgroundColor: AppColors.ink,
+                backgroundColor: AppColors.primary,
                 textColor: AppColors.white,
               ),
             ),

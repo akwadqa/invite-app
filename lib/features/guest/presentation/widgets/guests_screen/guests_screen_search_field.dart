@@ -47,7 +47,7 @@ class GuestsScreenSearchField extends StatelessWidget {
               controller: controller,
               onChanged: onChanged,
               textInputAction: TextInputAction.search,
-              cursorColor: AppColors.ink,
+              cursorColor: AppColors.primary,
               style: AppTextStyle.outfitRegular15.copyWith(
                 color: AppColors.ink,
                 height: null,

@@ -151,7 +151,7 @@ class _ProfileScreenLanguageOption extends StatelessWidget {
           color: isSelected ? AppColors.mistLight : AppColors.white,
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
-            color: isSelected ? AppColors.ink : AppColors.mistOutline,
+            color: isSelected ? AppColors.primary : AppColors.mistOutline,
             width: 1.5,
           ),
         ),
@@ -171,7 +171,7 @@ class _ProfileScreenLanguageOption extends StatelessWidget {
                 height: _checkSize,
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
-                  color: AppColors.ink,
+                  color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
                 child: Assets.icons.checkIc.svg(

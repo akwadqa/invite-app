@@ -53,7 +53,7 @@ class SelectLocationScreenSearchField extends StatelessWidget {
             child: TextField(
               onChanged: onChanged,
               textInputAction: TextInputAction.search,
-              cursorColor: AppColors.ink,
+              cursorColor: AppColors.primary,
               style: AppTextStyle.outfitRegular15.copyWith(
                 color: AppColors.ink,
               ),

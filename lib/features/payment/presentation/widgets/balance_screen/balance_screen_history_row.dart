@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:invit/features/payment/domain/model/balance_entry.dart';
+import 'package:invit/features/payment/domain/model/balance/balance_model.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
@@ -9,27 +9,29 @@ import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 class BalanceScreenHistoryRow extends StatelessWidget {
   const BalanceScreenHistoryRow({super.key, required this.entry});
 
-  final BalanceEntry entry;
+  final BalanceHistoryModel entry;
 
   static const double _lineHeight = 1.25;
   static const String _minus = '−';
 
-  String get _title => switch (entry.kind) {
-    BalanceEntryKind.invitations => 'balance_entry_invitations'.tr(),
-    BalanceEntryKind.reminders => 'balance_entry_reminders'.tr(),
-    BalanceEntryKind.purchase => entry.label,
-  };
+  String get _title => entry.title ?? entry.bundle ?? entry.type ?? '';
+
+  String get _amount {
+    final value = (entry.amount ?? 0).abs();
+    final text = value == value.toInt() ? '${value.toInt()}' : '$value';
+    return '${entry.isCredit ? '+' : _minus}$text';
+  }
 
   String _subtitle(BuildContext context) {
-    final date = DateFormat(
-      'd MMM',
-      context.locale.toLanguageTag(),
-    ).format(entry.date);
-    final price = entry.price;
-    final lead = entry.isCredit
-        ? (price == null ? null : 'balance_paid'.tr(args: ['$price']))
-        : entry.label;
-    return lead == null ? date : '$lead · $date';
+    final dateTime = entry.dateTime;
+    final date = dateTime == null
+        ? null
+        : DateFormat('d MMM', context.locale.toLanguageTag()).format(dateTime);
+    final price = entry.paidAmount;
+    final lead = entry.isCredit && price != null
+        ? 'balance_paid'.tr(args: ['$price'])
+        : entry.subtitle;
+    return [lead, date].whereType<String>().where((e) => e.isNotEmpty).join(' · ');
   }
 
   @override
@@ -88,7 +90,7 @@ class BalanceScreenHistoryRow extends StatelessWidget {
             ),
           ),
           Text(
-            '${credit ? '+' : _minus}${entry.amount}',
+            _amount,
             textDirection: TextDirection.ltr,
             style: AppTextStyle.outfitSemiBold15.copyWith(
               color: credit ? AppColors.success : AppColors.ink,

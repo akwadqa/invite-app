@@ -80,7 +80,7 @@ class _PaymentSuccessScreenStep extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: isDone ? AppColors.ink : AppColors.accent,
+                color: isDone ? AppColors.primary : AppColors.accent,
                 shape: BoxShape.circle,
                 boxShadow: isDone
                     ? null
@@ -111,7 +111,7 @@ class _PaymentSuccessScreenStep extends StatelessWidget {
               const SizedBox(
                 width: 2,
                 height: 20,
-                child: ColoredBox(color: AppColors.ink),
+                child: ColoredBox(color: AppColors.primary),
               ),
           ],
         ),

@@ -77,10 +77,10 @@ class _GuestsScreenFilterTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = isSelected ? AppColors.white : AppColors.ink;
     return Material(
-      color: isSelected ? AppColors.ink : AppColors.white,
+      color: isSelected ? AppColors.primary : AppColors.white,
       shape: StadiumBorder(
         side: BorderSide(
-          color: isSelected ? AppColors.ink : AppColors.mistBorder,
+          color: isSelected ? AppColors.primary : AppColors.mistBorder,
           width: _borderWidth,
         ),
       ),

@@ -104,7 +104,7 @@ class _CreateEventImageScreenDropzone extends StatelessWidget {
                     height: _iconCircleSize,
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
-                      color: AppColors.ink,
+                      color: AppColors.primary,
                       shape: BoxShape.circle,
                     ),
                     child: Assets.icons.uploadIc.svg(

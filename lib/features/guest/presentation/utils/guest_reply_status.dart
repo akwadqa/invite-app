@@ -8,8 +8,8 @@ enum GuestReplyStatus {
     'details_confirmed',
     {'Confirmed'},
     background: AppColors.mist,
-    foreground: AppColors.ink,
-    dot: AppColors.ink,
+    foreground: AppColors.primary,
+    dot: AppColors.primary,
   ),
   noReply(
     'details_no_reply',

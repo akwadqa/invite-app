@@ -131,7 +131,7 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
                 trailing: canAddGuests
                     ? AppRoundIconButton(
                         icon: Assets.icons.plusIc,
-                        backgroundColor: AppColors.ink,
+                        backgroundColor: AppColors.primary,
                         iconColor: AppColors.white,
                         onTap: () => context.push(
                           AppRoutes.updateGuestListScreen,
@@ -222,7 +222,7 @@ class _GuestsScreenList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final guests = ref.watch(filteredGuestsProvider(occasionId));
     return RefreshIndicator(
-      color: AppColors.ink,
+      color: AppColors.primary,
       onRefresh: ref
           .read(eventDetailsControllerProvider(ocassionId: occasionId).notifier)
           .refresh,

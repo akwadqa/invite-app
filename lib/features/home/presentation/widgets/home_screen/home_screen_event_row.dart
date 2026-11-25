@@ -7,7 +7,7 @@ import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
-/// Compact event row; past events show how many guests attended.
+/// Compact event row; past events show how many guests were invited.
 class HomeScreenEventRow extends StatelessWidget {
   const HomeScreenEventRow({
     super.key,
@@ -27,10 +27,10 @@ class HomeScreenEventRow extends StatelessWidget {
 
   String _subtitle(BuildContext context) {
     if (!isPast) return HomeEventFormat.whenAndWhere(context, event);
-    final attended = event.guestReport?.scannedCount;
+    final guests = event.guestReport?.totalInvitees;
     return [
       ?HomeEventFormat.fullDate(context, event),
-      if (attended != null) 'home_attended'.tr(args: ['$attended']),
+      if (guests != null) 'home_guests_count'.tr(args: ['$guests']),
     ].join(' · ');
   }
 
