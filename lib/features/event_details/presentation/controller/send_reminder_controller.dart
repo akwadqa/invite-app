@@ -1,9 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
+import 'package:invit/features/event_details/data/repositories/event_details_repository.dart';
 import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
-import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
+import 'package:invit/features/event_details/domain/model/send_reminder_result_model.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
-import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
 import 'package:invit/features/home/presentation/controller/home_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,8 +15,28 @@ part 'send_reminder_controller.g.dart';
 abstract class SendReminderState with _$SendReminderState {
   const factory SendReminderState({
     @Default(ReminderAudience.noReply) ReminderAudience audience,
+
+    /// Sends the reminder. A low balance settles as an error holding a
+    /// `NotEnoughMessagesException`.
+    @Default(AsyncData(null)) AsyncValue<SendReminderResultModel?> send,
   }) = _SendReminderState;
+
+  const SendReminderState._();
+
+  /// The guests of the selected audience, what reminding them costs and the
+  /// [homeBalance] it is checked against.
+  ReminderCost costOf(GuestReportModel report, {required int? homeBalance}) {
+    final guests = audience.countIn(report);
+    return (
+      guests: guests,
+      cost: guests * CreateEventFlowConstants.messagesPerGuest,
+      balance: homeBalance,
+    );
+  }
 }
+
+/// What sending costs and the balance it is checked against.
+typedef ReminderCost = ({int guests, int cost, int? balance});
 
 /// What pressing "Send" led to.
 enum SendReminderOutcome {
@@ -25,11 +46,8 @@ enum SendReminderOutcome {
   /// The balance does not cover the messages: go and recharge.
   needsTopUp,
 
-  /// The messages are being sent; the actions controller reports the result.
+  /// The reminder is being sent; `state.send` reports the result.
   started,
-
-  /// There is no backend action for this audience yet.
-  unavailable,
 }
 
 /// The audience picked on the "Send a reminder" screen and its sending.
@@ -43,32 +61,44 @@ class SendReminderController extends _$SendReminderController {
       state = state.copyWith(audience: audience);
 
   Future<SendReminderOutcome> send() async {
+    if (state.send.isLoading) return SendReminderOutcome.nothing;
     final report =
         ref
             .read(eventDetailsControllerProvider(ocassionId: occasionId))
             .value
             ?.guestReport ??
         const GuestReportModel();
-    final audience = state.audience;
-    final guests = audience.countIn(report);
+    final (:guests, :cost, :balance) = state.costOf(
+      report,
+      homeBalance: ref
+          .read(homeControllerProvider)
+          .value
+          ?.remainingBalance
+          ?.toInt(),
+    );
     if (guests == 0) return SendReminderOutcome.nothing;
 
-    final balance = ref.read(homeControllerProvider).value?.remainingBalance;
-    final cost = guests * CreateEventFlowConstants.messagesPerGuest;
     if (balance != null && balance < cost) {
       return SendReminderOutcome.needsTopUp;
     }
 
-    switch (audience) {
-      case ReminderAudience.notDelivered:
-        await ref
-            .read(eventDetailsActionsControllerProvider(occasionId).notifier)
-            .resendFailed();
-        return SendReminderOutcome.started;
-      case ReminderAudience.noReply || ReminderAudience.confirmed:
-        // TODO(backend): no endpoint sends a reminder to guests who have not
-        // replied or to the confirmed ones. Call it here when it exists.
-        return SendReminderOutcome.unavailable;
+    final repository = ref.read(eventDetailsRepositoryProvider);
+    state = state.copyWith(send: const AsyncLoading());
+    try {
+      final result = await repository.sendReminder(
+        occasionId,
+        audience: state.audience.apiValue,
+      );
+      if (!ref.mounted) return SendReminderOutcome.started;
+      state = state.copyWith(send: AsyncData(result));
+      ref
+          .read(eventDetailsControllerProvider(ocassionId: occasionId).notifier)
+          .refresh();
+      ref.read(homeControllerProvider.notifier).refresh();
+    } catch (error, stackTrace) {
+      if (!ref.mounted) return SendReminderOutcome.started;
+      state = state.copyWith(send: AsyncError(error, stackTrace));
     }
+    return SendReminderOutcome.started;
   }
 }

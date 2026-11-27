@@ -91,6 +91,17 @@ class UnauthorizedException extends ApiException {
   String get defaultMessage => 'unauthorized'.tr();
 }
 
+/// 402: the user's balance does not cover the request. [data] is the
+/// response body, which says what is missing.
+class PaymentRequiredException extends ApiException {
+  PaymentRequiredException(super.r, super.message, {this.data});
+
+  final Object? data;
+
+  @override
+  String get defaultMessage => 'freiendlyErrorMessage'.tr();
+}
+
 class AccessForbiddenException extends ApiException {
   AccessForbiddenException(super.r, [super.message]);
   @override

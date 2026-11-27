@@ -21,6 +21,11 @@ _HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
   occasionTypes: (json['occasion_types'] as List<dynamic>)
       .map((e) => OcationTypeModel.fromJson(e as Map<String, dynamic>))
       .toList(),
+  reminderTemplates: json['reminder_templates'] == null
+      ? null
+      : ReminderTemplatesModel.fromJson(
+          json['reminder_templates'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
@@ -31,6 +36,7 @@ Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
       'events': instance.events,
       'featured_events': instance.featuredEvents,
       'occasion_types': instance.occasionTypes,
+      'reminder_templates': instance.reminderTemplates,
     };
 
 _BundleModel _$BundleModelFromJson(Map<String, dynamic> json) => _BundleModel(

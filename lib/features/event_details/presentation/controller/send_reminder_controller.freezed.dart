@@ -15,7 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SendReminderState {
 
- ReminderAudience get audience;
+ ReminderAudience get audience;/// Sends the reminder. A low balance settles as an error holding a
+/// `NotEnoughMessagesException`.
+ AsyncValue<SendReminderResultModel?> get send;
 /// Create a copy of SendReminderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +29,20 @@ $SendReminderStateCopyWith<SendReminderState> get copyWith => _$SendReminderStat
 @override
 bool operator ==(Object other) {
   final _this = this as SendReminderState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendReminderState&&(identical(other.audience, _this.audience) || other.audience == _this.audience));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendReminderState&&(identical(other.audience, _this.audience) || other.audience == _this.audience)&&(identical(other.send, _this.send) || other.send == _this.send));
 }
 
 
 @override
 int get hashCode {
   final _this = this as SendReminderState;
-  return Object.hash(runtimeType,_this.audience);
+  return Object.hash(runtimeType,_this.audience,_this.send);
 }
 
 @override
 String toString() {
   final _this = this as SendReminderState;
-  return 'SendReminderState(audience: ${_this.audience})';
+  return 'SendReminderState(audience: ${_this.audience}, send: ${_this.send})';
 }
 
 
@@ -51,7 +53,7 @@ abstract mixin class $SendReminderStateCopyWith<$Res>  {
   factory $SendReminderStateCopyWith(SendReminderState value, $Res Function(SendReminderState) _then) = _$SendReminderStateCopyWithImpl;
 @useResult
 $Res call({
- ReminderAudience audience
+ ReminderAudience audience, AsyncValue<SendReminderResultModel?> send
 });
 
 
@@ -68,10 +70,11 @@ class _$SendReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of SendReminderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? audience = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? audience = null,Object? send = null,}) {
   return _then(SendReminderState(
 audience: null == audience ? _self.audience : audience // ignore: cast_nullable_to_non_nullable
-as ReminderAudience,
+as ReminderAudience,send: null == send ? _self.send : send // ignore: cast_nullable_to_non_nullable
+as AsyncValue<SendReminderResultModel?>,
   ));
 }
 
@@ -156,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ReminderAudience audience)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ReminderAudience audience,  AsyncValue<SendReminderResultModel?> send)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SendReminderState() when $default != null:
-return $default(_that.audience);case _:
+return $default(_that.audience,_that.send);case _:
   return orElse();
 
 }
@@ -177,10 +180,10 @@ return $default(_that.audience);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ReminderAudience audience)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ReminderAudience audience,  AsyncValue<SendReminderResultModel?> send)  $default,) {final _that = this;
 switch (_that) {
 case _SendReminderState():
-return $default(_that.audience);case _:
+return $default(_that.audience,_that.send);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +200,10 @@ return $default(_that.audience);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ReminderAudience audience)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ReminderAudience audience,  AsyncValue<SendReminderResultModel?> send)?  $default,) {final _that = this;
 switch (_that) {
 case _SendReminderState() when $default != null:
-return $default(_that.audience);case _:
+return $default(_that.audience,_that.send);case _:
   return null;
 
 }
@@ -211,11 +214,14 @@ return $default(_that.audience);case _:
 /// @nodoc
 
 
-class _SendReminderState implements SendReminderState {
-  const _SendReminderState({this.audience = ReminderAudience.noReply});
+class _SendReminderState extends SendReminderState {
+  const _SendReminderState({this.audience = ReminderAudience.noReply, this.send = const AsyncData(null)}): super._();
   
 
 @override@JsonKey() final  ReminderAudience audience;
+/// Sends the reminder. A low balance settles as an error holding a
+/// `NotEnoughMessagesException`.
+@override@JsonKey() final  AsyncValue<SendReminderResultModel?> send;
 
 /// Create a copy of SendReminderState
 /// with the given fields replaced by the non-null parameter values.
@@ -227,18 +233,18 @@ _$SendReminderStateCopyWith<_SendReminderState> get copyWith => __$SendReminderS
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SendReminderState&&(identical(other.audience, audience) || other.audience == audience));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SendReminderState&&(identical(other.audience, audience) || other.audience == audience)&&(identical(other.send, send) || other.send == send));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,audience);
+    return Object.hash(runtimeType,audience,send);
 }
 
 @override
 String toString() {
-    return 'SendReminderState(audience: $audience)';
+    return 'SendReminderState(audience: $audience, send: $send)';
 }
 
 
@@ -249,7 +255,7 @@ abstract mixin class _$SendReminderStateCopyWith<$Res> implements $SendReminderS
   factory _$SendReminderStateCopyWith(_SendReminderState value, $Res Function(_SendReminderState) _then) = __$SendReminderStateCopyWithImpl;
 @override @useResult
 $Res call({
- ReminderAudience audience
+ ReminderAudience audience, AsyncValue<SendReminderResultModel?> send
 });
 
 
@@ -266,10 +272,11 @@ class __$SendReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of SendReminderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? audience = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? audience = null,Object? send = null,}) {
   return _then(_SendReminderState(
 audience: null == audience ? _self.audience : audience // ignore: cast_nullable_to_non_nullable
-as ReminderAudience,
+as ReminderAudience,send: null == send ? _self.send : send // ignore: cast_nullable_to_non_nullable
+as AsyncValue<SendReminderResultModel?>,
   ));
 }
 

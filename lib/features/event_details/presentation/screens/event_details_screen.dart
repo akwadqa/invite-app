@@ -22,7 +22,6 @@ import 'package:invit/src/core/shared_widgets/app_screen_header.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/utils/functions/async_action_listener.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
-import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 /// Status of a draft event, as sent by the backend.
@@ -278,20 +277,21 @@ class _EventDetailsScreenBody extends ConsumerWidget {
                 ),
                 message: 'details_not_delivered_suffix'.tr(),
                 actionLabel: 'details_resend'.tr(),
-                onAction: () =>
-                    _openReminder(context, ReminderAudience.notDelivered),
+                onAction: () => context.push(
+                  AppRoutes.resendFailedScreen,
+                  extra: occasionId,
+                ),
               ),
             ],
-            if (noReply > 0) ...[
-              const SizedBox(height: _gap),
-              EventDetailsScreenBanner(
-                highlight: 'details_remind_highlight'.tr(args: ['$noReply']),
-                message: 'details_remind_suffix'.tr(),
-                actionLabel: 'details_remind'.tr(),
-                onAction: () =>
-                    _openReminder(context, ReminderAudience.noReply),
-              ),
-            ],
+            const SizedBox(height: _gap),
+            EventDetailsScreenBanner(
+              highlight: noReply > 0
+                  ? 'details_remind_highlight'.tr(args: ['$noReply'])
+                  : 'details_remind_all'.tr(),
+              message: noReply > 0 ? 'details_remind_suffix'.tr() : '',
+              actionLabel: 'details_remind'.tr(),
+              onAction: () => _openReminder(context, ReminderAudience.noReply),
+            ),
           ],
         ],
       ),
@@ -348,84 +348,6 @@ class _EventDetailsScreenSkeleton extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// "Past" chip shown instead of the options once the event is over.
-class _EventDetailsScreenPastChip extends StatelessWidget {
-  const _EventDetailsScreenPastChip();
-
-  static const double _height = 32;
-  static const EdgeInsets _padding = EdgeInsets.symmetric(horizontal: 12);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: _height,
-      padding: _padding,
-      alignment: Alignment.center,
-      decoration: const ShapeDecoration(
-        color: AppColors.mistSoft,
-        shape: StadiumBorder(),
-      ),
-      child: Text(
-        'details_past'.tr(),
-        style: AppTextStyle.outfitMedium13.copyWith(color: AppColors.inkLabel),
-      ),
-    );
-  }
-}
-
-/// "More" button with the event's options (editing a draft).
-class _EventDetailsScreenMoreButton extends StatelessWidget {
-  const _EventDetailsScreenMoreButton({
-    required this.event,
-    required this.canEdit,
-  });
-
-  final EventModel event;
-
-  /// Only draft events can be edited.
-  final bool canEdit;
-
-  static const double _size = 44;
-  static const double _iconSize = 18;
-
-  @override
-  Widget build(BuildContext context) {
-    return PopupMenuButton<VoidCallback>(
-      color: AppColors.white,
-      padding: EdgeInsets.zero,
-      onSelected: (action) => action(),
-      // TODO(design): the design shows this button without its options; only
-      // "Edit event" exists for now. Add the other options when they are known.
-      itemBuilder: (_) => [
-        PopupMenuItem(
-          enabled: canEdit,
-          value: () => context.push(AppRoutes.updateEventScreen, extra: event),
-          child: Text(
-            'details_edit_event'.tr(),
-            style: AppTextStyle.outfitMedium14.copyWith(
-              color: canEdit ? AppColors.ink : AppColors.inkMuted,
-            ),
-          ),
-        ),
-      ],
-      child: Container(
-        width: _size,
-        height: _size,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: AppColors.mistSoft,
-          shape: BoxShape.circle,
-        ),
-        child: Assets.icons.moreHorizontalIc.svg(
-          width: _iconSize,
-          height: _iconSize,
-          colorFilter: const ColorFilter.mode(AppColors.ink, BlendMode.srcIn),
-        ),
       ),
     );
   }

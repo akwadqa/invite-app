@@ -1,4 +1,5 @@
 import 'package:invit/features/event/data/repository/event_repository.dart';
+import 'package:invit/features/event_details/data/repositories/event_details_repository.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_actions_state.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/guest/data/repository/guest_repository.dart';
@@ -8,8 +9,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'event_details_actions_controller.g.dart';
 
-/// One-off actions on an event: send a draft, resend failed invitations and
-/// remove a guest. Each one reloads the event when it succeeds.
+/// One-off actions on an event: send a draft, resend failed invitations,
+/// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
 @riverpod
 class EventDetailsActionsController extends _$EventDetailsActionsController {
   @override
@@ -46,9 +47,27 @@ class EventDetailsActionsController extends _$EventDetailsActionsController {
       if (data == null) throw AppException(message: response.message);
       state = state.copyWith(resendFailed: AsyncData(data));
       _reloadEvent();
+      ref.read(homeControllerProvider.notifier).refresh();
     } catch (error, stackTrace) {
       if (!ref.mounted) return;
       state = state.copyWith(resendFailed: AsyncError(error, stackTrace));
+    }
+  }
+
+  /// A low balance settles as an error holding a `NotEnoughMessagesException`.
+  Future<void> resendInvitation(String inviteeId) async {
+    if (state.resendInvitation.isLoading) return;
+    final repository = ref.read(eventDetailsRepositoryProvider);
+    state = state.copyWith(resendInvitation: const AsyncLoading());
+    try {
+      final result = await repository.resendInvitation(inviteeId);
+      if (!ref.mounted) return;
+      state = state.copyWith(resendInvitation: AsyncData(result));
+      _reloadEvent();
+      ref.read(homeControllerProvider.notifier).refresh();
+    } catch (error, stackTrace) {
+      if (!ref.mounted) return;
+      state = state.copyWith(resendInvitation: AsyncError(error, stackTrace));
     }
   }
 

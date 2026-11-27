@@ -3,30 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:invit/features/event_details/domain/exceptions/not_enough_messages_exception.dart';
 import 'package:invit/features/event_details/domain/model/guest_report_model.dart';
-import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
+import 'package:invit/features/event_details/domain/model/send_reminder_result_model.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/event_details/presentation/controller/send_reminder_controller.dart';
 import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
 import 'package:invit/features/event_details/presentation/widgets/send_reminder_screen/send_reminder_screen_audiences.dart';
 import 'package:invit/features/event_details/presentation/widgets/send_reminder_screen/send_reminder_screen_cost.dart';
 import 'package:invit/features/event_details/presentation/widgets/send_reminder_screen/send_reminder_screen_preview.dart';
-import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
 import 'package:invit/features/home/presentation/controller/home_controller.dart';
+import 'package:invit/features/payment/presentation/utils/offer_recharge.dart';
 import 'package:invit/features/payment/presentation/utils/recharge_request.dart';
 import 'package:invit/gen/assets.gen.dart';
-import 'package:invit/src/application/router/app_routes.dart';
-import 'package:invit/src/core/shared_widgets/app_low_balance_sheet.dart';
 import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
 import 'package:invit/src/core/shared_widgets/app_screen_header.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/utils/functions/async_action_listener.dart';
-import 'package:invit/src/core/utils/functions/coming_soon.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
-/// Send a message again to the guests who have not replied, the confirmed
-/// ones or the ones it was not delivered to, after checking it and its cost.
+/// Remind the guests who have not replied or the confirmed ones, after
+/// checking the message and its cost.
 class SendReminderScreen extends ConsumerWidget {
   const SendReminderScreen({super.key, required this.args});
 
@@ -39,77 +37,96 @@ class SendReminderScreen extends ConsumerWidget {
   static const double _sectionGap = 20;
   static const double _blockGap = 16;
 
+  SendReminderControllerProvider get _provider =>
+      sendReminderControllerProvider(args.occasionId, args.audience);
+
   Future<void> _send(
     BuildContext context,
     WidgetRef ref, {
-    required int guests,
-    required int cost,
-    required int? balance,
+    required ReminderCost cost,
   }) async {
-    final outcome = await ref
-        .read(
-          sendReminderControllerProvider(
-            args.occasionId,
-            args.audience,
-          ).notifier,
-        )
-        .send();
+    final outcome = await ref.read(_provider.notifier).send();
     if (!context.mounted) return;
     switch (outcome) {
       case SendReminderOutcome.needsTopUp:
-        final audience = ref
-            .read(
-              sendReminderControllerProvider(args.occasionId, args.audience),
-            )
-            .audience;
-        final recharge = await AppLowBalanceSheet.show(
+        await _offerRecharge(
           context,
-          message: audience.lowBalanceKey.tr(
-            args: ['$guests', '$cost', '${balance ?? 0}'],
-          ),
-          needed: cost,
-          balance: balance ?? 0,
+          ref,
+          guests: cost.guests,
+          needed: cost.cost,
+          balance: cost.balance ?? 0,
         );
-        if (!recharge || !context.mounted) return;
-        await context.push(
-          AppRoutes.rechargeScreen,
-          extra: RechargeRequest(
-            needed: cost,
-            eventId: args.occasionId,
-            followUp: audience == ReminderAudience.notDelivered
-                ? PaymentFollowUp.resendFailed
-                : PaymentFollowUp.none,
-          ),
-        );
-        if (!context.mounted) return;
-        ref.read(homeControllerProvider.notifier).refresh();
-      case SendReminderOutcome.unavailable:
-        showComingSoon();
-      case SendReminderOutcome.nothing || SendReminderOutcome.started:
+      case SendReminderOutcome.nothing:
+      case SendReminderOutcome.started:
         break;
     }
   }
 
+  Future<void> _offerRecharge(
+    BuildContext context,
+    WidgetRef ref, {
+    required int guests,
+    required int needed,
+    required int balance,
+  }) async {
+    final audience = ref.read(_provider).audience;
+    await offerRecharge(
+      context,
+      ref,
+      message: audience.lowBalanceKey.tr(
+        args: ['$guests', '$needed', '$balance'],
+      ),
+      balance: balance,
+      request: RechargeRequest(needed: needed, eventId: args.occasionId),
+    );
+  }
+
+  void _onSent(
+    BuildContext context,
+    WidgetRef ref,
+    AsyncValue<SendReminderResultModel?> result,
+  ) {
+    final error = result.error;
+    if (error is NotEnoughMessagesException) {
+      final report =
+          ref
+              .read(eventDetailsControllerProvider(ocassionId: args.occasionId))
+              .value
+              ?.guestReport ??
+          const GuestReportModel();
+      final details = error.details;
+      final needed = details.needed ?? 0;
+      _offerRecharge(
+        context,
+        ref,
+        guests: ref.read(_provider).audience.countIn(report),
+        needed: needed,
+        balance: details.available ?? needed - (details.missing ?? needed),
+      );
+      return;
+    }
+    if (result.hasError) {
+      AppToast.errorToast(error.toString());
+      return;
+    }
+    final reminded = result.value?.remindedCount;
+    AppToast.doneToast(
+      reminded == null
+          ? 'reminder_done'.tr()
+          : 'reminder_done_count'.tr(args: ['$reminded']),
+    );
+    if (context.canPop()) context.pop();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // This screen owns the resend: it shows the loading dialog and the
-    // result, then closes.
     ref.listen(
-      eventDetailsActionsControllerProvider(
-        args.occasionId,
-      ).select((state) => state.resendFailed),
+      _provider.select((state) => state.send),
       (previous, next) => handleAsyncAction(
         context,
         previous,
         next,
-        onSettled: (result) {
-          if (result.hasError) {
-            AppToast.errorToast(result.error.toString());
-            return;
-          }
-          AppToast.doneToast('details_resend_done'.tr());
-          if (context.canPop()) context.pop();
-        },
+        onSettled: (result) => _onSent(context, ref, result),
       ),
     );
 
@@ -123,19 +140,13 @@ class SendReminderScreen extends ConsumerWidget {
         ocassionId: args.occasionId,
       ).select((event) => event.value?.guestReport ?? const GuestReportModel()),
     );
-    final audience = ref.watch(
-      sendReminderControllerProvider(
-        args.occasionId,
-        args.audience,
-      ).select((state) => state.audience),
-    );
-    final balance = ref.watch(
+    final homeBalance = ref.watch(
       homeControllerProvider.select(
         (home) => home.value?.remainingBalance?.toInt(),
       ),
     );
-    final guests = audience.countIn(report);
-    final cost = guests * CreateEventFlowConstants.messagesPerGuest;
+    final state = ref.watch(_provider);
+    final cost = state.costOf(report, homeBalance: homeBalance);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -156,7 +167,10 @@ class SendReminderScreen extends ConsumerWidget {
                     _SendReminderScreenLabel('reminder_what'.tr()),
                     SendReminderScreenPreview(args: args),
                     const SizedBox(height: _blockGap),
-                    SendReminderScreenCost(cost: cost, balance: balance),
+                    SendReminderScreenCost(
+                      cost: cost.cost,
+                      balance: cost.balance,
+                    ),
                   ],
                 ),
               ),
@@ -167,17 +181,11 @@ class SendReminderScreen extends ConsumerWidget {
               child: Padding(
                 padding: _bottomPadding,
                 child: AppPrimaryButton(
-                  label: 'reminder_send'.tr(args: ['$guests']),
+                  label: 'reminder_send'.tr(args: ['${cost.guests}']),
                   icon: Assets.icons.sendIc,
                   mirrorIconInRtl: false,
-                  isEnabled: guests > 0,
-                  onPressed: () => _send(
-                    context,
-                    ref,
-                    guests: guests,
-                    cost: cost,
-                    balance: balance,
-                  ),
+                  isEnabled: cost.guests > 0,
+                  onPressed: () => _send(context, ref, cost: cost),
                 ),
               ),
             ),

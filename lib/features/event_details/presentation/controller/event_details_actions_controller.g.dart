@@ -8,23 +8,23 @@ part of 'event_details_actions_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// One-off actions on an event: send a draft, resend failed invitations and
-/// remove a guest. Each one reloads the event when it succeeds.
+/// One-off actions on an event: send a draft, resend failed invitations,
+/// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
 
 @ProviderFor(EventDetailsActionsController)
 final eventDetailsActionsControllerProvider =
     EventDetailsActionsControllerFamily._();
 
-/// One-off actions on an event: send a draft, resend failed invitations and
-/// remove a guest. Each one reloads the event when it succeeds.
+/// One-off actions on an event: send a draft, resend failed invitations,
+/// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
 final class EventDetailsActionsControllerProvider
     extends
         $NotifierProvider<
           EventDetailsActionsController,
           EventDetailsActionsState
         > {
-  /// One-off actions on an event: send a draft, resend failed invitations and
-  /// remove a guest. Each one reloads the event when it succeeds.
+  /// One-off actions on an event: send a draft, resend failed invitations,
+  /// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
   EventDetailsActionsControllerProvider._({
     required EventDetailsActionsControllerFamily super.from,
     required String super.argument,
@@ -71,10 +71,10 @@ final class EventDetailsActionsControllerProvider
 }
 
 String _$eventDetailsActionsControllerHash() =>
-    r'2cb7aaf312ee8087874e975d61ab94cfff723805';
+    r'955dbe45d11bbd986719aa42f3f68f9e0f6a7285';
 
-/// One-off actions on an event: send a draft, resend failed invitations and
-/// remove a guest. Each one reloads the event when it succeeds.
+/// One-off actions on an event: send a draft, resend failed invitations,
+/// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
 
 final class EventDetailsActionsControllerFamily extends $Family
     with
@@ -94,8 +94,8 @@ final class EventDetailsActionsControllerFamily extends $Family
         isAutoDispose: true,
       );
 
-  /// One-off actions on an event: send a draft, resend failed invitations and
-  /// remove a guest. Each one reloads the event when it succeeds.
+  /// One-off actions on an event: send a draft, resend failed invitations,
+  /// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
 
   EventDetailsActionsControllerProvider call(String occasionId) =>
       EventDetailsActionsControllerProvider._(argument: occasionId, from: this);
@@ -104,8 +104,8 @@ final class EventDetailsActionsControllerFamily extends $Family
   String toString() => r'eventDetailsActionsControllerProvider';
 }
 
-/// One-off actions on an event: send a draft, resend failed invitations and
-/// remove a guest. Each one reloads the event when it succeeds.
+/// One-off actions on an event: send a draft, resend failed invitations,
+/// resend one guest's invitation and remove a guest. Each one reloads the event when it succeeds.
 
 abstract class _$EventDetailsActionsController
     extends $Notifier<EventDetailsActionsState> {

@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
+import 'package:invit/features/event/presentation/utils/create_event_flow_constants.dart';
 import 'package:invit/features/event/presentation/utils/guest_phone_number.dart';
+import 'package:invit/features/event_details/domain/exceptions/not_enough_messages_exception.dart';
 import 'package:invit/features/event_details/presentation/controller/event_details_actions_controller.dart';
 import 'package:invit/features/guest/presentation/utils/edit_guest_screen_args.dart';
 import 'package:invit/features/guest/presentation/utils/guest_reply_status.dart';
+import 'package:invit/features/payment/presentation/utils/offer_recharge.dart';
+import 'package:invit/features/payment/presentation/utils/recharge_request.dart';
 import 'package:invit/gen/assets.gen.dart';
 import 'package:invit/src/application/router/app_routes.dart';
 import 'package:invit/src/core/shared_widgets/app_dialogs.dart';
@@ -14,7 +18,6 @@ import 'package:invit/src/core/shared_widgets/app_initials_avatar.dart';
 import 'package:invit/src/core/shared_widgets/app_round_icon_button.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/utils/functions/async_action_listener.dart';
-import 'package:invit/src/core/utils/functions/coming_soon.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
@@ -87,8 +90,59 @@ class GuestsScreenGuestSheet extends ConsumerWidget {
         .removeGuest(inviteeId);
   }
 
+  void _resend(WidgetRef ref) {
+    final inviteeId = guest.inviteeId;
+    if (inviteeId == null) return;
+    ref
+        .read(eventDetailsActionsControllerProvider(occasionId).notifier)
+        .resendInvitation(inviteeId);
+  }
+
+  void _onResent(
+    BuildContext context,
+    WidgetRef ref,
+    AsyncValue<Object?> result,
+  ) {
+    final error = result.error;
+    if (error is NotEnoughMessagesException) {
+      final needed =
+          error.details.needed ?? CreateEventFlowConstants.messagesPerGuest;
+      offerRecharge(
+        context,
+        ref,
+        message: 'low_balance_resend_one'.tr(
+          args: [
+            guest.fullName ?? '',
+            '$needed',
+            '${error.details.available ?? 0}',
+          ],
+        ),
+        balance: error.details.available ?? 0,
+        request: RechargeRequest(needed: needed, eventId: occasionId),
+      );
+      return;
+    }
+    if (result.hasError) {
+      AppToast.errorToast(error.toString());
+      return;
+    }
+    AppToast.doneToast('guests_resend_done'.tr());
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(
+      eventDetailsActionsControllerProvider(
+        occasionId,
+      ).select((state) => state.resendInvitation),
+      (previous, next) => handleAsyncAction(
+        context,
+        previous,
+        next,
+        onSettled: (result) => _onResent(context, ref, result),
+      ),
+    );
     ref.listen(
       eventDetailsActionsControllerProvider(
         occasionId,
@@ -208,7 +262,10 @@ class GuestsScreenGuestSheet extends ConsumerWidget {
               ),
             ],
           ),
-          _GuestsScreenGuestSheetActions(onEdit: () => _edit(context)),
+          _GuestsScreenGuestSheetActions(
+            onEdit: () => _edit(context),
+            onResend: guest.inviteeId == null ? null : () => _resend(ref),
+          ),
           if (guest.inviteeId != null)
             _GuestsScreenGuestSheetRemoveButton(
               onTap: () => _confirmRemove(context, ref),
@@ -271,9 +328,15 @@ class _GuestsScreenGuestSheetInfo extends StatelessWidget {
 
 /// "Edit" and "Resend invitation" buttons (widths 10 : 16).
 class _GuestsScreenGuestSheetActions extends StatelessWidget {
-  const _GuestsScreenGuestSheetActions({required this.onEdit});
+  const _GuestsScreenGuestSheetActions({
+    required this.onEdit,
+    required this.onResend,
+  });
 
   final VoidCallback onEdit;
+
+  /// `null` when the guest cannot be resent to (not saved yet).
+  final VoidCallback? onResend;
 
   static const double _height = 52;
   static const double _borderWidth = 1.5;
@@ -321,8 +384,7 @@ class _GuestsScreenGuestSheetActions extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: InkWell(
                 splashColor: AppColors.white.withValues(alpha: 0.12),
-                // TODO(backend): no endpoint to resend one guest's invitation.
-                onTap: showComingSoon,
+                onTap: onResend,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   spacing: 8,

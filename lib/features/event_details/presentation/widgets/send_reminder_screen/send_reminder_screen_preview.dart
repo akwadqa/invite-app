@@ -6,6 +6,8 @@ import 'package:invit/features/event/presentation/widgets/create_event_preview_s
 import 'package:invit/features/event_details/presentation/controller/event_details_controller.dart';
 import 'package:invit/features/event_details/presentation/controller/send_reminder_controller.dart';
 import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
+import 'package:invit/features/home/domain/model/reminder_templates/reminder_templates_model.dart';
+import 'package:invit/features/home/presentation/controller/home_controller.dart';
 import 'package:invit/features/home/presentation/utils/home_event_format.dart';
 import 'package:invit/src/resourses/color_manager/app_colors.dart';
 
@@ -29,6 +31,23 @@ class SendReminderScreenPreview extends ConsumerWidget {
     );
   }
 
+  /// The message exactly as the backend template defines it.
+  static CreateEventPreviewMessage _fromTemplate(
+    ReminderTemplateModel template,
+  ) {
+    return CreateEventPreviewMessage(
+      title: template.header,
+      message: template.message,
+      imagePath: template.image,
+      footer: template.footer,
+      buttons: [
+        for (final button
+            in template.buttons ?? const <ReminderTemplateButton>[])
+          if (button.label?.isNotEmpty ?? false) button.label!,
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final audience = ref.watch(
@@ -36,6 +55,15 @@ class SendReminderScreenPreview extends ConsumerWidget {
         args.occasionId,
         args.audience,
       ).select((state) => state.audience),
+    );
+    final template = ref.watch(
+      homeControllerProvider.select(
+        (home) => switch (audience) {
+          ReminderAudience.noReply => home.value?.reminderTemplates?.noReply,
+          ReminderAudience.confirmed =>
+            home.value?.reminderTemplates?.confirmed,
+        },
+      ),
     );
     final event = ref
         .watch(eventDetailsControllerProvider(ocassionId: args.occasionId))
@@ -61,12 +89,14 @@ class SendReminderScreenPreview extends ConsumerWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: CreateEventPreviewScreenIncomingBubble(
-            message: CreateEventPreviewMessage(
-              title: audience.titleKey.tr(namedArgs: names),
-              message: audience.bodyKey.tr(namedArgs: names),
-              footer: 'create_preview_kindly_reply'.tr(),
-              buttons: [for (final key in audience.buttonKeys) key.tr()],
-            ),
+            message: template?.available == true
+                ? _fromTemplate(template!)
+                : CreateEventPreviewMessage(
+                    title: audience.titleKey.tr(namedArgs: names),
+                    message: audience.bodyKey.tr(namedArgs: names),
+                    footer: 'create_preview_kindly_reply'.tr(),
+                    buttons: [for (final key in audience.buttonKeys) key.tr()],
+                  ),
           ),
         ),
       ),

@@ -11,6 +11,7 @@ abstract class AppRoutes {
   static const String selectLocationScreen = '/select_location';
   static const String guestsScreen = '/guest_screen';
   static const String sendReminderScreen = '/send_reminder';
+  static const String resendFailedScreen = '/resend_failed';
   static const String editGuestScreen = '/edit_guest';
   static const String mainScreen = '/main';
   static const String notificationScreen = '/notification';

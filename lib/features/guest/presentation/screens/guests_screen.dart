@@ -109,9 +109,12 @@ class _GuestsScreenState extends ConsumerState<GuestsScreen> {
                 args: ['$failed', '$failed'],
               ),
               // TODO(backend): no endpoint to fix a guest's number before
-              // resending; the reminder screen only resends the failed
+              // resending; the resend screen only resends the failed
               // invitations for now.
-              onPressed: () => _openReminder(ReminderAudience.notDelivered),
+              onPressed: () => context.push(
+                AppRoutes.resendFailedScreen,
+                extra: _occasionId,
+              ),
             ),
             _ => null,
           };

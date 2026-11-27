@@ -167,13 +167,13 @@ class EventDetailsScreenBanner extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   alignment: Alignment.center,
                   decoration: const ShapeDecoration(
-                    color: AppColors.accent,
+                    color: AppColors.dangerLight,
                     shape: StadiumBorder(),
                   ),
                   child: Text(
                     actionLabel,
                     style: AppTextStyle.outfitMedium14.copyWith(
-                      color: AppColors.ink,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),

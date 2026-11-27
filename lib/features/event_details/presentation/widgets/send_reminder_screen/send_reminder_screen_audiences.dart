@@ -33,14 +33,8 @@ class SendReminderScreenAudiences extends ConsumerWidget {
     final notifier = ref.read(
       sendReminderControllerProvider(args.occasionId, args.audience).notifier,
     );
-    // "Not delivered" is offered only when there is something to resend.
-    final audiences = [
-      for (final audience in ReminderAudience.values)
-        if (audience != ReminderAudience.notDelivered ||
-            audience.countIn(report) > 0 ||
-            audience == args.audience)
-          audience,
-    ];
+    // Only the guests who have not replied and the confirmed ones are offered.
+    const audiences = [ReminderAudience.noReply, ReminderAudience.confirmed];
 
     return Column(
       spacing: _gap,

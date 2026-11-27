@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeModel {
 
-@JsonKey(name: 'remaining_balance') num? get remainingBalance;@JsonKey(name: 'consuming_balance') num? get consumingBalance; List<BundleModel> get bundles; List<EventModel> get events;@JsonKey(name: 'featured_events') List<EventModel> get featuredEvents;@JsonKey(name: 'occasion_types') List<OcationTypeModel> get occasionTypes;
+@JsonKey(name: 'remaining_balance') num? get remainingBalance;@JsonKey(name: 'consuming_balance') num? get consumingBalance; List<BundleModel> get bundles; List<EventModel> get events;@JsonKey(name: 'featured_events') List<EventModel> get featuredEvents;@JsonKey(name: 'occasion_types') List<OcationTypeModel> get occasionTypes;@JsonKey(name: 'reminder_templates') ReminderTemplatesModel? get reminderTemplates;
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $HomeModelCopyWith<HomeModel> get copyWith => _$HomeModelCopyWithImpl<HomeModel>
 @override
 bool operator ==(Object other) {
   final _this = this as HomeModel;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.remainingBalance, _this.remainingBalance) || other.remainingBalance == _this.remainingBalance)&&(identical(other.consumingBalance, _this.consumingBalance) || other.consumingBalance == _this.consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, _this.bundles)&&const DeepCollectionEquality().equals(other.events, _this.events)&&const DeepCollectionEquality().equals(other.featuredEvents, _this.featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, _this.occasionTypes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.remainingBalance, _this.remainingBalance) || other.remainingBalance == _this.remainingBalance)&&(identical(other.consumingBalance, _this.consumingBalance) || other.consumingBalance == _this.consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, _this.bundles)&&const DeepCollectionEquality().equals(other.events, _this.events)&&const DeepCollectionEquality().equals(other.featuredEvents, _this.featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, _this.occasionTypes)&&(identical(other.reminderTemplates, _this.reminderTemplates) || other.reminderTemplates == _this.reminderTemplates));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as HomeModel;
-  return Object.hash(runtimeType,_this.remainingBalance,_this.consumingBalance,const DeepCollectionEquality().hash(_this.bundles),const DeepCollectionEquality().hash(_this.events),const DeepCollectionEquality().hash(_this.featuredEvents),const DeepCollectionEquality().hash(_this.occasionTypes));
+  return Object.hash(runtimeType,_this.remainingBalance,_this.consumingBalance,const DeepCollectionEquality().hash(_this.bundles),const DeepCollectionEquality().hash(_this.events),const DeepCollectionEquality().hash(_this.featuredEvents),const DeepCollectionEquality().hash(_this.occasionTypes),_this.reminderTemplates);
 }
 
 @override
 String toString() {
   final _this = this as HomeModel;
-  return 'HomeModel(remainingBalance: ${_this.remainingBalance}, consumingBalance: ${_this.consumingBalance}, bundles: ${_this.bundles}, events: ${_this.events}, featuredEvents: ${_this.featuredEvents}, occasionTypes: ${_this.occasionTypes})';
+  return 'HomeModel(remainingBalance: ${_this.remainingBalance}, consumingBalance: ${_this.consumingBalance}, bundles: ${_this.bundles}, events: ${_this.events}, featuredEvents: ${_this.featuredEvents}, occasionTypes: ${_this.occasionTypes}, reminderTemplates: ${_this.reminderTemplates})';
 }
 
 
@@ -54,11 +54,11 @@ abstract mixin class $HomeModelCopyWith<$Res>  {
   factory $HomeModelCopyWith(HomeModel value, $Res Function(HomeModel) _then) = _$HomeModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'remaining_balance') num? remainingBalance,@JsonKey(name: 'consuming_balance') num? consumingBalance, List<BundleModel> bundles, List<EventModel> events,@JsonKey(name: 'featured_events') List<EventModel> featuredEvents,@JsonKey(name: 'occasion_types') List<OcationTypeModel> occasionTypes
+@JsonKey(name: 'remaining_balance') num? remainingBalance,@JsonKey(name: 'consuming_balance') num? consumingBalance, List<BundleModel> bundles, List<EventModel> events,@JsonKey(name: 'featured_events') List<EventModel> featuredEvents,@JsonKey(name: 'occasion_types') List<OcationTypeModel> occasionTypes,@JsonKey(name: 'reminder_templates') ReminderTemplatesModel? reminderTemplates
 });
 
 
-
+$ReminderTemplatesModelCopyWith<$Res>? get reminderTemplates;
 
 }
 /// @nodoc
@@ -71,7 +71,7 @@ class _$HomeModelCopyWithImpl<$Res>
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? remainingBalance = freezed,Object? consumingBalance = freezed,Object? bundles = null,Object? events = null,Object? featuredEvents = null,Object? occasionTypes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? remainingBalance = freezed,Object? consumingBalance = freezed,Object? bundles = null,Object? events = null,Object? featuredEvents = null,Object? occasionTypes = null,Object? reminderTemplates = freezed,}) {
   return _then(HomeModel(
 remainingBalance: freezed == remainingBalance ? _self.remainingBalance : remainingBalance // ignore: cast_nullable_to_non_nullable
 as num?,consumingBalance: freezed == consumingBalance ? _self.consumingBalance : consumingBalance // ignore: cast_nullable_to_non_nullable
@@ -79,10 +79,23 @@ as num?,bundles: null == bundles ? _self.bundles : bundles // ignore: cast_nulla
 as List<BundleModel>,events: null == events ? _self.events : events // ignore: cast_nullable_to_non_nullable
 as List<EventModel>,featuredEvents: null == featuredEvents ? _self.featuredEvents : featuredEvents // ignore: cast_nullable_to_non_nullable
 as List<EventModel>,occasionTypes: null == occasionTypes ? _self.occasionTypes : occasionTypes // ignore: cast_nullable_to_non_nullable
-as List<OcationTypeModel>,
+as List<OcationTypeModel>,reminderTemplates: freezed == reminderTemplates ? _self.reminderTemplates : reminderTemplates // ignore: cast_nullable_to_non_nullable
+as ReminderTemplatesModel?,
   ));
 }
+/// Create a copy of HomeModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ReminderTemplatesModelCopyWith<$Res>? get reminderTemplates {
+    if (_self.reminderTemplates == null) {
+    return null;
+  }
 
+  return $ReminderTemplatesModelCopyWith<$Res>(_self.reminderTemplates!, (value) {
+    return _then(_self.copyWith(reminderTemplates: value));
+  });
+}
 }
 
 
@@ -164,10 +177,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'remaining_balance')  num? remainingBalance, @JsonKey(name: 'consuming_balance')  num? consumingBalance,  List<BundleModel> bundles,  List<EventModel> events, @JsonKey(name: 'featured_events')  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types')  List<OcationTypeModel> occasionTypes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'remaining_balance')  num? remainingBalance, @JsonKey(name: 'consuming_balance')  num? consumingBalance,  List<BundleModel> bundles,  List<EventModel> events, @JsonKey(name: 'featured_events')  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types')  List<OcationTypeModel> occasionTypes, @JsonKey(name: 'reminder_templates')  ReminderTemplatesModel? reminderTemplates)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeModel() when $default != null:
-return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_that.events,_that.featuredEvents,_that.occasionTypes);case _:
+return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_that.events,_that.featuredEvents,_that.occasionTypes,_that.reminderTemplates);case _:
   return orElse();
 
 }
@@ -185,10 +198,10 @@ return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'remaining_balance')  num? remainingBalance, @JsonKey(name: 'consuming_balance')  num? consumingBalance,  List<BundleModel> bundles,  List<EventModel> events, @JsonKey(name: 'featured_events')  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types')  List<OcationTypeModel> occasionTypes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'remaining_balance')  num? remainingBalance, @JsonKey(name: 'consuming_balance')  num? consumingBalance,  List<BundleModel> bundles,  List<EventModel> events, @JsonKey(name: 'featured_events')  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types')  List<OcationTypeModel> occasionTypes, @JsonKey(name: 'reminder_templates')  ReminderTemplatesModel? reminderTemplates)  $default,) {final _that = this;
 switch (_that) {
 case _HomeModel():
-return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_that.events,_that.featuredEvents,_that.occasionTypes);case _:
+return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_that.events,_that.featuredEvents,_that.occasionTypes,_that.reminderTemplates);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +218,10 @@ return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'remaining_balance')  num? remainingBalance, @JsonKey(name: 'consuming_balance')  num? consumingBalance,  List<BundleModel> bundles,  List<EventModel> events, @JsonKey(name: 'featured_events')  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types')  List<OcationTypeModel> occasionTypes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'remaining_balance')  num? remainingBalance, @JsonKey(name: 'consuming_balance')  num? consumingBalance,  List<BundleModel> bundles,  List<EventModel> events, @JsonKey(name: 'featured_events')  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types')  List<OcationTypeModel> occasionTypes, @JsonKey(name: 'reminder_templates')  ReminderTemplatesModel? reminderTemplates)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeModel() when $default != null:
-return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_that.events,_that.featuredEvents,_that.occasionTypes);case _:
+return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_that.events,_that.featuredEvents,_that.occasionTypes,_that.reminderTemplates);case _:
   return null;
 
 }
@@ -220,7 +233,7 @@ return $default(_that.remainingBalance,_that.consumingBalance,_that.bundles,_tha
 @JsonSerializable()
 
 class _HomeModel implements HomeModel {
-   _HomeModel({@JsonKey(name: 'remaining_balance') this.remainingBalance, @JsonKey(name: 'consuming_balance') this.consumingBalance, required  List<BundleModel> bundles, required  List<EventModel> events, @JsonKey(name: 'featured_events') required  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types') required  List<OcationTypeModel> occasionTypes}): _bundles = bundles,_events = events,_featuredEvents = featuredEvents,_occasionTypes = occasionTypes;
+   _HomeModel({@JsonKey(name: 'remaining_balance') this.remainingBalance, @JsonKey(name: 'consuming_balance') this.consumingBalance, required  List<BundleModel> bundles, required  List<EventModel> events, @JsonKey(name: 'featured_events') required  List<EventModel> featuredEvents, @JsonKey(name: 'occasion_types') required  List<OcationTypeModel> occasionTypes, @JsonKey(name: 'reminder_templates') this.reminderTemplates}): _bundles = bundles,_events = events,_featuredEvents = featuredEvents,_occasionTypes = occasionTypes;
   factory _HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 
 @override@JsonKey(name: 'remaining_balance') final  num? remainingBalance;
@@ -253,6 +266,7 @@ class _HomeModel implements HomeModel {
   return EqualUnmodifiableListView(_occasionTypes);
 }
 
+@override@JsonKey(name: 'reminder_templates') final  ReminderTemplatesModel? reminderTemplates;
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
@@ -267,18 +281,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.remainingBalance, remainingBalance) || other.remainingBalance == remainingBalance)&&(identical(other.consumingBalance, consumingBalance) || other.consumingBalance == consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, _bundles)&&const DeepCollectionEquality().equals(other.events, _events)&&const DeepCollectionEquality().equals(other.featuredEvents, _featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, _occasionTypes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.remainingBalance, remainingBalance) || other.remainingBalance == remainingBalance)&&(identical(other.consumingBalance, consumingBalance) || other.consumingBalance == consumingBalance)&&const DeepCollectionEquality().equals(other.bundles, _bundles)&&const DeepCollectionEquality().equals(other.events, _events)&&const DeepCollectionEquality().equals(other.featuredEvents, _featuredEvents)&&const DeepCollectionEquality().equals(other.occasionTypes, _occasionTypes)&&(identical(other.reminderTemplates, reminderTemplates) || other.reminderTemplates == reminderTemplates));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,remainingBalance,consumingBalance,const DeepCollectionEquality().hash(_bundles),const DeepCollectionEquality().hash(_events),const DeepCollectionEquality().hash(_featuredEvents),const DeepCollectionEquality().hash(_occasionTypes));
+    return Object.hash(runtimeType,remainingBalance,consumingBalance,const DeepCollectionEquality().hash(_bundles),const DeepCollectionEquality().hash(_events),const DeepCollectionEquality().hash(_featuredEvents),const DeepCollectionEquality().hash(_occasionTypes),reminderTemplates);
 }
 
 @override
 String toString() {
-    return 'HomeModel(remainingBalance: $remainingBalance, consumingBalance: $consumingBalance, bundles: $bundles, events: $events, featuredEvents: $featuredEvents, occasionTypes: $occasionTypes)';
+    return 'HomeModel(remainingBalance: $remainingBalance, consumingBalance: $consumingBalance, bundles: $bundles, events: $events, featuredEvents: $featuredEvents, occasionTypes: $occasionTypes, reminderTemplates: $reminderTemplates)';
 }
 
 
@@ -289,11 +303,11 @@ abstract mixin class _$HomeModelCopyWith<$Res> implements $HomeModelCopyWith<$Re
   factory _$HomeModelCopyWith(_HomeModel value, $Res Function(_HomeModel) _then) = __$HomeModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'remaining_balance') num? remainingBalance,@JsonKey(name: 'consuming_balance') num? consumingBalance, List<BundleModel> bundles, List<EventModel> events,@JsonKey(name: 'featured_events') List<EventModel> featuredEvents,@JsonKey(name: 'occasion_types') List<OcationTypeModel> occasionTypes
+@JsonKey(name: 'remaining_balance') num? remainingBalance,@JsonKey(name: 'consuming_balance') num? consumingBalance, List<BundleModel> bundles, List<EventModel> events,@JsonKey(name: 'featured_events') List<EventModel> featuredEvents,@JsonKey(name: 'occasion_types') List<OcationTypeModel> occasionTypes,@JsonKey(name: 'reminder_templates') ReminderTemplatesModel? reminderTemplates
 });
 
 
-
+@override $ReminderTemplatesModelCopyWith<$Res>? get reminderTemplates;
 
 }
 /// @nodoc
@@ -306,7 +320,7 @@ class __$HomeModelCopyWithImpl<$Res>
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? remainingBalance = freezed,Object? consumingBalance = freezed,Object? bundles = null,Object? events = null,Object? featuredEvents = null,Object? occasionTypes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? remainingBalance = freezed,Object? consumingBalance = freezed,Object? bundles = null,Object? events = null,Object? featuredEvents = null,Object? occasionTypes = null,Object? reminderTemplates = freezed,}) {
   return _then(_HomeModel(
 remainingBalance: freezed == remainingBalance ? _self.remainingBalance : remainingBalance // ignore: cast_nullable_to_non_nullable
 as num?,consumingBalance: freezed == consumingBalance ? _self.consumingBalance : consumingBalance // ignore: cast_nullable_to_non_nullable
@@ -314,11 +328,24 @@ as num?,bundles: null == bundles ? _self._bundles : bundles // ignore: cast_null
 as List<BundleModel>,events: null == events ? _self._events : events // ignore: cast_nullable_to_non_nullable
 as List<EventModel>,featuredEvents: null == featuredEvents ? _self._featuredEvents : featuredEvents // ignore: cast_nullable_to_non_nullable
 as List<EventModel>,occasionTypes: null == occasionTypes ? _self._occasionTypes : occasionTypes // ignore: cast_nullable_to_non_nullable
-as List<OcationTypeModel>,
+as List<OcationTypeModel>,reminderTemplates: freezed == reminderTemplates ? _self.reminderTemplates : reminderTemplates // ignore: cast_nullable_to_non_nullable
+as ReminderTemplatesModel?,
   ));
 }
 
+/// Create a copy of HomeModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ReminderTemplatesModelCopyWith<$Res>? get reminderTemplates {
+    if (_self.reminderTemplates == null) {
+    return null;
+  }
 
+  return $ReminderTemplatesModelCopyWith<$Res>(_self.reminderTemplates!, (value) {
+    return _then(_self.copyWith(reminderTemplates: value));
+  });
+}
 }
 
 

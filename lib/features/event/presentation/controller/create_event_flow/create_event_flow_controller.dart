@@ -116,7 +116,10 @@ class CreateEventFlowController extends _$CreateEventFlowController {
     if (state.title.trim().isEmpty) return CreateEventDetailsError.missingTitle;
     final dateTime = state.dateTime;
     if (dateTime == null) return CreateEventDetailsError.missingDateTime;
-    if (!dateTime.isAfter(DateTime.now())) {
+    final earliest = DateTime.now().add(
+      const Duration(minutes: CreateEventFlowConstants.minLeadMinutes),
+    );
+    if (dateTime.isBefore(earliest)) {
       return CreateEventDetailsError.pastDateTime;
     }
     if (state.location == null) return CreateEventDetailsError.missingLocation;

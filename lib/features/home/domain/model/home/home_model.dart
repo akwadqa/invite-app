@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/home/domain/model/banners/banner_model.dart';
+import 'package:invit/features/home/domain/model/reminder_templates/reminder_templates_model.dart';
 
 import '../ocation type/ocation_type_model.dart';
 
@@ -18,6 +18,8 @@ abstract class HomeModel with _$HomeModel {
     @JsonKey(name: 'featured_events') required List<EventModel> featuredEvents,
     @JsonKey(name: 'occasion_types')
     required List<OcationTypeModel> occasionTypes,
+    @JsonKey(name: 'reminder_templates')
+    ReminderTemplatesModel? reminderTemplates,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, dynamic> json) =>

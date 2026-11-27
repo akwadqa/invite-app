@@ -107,4 +107,4 @@ final class HomeEventSectionsProvider
   }
 }
 
-String _$homeEventSectionsHash() => r'6d1505e3d62c124b17074515bcd161c9f643dcc3';
+String _$homeEventSectionsHash() => r'2425c123fae6c529647663d136c118eb19f3f76d';

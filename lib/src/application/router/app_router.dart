@@ -7,6 +7,7 @@ import 'package:invit/features/event/domain/model/event_model/event_model.dart';
 import 'package:invit/features/event/presentation/screens/update_event/update_event_details_screen.dart';
 import 'package:invit/features/event/presentation/screens/update_event/update_guest_list_screen.dart';
 import 'package:invit/features/event_details/presentation/screens/event_details_screen.dart';
+import 'package:invit/features/event_details/presentation/screens/resend_failed_screen.dart';
 import 'package:invit/features/event_details/presentation/screens/send_reminder_screen.dart';
 import 'package:invit/features/event_details/presentation/utils/reminder_audience.dart';
 import 'package:invit/features/guest/presentation/screens/edit_guest_screen.dart';
@@ -286,6 +287,10 @@ class AppRouter {
           (state) => SendReminderScreen(
             args: SendReminderScreenArgs.from(state.extra),
           ),
+        ),
+        _createEventRouteFrom(
+          AppRoutes.resendFailedScreen,
+          (state) => ResendFailedScreen(occasionId: '${state.extra}'),
         ),
         GoRoute(
           path: AppRoutes.guestsScreen,

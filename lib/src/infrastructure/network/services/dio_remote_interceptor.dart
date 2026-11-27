@@ -107,6 +107,15 @@ class RemoteInterceptor extends Interceptor {
               request,
               responseData['message'] ?? "Unauthorized",
             );
+          case 402:
+            final message = responseData is Map
+                ? responseData['message']
+                : null;
+            throw PaymentRequiredException(
+              request,
+              message is String ? message : "Payment Required",
+              data: responseData,
+            );
           case 403:
             throw AccessForbiddenException(
               request,

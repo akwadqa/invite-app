@@ -24,6 +24,9 @@ abstract class CreateEventFlowConstants {
   /// Messages WhatsApp lets the account send in a day (shown to the user).
   static const int whatsAppDailyLimit = 1000;
 
+  /// The event must start at least this many minutes from now.
+  static const int minLeadMinutes = 10;
+
   /// One WhatsApp message is consumed per guest.
   static const int messagesPerGuest = 1;
 

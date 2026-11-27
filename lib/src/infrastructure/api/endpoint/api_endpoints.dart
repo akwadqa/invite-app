@@ -35,6 +35,10 @@ class ApiEndPoints {
   static const String getUserEvents = 'invite.api.api.get_user_events';
   static const String getEventDetails = 'invite.api.api.event_details';
 
+  //? --- Reminders & resending ---
+  static const String sendReminder = 'invite.api.api.send_reminder';
+  static const String resendInvitation = 'invite.api.api.resend_invitation';
+
   //? --- QR SCAN ---
   static String scanQr = 'invite.api.api.check_in';
   static String getScaned = 'invite.api.api.get_scan_events';

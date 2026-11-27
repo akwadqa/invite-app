@@ -127,8 +127,11 @@ class _CreateEventPreviewScreenChat extends ConsumerWidget {
     final image = ref.watch(
       createEventFlowControllerProvider.select((state) => state.image),
     );
+    final occasionType = ref.watch(
+      createEventFlowControllerProvider.select((state) => state.occasionType),
+    );
     return CreateEventPreviewScreenWhatsapp(
-      chat: _chatFor(template, tab, image),
+      chat: _chatFor(template, tab, image, occasionType),
       bottomInset: bottomInset,
     );
   }
@@ -139,13 +142,18 @@ class _CreateEventPreviewScreenChat extends ConsumerWidget {
     TemplateModel? template,
     TemplatePreviewTab tab,
     File? image,
+    String? occasionType,
   ) {
     if (template == null) return null;
     final label = tab.buttonLabel;
     if (label == null) {
       return CreateEventPreviewChat(
         incoming: CreateEventPreviewMessage(
-          title: template.templateName,
+          title: occasionType == null
+              ? null
+              : 'create_preview_message_title'.tr(
+                  namedArgs: {'type': occasionType},
+                ),
           message: template.message,
           imagePath: template.image,
           imageFile: image,

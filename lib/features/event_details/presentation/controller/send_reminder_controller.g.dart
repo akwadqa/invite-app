@@ -63,7 +63,7 @@ final class SendReminderControllerProvider
 }
 
 String _$sendReminderControllerHash() =>
-    r'c00df4414ec9b12a12281aefbab29482bb3f79ca';
+    r'3abb07606b29b7397d638a7a41434ce9b4c9ab88';
 
 /// The audience picked on the "Send a reminder" screen and its sending.
 

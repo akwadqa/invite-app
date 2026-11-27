@@ -5,6 +5,7 @@ import 'package:invit/src/resourses/color_manager/app_colors.dart';
 /// Who a message can be sent to again from the "Send a reminder" screen.
 enum ReminderAudience {
   noReply(
+    apiValue: 'no_reply',
     labelKey: 'reminder_aud_no_reply',
     hintKey: 'reminder_aud_no_reply_hint',
     dot: AppColors.accent,
@@ -14,6 +15,7 @@ enum ReminderAudience {
     lowBalanceKey: 'low_balance_no_reply',
   ),
   confirmed(
+    apiValue: 'confirmed',
     labelKey: 'reminder_aud_confirmed',
     hintKey: 'reminder_aud_confirmed_hint',
     dot: AppColors.primary,
@@ -21,18 +23,10 @@ enum ReminderAudience {
     bodyKey: 'reminder_msg_confirmed_body',
     buttonKeys: ['reminder_btn_location'],
     lowBalanceKey: 'low_balance_confirmed',
-  ),
-  notDelivered(
-    labelKey: 'reminder_aud_failed',
-    hintKey: 'reminder_aud_failed_hint',
-    dot: AppColors.danger,
-    titleKey: 'reminder_msg_failed_title',
-    bodyKey: 'reminder_msg_failed_body',
-    buttonKeys: ['reminder_btn_confirm', 'reminder_btn_decline'],
-    lowBalanceKey: 'low_balance_failed',
   );
 
   const ReminderAudience({
+    required this.apiValue,
     required this.labelKey,
     required this.hintKey,
     required this.dot,
@@ -42,6 +36,8 @@ enum ReminderAudience {
     required this.lowBalanceKey,
   });
 
+  /// The `audience` sent to `send_reminder`.
+  final String apiValue;
   final String labelKey;
   final String hintKey;
   final Color dot;
@@ -58,7 +54,6 @@ enum ReminderAudience {
   int countIn(GuestReportModel report) => switch (this) {
     ReminderAudience.noReply => report.pending + report.notSent,
     ReminderAudience.confirmed => report.confirmed,
-    ReminderAudience.notDelivered => report.failed,
   };
 }
 

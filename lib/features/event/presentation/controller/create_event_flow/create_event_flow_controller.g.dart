@@ -48,7 +48,7 @@ final class CreateEventFlowControllerProvider
 }
 
 String _$createEventFlowControllerHash() =>
-    r'af01413a031416909b28288404751cb146af4311';
+    r'a8ee1db4680be933a85da095f85b67ca64592509';
 
 /// Holds everything the six "create event" screens collect. It lives while
 /// any of those screens is on the stack, so leaving the flow resets it.

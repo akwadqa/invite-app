@@ -7,11 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:invit/features/event/domain/model/create_event_response/create_event_response.dart';
 import 'package:invit/features/event/domain/model/event_model/event_model.dart';
-import 'package:invit/features/event/domain/model/invite_template/invite_template_model.dart';
 import 'package:invit/features/event/domain/model/retry_bulk_response/retry_bulk_response.dart';
 import 'package:invit/features/event/domain/model/template%20model/template_model.dart';
+import 'package:invit/features/event_details/domain/exceptions/not_enough_messages_exception.dart';
 import 'package:invit/src/infrastructure/api/endpoint/api_endpoints.dart';
 import 'package:invit/src/infrastructure/api/response/api_response.dart';
+import 'package:invit/src/infrastructure/network/exception/dio_exceptions.dart';
 import 'package:invit/src/infrastructure/network/services/dio_client.dart';
 import 'package:invit/src/infrastructure/network/services/network_service.dart';
 import 'package:invit/src/logger/log_services/dev_logger.dart';
@@ -112,6 +113,11 @@ class EventRemoteDataSource {
       return ApiResponse.fromJson(
         response.data,
         (json) => RetryBulkResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on PaymentRequiredException catch (e) {
+      throw NotEnoughMessagesException.fromResponse(
+        e.data,
+        message: e.toString(),
       );
     } catch (e) {
       return ApiResponse.error(message: e.toString());

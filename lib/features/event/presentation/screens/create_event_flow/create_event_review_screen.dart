@@ -18,8 +18,6 @@ import 'package:invit/src/core/shared_widgets/app_primary_button.dart';
 import 'package:invit/src/core/shared_widgets/app_toast.dart';
 import 'package:invit/src/core/utils/functions/async_action_listener.dart';
 import 'package:invit/src/core/utils/functions/coming_soon.dart';
-import 'package:invit/src/resourses/color_manager/app_colors.dart';
-import 'package:invit/src/resourses/font_manager/app_text_style.dart';
 
 /// Step 6: last look, then create the event and send the invitations.
 class CreateEventReviewScreen extends ConsumerWidget {
@@ -131,19 +129,7 @@ class CreateEventReviewScreen extends ConsumerWidget {
       ),
       bottom: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 8,
         children: [
-          TextButton(
-            onPressed: () => notifier.submit(send: false),
-            child: Text(
-              'create_review_save_draft'.tr(),
-              style: AppTextStyle.outfitMedium14.copyWith(
-                color: AppColors.inkLabel,
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.inkLabel,
-              ),
-            ),
-          ),
           AppPrimaryButton(
             label: canSend
                 ? 'create_review_send'.tr()

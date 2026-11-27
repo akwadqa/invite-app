@@ -112,8 +112,9 @@ class CreateEventPreviewScreenIncomingBubble extends StatelessWidget {
   Widget _image() {
     final file = message.imageFile;
     if (file != null) return Image.file(file, fit: BoxFit.cover);
+    final path = message.imagePath ?? '';
     return CachedNetworkImage(
-      imageUrl: ServicesUrls.imageUrl + (message.imagePath ?? ''),
+      imageUrl: path.startsWith('http') ? path : ServicesUrls.imageUrl + path,
       fit: BoxFit.cover,
       placeholder: (_, _) => const ColoredBox(color: AppColors.paper),
       errorWidget: (_, _, _) => const ColoredBox(color: AppColors.paper),
